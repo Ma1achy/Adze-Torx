@@ -6,6 +6,8 @@ import jax
 import jax.numpy as jnp
 from torx.psc import PNOT, BranchingSimulator, DiscretePCircuit, StateVectorSimulator
 
+from adze_t.train.score_bridge import score_corrected_loss
+
 from .oracles import markov_value_and_grad
 
 
@@ -43,6 +45,37 @@ def estimate(
 
     value, grad = jax.value_and_grad(objective)([jnp.array([theta], dtype=jnp.float64)], key)
     return value, grad[0][0]
+
+
+def manual_score_corrected_loss(theta: jax.Array, key, depth: int) -> jax.Array:
+    """Sample a PNOT recurrence and add its per-trajectory score correction."""
+    gate = PNOT(0)
+    theta_param = jnp.reshape(theta, (1,))
+    state = jnp.zeros((1,), dtype=gate.input_ports["in"].dtype)
+    log_prob_sum = jnp.asarray(0.0, dtype=theta.dtype)
+    keys = jax.random.split(key, depth)
+    for step_key in keys:
+        previous_state = state
+        state = gate.sample(step_key, {"in": previous_state}, theta_param)
+        log_prob_sum = log_prob_sum + gate.log_probability(
+            {"in": previous_state}, state, theta_param
+        )
+    loss = state[0].astype(theta.dtype)
+    return score_corrected_loss(loss, log_prob_sum)
+
+
+def manual_score_estimate(theta: float, keys: jax.Array, depth: int):
+    theta_array = jnp.asarray(theta, dtype=jnp.float64)
+
+    def batch_loss(t):
+        values = jax.vmap(lambda key: manual_score_corrected_loss(t, key, depth))(keys)
+        return jnp.mean(values)
+
+    return jax.value_and_grad(batch_loss)(theta_array)
+
+
+def make_keys(seed: int, n_samples: int) -> jax.Array:
+    return jax.random.split(jax.random.key(seed), n_samples)
 
 
 def run(depths=(1, 2, 4, 8, 16, 32), theta=0.35, samples=4096, seeds=8):

@@ -62,17 +62,16 @@ def mixed_objective(params: jax.Array, depth: int = 1) -> jax.Array:
         next_mean = jnp.zeros(2)
         next_second = jnp.zeros(2)
         for new_x in range(2):
-            weights = prob * transition[:, new_x]
+            transition_weights = transition[:, new_x]
             # H' = alpha H + beta * X' + sigma eps.
-            shifted_mean = alpha * mean + beta * new_x
+            shifted_mean = alpha * mean + beta * new_x * prob
             shifted_second = (
                 alpha**2 * second
                 + 2.0 * alpha * beta * new_x * mean
-                + (beta * new_x) ** 2
-                + jnp.exp(log_var)
+                + ((beta * new_x) ** 2 + jnp.exp(log_var)) * prob
             )
-            next_mean = next_mean.at[new_x].set(jnp.sum(weights * shifted_mean))
-            next_second = next_second.at[new_x].set(jnp.sum(weights * shifted_second))
+            next_mean = next_mean.at[new_x].set(jnp.sum(transition_weights * shifted_mean))
+            next_second = next_second.at[new_x].set(jnp.sum(transition_weights * shifted_second))
         prob, mean, second = next_prob, next_mean, next_second
     h_mean = jnp.sum(mean)
     h_second = jnp.sum(second)

@@ -1,8 +1,16 @@
-"""Placeholder: M2+ tiny reconstruction training."""
+import jax
+import jax.numpy as jnp
 
-import pytest
+from adze_t.model.direct_carrier import DirectCarrierConfig
+from experiments.m2_direct_carrier.data import make_data
+from experiments.m2_direct_carrier.train import TrainConfig, run
 
 
-@pytest.mark.skip(reason="M2+ tiny reconstruction training not implemented yet")
-def test_milestone_placeholder():
-    pass
+def test_tiny_direct_carrier_training_reduces_loss():
+    train = make_data(jax.random.key(10), 64)
+    validation = make_data(jax.random.key(11), 64)
+    config = DirectCarrierConfig(q=2, tied=True)
+    _, metrics = run(config, TrainConfig(steps=12, batch_size=16, seed=2), train, validation)
+    assert bool(jnp.isfinite(metrics["loss"]))
+    assert bool(jnp.isfinite(metrics["train_loss_final"]))
+    assert float(metrics["train_loss_final"]) < float(metrics["train_loss_initial"])

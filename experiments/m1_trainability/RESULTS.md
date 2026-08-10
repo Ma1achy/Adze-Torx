@@ -83,8 +83,8 @@ in `HybridPCircuit`. Independent oracle propagates `P(X_t)`, `E[H_t|X_t]`, and
 
 ```text
 depth=4, params=[theta=.2, alpha=.8, beta=.4, log_var=-1]
-exact objective: 0.87217536
-exact gradient:  [-0.00395272, 0.77031668, 0.97391773, 0.42836197]
+corrected exact objective: 1.41175683
+corrected exact gradient:  [0.00362619, 2.98460569, 2.20750560, 0.68035447]
 forward sample: finite and correctly shaped
 ordinary JAX sample gradient: discrete theta component exactly 0.0
 ```
@@ -147,6 +147,11 @@ The mixed forward computation is expressible through public Torx, but the
 required mixed stochastic gradient is not. Ordinary JAX gives zero gradient
 through the sampled discrete transition, while the two documented Torx
 simulators cover disjoint discrete and affine-continuous fragments.
+
+The original M1 conditional-moment oracle omitted current-state probability
+factors in additive moment terms. M1.5 corrected that oracle and confirmed the
+corrected values above against raw Torx forward Monte Carlo. The M1 conclusion
+about the missing public mixed-gradient route is unchanged.
 
 With float64 enabled, the pinned `HybridPCircuit` exposes an int32 top-level
 discrete input spec while its public `PNOT` gate expects int64 input states.
