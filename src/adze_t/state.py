@@ -33,6 +33,13 @@ class CommittedStructure:
 
     c_b: Array
     activity: Array
+    length: Array | None = None
+
+    def effective_length(self) -> Array:
+        """Return explicit extent, or the Phase A activity-compatible fallback."""
+        if self.length is None:
+            return self.activity.astype(jnp.int32)
+        return self.length
 
 
 @dataclass(frozen=True)
@@ -71,12 +78,19 @@ def validate_carrier_state(state: CarrierState) -> None:
                 raise ValueError(
                     f"{name} must start with shape {(batch, capacity)}, got {value.shape}"
                 )
+        if committed.length is not None and committed.length.shape != (batch, capacity):
+            raise ValueError("committed.length must match [batch, carrier]")
 
     valid_binary, terminal = carrier_invariant_flags(committed.c_b, committed.activity)
     if not bool(valid_binary):
         raise ValueError("committed boundary/activity must contain only binary values")
     if not bool(terminal):
         raise ValueError("committed.c_b must have a terminal cut after the final carrier")
+    if committed.length is not None:
+        if not bool(jnp.all(committed.length >= 0)):
+            raise ValueError("committed.length must be non-negative")
+        if not bool(jnp.all((committed.length > 0) == (committed.activity > 0))):
+            raise ValueError("activity must agree with committed.length > 0")
 
 
 def carrier_invariant_flags(c_b: Array, activity: Array) -> tuple[Array, Array]:
