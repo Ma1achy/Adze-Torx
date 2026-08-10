@@ -1,0 +1,19 @@
+{
+  "environment": {"python": "3.11.8", "jax": "0.8.1", "device": "TFRT_CPU_0", "dtype": "float32"},
+  "arithmetic_all_at_once_depth8_five_steps": {
+    "q1": {"exact_mean": 0.0, "digit_mean": 0.680288},
+    "q2": {"exact_mean": 0.0, "digit_mean": 0.685697},
+    "q4": {"exact_mean": 0.0, "digit_mean": 0.673077},
+    "q8": {"exact_mean": 0.0, "digit_mean": 0.671346},
+    "q12": {"exact_mean": 0.0, "digit_mean": 0.680288}
+  },
+  "solvability": {
+    "arithmetic_all_q12_exact": [0.0, 0.0, 0.0],
+    "arithmetic_all_q12_digit": [0.210337, 0.212740, 0.204327],
+    "arithmetic_cursor_q12_exact": [0.0, 0.0, 0.0],
+    "arithmetic_cursor_q12_digit": [0.210337, 0.206731, 0.194712],
+    "program_cursor_k4_exact": [0.0, 0.0, 0.0],
+    "program_cursor_k4_register": [0.09375, 0.046875, 0.03125]
+  },
+  "program_diversity": {"fixed_initial_unique_states": 256, "samples": 4096, "mean_register_variance": 19.1131058}
+}
