@@ -26,8 +26,15 @@ class RecurrentCoreConfig:
     def __post_init__(self) -> None:
         if min(self.width, self.q) < 1:
             raise ValueError("width and q must be positive")
-        if self.family not in {"current", "residual"}:
-            raise ValueError("family must be current or residual")
+        if self.family not in {
+            "current",
+            "residual",
+            "identity_residual",
+            "q_normalized_residual",
+        }:
+            raise ValueError(
+                "family must be current, residual, identity_residual, or q_normalized_residual"
+            )
         if not 0.0 <= self.eta <= 1.0:
             raise ValueError("eta must be in [0, 1]")
         if self.total_variance <= 0.0:
@@ -59,9 +66,13 @@ def _initial_gate_params(config: RecurrentCoreConfig, key: jax.Array) -> dict[st
     if config.family == "current":
         matrix = 0.6 * jnp.eye(config.width, dtype=base["A"].dtype)
         bias = jnp.zeros_like(base["b"])
-    else:
+    elif config.family == "residual":
         # A small negative diagonal delta starts as a near-identity refinement.
         matrix = -0.4 * jnp.eye(config.width, dtype=base["A"].dtype)
+        bias = jnp.zeros_like(base["b"])
+    else:
+        # M4.1 variants start at an exact identity mean map for every Q.
+        matrix = jnp.zeros_like(base["A"])
         bias = jnp.zeros_like(base["b"])
     params = {
         "A": matrix,
@@ -87,9 +98,15 @@ def _gate_params(
     if config.family == "current":
         matrix = params["A"]
         bias = params["b"]
-    else:
+    elif config.family == "residual":
         matrix = jnp.eye(config.width, dtype=params["A"].dtype) + config.eta * params["A"]
         bias = config.eta * params["b"]
+    else:
+        scale = config.eta
+        if config.family == "q_normalized_residual":
+            scale = scale / config.q
+        matrix = jnp.eye(config.width, dtype=params["A"].dtype) + scale * params["A"]
+        bias = scale * params["b"]
     if config.cycle_conditioning:
         bias = bias + (cycle / max(config.q, 1)) * params["cycle_bias"]
     return {"A": matrix, "b": bias, "log_var": params["log_var"]}
@@ -158,3 +175,13 @@ def prefix_config(config: RecurrentCoreConfig, q: int) -> RecurrentCoreConfig:
         noise_mode=config.noise_mode,
         cycle_conditioning=config.cycle_conditioning,
     )
+
+
+def effective_linear_map(config: RecurrentCoreConfig, params: Any) -> jax.Array:
+    """Return the deterministic Q-step linear map for affine diagnostics."""
+    effective = jnp.eye(config.width)
+    for cycle in range(config.q):
+        step_params = params if config.tied else params[cycle]
+        matrix = _gate_params(config, step_params, cycle)["A"]
+        effective = matrix @ effective
+    return effective
