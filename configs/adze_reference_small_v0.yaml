@@ -1,0 +1,74 @@
+name: adze_reference_small_v0
+
+io:
+  byte_vocab: 256
+  prompt_max_bytes: 128
+  target_max_bytes: 128
+
+carrier:
+  C: 32
+  h_dim: 64
+  L_max: 4
+
+frontend:
+  d_front: 64
+  layers: 2
+
+context_encoder:
+  d_ctx: 128
+  layers: 2
+
+target_encoder:
+  layers: 2
+
+proposal:
+  layers: 2
+  hidden_dim: 64
+
+packing:
+  M_max: 32
+  K: 8
+  overflow_policy: explicit_error_or_larger_bucket
+
+dit:
+  d_model: 128
+  heads: 4
+  head_dim: 32
+  ffn_hidden: 256
+  physical_blocks_L: 4
+  cycles_Q: 3
+  effective_applications: 12
+  draft_mask: block_causal
+  refine_mask: global
+  effective_depth_conditioning: true
+
+decoder:
+  d_dec: 128
+  layers: 2
+
+denoise:
+  S_initial: 1
+
+refinement:
+  R_initial: 0
+
+stochasticity:
+  operator_stochasticity: false
+  diffusion_stochasticity: true
+  structure_sampling: false
+
+torx_operator:
+  variance_parameterization: per_output_channel_diagonal
+  sigma_min: 1.0e-6
+  sigma_max: 0.25
+  initial_sigma: 1.0e-3
+  master_scale_lambda_op: 0.0
+
+training:
+  optimizer: adamw
+  learning_rate: 3.0e-4
+  weight_decay: 0.01
+  grad_clip_norm: 1.0
+  batch_size: 32
+  validation_every_steps: 100
+  seeds: [0, 1, 2]

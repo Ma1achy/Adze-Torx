@@ -1,0 +1,198 @@
+{
+  "name": "adze-t-faithful-scaffold",
+  "architecture": "docs/architecture/adze-architecture-v3.md",
+  "torx_pin": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+  "initial_phase": "A",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 119,
+      "sha256": "fcc524a8702c2d389cd8a9331504364a9e20debd73db22a29d7bf956a090b167"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 2414,
+      "sha256": "d64a01470ae5e82957dcf2fa0f7ce5623c0b6704731c3a31f756898e803da03b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1754,
+      "sha256": "eb62c94660569f6a0f4a732e696ed11dcb18f6053f52f9bd65a824e5bf7485cb"
+    },
+    {
+      "path": "configs/adze_reference_small_v0.yaml",
+      "bytes": 1112,
+      "sha256": "87f567b213060971c51864df4d202bd468135b9192476017d62347169e4d076d"
+    },
+    {
+      "path": "docs/architecture/adze-architecture-v3.md",
+      "bytes": 90581,
+      "sha256": "60ea19071b21e8787e0e51fafa887b4c59a07bc7891c6940cf1dceb675b50935"
+    },
+    {
+      "path": "docs/decisions/0001-faithful-adze-reset.md",
+      "bytes": 1515,
+      "sha256": "d80d1872d99c1f4df880b32d79f112f3cb8976a5b138ec4e7b95f38d97daa355"
+    },
+    {
+      "path": "experiments/denoising/README.md",
+      "bytes": 68,
+      "sha256": "5a1db18ad61542ba27881228b67a0cf31d17e6b81419c8e17d62d42941db0172"
+    },
+    {
+      "path": "experiments/parity/README.md",
+      "bytes": 65,
+      "sha256": "b13740cca4615ec5fcc416f64b902e3f1c52b9092691766f6717ec1aec65bea5"
+    },
+    {
+      "path": "experiments/q_scaling/README.md",
+      "bytes": 68,
+      "sha256": "486a80a51653a08df3a99306c609bf85ff48c9b438f5795a0303de0e9cab2ac7"
+    },
+    {
+      "path": "experiments/refinement/README.md",
+      "bytes": 69,
+      "sha256": "8321666bc734e16da0ca41fd7ac208c59b364e79dbd42d0832fb4e7953ea2f60"
+    },
+    {
+      "path": "experiments/structure/README.md",
+      "bytes": 68,
+      "sha256": "b6c26d83d3a0db9220b2de6ebf37423c617236af00af31ac69fc2282ed3e7467"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 701,
+      "sha256": "4c9174f775cacc405cf27f320095ff93864e74eed730bc1de40ff4e3451794c7"
+    },
+    {
+      "path": "results/README.md",
+      "bytes": 287,
+      "sha256": "fd4216691248cf772f25101d86bbe91d816912ee8b95e7fecaf3867d2fe28806"
+    },
+    {
+      "path": "src/adze_t/__init__.py",
+      "bytes": 58,
+      "sha256": "680551594887a0c36efde070a1efa58c967ef65aed5557d43d2878d04af3d28f"
+    },
+    {
+      "path": "src/adze_t/backends/__init__.py",
+      "bytes": 64,
+      "sha256": "653aa7b820f3a00df4b4ffc632bd174592cf6b6de09de5742ce4e4d26a7c9d24"
+    },
+    {
+      "path": "src/adze_t/backends/deterministic.py",
+      "bytes": 103,
+      "sha256": "30380fa6bf47ed59c5487dd8d3768627a9e9cd53d2a6fa87e97412a5ca0837f1"
+    },
+    {
+      "path": "src/adze_t/backends/protocol.py",
+      "bytes": 447,
+      "sha256": "76776ce0c7e5b4f112063708878a17b7e973d6bbf9d14448eec02289e01748b7"
+    },
+    {
+      "path": "src/adze_t/backends/torx.py",
+      "bytes": 222,
+      "sha256": "3e8bd247d193b560cd6609c63b4b78cf97b21bd39e71cbf8fbf0deec99aec524"
+    },
+    {
+      "path": "src/adze_t/conditioning.py",
+      "bytes": 100,
+      "sha256": "b493b6db195c4e6c5fff73f790d93ce51b96fb546bcbc1d96eddb0499f2f213d"
+    },
+    {
+      "path": "src/adze_t/config.py",
+      "bytes": 476,
+      "sha256": "721078bcd453b6eb9d96c13ed3d5089366319204bfcd419857c737a1297c3404"
+    },
+    {
+      "path": "src/adze_t/corruption.py",
+      "bytes": 138,
+      "sha256": "2ad8da8d57ea9805b6bd804dc04559d04f18ba1d79acdeb3056fab47d1a0373e"
+    },
+    {
+      "path": "src/adze_t/decoder.py",
+      "bytes": 101,
+      "sha256": "ed0d50e700a7e785a704cd1cc90e23f26b1e1c8cc70ca5f491eff7fd7db5ba7a"
+    },
+    {
+      "path": "src/adze_t/denoise.py",
+      "bytes": 105,
+      "sha256": "dcc564b43eaec96d192d1a6f2bfb2cfcf4f3070b37391ca69cfa281a7efc0a5a"
+    },
+    {
+      "path": "src/adze_t/dit.py",
+      "bytes": 110,
+      "sha256": "2152971c0e9b8262702383ad13dff9f69269a26a68d5abe9da721b82b777eab6"
+    },
+    {
+      "path": "src/adze_t/encoder.py",
+      "bytes": 122,
+      "sha256": "2ef475055669f3516f6f9b0f4e53c85ba1d373830545a618f198efa30852e263"
+    },
+    {
+      "path": "src/adze_t/masking.py",
+      "bytes": 626,
+      "sha256": "b648d6720f25dec67b7588eb4470e3cc08886e51ad1ddd160406299888fcbb98"
+    },
+    {
+      "path": "src/adze_t/model.py",
+      "bytes": 140,
+      "sha256": "135544823839d2a4fb3e17009b5b18fdb266dec6a7568ce2f6fa0f684b987c62"
+    },
+    {
+      "path": "src/adze_t/packing.py",
+      "bytes": 1388,
+      "sha256": "dafce6871f19e60a19a4ea7b8873d4f6e6f2fcbbe997bcff8c56d911e2164e68"
+    },
+    {
+      "path": "src/adze_t/proposal.py",
+      "bytes": 100,
+      "sha256": "ba54e4eaaf422331ba55367cfbe1163b34a1f3e0762cad3e80238a0a914ab7b7"
+    },
+    {
+      "path": "src/adze_t/refinement.py",
+      "bytes": 122,
+      "sha256": "fdbc6a8f2f28d20bb4bd44db0ee207a736ffdd8da7102c649ce95a4a0bae69d0"
+    },
+    {
+      "path": "src/adze_t/state.py",
+      "bytes": 1064,
+      "sha256": "72aa325ccbe1fe967dc8c840f162f30846d3b1dc959099edacfaa5a8da114848"
+    },
+    {
+      "path": "src/adze_t/unpool.py",
+      "bytes": 324,
+      "sha256": "41e88a02715e87618f25888a08ac7f656bfff6994e188bb3b00284a60c1844bc"
+    },
+    {
+      "path": "tests/test_blocks.py",
+      "bytes": 905,
+      "sha256": "ce93fc649fb4daf9a9c326665ed56618d747db26c99238cc27f7ad2bd40dcbcb"
+    },
+    {
+      "path": "tests/test_inactive_sites.py",
+      "bytes": 574,
+      "sha256": "8bc7d6a46db0f798a917633594d75e3027cb93f14cc95e1ff3123994d2754a8f"
+    },
+    {
+      "path": "tests/test_masks.py",
+      "bytes": 1286,
+      "sha256": "3437dca04014892d49cd2a48276e639548b2ca3a4e0d594e69ad357c1c9a9729"
+    },
+    {
+      "path": "tests/test_pack_unpool.py",
+      "bytes": 1484,
+      "sha256": "03b92b3950e1c11c5e97d718fca40524a9514007c2127e84689d77ee2d639204"
+    },
+    {
+      "path": "tests/test_reference_config.py",
+      "bytes": 272,
+      "sha256": "5b177b45bd49020bec914e6215c1f03e766bc56c6278fd167c806624f0f74174"
+    },
+    {
+      "path": "tests/test_state.py",
+      "bytes": 1016,
+      "sha256": "3a58893c2d5a5a2618ed23e12e7aeeab5dc8a82b4fa4240c992ec80ac7ba96a8"
+    }
+  ]
+}
