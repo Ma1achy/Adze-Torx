@@ -72,12 +72,21 @@ def validate_carrier_state(state: CarrierState) -> None:
                     f"{name} must start with shape {(batch, capacity)}, got {value.shape}"
                 )
 
-    for name, value in (
-        ("committed.c_b", committed.c_b),
-        ("committed.activity", committed.activity),
-    ):
-        if not bool(jnp.all((value == 0) | (value == 1))):
-            raise ValueError(f"{name} must contain only binary values")
-
-    if not bool(jnp.all(committed.c_b[:, -1] == 1)):
+    valid_binary, terminal = carrier_invariant_flags(committed.c_b, committed.activity)
+    if not bool(valid_binary):
+        raise ValueError("committed boundary/activity must contain only binary values")
+    if not bool(terminal):
         raise ValueError("committed.c_b must have a terminal cut after the final carrier")
+
+
+def carrier_invariant_flags(c_b: Array, activity: Array) -> tuple[Array, Array]:
+    """Pure-JAX committed-state checks for compiled callers.
+
+    Returns scalar ``(binary_values_valid, terminal_boundary_valid)`` flags;
+    the eager ``validate_carrier_state`` wrapper turns failures into errors.
+    """
+    c_b = jnp.asarray(c_b)
+    activity = jnp.asarray(activity)
+    binary = jnp.all((c_b == 0) | (c_b == 1)) & jnp.all((activity == 0) | (activity == 1))
+    terminal = jnp.all(c_b[:, -1] == 1)
+    return binary, terminal

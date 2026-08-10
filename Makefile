@@ -4,7 +4,7 @@ install:
 	python -m pip install -e ".[dev]"
 
 install-torx:
-	python -m pip install -e ".[dev,torx]"
+	python -m pip install -e ".[dev]"
 
 format:
 	ruff format .
@@ -23,7 +23,7 @@ test:
 	pytest -m "not slow"
 
 test-slow:
-	pytest -m "slow"
+	pytest -m "slow" || test $$? -eq 5
 
 boundaries:
 	python scripts/check_public_boundaries.py

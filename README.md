@@ -61,4 +61,5 @@ Use the public `torx` API only. No `torx._...` imports.
 
 ## Test status
 
-The Phase A tests are intentionally written as executable contracts. The initial scaffold contains `NotImplementedError` placeholders, so these tests are expected to fail until Phase A is implemented.
+Phase A has passed. Phase A.1 is hardening the structural path for JIT-safe
+execution and fresh-environment reproducibility. Phase B has not started.
