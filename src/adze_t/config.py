@@ -33,12 +33,15 @@ class LoopConfig:
     refinement_steps: int = 1  # R
 
     def __post_init__(self) -> None:
-        if min(
-            self.physical_blocks,
-            self.core_cycles,
-            self.denoise_steps,
-            self.refinement_steps,
-        ) < 1:
+        if (
+            min(
+                self.physical_blocks,
+                self.core_cycles,
+                self.denoise_steps,
+                self.refinement_steps,
+            )
+            < 1
+        ):
             raise ValueError("loop counts must be >= 1")
 
     @property

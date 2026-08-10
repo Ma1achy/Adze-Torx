@@ -17,7 +17,7 @@ lint:
 	ruff check .
 
 typecheck:
-	pyright
+	pyright --pythonpath "$$(python -c 'import sys; print(sys.executable)')"
 
 test:
 	pytest -m "not slow"

@@ -1,8 +1,10 @@
-"""Placeholder: M1 Stage C analytic continuous oracle."""
+import jax.numpy as jnp
 
-import pytest
+from experiments.m1_trainability.continuous import run
 
 
-@pytest.mark.skip(reason="M1 Stage C analytic continuous oracle not implemented yet")
-def test_milestone_placeholder():
-    pass
+def test_affine_gaussian_public_moment_route_matches_analytic_oracle():
+    value, grad, oracle_value, oracle_grad = run()
+    assert jnp.allclose(value, oracle_value)
+    observed = jnp.array([grad["A"][0, 0], grad["b"][0], grad["log_var"][0]])
+    assert jnp.allclose(observed, oracle_grad)

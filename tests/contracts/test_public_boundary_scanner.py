@@ -1,6 +1,6 @@
-from pathlib import Path
 import subprocess
 import sys
+from pathlib import Path
 
 
 def test_public_boundary_scanner_passes():
