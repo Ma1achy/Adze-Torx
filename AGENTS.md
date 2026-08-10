@@ -100,6 +100,14 @@ Every milestone ends with tests run, numerical results, `RESULTS.md` update, unr
 
 Use `NotImplementedError`, TODOs tied to milestone IDs, or an open decision record. Do not invent plausible behaviour merely to complete an interface.
 
+### 11. Commit and push completed work
+
+After completing every milestone or requested task, commit all related changes
+with a focused message and push the commit to the configured upstream branch.
+Verify that the worktree is clean and the local branch is synchronized with its
+upstream before reporting completion. Do not push incomplete or unreviewed
+work between milestone gates unless explicitly requested.
+
 ## Quality requirements
 
 Before declaring a milestone complete, run as applicable:
