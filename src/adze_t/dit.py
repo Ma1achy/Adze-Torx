@@ -179,13 +179,20 @@ def apply_dit_cycle(
     noise: jax.Array | float = 0.0,
     denoise_step: jax.Array | int = 0,
     refinement_step: jax.Array | int = 0,
-) -> tuple[jax.Array, jax.Array, jax.Array]:
+) -> tuple[jax.Array, jax.Array, jax.Array, jax.Array]:
     """Apply one tied physical stack at recurrence position ``cycle_index``."""
     ops = ops or DeterministicOps()
     block_rms = []
+    block_states = []
     depths = []
     for block_index, block in enumerate(params["blocks"]):
         depth = cycle_index * config.physical_blocks + block_index
+        block_ops = ops.with_occurrence(
+            recurrence_cycle=cycle_index,
+            physical_layer=block_index,
+            denoise_step=denoise_step,
+            refinement_step=refinement_step,
+        )
         raw_conditioning = build_conditioning(
             prompt_global,
             noise,
@@ -195,7 +202,7 @@ def apply_dit_cycle(
             depth,
         )
         conditioning = jax.nn.silu(
-            ops.linear(
+            block_ops.linear(
                 raw_conditioning,
                 params["conditioning_trunk"],
                 name="dit.conditioning_trunk",
@@ -209,12 +216,13 @@ def apply_dit_cycle(
             carrier_id,
             query_mask,
             config,
-            ops,
+            block_ops,
             block_index=block_index,
         )
         depths.append(depth)
         block_rms.append(jnp.sqrt(jnp.mean(x**2)))
-    return x, jnp.stack(block_rms), jnp.asarray(depths, dtype=jnp.int32)
+        block_states.append(x)
+    return x, jnp.stack(block_rms), jnp.asarray(depths, dtype=jnp.int32), jnp.stack(block_states)
 
 
 def apply_dit(
@@ -280,8 +288,9 @@ def apply_dit(
     cycle_states = []
     block_rms = []
     depths = []
+    block_states = []
     for cycle in range(cycle_count):
-        x, cycle_block_rms, cycle_depths = apply_dit_cycle(
+        x, cycle_block_rms, cycle_depths, cycle_block_states = apply_dit_cycle(
             x,
             params,
             prompt_global,
@@ -298,11 +307,13 @@ def apply_dit(
         )
         block_rms.append(cycle_block_rms)
         depths.append(cycle_depths)
+        block_states.append(cycle_block_states)
         cycle_states.append(x)
     x = ops.linear(x, params["output_proj"], name="dit.output_proj")
     x = jnp.where(query[..., None], x, 0.0)
     return x.reshape(batch, blocks, slots, -1), {
         "trajectory": jnp.stack(cycle_states),
+        "block_trajectory": jnp.concatenate(block_states, axis=0),
         "mask": mask,
         "effective_depths": jnp.concatenate(depths),
         "block_rms": jnp.concatenate(block_rms),

@@ -1,0 +1,2063 @@
+{
+  "counts": {
+    "deterministic": 2268245,
+    "torx_mean": 2268245,
+    "torx_stochastic": 18901,
+    "torx_total": 2287146
+  },
+  "entries": [
+    {
+      "count": 16384,
+      "deterministic_path": "encoder/byte_embed",
+      "role": "mean",
+      "torx_path": "encoder/byte_embed/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/byte_embed/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "encoder/frontend/0/in_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/in_proj/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/frontend/0/in_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/in_proj/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/frontend/0/in_proj/rho"
+    },
+    {
+      "count": 384,
+      "deterministic_path": "encoder/frontend/0/conv/kernel",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/conv/mean/kernel"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/frontend/0/conv/bias",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/conv/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/frontend/0/conv/rho"
+    },
+    {
+      "count": 20480,
+      "deterministic_path": "encoder/frontend/0/dbc_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/dbc_proj/mean/weight"
+    },
+    {
+      "count": 160,
+      "deterministic_path": "encoder/frontend/0/dbc_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/dbc_proj/mean/bias"
+    },
+    {
+      "count": 160,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/frontend/0/dbc_proj/rho"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "encoder/frontend/0/out_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/out_proj/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "encoder/frontend/0/out_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/out_proj/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/frontend/0/out_proj/rho"
+    },
+    {
+      "count": 2048,
+      "deterministic_path": "encoder/frontend/0/a_log",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/a_log/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/frontend/0/d_skip",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/d_skip/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/frontend/0/delta_bias",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/delta_bias/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "encoder/frontend/0/layer_scale",
+      "role": "mean",
+      "torx_path": "encoder/frontend/0/layer_scale/mean"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "encoder/frontend/1/in_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/in_proj/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/frontend/1/in_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/in_proj/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/frontend/1/in_proj/rho"
+    },
+    {
+      "count": 384,
+      "deterministic_path": "encoder/frontend/1/conv/kernel",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/conv/mean/kernel"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/frontend/1/conv/bias",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/conv/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/frontend/1/conv/rho"
+    },
+    {
+      "count": 20480,
+      "deterministic_path": "encoder/frontend/1/dbc_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/dbc_proj/mean/weight"
+    },
+    {
+      "count": 160,
+      "deterministic_path": "encoder/frontend/1/dbc_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/dbc_proj/mean/bias"
+    },
+    {
+      "count": 160,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/frontend/1/dbc_proj/rho"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "encoder/frontend/1/out_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/out_proj/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "encoder/frontend/1/out_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/out_proj/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/frontend/1/out_proj/rho"
+    },
+    {
+      "count": 2048,
+      "deterministic_path": "encoder/frontend/1/a_log",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/a_log/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/frontend/1/d_skip",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/d_skip/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/frontend/1/delta_bias",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/delta_bias/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "encoder/frontend/1/layer_scale",
+      "role": "mean",
+      "torx_path": "encoder/frontend/1/layer_scale/mean"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "encoder/context_in/weight",
+      "role": "mean",
+      "torx_path": "encoder/context_in/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/context_in/bias",
+      "role": "mean",
+      "torx_path": "encoder/context_in/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/context_in/rho"
+    },
+    {
+      "count": 65536,
+      "deterministic_path": "encoder/context/0/in_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/context/0/in_proj/mean/weight"
+    },
+    {
+      "count": 512,
+      "deterministic_path": "encoder/context/0/in_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/context/0/in_proj/mean/bias"
+    },
+    {
+      "count": 512,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/context/0/in_proj/rho"
+    },
+    {
+      "count": 768,
+      "deterministic_path": "encoder/context/0/conv/kernel",
+      "role": "mean",
+      "torx_path": "encoder/context/0/conv/mean/kernel"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/context/0/conv/bias",
+      "role": "mean",
+      "torx_path": "encoder/context/0/conv/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/context/0/conv/rho"
+    },
+    {
+      "count": 73728,
+      "deterministic_path": "encoder/context/0/dbc_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/context/0/dbc_proj/mean/weight"
+    },
+    {
+      "count": 288,
+      "deterministic_path": "encoder/context/0/dbc_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/context/0/dbc_proj/mean/bias"
+    },
+    {
+      "count": 288,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/context/0/dbc_proj/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "encoder/context/0/out_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/context/0/out_proj/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/context/0/out_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/context/0/out_proj/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/context/0/out_proj/rho"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "encoder/context/0/a_log",
+      "role": "mean",
+      "torx_path": "encoder/context/0/a_log/mean"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/context/0/d_skip",
+      "role": "mean",
+      "torx_path": "encoder/context/0/d_skip/mean"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/context/0/delta_bias",
+      "role": "mean",
+      "torx_path": "encoder/context/0/delta_bias/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/context/0/layer_scale",
+      "role": "mean",
+      "torx_path": "encoder/context/0/layer_scale/mean"
+    },
+    {
+      "count": 65536,
+      "deterministic_path": "encoder/context/1/in_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/context/1/in_proj/mean/weight"
+    },
+    {
+      "count": 512,
+      "deterministic_path": "encoder/context/1/in_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/context/1/in_proj/mean/bias"
+    },
+    {
+      "count": 512,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/context/1/in_proj/rho"
+    },
+    {
+      "count": 768,
+      "deterministic_path": "encoder/context/1/conv/kernel",
+      "role": "mean",
+      "torx_path": "encoder/context/1/conv/mean/kernel"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/context/1/conv/bias",
+      "role": "mean",
+      "torx_path": "encoder/context/1/conv/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/context/1/conv/rho"
+    },
+    {
+      "count": 73728,
+      "deterministic_path": "encoder/context/1/dbc_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/context/1/dbc_proj/mean/weight"
+    },
+    {
+      "count": 288,
+      "deterministic_path": "encoder/context/1/dbc_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/context/1/dbc_proj/mean/bias"
+    },
+    {
+      "count": 288,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/context/1/dbc_proj/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "encoder/context/1/out_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/context/1/out_proj/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/context/1/out_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/context/1/out_proj/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/context/1/out_proj/rho"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "encoder/context/1/a_log",
+      "role": "mean",
+      "torx_path": "encoder/context/1/a_log/mean"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/context/1/d_skip",
+      "role": "mean",
+      "torx_path": "encoder/context/1/d_skip/mean"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/context/1/delta_bias",
+      "role": "mean",
+      "torx_path": "encoder/context/1/delta_bias/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/context/1/layer_scale",
+      "role": "mean",
+      "torx_path": "encoder/context/1/layer_scale/mean"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "encoder/target/0/in_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/target/0/in_proj/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/target/0/in_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/target/0/in_proj/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target/0/in_proj/rho"
+    },
+    {
+      "count": 384,
+      "deterministic_path": "encoder/target/0/conv/kernel",
+      "role": "mean",
+      "torx_path": "encoder/target/0/conv/mean/kernel"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/target/0/conv/bias",
+      "role": "mean",
+      "torx_path": "encoder/target/0/conv/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target/0/conv/rho"
+    },
+    {
+      "count": 20480,
+      "deterministic_path": "encoder/target/0/dbc_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/target/0/dbc_proj/mean/weight"
+    },
+    {
+      "count": 160,
+      "deterministic_path": "encoder/target/0/dbc_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/target/0/dbc_proj/mean/bias"
+    },
+    {
+      "count": 160,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target/0/dbc_proj/rho"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "encoder/target/0/out_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/target/0/out_proj/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "encoder/target/0/out_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/target/0/out_proj/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target/0/out_proj/rho"
+    },
+    {
+      "count": 2048,
+      "deterministic_path": "encoder/target/0/a_log",
+      "role": "mean",
+      "torx_path": "encoder/target/0/a_log/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/target/0/d_skip",
+      "role": "mean",
+      "torx_path": "encoder/target/0/d_skip/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/target/0/delta_bias",
+      "role": "mean",
+      "torx_path": "encoder/target/0/delta_bias/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "encoder/target/0/layer_scale",
+      "role": "mean",
+      "torx_path": "encoder/target/0/layer_scale/mean"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "encoder/target/1/in_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/target/1/in_proj/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/target/1/in_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/target/1/in_proj/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target/1/in_proj/rho"
+    },
+    {
+      "count": 384,
+      "deterministic_path": "encoder/target/1/conv/kernel",
+      "role": "mean",
+      "torx_path": "encoder/target/1/conv/mean/kernel"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/target/1/conv/bias",
+      "role": "mean",
+      "torx_path": "encoder/target/1/conv/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target/1/conv/rho"
+    },
+    {
+      "count": 20480,
+      "deterministic_path": "encoder/target/1/dbc_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/target/1/dbc_proj/mean/weight"
+    },
+    {
+      "count": 160,
+      "deterministic_path": "encoder/target/1/dbc_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/target/1/dbc_proj/mean/bias"
+    },
+    {
+      "count": 160,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target/1/dbc_proj/rho"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "encoder/target/1/out_proj/weight",
+      "role": "mean",
+      "torx_path": "encoder/target/1/out_proj/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "encoder/target/1/out_proj/bias",
+      "role": "mean",
+      "torx_path": "encoder/target/1/out_proj/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target/1/out_proj/rho"
+    },
+    {
+      "count": 2048,
+      "deterministic_path": "encoder/target/1/a_log",
+      "role": "mean",
+      "torx_path": "encoder/target/1/a_log/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/target/1/d_skip",
+      "role": "mean",
+      "torx_path": "encoder/target/1/d_skip/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/target/1/delta_bias",
+      "role": "mean",
+      "torx_path": "encoder/target/1/delta_bias/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "encoder/target/1/layer_scale",
+      "role": "mean",
+      "torx_path": "encoder/target/1/layer_scale/mean"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "encoder/target_slot_embed",
+      "role": "mean",
+      "torx_path": "encoder/target_slot_embed/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target_slot_embed/rho"
+    },
+    {
+      "count": 2048,
+      "deterministic_path": "encoder/target_carrier_embed",
+      "role": "mean",
+      "torx_path": "encoder/target_carrier_embed/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target_carrier_embed/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "encoder/target_pool/weight",
+      "role": "mean",
+      "torx_path": "encoder/target_pool/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "encoder/target_pool/bias",
+      "role": "mean",
+      "torx_path": "encoder/target_pool/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target_pool/rho"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "encoder/target_h/weight",
+      "role": "mean",
+      "torx_path": "encoder/target_h/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "encoder/target_h/bias",
+      "role": "mean",
+      "torx_path": "encoder/target_h/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target_h/rho"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "encoder/target_b/weight",
+      "role": "mean",
+      "torx_path": "encoder/target_b/mean/weight"
+    },
+    {
+      "count": 2,
+      "deterministic_path": "encoder/target_b/bias",
+      "role": "mean",
+      "torx_path": "encoder/target_b/mean/bias"
+    },
+    {
+      "count": 2,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target_b/rho"
+    },
+    {
+      "count": 320,
+      "deterministic_path": "encoder/target_l/weight",
+      "role": "mean",
+      "torx_path": "encoder/target_l/mean/weight"
+    },
+    {
+      "count": 5,
+      "deterministic_path": "encoder/target_l/bias",
+      "role": "mean",
+      "torx_path": "encoder/target_l/mean/bias"
+    },
+    {
+      "count": 5,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "encoder/target_l/rho"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "proposal/context/weight",
+      "role": "mean",
+      "torx_path": "proposal/context/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "proposal/context/bias",
+      "role": "mean",
+      "torx_path": "proposal/context/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/context/rho"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "proposal/prior/weight",
+      "role": "mean",
+      "torx_path": "proposal/prior/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "proposal/prior/bias",
+      "role": "mean",
+      "torx_path": "proposal/prior/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/prior/rho"
+    },
+    {
+      "count": 2048,
+      "deterministic_path": "proposal/position",
+      "role": "mean",
+      "torx_path": "proposal/position/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/position/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "proposal/stack/0/in_proj/weight",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/in_proj/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "proposal/stack/0/in_proj/bias",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/in_proj/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/stack/0/in_proj/rho"
+    },
+    {
+      "count": 384,
+      "deterministic_path": "proposal/stack/0/conv/kernel",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/conv/mean/kernel"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "proposal/stack/0/conv/bias",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/conv/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/stack/0/conv/rho"
+    },
+    {
+      "count": 20480,
+      "deterministic_path": "proposal/stack/0/dbc_proj/weight",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/dbc_proj/mean/weight"
+    },
+    {
+      "count": 160,
+      "deterministic_path": "proposal/stack/0/dbc_proj/bias",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/dbc_proj/mean/bias"
+    },
+    {
+      "count": 160,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/stack/0/dbc_proj/rho"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "proposal/stack/0/out_proj/weight",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/out_proj/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "proposal/stack/0/out_proj/bias",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/out_proj/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/stack/0/out_proj/rho"
+    },
+    {
+      "count": 2048,
+      "deterministic_path": "proposal/stack/0/a_log",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/a_log/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "proposal/stack/0/d_skip",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/d_skip/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "proposal/stack/0/delta_bias",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/delta_bias/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "proposal/stack/0/layer_scale",
+      "role": "mean",
+      "torx_path": "proposal/stack/0/layer_scale/mean"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "proposal/stack/1/in_proj/weight",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/in_proj/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "proposal/stack/1/in_proj/bias",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/in_proj/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/stack/1/in_proj/rho"
+    },
+    {
+      "count": 384,
+      "deterministic_path": "proposal/stack/1/conv/kernel",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/conv/mean/kernel"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "proposal/stack/1/conv/bias",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/conv/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/stack/1/conv/rho"
+    },
+    {
+      "count": 20480,
+      "deterministic_path": "proposal/stack/1/dbc_proj/weight",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/dbc_proj/mean/weight"
+    },
+    {
+      "count": 160,
+      "deterministic_path": "proposal/stack/1/dbc_proj/bias",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/dbc_proj/mean/bias"
+    },
+    {
+      "count": 160,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/stack/1/dbc_proj/rho"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "proposal/stack/1/out_proj/weight",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/out_proj/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "proposal/stack/1/out_proj/bias",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/out_proj/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/stack/1/out_proj/rho"
+    },
+    {
+      "count": 2048,
+      "deterministic_path": "proposal/stack/1/a_log",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/a_log/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "proposal/stack/1/d_skip",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/d_skip/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "proposal/stack/1/delta_bias",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/delta_bias/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "proposal/stack/1/layer_scale",
+      "role": "mean",
+      "torx_path": "proposal/stack/1/layer_scale/mean"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "proposal/h/weight",
+      "role": "mean",
+      "torx_path": "proposal/h/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "proposal/h/bias",
+      "role": "mean",
+      "torx_path": "proposal/h/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/h/rho"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "proposal/b/weight",
+      "role": "mean",
+      "torx_path": "proposal/b/mean/weight"
+    },
+    {
+      "count": 2,
+      "deterministic_path": "proposal/b/bias",
+      "role": "mean",
+      "torx_path": "proposal/b/mean/bias"
+    },
+    {
+      "count": 2,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/b/rho"
+    },
+    {
+      "count": 320,
+      "deterministic_path": "proposal/l/weight",
+      "role": "mean",
+      "torx_path": "proposal/l/mean/weight"
+    },
+    {
+      "count": 5,
+      "deterministic_path": "proposal/l/bias",
+      "role": "mean",
+      "torx_path": "proposal/l/mean/bias"
+    },
+    {
+      "count": 5,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "proposal/l/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/input_proj/weight",
+      "role": "mean",
+      "torx_path": "dit/input_proj/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/input_proj/bias",
+      "role": "mean",
+      "torx_path": "dit/input_proj/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/input_proj/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/output_proj/weight",
+      "role": "mean",
+      "torx_path": "dit/output_proj/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/output_proj/bias",
+      "role": "mean",
+      "torx_path": "dit/output_proj/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/output_proj/rho"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "dit/carrier_embed",
+      "role": "mean",
+      "torx_path": "dit/carrier_embed/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/carrier_embed/rho"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "dit/block_embed",
+      "role": "mean",
+      "torx_path": "dit/block_embed/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/block_embed/rho"
+    },
+    {
+      "count": 1024,
+      "deterministic_path": "dit/within_embed",
+      "role": "mean",
+      "torx_path": "dit/within_embed/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/within_embed/rho"
+    },
+    {
+      "count": 640,
+      "deterministic_path": "dit/length_embed",
+      "role": "mean",
+      "torx_path": "dit/length_embed/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/length_embed/rho"
+    },
+    {
+      "count": 384,
+      "deterministic_path": "dit/boundary_left_embed",
+      "role": "mean",
+      "torx_path": "dit/boundary_left_embed/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/boundary_left_embed/rho"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "dit/boundary_right_embed",
+      "role": "mean",
+      "torx_path": "dit/boundary_right_embed/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/boundary_right_embed/rho"
+    },
+    {
+      "count": 26624,
+      "deterministic_path": "dit/conditioning_trunk/weight",
+      "role": "mean",
+      "torx_path": "dit/conditioning_trunk/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/conditioning_trunk/bias",
+      "role": "mean",
+      "torx_path": "dit/conditioning_trunk/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/conditioning_trunk/rho"
+    },
+    {
+      "count": 98304,
+      "deterministic_path": "dit/blocks/0/modulation/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/modulation/mean/weight"
+    },
+    {
+      "count": 768,
+      "deterministic_path": "dit/blocks/0/modulation/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/modulation/mean/bias"
+    },
+    {
+      "count": 768,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/0/modulation/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/0/q/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/q/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/0/q/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/q/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/0/q/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/0/k/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/k/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/0/k/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/k/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/0/k/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/0/v/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/v/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/0/v/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/v/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/0/v/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/0/o/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/o/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/0/o/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/o/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/0/o/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/0/up/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/up/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "dit/blocks/0/up/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/up/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/0/up/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/0/gate/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/gate/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "dit/blocks/0/gate/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/gate/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/0/gate/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/0/down/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/down/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/0/down/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/0/down/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/0/down/rho"
+    },
+    {
+      "count": 98304,
+      "deterministic_path": "dit/blocks/1/modulation/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/modulation/mean/weight"
+    },
+    {
+      "count": 768,
+      "deterministic_path": "dit/blocks/1/modulation/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/modulation/mean/bias"
+    },
+    {
+      "count": 768,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/1/modulation/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/1/q/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/q/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/1/q/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/q/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/1/q/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/1/k/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/k/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/1/k/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/k/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/1/k/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/1/v/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/v/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/1/v/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/v/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/1/v/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/1/o/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/o/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/1/o/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/o/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/1/o/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/1/up/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/up/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "dit/blocks/1/up/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/up/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/1/up/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/1/gate/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/gate/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "dit/blocks/1/gate/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/gate/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/1/gate/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/1/down/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/down/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/1/down/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/1/down/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/1/down/rho"
+    },
+    {
+      "count": 98304,
+      "deterministic_path": "dit/blocks/2/modulation/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/modulation/mean/weight"
+    },
+    {
+      "count": 768,
+      "deterministic_path": "dit/blocks/2/modulation/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/modulation/mean/bias"
+    },
+    {
+      "count": 768,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/2/modulation/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/2/q/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/q/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/2/q/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/q/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/2/q/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/2/k/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/k/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/2/k/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/k/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/2/k/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/2/v/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/v/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/2/v/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/v/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/2/v/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/2/o/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/o/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/2/o/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/o/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/2/o/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/2/up/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/up/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "dit/blocks/2/up/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/up/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/2/up/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/2/gate/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/gate/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "dit/blocks/2/gate/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/gate/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/2/gate/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/2/down/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/down/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/2/down/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/2/down/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/2/down/rho"
+    },
+    {
+      "count": 98304,
+      "deterministic_path": "dit/blocks/3/modulation/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/modulation/mean/weight"
+    },
+    {
+      "count": 768,
+      "deterministic_path": "dit/blocks/3/modulation/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/modulation/mean/bias"
+    },
+    {
+      "count": 768,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/3/modulation/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/3/q/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/q/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/3/q/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/q/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/3/q/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/3/k/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/k/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/3/k/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/k/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/3/k/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/3/v/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/v/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/3/v/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/v/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/3/v/rho"
+    },
+    {
+      "count": 16384,
+      "deterministic_path": "dit/blocks/3/o/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/o/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/3/o/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/o/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/3/o/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/3/up/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/up/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "dit/blocks/3/up/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/up/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/3/up/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/3/gate/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/gate/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "dit/blocks/3/gate/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/gate/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/3/gate/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "dit/blocks/3/down/weight",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/down/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "dit/blocks/3/down/bias",
+      "role": "mean",
+      "torx_path": "dit/blocks/3/down/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "dit/blocks/3/down/rho"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "decoder/h/weight",
+      "role": "mean",
+      "torx_path": "decoder/h/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "decoder/h/bias",
+      "role": "mean",
+      "torx_path": "decoder/h/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/h/rho"
+    },
+    {
+      "count": 512,
+      "deterministic_path": "decoder/slot_embed",
+      "role": "mean",
+      "torx_path": "decoder/slot_embed/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/slot_embed/rho"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "decoder/carrier_embed",
+      "role": "mean",
+      "torx_path": "decoder/carrier_embed/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/carrier_embed/rho"
+    },
+    {
+      "count": 65536,
+      "deterministic_path": "decoder/stack/0/in_proj/weight",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/in_proj/mean/weight"
+    },
+    {
+      "count": 512,
+      "deterministic_path": "decoder/stack/0/in_proj/bias",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/in_proj/mean/bias"
+    },
+    {
+      "count": 512,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/stack/0/in_proj/rho"
+    },
+    {
+      "count": 768,
+      "deterministic_path": "decoder/stack/0/conv/kernel",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/conv/mean/kernel"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "decoder/stack/0/conv/bias",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/conv/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/stack/0/conv/rho"
+    },
+    {
+      "count": 73728,
+      "deterministic_path": "decoder/stack/0/dbc_proj/weight",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/dbc_proj/mean/weight"
+    },
+    {
+      "count": 288,
+      "deterministic_path": "decoder/stack/0/dbc_proj/bias",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/dbc_proj/mean/bias"
+    },
+    {
+      "count": 288,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/stack/0/dbc_proj/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "decoder/stack/0/out_proj/weight",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/out_proj/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "decoder/stack/0/out_proj/bias",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/out_proj/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/stack/0/out_proj/rho"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "decoder/stack/0/a_log",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/a_log/mean"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "decoder/stack/0/d_skip",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/d_skip/mean"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "decoder/stack/0/delta_bias",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/delta_bias/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "decoder/stack/0/layer_scale",
+      "role": "mean",
+      "torx_path": "decoder/stack/0/layer_scale/mean"
+    },
+    {
+      "count": 65536,
+      "deterministic_path": "decoder/stack/1/in_proj/weight",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/in_proj/mean/weight"
+    },
+    {
+      "count": 512,
+      "deterministic_path": "decoder/stack/1/in_proj/bias",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/in_proj/mean/bias"
+    },
+    {
+      "count": 512,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/stack/1/in_proj/rho"
+    },
+    {
+      "count": 768,
+      "deterministic_path": "decoder/stack/1/conv/kernel",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/conv/mean/kernel"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "decoder/stack/1/conv/bias",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/conv/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/stack/1/conv/rho"
+    },
+    {
+      "count": 73728,
+      "deterministic_path": "decoder/stack/1/dbc_proj/weight",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/dbc_proj/mean/weight"
+    },
+    {
+      "count": 288,
+      "deterministic_path": "decoder/stack/1/dbc_proj/bias",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/dbc_proj/mean/bias"
+    },
+    {
+      "count": 288,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/stack/1/dbc_proj/rho"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "decoder/stack/1/out_proj/weight",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/out_proj/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "decoder/stack/1/out_proj/bias",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/out_proj/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/stack/1/out_proj/rho"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "decoder/stack/1/a_log",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/a_log/mean"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "decoder/stack/1/d_skip",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/d_skip/mean"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "decoder/stack/1/delta_bias",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/delta_bias/mean"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "decoder/stack/1/layer_scale",
+      "role": "mean",
+      "torx_path": "decoder/stack/1/layer_scale/mean"
+    },
+    {
+      "count": 32768,
+      "deterministic_path": "decoder/out/weight",
+      "role": "mean",
+      "torx_path": "decoder/out/mean/weight"
+    },
+    {
+      "count": 256,
+      "deterministic_path": "decoder/out/bias",
+      "role": "mean",
+      "torx_path": "decoder/out/mean/bias"
+    },
+    {
+      "count": 256,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "decoder/out/rho"
+    },
+    {
+      "count": 2048,
+      "deterministic_path": "carrier_prior",
+      "role": "mean",
+      "torx_path": "carrier_prior/mean"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "carrier_prior/rho"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "carrier_in/weight",
+      "role": "mean",
+      "torx_path": "carrier_in/mean/weight"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "carrier_in/bias",
+      "role": "mean",
+      "torx_path": "carrier_in/mean/bias"
+    },
+    {
+      "count": 128,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "carrier_in/rho"
+    },
+    {
+      "count": 8192,
+      "deterministic_path": "carrier_out/weight",
+      "role": "mean",
+      "torx_path": "carrier_out/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "carrier_out/bias",
+      "role": "mean",
+      "torx_path": "carrier_out/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "carrier_out/rho"
+    },
+    {
+      "count": 4096,
+      "deterministic_path": "h_head/weight",
+      "role": "mean",
+      "torx_path": "h_head/mean/weight"
+    },
+    {
+      "count": 64,
+      "deterministic_path": "h_head/bias",
+      "role": "mean",
+      "torx_path": "h_head/mean/bias"
+    },
+    {
+      "count": 64,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "h_head/rho"
+    },
+    {
+      "count": 128,
+      "deterministic_path": "b_head/weight",
+      "role": "mean",
+      "torx_path": "b_head/mean/weight"
+    },
+    {
+      "count": 2,
+      "deterministic_path": "b_head/bias",
+      "role": "mean",
+      "torx_path": "b_head/mean/bias"
+    },
+    {
+      "count": 2,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "b_head/rho"
+    },
+    {
+      "count": 320,
+      "deterministic_path": "l_head/weight",
+      "role": "mean",
+      "torx_path": "l_head/mean/weight"
+    },
+    {
+      "count": 5,
+      "deterministic_path": "l_head/bias",
+      "role": "mean",
+      "torx_path": "l_head/mean/bias"
+    },
+    {
+      "count": 5,
+      "deterministic_path": null,
+      "role": "stochastic",
+      "torx_path": "l_head/rho"
+    }
+  ],
+  "phase_d_obligation": "PHASE_D_DIRECT_PARAMETER_NOISE_POLICY_TBD"
+}

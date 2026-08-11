@@ -12,7 +12,13 @@ from .backends.protocol import LearnedOps
 from .config import REFERENCE_SMALL_V0, ReferenceConfig
 from .decoder import apply_decoder, init_decoder_params
 from .dit import DiTConfig, apply_dit, init_dit_params
-from .encoder import encode_context, encode_target, init_encoder_params
+from .encoder import (
+    encode_context_from_hidden,
+    encode_target,
+    encode_target_from_hidden,
+    init_encoder_params,
+    shared_byte_frontend,
+)
 from .packing import build_pack_metadata_core, pack_values, trim_padding_blocks
 from .proposal import apply_proposal, init_proposal_params
 from .unpool import unpool_values
@@ -109,10 +115,14 @@ def apply_model(
     ops = ops or DeterministicOps()
     if target.shape[1] > config.carrier.C * config.carrier.L_max:
         raise ValueError("target sequence width exceeds carrier emission capacity")
-    context_seq, context_global = encode_context(
-        prompt, prompt_mask, params["encoder"], config, ops
+    prompt_frontend = shared_byte_frontend(prompt, prompt_mask, params["encoder"], config, ops)
+    context_seq, context_global = encode_context_from_hidden(
+        prompt_frontend, prompt_mask, params["encoder"], config, ops
     )
-    target_codec = encode_target(target, target_mask, params["encoder"], config, ops)
+    target_frontend = shared_byte_frontend(target, target_mask, params["encoder"], config, ops)
+    target_codec = encode_target_from_hidden(
+        target_frontend, target, target_mask, params["encoder"], config, ops
+    )
     teacher = target_codec["teacher"]
     c_b = teacher.boundaries if committed_c_b is None else committed_c_b
     length = teacher.length if committed_length is None else committed_length
@@ -168,6 +178,8 @@ def apply_model(
         h_final, length, params["decoder"], config, ops, name="decoder"
     )
     return {
+        "prompt_frontend": prompt_frontend,
+        "target_frontend": target_frontend,
         "context_seq": context_seq,
         "context_global": context_global,
         "target": target_codec,
@@ -178,6 +190,9 @@ def apply_model(
         "byte_logits": byte_logits,
         "emit_mask": emit_mask,
         "metadata": metadata,
+        "packed_carrier": packed,
+        "packed_output": packed_out,
+        "unpooled_carrier": unpooled,
         "dit_aux": dit_aux,
         "activation_rms": {
             "packed_input": jnp.sqrt(jnp.mean(packed**2)),

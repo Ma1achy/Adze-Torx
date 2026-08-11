@@ -207,7 +207,7 @@ def test_dit_manual_unroll_matches_recurrent_driver():
     x = jnp.where(query[..., None], x, 0.0)
     mask = aux["mask"]
     for cycle in range(cfg.cycles):
-        x, _, _ = apply_dit_cycle(
+        x, _, _, _ = apply_dit_cycle(
             x,
             params,
             context,

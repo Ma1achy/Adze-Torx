@@ -1,0 +1,627 @@
+{
+  "first_divergence": null,
+  "records": [
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        8,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "frontend/prompt",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        8,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        8,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "frontend/target",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        8,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        8,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "context/sequence",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        8,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "context/global",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "target/h0",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        2
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "target/b_logits",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        5
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "target/l_logits",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "proposal/h",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        2
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "proposal/b_logits",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        5
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "proposal/l_logits",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        4,
+        8,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "packed/input",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        4,
+        8,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q0/b0",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q0/b1",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q0/b2",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q0/b3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q1/b0",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q1/b1",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q1/b2",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q1/b3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q2/b0",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q2/b1",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q2/b2",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "dit/q2/b3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        4,
+        8,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "packed/output",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        4,
+        8,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "carrier/unpool",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "carrier/pre_head",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "heads/h_hat",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        2
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "heads/b_logits",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        5
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "heads/l_logits",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        4,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "decoder/logits",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        1,
+        32,
+        4,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        1,
+        32,
+        4,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "jit/decoder_logits",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        1,
+        32,
+        4,
+        256
+      ]
+    }
+  ],
+  "refine_first_divergence": null,
+  "trained_checkpoints": [
+    {
+      "checkpoint": "target_codec_b1",
+      "first_divergence": null,
+      "passed": true,
+      "present": true,
+      "worst_max_absolute_difference": 0.0
+    },
+    {
+      "checkpoint": "copy",
+      "first_divergence": null,
+      "passed": true,
+      "present": true,
+      "worst_max_absolute_difference": 0.0
+    },
+    {
+      "checkpoint": "reverse",
+      "first_divergence": null,
+      "passed": true,
+      "present": true,
+      "worst_max_absolute_difference": 0.0
+    }
+  ]
+}

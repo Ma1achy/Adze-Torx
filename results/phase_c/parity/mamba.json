@@ -1,0 +1,49 @@
+{
+  "decision": "C2A_MAMBA_PARITY_PASS",
+  "records": [
+    {
+      "atol": 1e-06,
+      "deterministic_shape": [
+        2,
+        5,
+        8
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "all_valid",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-06,
+      "seed": 0,
+      "torx_shape": [
+        2,
+        5,
+        8
+      ]
+    },
+    {
+      "atol": 1e-06,
+      "deterministic_shape": [
+        2,
+        5,
+        8
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "internal_holes",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-06,
+      "seed": 0,
+      "torx_shape": [
+        2,
+        5,
+        8
+      ]
+    }
+  ]
+}

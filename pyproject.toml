@@ -32,6 +32,7 @@ allow-direct-references = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+markers = ["slow: expensive reference-configuration integration checks"]
 
 [tool.ruff]
 line-length = 100

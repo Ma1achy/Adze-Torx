@@ -1,0 +1,4516 @@
+{
+  "records": [
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "loss/total",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": []
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        2
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['b_head']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        2
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['b_head']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['carrier_in']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['carrier_in']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['carrier_out']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['carrier_out']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['carrier_prior']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['carrier_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['h']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['h']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['out']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['out']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        4,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['slot_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        4,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        16
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['a_log']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['conv']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['conv']['kernel']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['d_skip']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        288
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['dbc_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        288
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['dbc_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['delta_bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        512
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['in_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        512
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['in_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['layer_scale']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['out_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['out_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        16
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['a_log']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['conv']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['conv']['kernel']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['d_skip']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        288
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['dbc_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        288
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['dbc_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['delta_bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        512
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['in_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        512
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['in_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['layer_scale']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['out_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['out_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['block_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['down']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['down']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['gate']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['gate']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['k']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['k']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        768
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['modulation']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        768
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['modulation']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['o']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['o']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['q']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['q']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['up']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['up']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['v']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['v']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['down']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['down']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['gate']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['gate']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['k']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['k']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        768
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['modulation']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        768
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['modulation']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['o']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['o']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['q']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['q']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['up']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['up']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['v']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['v']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['down']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['down']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['gate']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['gate']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['k']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['k']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        768
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['modulation']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        768
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['modulation']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['o']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['o']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['q']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['q']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['up']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['up']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['v']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['v']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['down']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['down']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['gate']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['gate']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['k']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['k']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        768
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['modulation']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        768
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['modulation']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['o']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['o']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['q']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['q']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['up']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['up']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['v']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['v']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['boundary_left_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        2,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['boundary_right_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        2,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['carrier_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['conditioning_trunk']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        208,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['conditioning_trunk']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        208,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['input_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['input_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        5,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['length_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        5,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['output_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['output_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        8,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['within_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        8,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['byte_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        16
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['a_log']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['conv']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['conv']['kernel']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['d_skip']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        288
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['dbc_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        288
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['dbc_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['delta_bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        512
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['in_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        512
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['in_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['layer_scale']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['out_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['out_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        16
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['a_log']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['conv']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['conv']['kernel']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['d_skip']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        288
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['dbc_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        288
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['dbc_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['delta_bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        512
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['in_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        512
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['in_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['layer_scale']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['out_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['out_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context_in']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context_in']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['a_log']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['conv']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['conv']['kernel']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['d_skip']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['dbc_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['dbc_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['delta_bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['in_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['in_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['layer_scale']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['out_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['out_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['a_log']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['conv']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['conv']['kernel']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['d_skip']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['dbc_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['dbc_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['delta_bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['in_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['in_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['layer_scale']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['out_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['out_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['a_log']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['conv']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['conv']['kernel']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['d_skip']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['dbc_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['dbc_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['delta_bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['in_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['in_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['layer_scale']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['out_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['out_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['a_log']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['conv']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['conv']['kernel']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['d_skip']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['dbc_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['dbc_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['delta_bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['in_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['in_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['layer_scale']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['out_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['out_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        2
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_b']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        2
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_b']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_carrier_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_h']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_h']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        5
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_l']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        5
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_l']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_pool']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_pool']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        4,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_slot_embed']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        4,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['h_head']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['h_head']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        5
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['l_head']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        5
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['l_head']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        2
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['b']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        2
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['b']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['context']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['context']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['h']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['h']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        5
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['l']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        5
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['l']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['position']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['prior']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['prior']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['a_log']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['conv']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['conv']['kernel']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['d_skip']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['dbc_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['dbc_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['delta_bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['in_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['in_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['layer_scale']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['out_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['out_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['a_log']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['conv']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['conv']['kernel']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['d_skip']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['dbc_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['dbc_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['delta_bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['in_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['in_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['layer_scale']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['out_proj']['bias']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "lambda_op": 0.0,
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['out_proj']['weight']",
+      "rho_configuration": "initial_sigma=1e-3",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "seed": 0,
+      "torx_shape": [
+        128,
+        64
+      ]
+    }
+  ],
+  "rho_gradient_max_absolute": 0.0,
+  "worst_parameter": "loss/total"
+}

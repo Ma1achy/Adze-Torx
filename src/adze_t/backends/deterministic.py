@@ -46,6 +46,17 @@ class DeterministicOps:
         del name
         return value
 
+    def with_occurrence(
+        self,
+        *,
+        recurrence_cycle: int | Array | None = None,
+        physical_layer: int | Array | None = None,
+        denoise_step: int | Array | None = None,
+        refinement_step: int | Array | None = None,
+    ) -> "DeterministicOps":
+        del recurrence_cycle, physical_layer, denoise_step, refinement_step
+        return self
+
     def init_linear(
         self, key: Array, in_dim: int, out_dim: int, *, scale: float = 1.0
     ) -> dict[str, Array]:

@@ -25,3 +25,12 @@ class LearnedOps(Protocol):
     def categorical_logits(self, x: Array, params: Any, *, name: str) -> Array: ...
 
     def parameter(self, value: Array, *, name: str) -> Array: ...
+
+    def with_occurrence(
+        self,
+        *,
+        recurrence_cycle: int | Array | None = None,
+        physical_layer: int | Array | None = None,
+        denoise_step: int | Array | None = None,
+        refinement_step: int | Array | None = None,
+    ) -> "LearnedOps": ...
