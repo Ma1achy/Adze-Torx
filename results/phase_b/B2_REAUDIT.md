@@ -39,3 +39,9 @@ accuracy (80.47% exact sequence); held-out boundary/extent losses were
 denoising loss, while the normal decoder remains trainable. Changing target
 bytes changes h0, and tests cover slot ordering, proposal prior influence,
 configured depth, eager/JIT full forward, and decoder-path gradients.
+
+Phase B.1 correction: this 2,000-step codec run did not meet the declared
+validation gate, and zeroed gradients did not prevent AdamW decay of nominally
+frozen leaves. The measurement is preserved but superseded. Phase B.1 adds true
+optimizer masking and records a fresh passing codec run in
+`results/phase_b_1/RESULTS.md`.

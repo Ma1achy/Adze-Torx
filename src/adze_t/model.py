@@ -73,6 +73,8 @@ def apply_target_codec(
     are frozen before ordinary Phase-B model training.
     """
     ops = ops or DeterministicOps()
+    if target.shape[1] > config.carrier.C * config.carrier.L_max:
+        raise ValueError("target sequence width exceeds carrier emission capacity")
     target_codec = encode_target(target, target_mask, params["encoder"], config, ops)
     codec_logits, codec_emit_mask = apply_decoder(
         target_codec["h0"],
@@ -105,6 +107,8 @@ def apply_model(
 ) -> dict[str, Any]:
     """Run the shared S=1,R=0 graph with deterministic teacher routing."""
     ops = ops or DeterministicOps()
+    if target.shape[1] > config.carrier.C * config.carrier.L_max:
+        raise ValueError("target sequence width exceeds carrier emission capacity")
     context_seq, context_global = encode_context(
         prompt, prompt_mask, params["encoder"], config, ops
     )

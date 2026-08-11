@@ -95,20 +95,42 @@ def adamw_step(
     learning_rate: float,
     weight_decay: float,
     clip_norm: float,
+    update_mask: Any | None = None,
 ) -> tuple[Any, tuple[Any, Any], jax.Array]:
+    """Apply AdamW, leaving masked parameters and moments bitwise unchanged."""
     m, v = moments
-    grad_norm = global_norm(grads)
+    if update_mask is None:
+        update_mask = jax.tree_util.tree_map(lambda _: jnp.asarray(True), params)
+    masked_grads = jax.tree_util.tree_map(
+        lambda g, enabled: jnp.where(enabled, g, jnp.zeros_like(g)), grads, update_mask
+    )
+    grad_norm = global_norm(masked_grads)
     scale = jnp.minimum(1.0, clip_norm / jnp.maximum(grad_norm, 1.0e-8))
-    grads = jax.tree_util.tree_map(lambda g: g * scale, grads)
+    masked_grads = jax.tree_util.tree_map(lambda g: g * scale, masked_grads)
     beta1, beta2 = 0.9, 0.999
-    m = jax.tree_util.tree_map(lambda old, g: beta1 * old + (1 - beta1) * g, m, grads)
-    v = jax.tree_util.tree_map(lambda old, g: beta2 * old + (1 - beta2) * g * g, v, grads)
+    m = jax.tree_util.tree_map(
+        lambda old, g, enabled: jnp.where(enabled, beta1 * old + (1 - beta1) * g, old),
+        m,
+        masked_grads,
+        update_mask,
+    )
+    v = jax.tree_util.tree_map(
+        lambda old, g, enabled: jnp.where(enabled, beta2 * old + (1 - beta2) * g * g, old),
+        v,
+        masked_grads,
+        update_mask,
+    )
     m_hat = jax.tree_util.tree_map(lambda x: x / (1 - beta1**step), m)
     v_hat = jax.tree_util.tree_map(lambda x: x / (1 - beta2**step), v)
     params = jax.tree_util.tree_map(
-        lambda p, mh, vh: p - learning_rate * (mh / (jnp.sqrt(vh) + 1.0e-8) + weight_decay * p),
+        lambda p, mh, vh, enabled: jnp.where(
+            enabled,
+            p - learning_rate * (mh / (jnp.sqrt(vh) + 1.0e-8) + weight_decay * p),
+            p,
+        ),
         params,
         m_hat,
         v_hat,
+        update_mask,
     )
     return params, (m, v), grad_norm

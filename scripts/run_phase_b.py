@@ -44,7 +44,19 @@ B3_CHECKPOINTS = (
     120_000,
     240_000,
 )
-CODEC_CHECKPOINTS = (1, 100, 250, 500, 1_000, 2_000, 5_000, 10_000)
+CODEC_CHECKPOINTS = (
+    1,
+    100,
+    250,
+    500,
+    1_000,
+    2_000,
+    5_000,
+    10_000,
+    20_000,
+    40_000,
+    60_000,
+)
 
 
 def dataset(task: str, count: int, seed: int) -> tuple[jax.Array, jax.Array]:
@@ -155,7 +167,7 @@ def run_codec(max_steps: int) -> None:
     params, moments = initialise_training(jax.random.PRNGKey(700), CONFIG)
     update = jax.jit(codec_pretrain_step, static_argnames=("config",))
     evaluate = jax.jit(_codec_eval)
-    metrics_path = RUN_ROOT / "target_codec.jsonl"
+    metrics_path = RUN_ROOT / "target_codec_b1.jsonl"
     metrics_path.unlink(missing_ok=True)
     started = time.monotonic()
     batch_size = 32
@@ -194,10 +206,10 @@ def run_codec(max_steps: int) -> None:
                 ),
                 flush=True,
             )
-            save_checkpoint(CHECKPOINT_ROOT / "target_codec.pkl", params)
+            save_checkpoint(CHECKPOINT_ROOT / "target_codec_b1.pkl", params)
             if (
                 step >= 500
-                and float(validation_metrics["byte_accuracy"]) >= 0.995
+                and float(validation_metrics["byte_accuracy"]) >= 0.99
                 and float(validation_metrics["sequence_accuracy"]) >= 0.95
             ):
                 break
@@ -218,7 +230,7 @@ def _stage_data(stage: str) -> tuple[jax.Array, jax.Array, jax.Array | None, jax
 
 
 def run_b3(stage: str, max_steps: int) -> None:
-    codec_path = CHECKPOINT_ROOT / "target_codec.pkl"
+    codec_path = CHECKPOINT_ROOT / "target_codec_b1.pkl"
     if not codec_path.exists():
         raise FileNotFoundError("run target-codec pretraining before B3")
     params = load_checkpoint(codec_path)
@@ -353,7 +365,7 @@ def main() -> None:
     parser.add_argument("--max-steps", type=int)
     args = parser.parse_args()
     defaults = {
-        "codec": 10_000,
+        "codec": 60_000,
         "single": 1_000,
         "overfit": 20_000,
         "copy": 240_000,

@@ -11,7 +11,7 @@ from .backends.deterministic import DeterministicOps
 from .backends.protocol import LearnedOps
 from .config import ReferenceConfig
 from .mamba import MambaConfig, apply_mamba_stack, init_mamba_stack
-from .teacher import canonical_teacher_structure
+from .teacher import canonical_teacher_structure_core
 
 
 def _mamba_config(width: int, layers: int, config: ReferenceConfig) -> MambaConfig:
@@ -111,7 +111,7 @@ def encode_target_from_hidden(
     analysed = apply_mamba_stack(
         target_hidden, params["target"], target_config, ops, name="target", mask=target_mask
     )
-    teacher = canonical_teacher_structure(target_bytes, target_mask, config)
+    teacher = canonical_teacher_structure_core(target_bytes, target_mask, config)
     batch = analysed.shape[0]
     total_slots = config.carrier.C * config.carrier.L_max
     padded = jnp.pad(

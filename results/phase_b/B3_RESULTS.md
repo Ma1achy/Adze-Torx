@@ -57,6 +57,13 @@ global 34.545. Target analysis is deliberately frozen after codec pretraining
 and therefore reports zero during B3. Unit tests separately require finite,
 non-zero first-step gradients in every physical DiT block and clean head.
 
+Phase B.1 correction: the pre-mask frontend/target norms above remain valid
+connectivity diagnostics, but the original zero-gradient freezing mechanism
+still allowed AdamW weight decay. Phase B.1 replaces it with update masks that
+keep frozen parameters and optimizer moments bitwise unchanged. The accepted
+COPY/REVERSE measurements are preserved and are not reinterpreted as having
+used the later optimizer implementation.
+
 Machine-readable complete curves and activation RMS trajectories live in
 `results/phase_b/runs/`. Diagnostic curves preserve the superseded scalar-pool,
 batch-one, 1,024-example, and full-capacity-padding investigations; none is

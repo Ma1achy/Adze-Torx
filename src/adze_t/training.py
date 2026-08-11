@@ -21,50 +21,39 @@ from .objectives import (
 from .teacher import canonical_teacher_structure
 
 
-def _zero_subtree(tree: Any) -> Any:
-    return jax.tree_util.tree_map(jnp.zeros_like, tree)
+_CODEC_ENCODER_NAMES = (
+    "byte_embed",
+    "frontend",
+    "target",
+    "target_slot_embed",
+    "target_carrier_embed",
+    "target_pool",
+    "target_h",
+    "target_b",
+    "target_l",
+)
 
 
-def _freeze_codec_grads(grads: dict[str, Any]) -> dict[str, Any]:
-    encoder = dict(grads["encoder"])
-    for name in (
-        "byte_embed",
-        "frontend",
-        "target",
-        "target_slot_embed",
-        "target_carrier_embed",
-        "target_pool",
-        "target_h",
-        "target_b",
-        "target_l",
-    ):
-        encoder[name] = _zero_subtree(encoder[name])
-    return {
-        **grads,
-        "encoder": encoder,
-    }
+def _constant_mask(tree: Any, enabled: bool) -> Any:
+    return jax.tree_util.tree_map(lambda _: jnp.asarray(enabled), tree)
 
 
-def _keep_only_codec_grads(grads: dict[str, Any]) -> dict[str, Any]:
-    zeroed = _zero_subtree(grads)
-    encoder = dict(zeroed["encoder"])
-    for name in (
-        "byte_embed",
-        "frontend",
-        "target",
-        "target_slot_embed",
-        "target_carrier_embed",
-        "target_pool",
-        "target_h",
-        "target_b",
-        "target_l",
-    ):
-        encoder[name] = grads["encoder"][name]
-    return {
-        **zeroed,
-        "encoder": encoder,
-        "decoder": grads["decoder"],
-    }
+def codec_update_mask(params: dict[str, Any]) -> dict[str, Any]:
+    """Select only target-codec leaves for codec pretraining."""
+    mask = _constant_mask(params, False)
+    encoder = dict(mask["encoder"])
+    for name in _CODEC_ENCODER_NAMES:
+        encoder[name] = _constant_mask(params["encoder"][name], True)
+    return {**mask, "encoder": encoder, "decoder": _constant_mask(params["decoder"], True)}
+
+
+def model_update_mask(params: dict[str, Any]) -> dict[str, Any]:
+    """Freeze the established target codec during ordinary Phase-B training."""
+    mask = _constant_mask(params, True)
+    encoder = dict(mask["encoder"])
+    for name in _CODEC_ENCODER_NAMES:
+        encoder[name] = _constant_mask(params["encoder"][name], False)
+    return {**mask, "encoder": encoder}
 
 
 def _norm(*trees: Any) -> jax.Array:
@@ -122,7 +111,6 @@ def train_step(
 
     (loss, (components, outputs)), grads = jax.value_and_grad(objective, has_aux=True)(params)
     gradient_metrics = _gradient_metrics(grads)
-    grads = _freeze_codec_grads(grads)
     params, moments, grad_norm = adamw_step(
         params,
         grads,
@@ -131,6 +119,7 @@ def train_step(
         learning_rate=config.training.learning_rate,
         weight_decay=config.training.weight_decay,
         clip_norm=config.training.grad_clip_norm,
+        update_mask=model_update_mask(params),
     )
     teacher = outputs["target"]["teacher"]
     byte_accuracy, sequence_accuracy = emitted_metrics(
@@ -181,7 +170,6 @@ def codec_pretrain_step(
         return loss, (components, outputs)
 
     (loss, (components, outputs)), grads = jax.value_and_grad(objective, has_aux=True)(params)
-    grads = _keep_only_codec_grads(grads)
     params, moments, grad_norm = adamw_step(
         params,
         grads,
@@ -190,6 +178,7 @@ def codec_pretrain_step(
         learning_rate=config.training.learning_rate,
         weight_decay=config.training.weight_decay,
         clip_norm=config.training.grad_clip_norm,
+        update_mask=codec_update_mask(params),
     )
     teacher = outputs["target"]["teacher"]
     byte_accuracy, sequence_accuracy = emitted_metrics(
@@ -212,10 +201,17 @@ def make_fixed_structure_batch(
     prompt: jax.Array,
     target: jax.Array,
     *,
+    prompt_mask: jax.Array | None = None,
+    target_mask: jax.Array | None = None,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
 ) -> dict[str, jax.Array]:
-    prompt_mask = prompt != 0
-    target_mask = target != 0
+    """Build a validated batch; byte value zero is ordinary data, not padding."""
+    if prompt_mask is None:
+        prompt_mask = jnp.ones_like(prompt, dtype=bool)
+    if target_mask is None:
+        target_mask = jnp.ones_like(target, dtype=bool)
+    if prompt_mask.shape != prompt.shape or target_mask.shape != target.shape:
+        raise ValueError("byte masks must match their corresponding byte arrays")
     teacher = canonical_teacher_structure(target, target_mask, config)
     return {
         "prompt": prompt,

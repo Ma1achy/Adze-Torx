@@ -66,21 +66,36 @@ def _selective_scan(
     a_log: jax.Array,
     d_skip: jax.Array,
     delta_bias: jax.Array,
+    mask: jax.Array | None = None,
 ) -> jax.Array:
     """Stable diagonal selective scan with explicit deterministic algebra."""
     a = -jnp.exp(a_log)
     delta = jax.nn.softplus(delta_raw + delta_bias)
     initial = jnp.zeros((u.shape[0], u.shape[2], a.shape[1]), dtype=u.dtype)
 
-    def step(state, inputs):
-        u_step, dt_step, b_step, c_step = inputs
+    if mask is None:
+        mask = jnp.ones(u.shape[:2], dtype=bool)
+
+    def step(
+        state: jax.Array,
+        inputs: tuple[jax.Array, jax.Array, jax.Array, jax.Array, jax.Array],
+    ) -> tuple[jax.Array, jax.Array]:
+        u_step, dt_step, b_step, c_step, active_step = inputs
         transition = jnp.exp(dt_step[..., None] * a[None, :, :])
         drive = dt_step[..., None] * u_step[..., None] * b_step[:, None, :]
-        state = transition * state + drive
+        candidate_state = transition * state + drive
+        state = jnp.where(active_step[:, None, None], candidate_state, state)
         output = jnp.sum(state * c_step[:, None, :], axis=-1) + d_skip * u_step
+        output = jnp.where(active_step[:, None], output, 0.0)
         return state, output
 
-    inputs = tuple(jnp.swapaxes(x, 0, 1) for x in (u, delta, b_t, c_t))
+    inputs = (
+        jnp.swapaxes(u, 0, 1),
+        jnp.swapaxes(delta, 0, 1),
+        jnp.swapaxes(b_t, 0, 1),
+        jnp.swapaxes(c_t, 0, 1),
+        jnp.swapaxes(mask, 0, 1),
+    )
     _, output = jax.lax.scan(step, initial, inputs)
     return jnp.swapaxes(output, 0, 1)
 
@@ -94,8 +109,9 @@ def apply_mamba_block(
     name: str,
     mask: jax.Array | None = None,
 ) -> jax.Array:
-    residual = x
-    projected = ops.linear(x, params["in_proj"], name=f"{name}.in_proj")
+    block_input = x if mask is None else jnp.where(mask[..., None], x, 0.0)
+    residual = block_input
+    projected = ops.linear(block_input, params["in_proj"], name=f"{name}.in_proj")
     u, gate = jnp.split(projected, 2, axis=-1)
     u = jax.nn.silu(ops.depthwise_conv1d(u, params["conv"], name=f"{name}.conv"))
     dbc = ops.linear(u, params["dbc_proj"], name=f"{name}.dbc_proj")
@@ -110,13 +126,14 @@ def apply_mamba_block(
         ops.parameter(params["a_log"], name=f"{name}.a_log"),
         ops.parameter(params["d_skip"], name=f"{name}.d_skip"),
         ops.parameter(params["delta_bias"], name=f"{name}.delta_bias"),
+        mask,
     )
     output = scanned * jax.nn.silu(gate)
     output = ops.linear(output, params["out_proj"], name=f"{name}.out_proj")
     scale = ops.parameter(params["layer_scale"], name=f"{name}.layer_scale")
     output = residual + scale * output
     if mask is not None:
-        output = jnp.where(mask[..., None], output, residual)
+        output = jnp.where(mask[..., None], output, 0.0)
     return output
 
 

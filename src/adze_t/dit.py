@@ -97,7 +97,18 @@ def apply_rope(q: jax.Array, k: jax.Array, carrier_id: jax.Array) -> tuple[jax.A
     return rotate(q), rotate(k)
 
 
-def _attention(
+def masked_softmax(scores: jax.Array, mask: jax.Array) -> jax.Array:
+    """Softmax over allowed keys, returning exact zeros for empty rows."""
+    mask = jnp.broadcast_to(mask, scores.shape)
+    has_value = jnp.any(mask, axis=-1, keepdims=True)
+    masked_scores = jnp.where(mask, scores, -jnp.inf)
+    row_max = jnp.where(has_value, jnp.max(masked_scores, axis=-1, keepdims=True), 0.0)
+    unnormalised = jnp.where(mask, jnp.exp(masked_scores - row_max), 0.0)
+    denominator = jnp.sum(unnormalised, axis=-1, keepdims=True)
+    return unnormalised / jnp.where(has_value, denominator, 1.0)
+
+
+def apply_attention(
     x: jax.Array,
     block: dict[str, Any],
     mask: jax.Array,
@@ -119,10 +130,12 @@ def _attention(
     )
     q, k = apply_rope(q, k, carrier_id)
     scores = jnp.einsum("bthd,bshd->bhts", q, k) / jnp.sqrt(config.head_dim)
-    scores = jnp.where(mask[:, None, :, :], scores, -1.0e9)
-    weights = jax.nn.softmax(scores, axis=-1)
+    expanded_mask = mask[:, None, :, :]
+    weights = masked_softmax(scores, expanded_mask)
     attended = jnp.einsum("bhts,bshd->bthd", weights, v).reshape(batch, positions, -1)
-    return ops.linear(attended, block["o"], name=f"{name}.o")
+    projected = ops.linear(attended, block["o"], name=f"{name}.o")
+    has_kv = jnp.any(mask, axis=-1)
+    return jnp.where(has_kv[..., None], projected, 0.0)
 
 
 def apply_physical_block(
@@ -141,7 +154,7 @@ def apply_physical_block(
     modulation = ops.linear(conditioning, block["modulation"], name=f"{prefix}.modulation")
     shift_a, scale_a, gate_a, shift_f, scale_f, gate_f = jnp.split(modulation, 6, axis=-1)
     normed = _layer_norm(x) * (1.0 + scale_a[:, None, :]) + shift_a[:, None, :]
-    x = x + gate_a[:, None, :] * _attention(
+    x = x + gate_a[:, None, :] * apply_attention(
         normed, block, mask, carrier_id, config, ops, name=prefix
     )
     normed = _layer_norm(x) * (1.0 + scale_f[:, None, :]) + shift_f[:, None, :]

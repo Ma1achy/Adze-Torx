@@ -2,6 +2,10 @@
 
 Decision: **ADZE_D_CORE_PASS**.
 
+Phase B.1 terminology: **ADZE_D_CORE_TRAINABILITY_PASS** remains the substantive
+decision; deterministic correctness hardening is recorded separately as
+`PHASE_B_1_PASS` in `results/phase_b_1/DECISION.md`.
+
 - `B0_INTERFACE_PASS`
 - `B1_DIT_PASS`
 - `B2_MODEL_PASS`
