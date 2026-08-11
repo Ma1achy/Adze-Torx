@@ -1,0 +1,115 @@
+{
+  "base_commit": "ae19b50dce9bef04cf483314169533c0b7ef5961",
+  "changed_root_changes_frontend_keys": true,
+  "changed_root_key": [
+    0,
+    202
+  ],
+  "derivation_order": [
+    "root_key",
+    "evaluation_id",
+    "optimizer_step",
+    "ordered_static_scopes",
+    "module_path",
+    "denoise_step_s",
+    "refinement_iteration_r",
+    "recurrence_cycle_q",
+    "physical_layer_ell",
+    "site_coordinate"
+  ],
+  "factor_occurrence_count": 237,
+  "parameter_counts": {
+    "deterministic": 2268245,
+    "torx_mean": 2268245,
+    "torx_stochastic": 18901,
+    "torx_total": 2287146
+  },
+  "passed": true,
+  "prompt_target_frontend": [
+    {
+      "derived_key": [
+        2277131107,
+        3505768866
+      ],
+      "factor_kind": "embedding",
+      "occurrence_path": "prompt/frontend.byte_embed",
+      "parameter_path": "frontend.byte_embed"
+    },
+    {
+      "derived_key": [
+        3477246704,
+        179510340
+      ],
+      "factor_kind": "embedding",
+      "occurrence_path": "target/frontend.byte_embed",
+      "parameter_path": "frontend.byte_embed"
+    }
+  ],
+  "q3_block_0_modulation": [
+    {
+      "derived_key": [
+        1177672475,
+        2444389144
+      ],
+      "factor_kind": "linear",
+      "occurrence_path": "mode:draft/dit.block_0.modulation",
+      "parameter_path": "dit.block_0.modulation"
+    },
+    {
+      "derived_key": [
+        521164284,
+        3134868051
+      ],
+      "factor_kind": "linear",
+      "occurrence_path": "mode:draft/dit.block_0.modulation",
+      "parameter_path": "dit.block_0.modulation"
+    },
+    {
+      "derived_key": [
+        4250133796,
+        3670753601
+      ],
+      "factor_kind": "linear",
+      "occurrence_path": "mode:draft/dit.block_0.modulation",
+      "parameter_path": "dit.block_0.modulation"
+    }
+  ],
+  "q3_block_0_q_projection": [
+    {
+      "derived_key": [
+        528601506,
+        2007423278
+      ],
+      "factor_kind": "linear",
+      "occurrence_path": "mode:draft/dit.block_0.q",
+      "parameter_path": "dit.block_0.q"
+    },
+    {
+      "derived_key": [
+        1320497939,
+        1630946592
+      ],
+      "factor_kind": "linear",
+      "occurrence_path": "mode:draft/dit.block_0.q",
+      "parameter_path": "dit.block_0.q"
+    },
+    {
+      "derived_key": [
+        618080976,
+        4143185596
+      ],
+      "factor_kind": "linear",
+      "occurrence_path": "mode:draft/dit.block_0.q",
+      "parameter_path": "dit.block_0.q"
+    }
+  ],
+  "repeated_run_identical": true,
+  "root_key": [
+    0,
+    201
+  ],
+  "scope_and_module_hash": "BLAKE2s-32 little-endian uint32 over UTF-8",
+  "shared_frontend_mean_parameter_paths": [
+    "encoder/byte_embed/mean"
+  ]
+}

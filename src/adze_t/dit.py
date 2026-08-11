@@ -243,6 +243,7 @@ def apply_dit(
 ) -> tuple[jax.Array, dict[str, Any]]:
     """Apply (B_L ... B_1)^Q with block parameters tied across Q."""
     ops = ops or DeterministicOps()
+    ops = ops.with_scope(f"mode:{mode}")
     cycle_count = config.cycles if cycles is None else cycles
     batch, blocks, slots, _ = packed.shape
     positions = blocks * slots

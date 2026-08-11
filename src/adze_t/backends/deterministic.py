@@ -53,8 +53,13 @@ class DeterministicOps:
         physical_layer: int | Array | None = None,
         denoise_step: int | Array | None = None,
         refinement_step: int | Array | None = None,
+        site_coordinate: int | Array | None = None,
     ) -> "DeterministicOps":
-        del recurrence_cycle, physical_layer, denoise_step, refinement_step
+        del recurrence_cycle, physical_layer, denoise_step, refinement_step, site_coordinate
+        return self
+
+    def with_scope(self, scope: str) -> "DeterministicOps":
+        del scope
         return self
 
     def init_linear(

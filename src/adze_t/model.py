@@ -81,13 +81,14 @@ def apply_target_codec(
     ops = ops or DeterministicOps()
     if target.shape[1] > config.carrier.C * config.carrier.L_max:
         raise ValueError("target sequence width exceeds carrier emission capacity")
-    target_codec = encode_target(target, target_mask, params["encoder"], config, ops)
+    target_ops = ops.with_scope("target")
+    target_codec = encode_target(target, target_mask, params["encoder"], config, target_ops)
     codec_logits, codec_emit_mask = apply_decoder(
         target_codec["h0"],
         target_codec["teacher"].length,
         params["decoder"],
         config,
-        ops,
+        ops.with_scope("target_codec_decoder"),
         name="decoder",
     )
     return {
@@ -115,13 +116,19 @@ def apply_model(
     ops = ops or DeterministicOps()
     if target.shape[1] > config.carrier.C * config.carrier.L_max:
         raise ValueError("target sequence width exceeds carrier emission capacity")
-    prompt_frontend = shared_byte_frontend(prompt, prompt_mask, params["encoder"], config, ops)
-    context_seq, context_global = encode_context_from_hidden(
-        prompt_frontend, prompt_mask, params["encoder"], config, ops
+    prompt_ops = ops.with_scope("prompt")
+    target_ops = ops.with_scope("target")
+    prompt_frontend = shared_byte_frontend(
+        prompt, prompt_mask, params["encoder"], config, prompt_ops
     )
-    target_frontend = shared_byte_frontend(target, target_mask, params["encoder"], config, ops)
+    context_seq, context_global = encode_context_from_hidden(
+        prompt_frontend, prompt_mask, params["encoder"], config, prompt_ops
+    )
+    target_frontend = shared_byte_frontend(
+        target, target_mask, params["encoder"], config, target_ops
+    )
     target_codec = encode_target_from_hidden(
-        target_frontend, target, target_mask, params["encoder"], config, ops
+        target_frontend, target, target_mask, params["encoder"], config, target_ops
     )
     teacher = target_codec["teacher"]
     c_b = teacher.boundaries if committed_c_b is None else committed_c_b
@@ -175,7 +182,12 @@ def apply_model(
     # teacher structure controls routing/emission and is not rewritten in-step.
     h_final = h_hat
     byte_logits, emit_mask = apply_decoder(
-        h_final, length, params["decoder"], config, ops, name="decoder"
+        h_final,
+        length,
+        params["decoder"],
+        config,
+        ops.with_scope("output"),
+        name="decoder",
     )
     return {
         "prompt_frontend": prompt_frontend,

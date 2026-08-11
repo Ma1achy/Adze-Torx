@@ -34,25 +34,43 @@ class TorxOperatorConfig:
 @dataclass(frozen=True)
 class OccurrenceContext:
     root_key: Array
+    scopes: tuple[str, ...] = ()
     evaluation_id: int | Array = 0
     optimizer_step: int | Array = 0
     denoise_step: int | Array = 0
     refinement_step: int | Array = 0
     recurrence_cycle: int | Array = 0
     physical_layer: int | Array = 0
+    site_coordinate: int | Array = 0
 
     def key_for(self, name: str) -> Array:
-        key = jax.random.fold_in(self.root_key, stable_occurrence_id(name))
+        """Derive a key from explicit identity fields in a frozen order."""
+        key = self.root_key
         for value in (
             self.evaluation_id,
             self.optimizer_step,
+        ):
+            key = jax.random.fold_in(key, jnp.asarray(value, dtype=jnp.uint32))
+        for scope in self.scopes:
+            key = jax.random.fold_in(key, stable_occurrence_id(f"scope:{scope}"))
+        key = jax.random.fold_in(key, stable_occurrence_id(f"module:{name}"))
+        for value in (
             self.denoise_step,
             self.refinement_step,
             self.recurrence_cycle,
             self.physical_layer,
+            self.site_coordinate,
         ):
             key = jax.random.fold_in(key, jnp.asarray(value, dtype=jnp.uint32))
         return key
+
+    def with_scope(self, scope: str) -> "OccurrenceContext":
+        if not scope:
+            raise ValueError("occurrence scope must be a non-empty static string")
+        return replace(self, scopes=(*self.scopes, scope))
+
+    def occurrence_path(self, name: str) -> str:
+        return "/".join((*self.scopes, name))
 
 
 class GaussianAffineFactor(torx.AbstractReferenceFactor):
@@ -196,6 +214,7 @@ def _exact_or_noisy(key: Array, mean: Array, rho: Array, config: TorxOperatorCon
 
 
 FactorObserver = Callable[[str, str], None]
+OccurrenceObserver = Callable[[str, str, str, Array], None]
 
 
 @dataclass(frozen=True)
@@ -205,6 +224,7 @@ class TorxOps:
     context: OccurrenceContext
     config: TorxOperatorConfig = TorxOperatorConfig()
     observer: FactorObserver | None = None
+    occurrence_observer: OccurrenceObserver | None = None
 
     @classmethod
     def create(
@@ -215,19 +235,22 @@ class TorxOps:
         evaluation_id: int | Array = 0,
         optimizer_step: int | Array = 0,
         observer: FactorObserver | None = None,
+        occurrence_observer: OccurrenceObserver | None = None,
     ) -> "TorxOps":
         return cls(
             OccurrenceContext(key, evaluation_id=evaluation_id, optimizer_step=optimizer_step),
             config or TorxOperatorConfig(),
             observer,
+            occurrence_observer,
         )
 
     def _sample(self, factor: Any, inputs: Mapping[str, Any], params: Any, name: str, kind: str):
         if self.observer is not None:
             self.observer(kind, name)
-        return factor.sample(
-            self.context.key_for(name), inputs, params, self.config, return_aux=False
-        )
+        key = self.context.key_for(name)
+        if self.occurrence_observer is not None:
+            self.occurrence_observer(kind, name, self.context.occurrence_path(name), key)
+        return factor.sample(key, inputs, params, self.config, return_aux=False)
 
     def linear(self, x: Array, params: Any, *, name: str = "linear") -> Array:
         return self._sample(
@@ -271,6 +294,7 @@ class TorxOps:
         physical_layer: int | Array | None = None,
         denoise_step: int | Array | None = None,
         refinement_step: int | Array | None = None,
+        site_coordinate: int | Array | None = None,
     ) -> "TorxOps":
         updates = {
             name: value
@@ -279,10 +303,14 @@ class TorxOps:
                 "physical_layer": physical_layer,
                 "denoise_step": denoise_step,
                 "refinement_step": refinement_step,
+                "site_coordinate": site_coordinate,
             }.items()
             if value is not None
         }
         return replace(self, context=replace(self.context, **updates))
+
+    def with_scope(self, scope: str) -> "TorxOps":
+        return replace(self, context=self.context.with_scope(scope))
 
     def init_linear(self, key: Array, in_dim: int, out_dim: int, *, scale: float = 1.0) -> Any:
         del key, in_dim, out_dim, scale

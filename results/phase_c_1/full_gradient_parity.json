@@ -1,0 +1,3881 @@
+{
+  "components": {
+    "b": {
+      "atol": 1e-05,
+      "deterministic_shape": [],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "b",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": []
+    },
+    "byte": {
+      "atol": 1e-05,
+      "deterministic_shape": [],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "byte",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": []
+    },
+    "h": {
+      "atol": 1e-05,
+      "deterministic_shape": [],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "h",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": []
+    },
+    "l": {
+      "atol": 1e-05,
+      "deterministic_shape": [],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "l",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": []
+    },
+    "proposal": {
+      "atol": 1e-05,
+      "deterministic_shape": [],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "proposal",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": []
+    }
+  },
+  "factor_occurrence_count": 237,
+  "forward_first_divergence": null,
+  "forward_worst_max_absolute_difference": 0.0,
+  "gradient_records": [
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        2
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['b_head']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        2
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['b_head']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['carrier_in']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['carrier_in']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['carrier_out']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['carrier_out']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['carrier_prior']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['carrier_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['h']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['h']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['out']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['out']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        4,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['slot_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        4,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        16
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['a_log']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['conv']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['conv']['kernel']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['d_skip']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        288
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['dbc_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        288
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['dbc_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['delta_bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        512
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['in_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        512
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['in_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['layer_scale']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['out_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][0]['out_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        16
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['a_log']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['conv']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['conv']['kernel']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['d_skip']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        288
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['dbc_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        288
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['dbc_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['delta_bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        512
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['in_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        512
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['in_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['layer_scale']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['out_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['decoder']['stack'][1]['out_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['block_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['down']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['down']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['gate']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['gate']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['k']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['k']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        768
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['modulation']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        768
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['modulation']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['o']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['o']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['q']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['q']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['up']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['up']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['v']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][0]['v']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['down']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['down']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['gate']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['gate']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['k']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['k']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        768
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['modulation']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        768
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['modulation']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['o']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['o']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['q']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['q']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['up']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['up']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['v']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][1]['v']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['down']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['down']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['gate']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['gate']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['k']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['k']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        768
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['modulation']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        768
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['modulation']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['o']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['o']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['q']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['q']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['up']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['up']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['v']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][2]['v']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['down']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['down']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['gate']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['gate']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['k']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['k']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        768
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['modulation']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        768
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['modulation']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        768
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['o']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['o']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['q']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['q']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['up']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['up']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['v']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['blocks'][3]['v']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['boundary_left_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        2,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['boundary_right_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        2,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['carrier_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        32,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['conditioning_trunk']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        208,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['conditioning_trunk']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        208,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['input_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['input_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        5,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['length_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        5,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['output_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['output_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        8,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['dit']['within_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        8,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['byte_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        16
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['a_log']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['conv']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['conv']['kernel']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['d_skip']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        288
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['dbc_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        288
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['dbc_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['delta_bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        512
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['in_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        512
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['in_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['layer_scale']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['out_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][0]['out_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        16
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['a_log']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['conv']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['conv']['kernel']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['d_skip']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        288
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['dbc_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        288
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['dbc_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        288
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['delta_bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        512
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['in_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        512
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['in_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        512
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['layer_scale']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['out_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context'][1]['out_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context_in']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['context_in']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['a_log']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['conv']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['conv']['kernel']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['d_skip']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['dbc_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['dbc_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['delta_bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['in_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['in_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['layer_scale']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['out_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][0]['out_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['a_log']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['conv']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['conv']['kernel']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['d_skip']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['dbc_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['dbc_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['delta_bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['in_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['in_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['layer_scale']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['out_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['frontend'][1]['out_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['a_log']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['conv']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['conv']['kernel']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['d_skip']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['dbc_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['dbc_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['delta_bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['in_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['in_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['layer_scale']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['out_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][0]['out_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['a_log']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['conv']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['conv']['kernel']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['d_skip']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['dbc_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['dbc_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['delta_bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['in_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['in_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['layer_scale']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['out_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target'][1]['out_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        2
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_b']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        2
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_b']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_carrier_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_h']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_h']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        5
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_l']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        5
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_l']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_pool']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_pool']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        4,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['encoder']['target_slot_embed']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        4,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['h_head']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['h_head']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        5
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['l_head']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        5
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['l_head']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        2
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['b']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        2
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['b']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        2
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['context']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['context']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['h']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['h']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        5
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['l']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        5
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['l']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        5
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        32,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['position']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        32,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['prior']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['prior']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['a_log']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['conv']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['conv']['kernel']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['d_skip']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['dbc_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['dbc_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['delta_bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['in_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['in_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['layer_scale']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['out_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][0]['out_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        16
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['a_log']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        16
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['conv']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        3,
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['conv']['kernel']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        3,
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['d_skip']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['dbc_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        160
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['dbc_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        160
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['delta_bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['in_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64,
+        256
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['in_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64,
+        256
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['layer_scale']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['out_proj']['bias']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        64
+      ]
+    },
+    {
+      "atol": 1e-05,
+      "deterministic_shape": [
+        128,
+        64
+      ],
+      "max_absolute_difference": 0.0,
+      "max_relative_difference": 0.0,
+      "passed": true,
+      "path": "['proposal']['stack'][1]['out_proj']['weight']",
+      "rms_difference": 0.0,
+      "rtol": 1e-05,
+      "torx_shape": [
+        128,
+        64
+      ]
+    }
+  ],
+  "key_rho_invariance_first_divergence": null,
+  "key_rho_invariance_worst_max_absolute_difference": 0.0,
+  "lambda_op": 0.0,
+  "max_abs_grad_rho": 0.0,
+  "operator_stochasticity": true,
+  "passed": true,
+  "total_loss": {
+    "atol": 1e-05,
+    "deterministic_shape": [],
+    "max_absolute_difference": 0.0,
+    "max_relative_difference": 0.0,
+    "passed": true,
+    "path": "total_loss",
+    "rms_difference": 0.0,
+    "rtol": 1e-05,
+    "torx_shape": []
+  },
+  "worst_mapped_gradient": {
+    "atol": 1e-05,
+    "deterministic_shape": [
+      2
+    ],
+    "max_absolute_difference": 0.0,
+    "max_relative_difference": 0.0,
+    "passed": true,
+    "path": "['b_head']['bias']",
+    "rms_difference": 0.0,
+    "rtol": 1e-05,
+    "torx_shape": [
+      2
+    ]
+  }
+}

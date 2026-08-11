@@ -33,4 +33,7 @@ class LearnedOps(Protocol):
         physical_layer: int | Array | None = None,
         denoise_step: int | Array | None = None,
         refinement_step: int | Array | None = None,
+        site_coordinate: int | Array | None = None,
     ) -> "LearnedOps": ...
+
+    def with_scope(self, scope: str) -> "LearnedOps": ...
