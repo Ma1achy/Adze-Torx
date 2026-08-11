@@ -78,8 +78,8 @@ def validate_carrier_state(state: CarrierState) -> None:
                 raise ValueError(
                     f"{name} must start with shape {(batch, capacity)}, got {value.shape}"
                 )
-        if committed.length is not None and committed.length.shape != (batch, capacity):
-            raise ValueError("committed.length must match [batch, carrier]")
+    if committed.length is not None and committed.length.shape != (batch, capacity):
+        raise ValueError("committed.length must match [batch, carrier]")
 
     valid_binary, terminal = carrier_invariant_flags(committed.c_b, committed.activity)
     if not bool(valid_binary):

@@ -1,4 +1,4 @@
-"""Phase B deterministic clean-state and byte objectives."""
+"""Corrected Phase B clean-state, structure, codec, and byte objectives."""
 
 from __future__ import annotations
 
@@ -7,72 +7,97 @@ from typing import Any
 import jax
 import jax.numpy as jnp
 
+from .config import ReferenceConfig
 
-def _cross_entropy(logits: jax.Array, labels: jax.Array, mask: jax.Array) -> jax.Array:
+
+def cross_entropy(logits: jax.Array, labels: jax.Array, mask: jax.Array) -> jax.Array:
     log_probs = jax.nn.log_softmax(logits, axis=-1)
     selected = jnp.take_along_axis(log_probs, labels[..., None], axis=-1)[..., 0]
     weights = mask.astype(logits.dtype)
     return -jnp.sum(selected * weights) / jnp.maximum(jnp.sum(weights), 1.0)
 
 
-def loss_components(
-    outputs: dict[str, Any],
-    *,
-    clean_h: jax.Array,
-    boundary_target: jax.Array,
-    length_target: jax.Array,
-    target_bytes: jax.Array,
-) -> dict[str, jax.Array]:
-    """Return separately reported Phase B loss components."""
+def loss_components(outputs: dict[str, Any]) -> dict[str, jax.Array]:
+    """Use frozen target-codec h0 and canonical teacher b0/l0 as clean targets."""
     h_hat, b_logits, l_logits = outputs["prediction"]
-    slot_count = h_hat.shape[1] * outputs["emit_mask"].shape[2]
-    target_slots = jnp.pad(target_bytes, ((0, 0), (0, max(0, slot_count - target_bytes.shape[1]))))
-    target_slots = target_slots[:, :slot_count].reshape(
-        target_bytes.shape[0], h_hat.shape[1], outputs["emit_mask"].shape[2]
-    )
-    emit_mask = outputs["emit_mask"]
+    target = outputs["target"]
+    teacher = target["teacher"]
+    clean_h = jax.lax.stop_gradient(target["h0"])
     proposal_h, proposal_b, proposal_l = outputs["proposal"]
-    components = {
+    ones_b = jnp.ones_like(teacher.boundaries[:, :-1], dtype=bool)
+    ones_l = jnp.ones_like(teacher.length, dtype=bool)
+    return {
         "h": jnp.mean((h_hat - clean_h) ** 2),
-        "b": _cross_entropy(
-            b_logits[:, :-1], boundary_target[:, :-1], jnp.ones(boundary_target[:, :-1].shape)
-        ),
-        "l": _cross_entropy(l_logits, length_target, jnp.ones(length_target.shape)),
-        "byte": _cross_entropy(outputs["byte_logits"], target_slots, emit_mask),
+        "b": cross_entropy(b_logits[:, :-1], teacher.boundaries[:, :-1], ones_b),
+        "l": cross_entropy(l_logits, teacher.length, ones_l),
+        "byte": cross_entropy(outputs["byte_logits"], teacher.slot_bytes, teacher.slot_mask),
         "proposal": (
             jnp.mean((proposal_h - clean_h) ** 2)
-            + _cross_entropy(
-                proposal_b[:, :-1], boundary_target[:, :-1], jnp.ones(boundary_target[:, :-1].shape)
-            )
-            + _cross_entropy(proposal_l, length_target, jnp.ones(length_target.shape))
+            + cross_entropy(proposal_b[:, :-1], teacher.boundaries[:, :-1], ones_b)
+            + cross_entropy(proposal_l, teacher.length, ones_l)
         ),
     }
-    return components
 
 
-def total_loss(
-    components: dict[str, jax.Array], weights: dict[str, float] | None = None
-) -> jax.Array:
-    weights = weights or {"h": 1.0, "b": 1.0, "l": 1.0, "byte": 1.0, "proposal": 0.25}
-    return jnp.sum(jnp.stack([weights[name] * components[name] for name in components]))
+def codec_loss_components(outputs: dict[str, Any]) -> dict[str, jax.Array]:
+    target = outputs["target"]
+    teacher = target["teacher"]
+    return {
+        "codec_byte": cross_entropy(outputs["codec_logits"], teacher.slot_bytes, teacher.slot_mask),
+        "codec_b": cross_entropy(
+            target["b_logits"][:, :-1],
+            teacher.boundaries[:, :-1],
+            jnp.ones_like(teacher.boundaries[:, :-1], dtype=bool),
+        ),
+        "codec_l": cross_entropy(
+            target["l_logits"],
+            teacher.length,
+            jnp.ones_like(teacher.length, dtype=bool),
+        ),
+    }
+
+
+def total_loss(components: dict[str, jax.Array], config: ReferenceConfig) -> jax.Array:
+    weights = config.training
+    return (
+        weights.h_weight * components["h"]
+        + weights.boundary_weight * components["b"]
+        + weights.extent_weight * components["l"]
+        + weights.byte_weight * components["byte"]
+        + weights.proposal_weight * components["proposal"]
+    )
+
+
+def emitted_metrics(
+    logits: jax.Array, labels: jax.Array, mask: jax.Array
+) -> tuple[jax.Array, jax.Array]:
+    predicted = jnp.argmax(logits, axis=-1)
+    correct = (predicted == labels) & mask
+    byte_accuracy = jnp.sum(correct) / jnp.maximum(jnp.sum(mask), 1)
+    sequence_accuracy = jnp.mean(jnp.all(correct | ~mask, axis=(1, 2)))
+    return byte_accuracy, sequence_accuracy
 
 
 def adamw_init(params: Any) -> Any:
     return jax.tree_util.tree_map(jnp.zeros_like, params)
 
 
+def global_norm(tree: Any) -> jax.Array:
+    return jnp.sqrt(jnp.sum(jnp.stack([jnp.sum(x * x) for x in jax.tree_util.tree_leaves(tree)])))
+
+
 def adamw_step(
     params: Any,
     grads: Any,
     moments: tuple[Any, Any],
-    step: int,
+    step: jax.Array | int,
     *,
-    learning_rate: float = 3.0e-4,
-    weight_decay: float = 0.01,
-    clip_norm: float = 1.0,
-) -> tuple[Any, tuple[Any, Any]]:
+    learning_rate: float,
+    weight_decay: float,
+    clip_norm: float,
+) -> tuple[Any, tuple[Any, Any], jax.Array]:
     m, v = moments
-    grad_norm = jnp.sqrt(sum(jnp.sum(g * g) for g in jax.tree_util.tree_leaves(grads)))
+    grad_norm = global_norm(grads)
     scale = jnp.minimum(1.0, clip_norm / jnp.maximum(grad_norm, 1.0e-8))
     grads = jax.tree_util.tree_map(lambda g: g * scale, grads)
     beta1, beta2 = 0.9, 0.999
@@ -86,4 +111,4 @@ def adamw_step(
         m_hat,
         v_hat,
     )
-    return params, (m, v)
+    return params, (m, v), grad_norm

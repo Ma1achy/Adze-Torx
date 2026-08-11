@@ -169,6 +169,31 @@ def build_pack_metadata_core(c_b: Array, activity: Array, *, M_max: int, K: int)
     )
 
 
+def trim_padding_blocks(metadata: PackMetadata, n_blocks: int) -> PackMetadata:
+    """Remove known all-padding capacity blocks without changing mappings.
+
+    ``n_blocks`` must come from static, validated structure (the Phase-B
+    teacher uses a fixed K-bucket partition). Runtime-generated structure must
+    retain the full ``M_max`` capacity until a safe execution bucket is known.
+    """
+    return PackMetadata(
+        metadata.block_valid[:, :n_blocks],
+        metadata.slot_valid[:, :n_blocks],
+        metadata.query_mask[:, :n_blocks],
+        metadata.kv_mask[:, :n_blocks],
+        metadata.pool_mask[:, :n_blocks],
+        metadata.emit_mask[:, :n_blocks],
+        metadata.carrier_to_m,
+        metadata.carrier_to_k,
+        metadata.packed_to_carrier[:, :n_blocks],
+        metadata.block_id[:, :n_blocks],
+        metadata.carrier_id[:, :n_blocks],
+        metadata.within_block_pos[:, :n_blocks],
+        metadata.block_count_overflow,
+        metadata.block_length_overflow,
+    )
+
+
 def pack_values(values: Array, metadata: PackMetadata) -> Array:
     """Gather `[B,C,...]` carrier values into `[B,M_max,K,...]`."""
     values = jnp.asarray(values)

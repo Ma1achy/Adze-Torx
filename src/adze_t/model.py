@@ -1,4 +1,4 @@
-"""Shared high-level deterministic/Torx-ready Adze model topology."""
+"""One backend-driven Adze topology shared by deterministic and future Torx ops."""
 
 from __future__ import annotations
 
@@ -7,28 +7,20 @@ from typing import Any
 import jax
 import jax.numpy as jnp
 
+from .backends.deterministic import DeterministicOps
+from .backends.protocol import LearnedOps
 from .config import REFERENCE_SMALL_V0, ReferenceConfig
 from .decoder import apply_decoder, init_decoder_params
 from .dit import DiTConfig, apply_dit, init_dit_params
 from .encoder import encode_context, encode_target, init_encoder_params
-from .packing import build_pack_metadata_core, pack_values
+from .packing import build_pack_metadata_core, pack_values, trim_padding_blocks
 from .proposal import apply_proposal, init_proposal_params
 from .unpool import unpool_values
 
 
-def _linear(key: jax.Array, in_dim: int, out_dim: int) -> dict[str, jax.Array]:
-    return {
-        "weight": jax.random.normal(key, (in_dim, out_dim)) / jnp.sqrt(in_dim),
-        "bias": jnp.zeros((out_dim,)),
-    }
-
-
-def init_model_params(
-    key: jax.Array, config: ReferenceConfig = REFERENCE_SMALL_V0
-) -> dict[str, Any]:
-    keys = jax.random.split(key, 8)
+def _dit_config(config: ReferenceConfig) -> DiTConfig:
     m = config.model
-    dit_config = DiTConfig(
+    return DiTConfig(
         d_model=m.d_model,
         heads=m.heads,
         head_dim=m.head_dim,
@@ -37,37 +29,64 @@ def init_model_params(
         cycles=m.cycles_Q,
         carrier_capacity=config.carrier.C,
         d_context=m.d_ctx,
+        max_blocks=config.packing.M_max,
+        max_slots=config.packing.K,
+        max_extent=config.carrier.L_max,
+        residual_gate_init=m.residual_gate_init,
     )
+
+
+def init_model_params(
+    key: jax.Array,
+    config: ReferenceConfig = REFERENCE_SMALL_V0,
+    ops: LearnedOps | None = None,
+) -> dict[str, Any]:
+    ops = ops or DeterministicOps()
+    keys = iter(jax.random.split(key, 11))
+    m = config.model
     return {
-        "encoder": init_encoder_params(keys[0], config),
-        "proposal": init_proposal_params(keys[1], config),
-        "dit": init_dit_params(keys[2], dit_config),
-        "decoder": init_decoder_params(keys[3], config),
-        "carrier_in": _linear(keys[4], config.carrier.h_dim, m.d_model),
-        "carrier_out": _linear(keys[5], m.d_model, config.carrier.h_dim),
-        "h_head": _linear(keys[6], m.d_model, config.carrier.h_dim),
-        "b_head": _linear(keys[7], m.d_model, 2),
-        "l_head": _linear(keys[6], m.d_model, config.carrier.L_max + 1),
+        "encoder": init_encoder_params(next(keys), config, ops),
+        "proposal": init_proposal_params(next(keys), config, ops),
+        "dit": init_dit_params(next(keys), _dit_config(config), ops),
+        "decoder": init_decoder_params(next(keys), config, ops),
+        "carrier_prior": ops.init_embedding(next(keys), config.carrier.C, config.carrier.h_dim),
+        "carrier_in": ops.init_linear(next(keys), config.carrier.h_dim, m.d_model),
+        "carrier_out": ops.init_linear(next(keys), m.d_model, config.carrier.h_dim),
+        "h_head": ops.init_linear(next(keys), config.carrier.h_dim, config.carrier.h_dim),
+        "b_head": ops.init_linear(next(keys), config.carrier.h_dim, 2),
+        "l_head": ops.init_linear(next(keys), config.carrier.h_dim, config.carrier.L_max + 1),
     }
 
 
-def _apply_linear(x: jax.Array, params: dict[str, jax.Array]) -> jax.Array:
-    return x @ params["weight"] + params["bias"]
+def apply_target_codec(
+    params: dict[str, Any],
+    target: jax.Array,
+    target_mask: jax.Array,
+    *,
+    config: ReferenceConfig = REFERENCE_SMALL_V0,
+    ops: LearnedOps | None = None,
+) -> dict[str, Any]:
+    """Run only the training-time target codec used before B3.
 
-
-def _default_structure(
-    target_mask: jax.Array, config: ReferenceConfig
-) -> tuple[jax.Array, jax.Array, jax.Array]:
-    batch = target_mask.shape[0]
-    carrier_positions = jnp.arange(config.carrier.C)
-    base_boundaries = ((carrier_positions + 1) % config.packing.K == 0).astype(jnp.int32)
-    base_boundaries = base_boundaries.at[-1].set(1)
-    c_b = jnp.broadcast_to(base_boundaries, (batch, config.carrier.C))
-    length = jnp.zeros((batch, config.carrier.C), dtype=jnp.int32)
-    n = jnp.minimum(jnp.sum(target_mask, axis=1), config.carrier.C)
-    length = (jnp.arange(config.carrier.C)[None, :] < n[:, None]).astype(jnp.int32)
-    activity = length > 0
-    return c_b, activity, length
+    Keeping this path separate avoids compiling the heavy DiT while the clean
+    carrier representation is being established. The target-side parameters
+    are frozen before ordinary Phase-B model training.
+    """
+    ops = ops or DeterministicOps()
+    target_codec = encode_target(target, target_mask, params["encoder"], config, ops)
+    codec_logits, codec_emit_mask = apply_decoder(
+        target_codec["h0"],
+        target_codec["teacher"].length,
+        params["decoder"],
+        config,
+        ops,
+        name="decoder",
+    )
+    return {
+        "target": target_codec,
+        "codec_logits": codec_logits,
+        "codec_emit_mask": codec_emit_mask,
+    }
 
 
 def apply_model(
@@ -78,52 +97,86 @@ def apply_model(
     target_mask: jax.Array,
     *,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
+    ops: LearnedOps | None = None,
     committed_c_b: jax.Array | None = None,
     committed_activity: jax.Array | None = None,
     committed_length: jax.Array | None = None,
     mode: str = "draft",
 ) -> dict[str, Any]:
-    """Run S=1,R=0 deterministic Adze with teacher/fixed routing."""
-    context_seq, context_global = encode_context(prompt, prompt_mask, params["encoder"])
-    h0, b0, l0 = encode_target(target, target_mask, params["encoder"], config)
-    default_b, default_a, default_l = _default_structure(target_mask, config)
-    c_b = default_b if committed_c_b is None else committed_c_b
-    activity = default_a if committed_activity is None else committed_activity
-    length = default_l if committed_length is None else committed_length
-    proposal_h, proposal_b, proposal_l = apply_proposal(context_global, params["proposal"], config)
+    """Run the shared S=1,R=0 graph with deterministic teacher routing."""
+    ops = ops or DeterministicOps()
+    context_seq, context_global = encode_context(
+        prompt, prompt_mask, params["encoder"], config, ops
+    )
+    target_codec = encode_target(target, target_mask, params["encoder"], config, ops)
+    teacher = target_codec["teacher"]
+    c_b = teacher.boundaries if committed_c_b is None else committed_c_b
+    length = teacher.length if committed_length is None else committed_length
+    activity = length > 0
+    if committed_length is None and committed_activity is not None:
+        # Phase-A compatibility only. New Phase-B paths derive activity from length.
+        activity = committed_activity
+
+    carrier_ids = jnp.arange(config.carrier.C)[None, :]
+    carrier_prior = ops.embedding(
+        carrier_ids, params["carrier_prior"], name="proposal.carrier_prior"
+    )
+    carrier_prior = jnp.broadcast_to(
+        carrier_prior, (prompt.shape[0], config.carrier.C, config.carrier.h_dim)
+    )
+    proposal_h, proposal_b, proposal_l = apply_proposal(
+        context_global, carrier_prior, params["proposal"], config, ops
+    )
     metadata = build_pack_metadata_core(
         c_b, activity, M_max=config.packing.M_max, K=config.packing.K
     )
-    packed = pack_values(_apply_linear(proposal_h, params["carrier_in"]), metadata)
-    dit_config = DiTConfig(
-        d_model=config.model.d_model,
-        heads=config.model.heads,
-        head_dim=config.model.head_dim,
-        ffn_hidden=config.model.ffn_hidden,
-        physical_blocks=config.model.physical_blocks_L,
-        cycles=config.model.cycles_Q,
-        carrier_capacity=config.carrier.C,
-        d_context=config.model.d_ctx,
-    )
+    if committed_c_b is None:
+        # PROVISIONAL_PHASE_B_TEACHER has a static K-bucket partition. Its
+        # generated M is known exactly; M_max remains the validated capacity.
+        teacher_blocks = (config.carrier.C + config.packing.K - 1) // config.packing.K
+        if teacher_blocks > config.packing.M_max:
+            raise ValueError("Phase-B teacher block count exceeds M_max")
+        metadata = trim_padding_blocks(metadata, teacher_blocks)
+    carrier_input = ops.linear(proposal_h, params["carrier_in"], name="model.carrier_input")
+    packed = pack_values(carrier_input, metadata)
     packed_out, dit_aux = apply_dit(
-        packed, metadata, context_global, params["dit"], dit_config, mode=mode
+        packed,
+        metadata,
+        context_global,
+        params["dit"],
+        _dit_config(config),
+        ops=ops,
+        mode=mode,
+        observed_b=c_b,
+        observed_l=length,
     )
-    carrier_model = unpool_values(packed_out, metadata, C=config.carrier.C)
-    carrier_delta = _apply_linear(carrier_model, params["carrier_out"])
-    h_updated = proposal_h + carrier_delta
-    h_hat = _apply_linear(carrier_model, params["h_head"])
-    b_logits = _apply_linear(carrier_model, params["b_head"])
-    l_logits = _apply_linear(carrier_model, params["l_head"])
-    byte_logits, emit_mask = apply_decoder(h_updated, length, params["decoder"], config)
+    unpooled = unpool_values(packed_out, metadata, C=config.carrier.C)
+    carrier_delta = ops.linear(unpooled, params["carrier_out"], name="model.carrier_output")
+    pre_head_carrier = proposal_h + carrier_delta
+    h_hat = ops.linear(pre_head_carrier, params["h_head"], name="model.h_head")
+    b_logits = ops.categorical_logits(pre_head_carrier, params["b_head"], name="model.b_head")
+    l_logits = ops.categorical_logits(pre_head_carrier, params["l_head"], name="model.l_head")
+
+    # Phase-B fixed clean commit: predicted clean content reaches the decoder;
+    # teacher structure controls routing/emission and is not rewritten in-step.
+    h_final = h_hat
+    byte_logits, emit_mask = apply_decoder(
+        h_final, length, params["decoder"], config, ops, name="decoder"
+    )
     return {
         "context_seq": context_seq,
         "context_global": context_global,
-        "target": (h0, b0, l0),
+        "target": target_codec,
         "proposal": (proposal_h, proposal_b, proposal_l),
-        "carrier": h_updated,
+        "pre_head_carrier": pre_head_carrier,
+        "carrier": h_final,
         "prediction": (h_hat, b_logits, l_logits),
         "byte_logits": byte_logits,
         "emit_mask": emit_mask,
         "metadata": metadata,
         "dit_aux": dit_aux,
+        "activation_rms": {
+            "packed_input": jnp.sqrt(jnp.mean(packed**2)),
+            "unpooled_carrier": jnp.sqrt(jnp.mean(unpooled**2)),
+        },
     }

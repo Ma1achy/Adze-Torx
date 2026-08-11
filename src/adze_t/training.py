@@ -1,4 +1,4 @@
-"""Small deterministic Phase B training utilities."""
+"""Corrected deterministic Phase B codec and model training utilities."""
 
 from __future__ import annotations
 
@@ -7,20 +7,107 @@ from typing import Any
 import jax
 import jax.numpy as jnp
 
+from .backends.deterministic import DeterministicOps
 from .config import REFERENCE_SMALL_V0, ReferenceConfig
-from .model import apply_model
-from .objectives import adamw_init, adamw_step, loss_components, total_loss
+from .model import apply_model, apply_target_codec, init_model_params
+from .objectives import (
+    adamw_init,
+    adamw_step,
+    codec_loss_components,
+    emitted_metrics,
+    loss_components,
+    total_loss,
+)
+from .teacher import canonical_teacher_structure
+
+
+def _zero_subtree(tree: Any) -> Any:
+    return jax.tree_util.tree_map(jnp.zeros_like, tree)
+
+
+def _freeze_codec_grads(grads: dict[str, Any]) -> dict[str, Any]:
+    encoder = dict(grads["encoder"])
+    for name in (
+        "byte_embed",
+        "frontend",
+        "target",
+        "target_slot_embed",
+        "target_carrier_embed",
+        "target_pool",
+        "target_h",
+        "target_b",
+        "target_l",
+    ):
+        encoder[name] = _zero_subtree(encoder[name])
+    return {
+        **grads,
+        "encoder": encoder,
+    }
+
+
+def _keep_only_codec_grads(grads: dict[str, Any]) -> dict[str, Any]:
+    zeroed = _zero_subtree(grads)
+    encoder = dict(zeroed["encoder"])
+    for name in (
+        "byte_embed",
+        "frontend",
+        "target",
+        "target_slot_embed",
+        "target_carrier_embed",
+        "target_pool",
+        "target_h",
+        "target_b",
+        "target_l",
+    ):
+        encoder[name] = grads["encoder"][name]
+    return {
+        **zeroed,
+        "encoder": encoder,
+        "decoder": grads["decoder"],
+    }
+
+
+def _norm(*trees: Any) -> jax.Array:
+    leaves = [leaf for tree in trees for leaf in jax.tree_util.tree_leaves(tree)]
+    return jnp.sqrt(jnp.sum(jnp.stack([jnp.sum(leaf * leaf) for leaf in leaves])))
+
+
+def _gradient_metrics(grads: dict[str, Any]) -> dict[str, jax.Array]:
+    encoder = grads["encoder"]
+    dit = grads["dit"]
+    qkvo = [block[name] for block in dit["blocks"] for name in ("q", "k", "v", "o")]
+    ffn = [block[name] for block in dit["blocks"] for name in ("up", "gate", "down")]
+    modulation = [block["modulation"] for block in dit["blocks"]]
+    return {
+        "grad_frontend": _norm(encoder["byte_embed"], encoder["frontend"]),
+        "grad_context_encoder": _norm(encoder["context_in"], encoder["context"]),
+        "grad_target_encoder": _norm(
+            encoder["target"],
+            encoder["target_pool"],
+            encoder["target_h"],
+            encoder["target_b"],
+            encoder["target_l"],
+        ),
+        "grad_proposal": _norm(grads["proposal"]),
+        "grad_dit_qkvo": _norm(qkvo),
+        "grad_dit_ffn": _norm(ffn),
+        "grad_conditioning": _norm(dit["conditioning_trunk"], modulation),
+        "grad_output_heads": _norm(grads["h_head"], grads["b_head"], grads["l_head"]),
+        "grad_decoder": _norm(grads["decoder"]),
+    }
 
 
 def train_step(
     params: Any,
     moments: tuple[Any, Any],
-    step: int,
+    step: jax.Array | int,
     batch: dict[str, jax.Array],
     *,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
 ) -> tuple[Any, tuple[Any, Any], dict[str, jax.Array]]:
-    def objective(p: Any) -> tuple[jax.Array, dict[str, jax.Array]]:
+    ops = DeterministicOps()
+
+    def objective(p):
         outputs = apply_model(
             p,
             batch["prompt"],
@@ -28,21 +115,15 @@ def train_step(
             batch["target"],
             batch["target_mask"],
             config=config,
-            committed_c_b=batch.get("committed_c_b"),
-            committed_activity=batch.get("committed_activity"),
-            committed_length=batch.get("committed_length"),
+            ops=ops,
         )
-        components = loss_components(
-            outputs,
-            clean_h=batch["clean_h"],
-            boundary_target=batch["boundary_target"],
-            length_target=batch["length_target"],
-            target_bytes=batch["target"],
-        )
-        return total_loss(components), components
+        components = loss_components(outputs)
+        return total_loss(components, config), (components, outputs)
 
-    (loss, components), grads = jax.value_and_grad(objective, has_aux=True)(params)
-    params, moments = adamw_step(
+    (loss, (components, outputs)), grads = jax.value_and_grad(objective, has_aux=True)(params)
+    gradient_metrics = _gradient_metrics(grads)
+    grads = _freeze_codec_grads(grads)
+    params, moments, grad_norm = adamw_step(
         params,
         grads,
         moments,
@@ -51,38 +132,107 @@ def train_step(
         weight_decay=config.training.weight_decay,
         clip_norm=config.training.grad_clip_norm,
     )
-    metrics = {"loss": loss, **components}
-    return params, moments, metrics
+    teacher = outputs["target"]["teacher"]
+    byte_accuracy, sequence_accuracy = emitted_metrics(
+        outputs["byte_logits"], teacher.slot_bytes, teacher.slot_mask
+    )
+    _, b_logits, l_logits = outputs["prediction"]
+    boundary_accuracy = jnp.mean(
+        jnp.argmax(b_logits[:, :-1], axis=-1) == teacher.boundaries[:, :-1]
+    )
+    length_accuracy = jnp.mean(jnp.argmax(l_logits, axis=-1) == teacher.length)
+    return (
+        params,
+        moments,
+        {
+            "loss": loss,
+            **components,
+            "byte_accuracy": byte_accuracy,
+            "sequence_accuracy": sequence_accuracy,
+            "boundary_accuracy": boundary_accuracy,
+            "length_accuracy": length_accuracy,
+            "grad_norm": grad_norm,
+            **gradient_metrics,
+            "activation_packed_input": outputs["activation_rms"]["packed_input"],
+            "activation_unpooled_carrier": outputs["activation_rms"]["unpooled_carrier"],
+            "activation_block_rms": outputs["dit_aux"]["block_rms"],
+            "activation_cycle_rms": outputs["dit_aux"]["cycle_rms"],
+        },
+    )
+
+
+def codec_pretrain_step(
+    params: Any,
+    moments: tuple[Any, Any],
+    step: jax.Array | int,
+    batch: dict[str, jax.Array],
+    *,
+    config: ReferenceConfig = REFERENCE_SMALL_V0,
+) -> tuple[Any, tuple[Any, Any], dict[str, jax.Array]]:
+    def objective(p):
+        outputs = apply_target_codec(
+            p,
+            batch["target"],
+            batch["target_mask"],
+            config=config,
+        )
+        components = codec_loss_components(outputs)
+        loss = jnp.sum(jnp.stack(list(components.values())))
+        return loss, (components, outputs)
+
+    (loss, (components, outputs)), grads = jax.value_and_grad(objective, has_aux=True)(params)
+    grads = _keep_only_codec_grads(grads)
+    params, moments, grad_norm = adamw_step(
+        params,
+        grads,
+        moments,
+        step,
+        learning_rate=config.training.learning_rate,
+        weight_decay=config.training.weight_decay,
+        clip_norm=config.training.grad_clip_norm,
+    )
+    teacher = outputs["target"]["teacher"]
+    byte_accuracy, sequence_accuracy = emitted_metrics(
+        outputs["codec_logits"], teacher.slot_bytes, teacher.slot_mask
+    )
+    return (
+        params,
+        moments,
+        {
+            "loss": loss,
+            **components,
+            "byte_accuracy": byte_accuracy,
+            "sequence_accuracy": sequence_accuracy,
+            "grad_norm": grad_norm,
+        },
+    )
 
 
 def make_fixed_structure_batch(
-    prompt: jax.Array, target: jax.Array, *, config: ReferenceConfig = REFERENCE_SMALL_V0
+    prompt: jax.Array,
+    target: jax.Array,
+    *,
+    config: ReferenceConfig = REFERENCE_SMALL_V0,
 ) -> dict[str, jax.Array]:
-    """Create a teacher-structure batch for S=1/R=0 training."""
-    batch, width = target.shape
-    c_b = jnp.zeros((batch, config.carrier.C), dtype=jnp.int32)
-    c_b = c_b.at[:, config.packing.K - 1 :: config.packing.K].set(1)
-    c_b = c_b.at[:, -1].set(1)
-    length = (jnp.arange(config.carrier.C)[None, :] < width).astype(jnp.int32)
+    prompt_mask = prompt != 0
+    target_mask = target != 0
+    teacher = canonical_teacher_structure(target, target_mask, config)
     return {
         "prompt": prompt,
-        "prompt_mask": jnp.ones(prompt.shape, dtype=bool),
+        "prompt_mask": prompt_mask,
         "target": target,
-        "target_mask": jnp.ones(target.shape, dtype=bool),
-        "committed_c_b": c_b,
-        "committed_length": length,
-        "committed_activity": length > 0,
-        "clean_h": jnp.zeros((batch, config.carrier.C, config.carrier.h_dim)),
-        "boundary_target": c_b,
-        "length_target": length,
+        "target_mask": target_mask,
+        "committed_c_b": teacher.boundaries,
+        "committed_length": teacher.length,
+        "committed_activity": teacher.activity,
+        "boundary_target": teacher.boundaries,
+        "length_target": teacher.length,
     }
 
 
 def initialise_training(
     key: jax.Array, config: ReferenceConfig = REFERENCE_SMALL_V0
 ) -> tuple[Any, tuple[Any, Any]]:
-    from .model import init_model_params
-
     params = init_model_params(key, config)
     zeros = adamw_init(params)
     return params, (zeros, zeros)

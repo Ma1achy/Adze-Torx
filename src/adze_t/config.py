@@ -28,6 +28,7 @@ class ModelConfig:
     d_front: int = 64
     d_ctx: int = 128
     frontend_layers: int = 2
+    context_layers: int = 2
     target_layers: int = 2
     proposal_layers: int = 2
     proposal_hidden_dim: int = 64
@@ -39,6 +40,10 @@ class ModelConfig:
     cycles_Q: int = 3
     d_dec: int = 128
     decoder_layers: int = 2
+    mamba_expand: int = 2
+    mamba_state_dim: int = 16
+    mamba_conv_kernel: int = 3
+    residual_gate_init: float = 0.1
 
 
 @dataclass(frozen=True)
@@ -88,6 +93,7 @@ def load_reference_config(path: str | Path) -> ReferenceConfig:
             d_front=frontend["d_front"],
             d_ctx=context["d_ctx"],
             frontend_layers=frontend["layers"],
+            context_layers=context["layers"],
             target_layers=target["layers"],
             proposal_layers=proposal["layers"],
             proposal_hidden_dim=proposal["hidden_dim"],

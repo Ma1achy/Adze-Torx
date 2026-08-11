@@ -10,4 +10,5 @@ Rules:
 
 
 class TorxOps:
-    pass
+    def __getattr__(self, name):
+        raise NotImplementedError(f"TorxOps.{name} is deferred to Phase C")

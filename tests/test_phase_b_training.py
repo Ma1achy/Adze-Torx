@@ -11,7 +11,7 @@ def test_fixed_structure_training_step_and_gradients():
     prompt = jnp.array([[1, 2, 3, 4]], dtype=jnp.int32)
     batch = make_fixed_structure_batch(prompt, prompt, config=cfg)
     params, moments, metrics = train_step(params, moments, 1, batch, config=cfg)
-    assert all(bool(jnp.isfinite(value)) for value in metrics.values())
+    assert all(bool(jnp.all(jnp.isfinite(value))) for value in metrics.values())
     assert float(metrics["loss"]) > 0.0
     _, _, metrics2 = train_step(params, moments, 2, batch, config=cfg)
     assert bool(jnp.isfinite(metrics2["loss"]))

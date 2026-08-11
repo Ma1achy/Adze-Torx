@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import jax
 from jax import Array
 import jax.numpy as jnp
 
@@ -13,43 +14,50 @@ class DeterministicOps:
     matched Torx factor means without changing the surrounding model graph.
     """
 
-    def linear(self, x: Array, params: dict[str, Array]) -> Array:
+    def linear(self, x: Array, params: dict[str, Array], *, name: str = "linear") -> Array:
+        del name
         return x @ params["weight"] + params["bias"]
 
-    def categorical_logits(self, x: Array, params: dict[str, Array]) -> Array:
-        return self.linear(x, params)
+    def categorical_logits(
+        self, x: Array, params: dict[str, Array], *, name: str = "categorical_logits"
+    ) -> Array:
+        return self.linear(x, params, name=name)
 
-    def ssm_transition(self, state: Array, x: Array, params: dict[str, Array]) -> Array:
-        gate = jax_sigmoid(x @ params["gate_weight"] + params["gate_bias"])
-        proposal = state @ params["state_weight"] + x @ params["input_weight"]
-        return gate * jnp.tanh(proposal) + (1.0 - gate) * state
+    def embedding(self, indices: Array, params: Array, *, name: str) -> Array:
+        del name
+        return params[indices.astype(jnp.int32)]
 
-    @staticmethod
-    def init_linear(key: Array, in_dim: int, out_dim: int, scale: float = 1.0) -> dict[str, Array]:
-        import jax
+    def depthwise_conv1d(self, x: Array, params: dict[str, Array], *, name: str) -> Array:
+        """Apply learned depthwise kernels; causal padding is explicit here."""
+        del name
+        kernel = params["kernel"][:, None, :]
+        padded = jnp.pad(x, ((0, 0), (kernel.shape[0] - 1, 0), (0, 0)))
+        out = jax.lax.conv_general_dilated(
+            padded,
+            kernel,
+            window_strides=(1,),
+            padding="VALID",
+            dimension_numbers=("NWC", "WIO", "NWC"),
+            feature_group_count=x.shape[-1],
+        )
+        return out + params["bias"]
 
+    def parameter(self, value: Array, *, name: str) -> Array:
+        del name
+        return value
+
+    def init_linear(
+        self, key: Array, in_dim: int, out_dim: int, *, scale: float = 1.0
+    ) -> dict[str, Array]:
         weight_key, _ = jax.random.split(key)
         weight = jax.random.normal(weight_key, (in_dim, out_dim)) * (scale / jnp.sqrt(in_dim))
         return {"weight": weight, "bias": jnp.zeros((out_dim,))}
 
-    @staticmethod
-    def init_ssm(key: Array, state_dim: int, input_dim: int) -> dict[str, Array]:
-        import jax
+    def init_embedding(self, key: Array, size: int, width: int) -> Array:
+        return jax.random.normal(key, (size, width)) / jnp.sqrt(width)
 
-        keys = jax.random.split(key, 3)
+    def init_depthwise_conv(self, key: Array, kernel_size: int, channels: int) -> dict[str, Array]:
         return {
-            "state_weight": jax.random.normal(keys[0], (state_dim, state_dim))
-            / jnp.sqrt(state_dim),
-            "input_weight": jax.random.normal(keys[1], (input_dim, state_dim))
-            / jnp.sqrt(input_dim),
-            "gate_weight": jax.random.normal(keys[2], (input_dim, state_dim)) / jnp.sqrt(input_dim),
-            "gate_bias": jnp.zeros((state_dim,)),
+            "kernel": jax.random.normal(key, (kernel_size, channels)) / jnp.sqrt(kernel_size),
+            "bias": jnp.zeros((channels,)),
         }
-
-
-def jax_sigmoid(x: Array) -> Array:
-    return jax_clip_sigmoid(x)
-
-
-def jax_clip_sigmoid(x: Array) -> Array:
-    return 1.0 / (1.0 + jnp.exp(-jnp.clip(x, -30.0, 30.0)))
