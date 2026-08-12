@@ -42,52 +42,15 @@ Do not replace any of the above because another design seems more "Torx-native".
 - never hide a deterministic Transformer/Mamba model inside one custom factor;
 - do not modify the validated score bridge absent an oracle-backed bug.
 
-## Initial task boundary
+## Milestone boundary
 
-Implement **Phase A only**.
+Follow the latest explicit user-approved milestone instruction.  Treat the
+architecture contract and committed milestone result records as frozen unless
+that instruction explicitly authorizes a change.  Do not infer permission to
+advance experimental science or redesign the architecture from the repository
+state alone.
 
-Allowed files for substantive implementation:
-
-```text
-src/adze_t/state.py
-src/adze_t/packing.py
-src/adze_t/masking.py
-src/adze_t/unpool.py
-src/adze_t/config.py
-tests/test_state.py
-tests/test_blocks.py
-tests/test_pack_unpool.py
-tests/test_masks.py
-tests/test_inactive_sites.py
-tests/test_reference_config.py
-```
-
-Do not implement:
-
-- encoder;
-- proposal network;
-- DiT;
-- Mamba;
-- decoder;
-- training loop;
-- Torx backend;
-- `S`;
-- `R`.
-
-Those modules are placeholders only.
-
-## Phase A gate
-
-Before stopping:
-
-1. run the complete test suite;
-2. all Phase A tests must pass;
-3. pack/unpool carrier identities must be bijective on valid sites;
-4. inactive sites must remain query-active but key/value/pool-inactive;
-5. draft masks must prevent later-block -> earlier-block influence;
-6. refine masks must permit global active K/V access;
-7. overflow must be explicit, never truncation;
-8. report exactly what changed;
-9. STOP.
-
-Do not continue to Phase B unless explicitly instructed.
+For Phase-D work, preserve the accepted baseline and consult
+`results/phase_d/` and any subsequent versioned evidence directory before
+changing evaluation, training, or decision semantics.  Record corrections as
+new, versioned evidence; never silently rewrite historical scientific records.

@@ -1,0 +1,30 @@
+[
+  {
+    "factor": "affine",
+    "lambda_op": 1.0,
+    "max_absolute_error": 0.0,
+    "passed": true,
+    "rho_gradient_max": 0.0002245035138912499
+  },
+  {
+    "factor": "categorical_logits",
+    "lambda_op": 1.0,
+    "max_absolute_error": 0.0,
+    "passed": true,
+    "rho_gradient_max": 0.0005900007672607899
+  },
+  {
+    "factor": "embedding",
+    "lambda_op": 1.0,
+    "max_absolute_error": 5.820766091346741e-11,
+    "passed": true,
+    "rho_gradient_max": 0.0010874869767576456
+  },
+  {
+    "factor": "depthwise_conv1d",
+    "lambda_op": 1.0,
+    "max_absolute_error": 2.9103830456733704e-11,
+    "passed": true,
+    "rho_gradient_max": 0.00034912704722955823
+  }
+]

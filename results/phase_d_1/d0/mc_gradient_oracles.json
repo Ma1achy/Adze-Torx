@@ -1,0 +1,26 @@
+[
+  {
+    "factor": "affine",
+    "oracle": "independent_expected_jax",
+    "passed": true,
+    "samples": 4096
+  },
+  {
+    "factor": "categorical_logits",
+    "oracle": "independent_expected_jax",
+    "passed": true,
+    "samples": 4096
+  },
+  {
+    "factor": "embedding",
+    "oracle": "independent_expected_jax",
+    "passed": true,
+    "samples": 4096
+  },
+  {
+    "factor": "depthwise_conv1d",
+    "oracle": "independent_expected_jax",
+    "passed": true,
+    "samples": 4096
+  }
+]

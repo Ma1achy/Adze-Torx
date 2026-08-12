@@ -18,6 +18,7 @@ from adze_t.backends.torx import PHASE_D_INITIAL_SIGMA, sigma_from_rho, stable_o
 from adze_t.config import REFERENCE_SMALL_V0
 from adze_t.evaluation import (
     aggregate_root_chunks,
+    all_d3_runs_pass,
     paired_chunk_statistics,
     phase_d_root,
     phase_d_stage_names,
@@ -149,6 +150,7 @@ def evaluate_roots(params, prompt, target, base_seed, count, lambda_op, evaluate
                     prompt[start : start + BATCH_SIZE],
                     target[start : start + BATCH_SIZE],
                     root,
+                    jnp.arange(start, min(start + BATCH_SIZE, prompt.shape[0]), dtype=jnp.uint32),
                     jnp.asarray(lambda_op, dtype=jnp.float32),
                     config=REFERENCE_SMALL_V0,
                 )
@@ -402,6 +404,19 @@ def run_task(task: str, training_seed: int, max_steps: int) -> dict[str, Any]:
     return result
 
 
+def decision_for_runs(results):
+    """Apply the D3 gate to every available authoritative task/seed result."""
+    if all_d3_runs_pass(results):
+        return "D3_STOCHASTIC_SCRATCH_PASS"
+    if any(
+        result["lambda_zero"]["nonfinite_rate"]["mean"] > 0
+        or result["lambda_one"]["nonfinite_rate"]["mean"] > 0
+        for result in results
+    ):
+        return "D3_STOCHASTIC_SCRATCH_NUMERICAL_FAILURE"
+    return "D3_STOCHASTIC_SCRATCH_UNRESOLVED"
+
+
 def write_decision() -> None:
     primary_paths = [EVIDENCE / f"{task}_seed0_summary.json" for task in TASK_CONFIG]
     if not all(path.exists() for path in primary_paths):
@@ -412,16 +427,7 @@ def write_decision() -> None:
         seed_paths = [EVIDENCE / f"{task}_seed{seed}_summary.json" for task in TASK_CONFIG]
         if all(path.exists() for path in seed_paths):
             repeats.extend(json.loads(path.read_text(encoding="utf-8")) for path in seed_paths)
-    if all(result["passed"] for result in primary):
-        decision = "D3_STOCHASTIC_SCRATCH_PASS"
-    elif any(
-        result["lambda_zero"]["nonfinite_rate"]["mean"] > 0
-        or result["lambda_one"]["nonfinite_rate"]["mean"] > 0
-        for result in primary
-    ):
-        decision = "D3_STOCHASTIC_SCRATCH_NUMERICAL_FAILURE"
-    else:
-        decision = "D3_STOCHASTIC_SCRATCH_UNRESOLVED"
+    decision = decision_for_runs([*primary, *repeats])
     lines = [
         "# D3 — scratch generative trainability",
         "",
@@ -430,7 +436,8 @@ def write_decision() -> None:
     ]
     for result in (*primary, *repeats):
         lines.append(
-            f"- {result['task'].upper()} seed {result['training_seed']}: step {result['step']}, "
+            f"- {result['task'].upper()} stochastic-training seed {result['training_seed']}: "
+            f"step {result['step']}, "
             f"lambda-zero `{result['lambda_zero']['byte_accuracy']['mean']:.6f}`, "
             f"lambda-one `{result['lambda_one']['byte_accuracy']['mean']:.6f}`."
         )

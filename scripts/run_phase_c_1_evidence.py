@@ -19,7 +19,7 @@ from adze_t.backends.torx import TorxOperatorConfig, TorxOps, stable_occurrence_
 from adze_t.config import REFERENCE_SMALL_V0
 from adze_t.model import apply_model, init_model_params
 from adze_t.objectives import loss_components, total_loss
-from adze_t.parity import array_metric, compare_ordered_model_traces
+from adze_t.parity import all_records_pass, array_metric, compare_ordered_model_traces
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -240,7 +240,7 @@ def main() -> None:
             "passed": (
                 first_divergence is None
                 and invariance_divergence is None
-                and all(record["passed"] for record in gradient_records)
+                and all_records_pass(gradient_records)
                 and rho_gradient_max == 0.0
             ),
         },

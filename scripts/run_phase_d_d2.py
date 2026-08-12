@@ -142,6 +142,7 @@ def evaluate_roots(params, prompt, target, base_seed, count, evaluate):
                     prompt[start : start + BATCH_SIZE],
                     target[start : start + BATCH_SIZE],
                     root,
+                    jnp.arange(start, min(start + BATCH_SIZE, prompt.shape[0]), dtype=jnp.uint32),
                     jnp.asarray(1.0, dtype=jnp.float32),
                     config=REFERENCE_SMALL_V0,
                 )

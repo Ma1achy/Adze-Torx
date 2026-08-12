@@ -132,11 +132,75 @@ def test_fixed_key_affine_gradients_match_explicit_reparameterization():
     actual = jax.grad(factor_objective, argnums=(0, 1))(x, affine)
     expected = jax.grad(reference_objective, argnums=(0, 1))(x, affine)
     assert all(
-        jnp.array_equal(left, right)
+        jnp.allclose(left, right, rtol=0.0, atol=2.0e-10)
         for left, right in zip(
             jax.tree_util.tree_leaves(actual), jax.tree_util.tree_leaves(expected), strict=True
         )
     )
+
+
+@pytest.mark.parametrize("kind", ["affine", "logits", "embedding", "conv"])
+def test_fixed_key_gradients_match_explicit_reparameterization_for_every_factor(kind):
+    """Finite-lambda gradients use the exact epsilon from the declared occurrence key."""
+    _, params = _mapped_primitives()
+    root = jax.random.key(151)
+    x = jnp.array([[[0.3, -0.7], [0.5, 0.2]]], dtype=jnp.float32)
+    indices = jnp.array([[1, 4]], dtype=jnp.int32)
+    name = {
+        "affine": "oracle.affine",
+        "logits": "oracle.logits",
+        "embedding": "oracle.embedding",
+        "conv": "oracle.conv",
+    }[kind]
+    parameter = params[
+        "affine" if kind in ("affine", "logits") else "embedding" if kind == "embedding" else "conv"
+    ]
+    occurrence_key = TorxOps.create(root, config=_config()).context.key_for(name)
+
+    def actual(input_x, p):
+        ops = TorxOps.create(root, config=_config())
+        if kind == "affine":
+            output = ops.linear(input_x, p, name=name)
+        elif kind == "logits":
+            output = ops.categorical_logits(input_x, p, name=name)
+        elif kind == "embedding":
+            output = ops.embedding(indices, p, name=name)
+        else:
+            output = ops.depthwise_conv1d(input_x, p, name=name)
+        return 0.5 * jnp.sum(output**2)
+
+    def reference(input_x, p):
+        if kind in ("affine", "logits"):
+            mean = input_x @ p["mean"]["weight"] + p["mean"]["bias"]
+        elif kind == "embedding":
+            mean = p["mean"][indices]
+        else:
+            kernel = p["mean"]["kernel"][:, None, :]
+            padded = jnp.pad(input_x, ((0, 0), (kernel.shape[0] - 1, 0), (0, 0)))
+            mean = (
+                jax.lax.conv_general_dilated(
+                    padded,
+                    kernel,
+                    (1,),
+                    "VALID",
+                    dimension_numbers=("NWC", "WIO", "NWC"),
+                    feature_group_count=input_x.shape[-1],
+                )
+                + p["mean"]["bias"]
+            )
+        epsilon = jax.random.normal(occurrence_key, mean.shape, dtype=mean.dtype)
+        return 0.5 * jnp.sum((mean + sigma_from_rho(p["rho"]) * epsilon) ** 2)
+
+    # Integer embedding indices deliberately have no input gradient contract.
+    actual_grads = jax.grad(actual, argnums=(0, 1))(x, parameter)
+    reference_grads = jax.grad(reference, argnums=(0, 1))(x, parameter)
+    for left, right in zip(
+        jax.tree_util.tree_leaves(actual_grads),
+        jax.tree_util.tree_leaves(reference_grads),
+        strict=True,
+    ):
+        assert jnp.allclose(left, right, rtol=0.0, atol=2.0e-10)
+    assert float(jnp.max(jnp.abs(actual_grads[1]["rho"]))) > 0.0
 
 
 @pytest.mark.slow

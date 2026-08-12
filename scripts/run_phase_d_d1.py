@@ -121,6 +121,7 @@ def run_task(task: str) -> dict[str, Any]:
                     prompt[start : start + CHUNK],
                     target[start : start + CHUNK],
                     root,
+                    jnp.arange(start, min(start + CHUNK, prompt.shape[0]), dtype=jnp.uint32),
                     jnp.asarray(lambda_op, dtype=jnp.float32),
                     config=REFERENCE_SMALL_V0,
                 )

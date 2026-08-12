@@ -26,7 +26,7 @@ from adze_t.model import apply_model, init_model_params
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "results" / "phase_d" / "d0"
+OUTPUT = ROOT / "results" / "phase_d_1" / "d0"
 SAMPLES = 4096
 
 
@@ -109,27 +109,167 @@ def primitive_evidence() -> dict[str, Any]:
 
     affine = params["affine"]
     x = jnp.array([[0.3, -0.7], [0.5, 0.2]], dtype=jnp.float32)
+    indices = jnp.array([[1, 4]], dtype=jnp.int32)
     root = jax.random.key(6001)
     occurrence_key = TorxOps.create(root, config=_config()).context.key_for("oracle.affine")
 
-    def factor_objective(input_x, parameter):
+    def affine_factor_objective(input_x, parameter):
         y = TorxOps.create(root, config=_config()).linear(input_x, parameter, name="oracle.affine")
         return 0.5 * jnp.sum(y**2)
 
-    def reference_objective(input_x, parameter):
+    def affine_reference_objective(input_x, parameter):
         mean = input_x @ parameter["mean"]["weight"] + parameter["mean"]["bias"]
         epsilon = jax.random.normal(occurrence_key, mean.shape, dtype=mean.dtype)
         y = mean + sigma_from_rho(parameter["rho"]) * epsilon
         return 0.5 * jnp.sum(y**2)
 
-    actual = jax.grad(factor_objective, argnums=(0, 1))(x, affine)
-    expected = jax.grad(reference_objective, argnums=(0, 1))(x, affine)
+    actual = jax.grad(affine_factor_objective, argnums=(0, 1))(x, affine)
+    expected = jax.grad(affine_reference_objective, argnums=(0, 1))(x, affine)
     fixed_errors = [
         jnp.max(jnp.abs(left - right))
         for left, right in zip(
             jax.tree_util.tree_leaves(actual), jax.tree_util.tree_leaves(expected), strict=True
         )
     ]
+
+    def primitive_inputs(kind):
+        return (
+            x[None, :, :] if kind == "depthwise_conv1d" else x,
+            indices,
+            params[
+                "affine"
+                if kind in ("affine", "categorical_logits")
+                else "embedding"
+                if kind == "embedding"
+                else "conv"
+            ],
+        )
+
+    def factor_objective(kind, root, input_x, parameter):
+        ops = TorxOps.create(root, config=_config())
+        if kind == "affine":
+            output = ops.linear(input_x, parameter, name="oracle.affine")
+        elif kind == "categorical_logits":
+            output = ops.categorical_logits(input_x, parameter, name="oracle.logits")
+        elif kind == "embedding":
+            output = ops.embedding(indices, parameter, name="oracle.embedding")
+        else:
+            output = ops.depthwise_conv1d(input_x, parameter, name="oracle.conv")
+        return 0.5 * jnp.sum(output**2)
+
+    def reference_objective(kind, root, input_x, parameter):
+        name = {
+            "affine": "oracle.affine",
+            "categorical_logits": "oracle.logits",
+            "embedding": "oracle.embedding",
+            "depthwise_conv1d": "oracle.conv",
+        }[kind]
+        if kind in ("affine", "categorical_logits"):
+            mean_value = input_x @ parameter["mean"]["weight"] + parameter["mean"]["bias"]
+        elif kind == "embedding":
+            mean_value = parameter["mean"][indices]
+        else:
+            kernel = parameter["mean"]["kernel"][:, None, :]
+            padded = jnp.pad(input_x, ((0, 0), (kernel.shape[0] - 1, 0), (0, 0)))
+            mean_value = (
+                jax.lax.conv_general_dilated(
+                    padded,
+                    kernel,
+                    (1,),
+                    "VALID",
+                    dimension_numbers=("NWC", "WIO", "NWC"),
+                    feature_group_count=input_x.shape[-1],
+                )
+                + parameter["mean"]["bias"]
+            )
+        epsilon = jax.random.normal(
+            TorxOps.create(root, config=_config()).context.key_for(name),
+            mean_value.shape,
+            dtype=mean_value.dtype,
+        )
+        return 0.5 * jnp.sum((mean_value + sigma_from_rho(parameter["rho"]) * epsilon) ** 2)
+
+    fixed_key_records = []
+    mc_gradient_records = []
+    for kind in ("affine", "categorical_logits", "embedding", "depthwise_conv1d"):
+        input_x, _, parameter = primitive_inputs(kind)
+        finite_root = jax.random.key(6010)
+        actual_gradient = jax.grad(
+            lambda a, p: factor_objective(kind, finite_root, a, p), argnums=(0, 1)
+        )(input_x, parameter)
+        reference_gradient = jax.grad(
+            lambda a, p: reference_objective(kind, finite_root, a, p), argnums=(0, 1)
+        )(input_x, parameter)
+        errors = [
+            jnp.max(jnp.abs(left - right))
+            for left, right in zip(
+                jax.tree_util.tree_leaves(actual_gradient),
+                jax.tree_util.tree_leaves(reference_gradient),
+                strict=True,
+            )
+        ]
+        fixed_key_records.append(
+            {
+                "factor": kind,
+                "lambda_op": 1.0,
+                "max_absolute_error": max(errors),
+                "rho_gradient_max": jnp.max(jnp.abs(actual_gradient[1]["rho"])),
+                "passed": bool(
+                    max(errors) <= 2e-10 and jnp.max(jnp.abs(actual_gradient[1]["rho"])) > 0
+                ),
+            }
+        )
+
+        def expected_objective(a, p):
+            # Independent JAX expectation: E[.5||mean+sigma eps||²].
+            if kind in ("affine", "categorical_logits"):
+                mean_value = a @ p["mean"]["weight"] + p["mean"]["bias"]
+            elif kind == "embedding":
+                mean_value = p["mean"][indices]
+            else:
+                kernel = p["mean"]["kernel"][:, None, :]
+                padded = jnp.pad(a, ((0, 0), (kernel.shape[0] - 1, 0), (0, 0)))
+                mean_value = (
+                    jax.lax.conv_general_dilated(
+                        padded,
+                        kernel,
+                        (1,),
+                        "VALID",
+                        dimension_numbers=("NWC", "WIO", "NWC"),
+                        feature_group_count=a.shape[-1],
+                    )
+                    + p["mean"]["bias"]
+                )
+            sigma = sigma_from_rho(p["rho"])
+            return 0.5 * jnp.sum(mean_value**2) + 0.5 * (mean_value.size / sigma.size) * jnp.sum(
+                sigma**2
+            )
+
+        samples = jax.jit(
+            jax.vmap(
+                lambda sample_key: jax.grad(
+                    lambda a, p: factor_objective(kind, sample_key, a, p), argnums=(0, 1)
+                )(input_x, parameter)
+            )
+        )(keys)
+        analytic_gradient = jax.grad(expected_objective, argnums=(0, 1))(input_x, parameter)
+        leaves = []
+        for observed, expected_value in zip(
+            jax.tree_util.tree_leaves(samples),
+            jax.tree_util.tree_leaves(analytic_gradient),
+            strict=True,
+        ):
+            sem = jnp.std(observed, axis=0, ddof=1) / jnp.sqrt(SAMPLES)
+            error = jnp.abs(jnp.mean(observed, axis=0) - expected_value)
+            leaves.append(bool(jnp.all(error <= 5 * sem + 2e-6)))
+        mc_gradient_records.append(
+            {
+                "factor": kind,
+                "samples": SAMPLES,
+                "oracle": "independent_expected_jax",
+                "passed": all(leaves),
+            }
+        )
 
     gradient_x = jnp.array([0.3, -0.7], dtype=jnp.float32)
 
@@ -211,6 +351,8 @@ def primitive_evidence() -> dict[str, Any]:
     passed = (
         all(item["passed"] for item in moment_records)
         and max(float(value) for value in fixed_errors) <= 1.0e-9
+        and all(item["passed"] for item in fixed_key_records)
+        and all(item["passed"] for item in mc_gradient_records)
         and all(item["all_coordinates_passed"] for item in coordinate_records)
         and all(item["passed"] for item in lambda_scaling)
         and bool(
@@ -221,6 +363,8 @@ def primitive_evidence() -> dict[str, Any]:
         "policy": policy,
         "moments": moment_records,
         "fixed_key_reparameterized_gradient_max_errors": fixed_errors,
+        "fixed_key_gradients_by_family": fixed_key_records,
+        "mc_expected_gradients_by_family": mc_gradient_records,
         "mean_pathwise_gradients": coordinate_records,
         "lambda_residual_scaling": lambda_scaling,
         "lambda_zero_rho_gradient_max": jnp.max(jnp.abs(jax.grad(zero_objective)(affine["rho"]))),
@@ -365,6 +509,8 @@ def main() -> None:
     primitive = primitive_evidence()
     occurrence = occurrence_evidence()
     _write("primitive_moments_gradients.json", primitive)
+    _write("fixed_key_gradients.json", primitive["fixed_key_gradients_by_family"])
+    _write("mc_gradient_oracles.json", primitive["mc_expected_gradients_by_family"])
     _write("occurrence_noise.json", occurrence)
     passed = primitive["passed"] and occurrence["passed"]
     decision = "D0_FINITE_NOISE_CONTRACT_PASS" if passed else "D0_FINITE_NOISE_CONTRACT_FAILURE"

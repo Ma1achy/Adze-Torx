@@ -25,6 +25,11 @@ class ParityMetric:
         return asdict(self)
 
 
+def all_records_pass(records: list[dict[str, Any]]) -> bool:
+    """Aggregate every evidence record; a low-error neighbour cannot mask a failure."""
+    return all(bool(record["passed"]) for record in records)
+
+
 def array_metric(
     path: str, deterministic: jax.Array, torx_value: jax.Array, *, atol: float, rtol: float
 ) -> ParityMetric:

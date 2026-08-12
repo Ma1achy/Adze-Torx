@@ -45,6 +45,7 @@ class OccurrenceContext:
     root_key: Array
     scopes: tuple[str, ...] = ()
     evaluation_id: int | Array = 0
+    global_example_id: int | Array = 0
     optimizer_step: int | Array = 0
     denoise_step: int | Array = 0
     refinement_step: int | Array = 0
@@ -57,6 +58,7 @@ class OccurrenceContext:
         key = self.root_key
         for value in (
             self.evaluation_id,
+            self.global_example_id,
             self.optimizer_step,
         ):
             key = jax.random.fold_in(key, jnp.asarray(value, dtype=jnp.uint32))
@@ -260,13 +262,19 @@ class TorxOps:
         *,
         config: TorxOperatorConfig | None = None,
         evaluation_id: int | Array = 0,
+        global_example_id: int | Array = 0,
         optimizer_step: int | Array = 0,
         observer: FactorObserver | None = None,
         occurrence_observer: OccurrenceObserver | None = None,
         sample_observer: SampleObserver | None = None,
     ) -> "TorxOps":
         return cls(
-            OccurrenceContext(key, evaluation_id=evaluation_id, optimizer_step=optimizer_step),
+            OccurrenceContext(
+                key,
+                evaluation_id=evaluation_id,
+                global_example_id=global_example_id,
+                optimizer_step=optimizer_step,
+            ),
             config or TorxOperatorConfig(),
             observer,
             occurrence_observer,
