@@ -22,6 +22,9 @@ from adze_t.config import REFERENCE_SMALL_V0
 from adze_t.model import apply_model, init_model_params
 
 
+pytestmark = pytest.mark.integration
+
+
 def _config(lambda_op=1.0):
     return TorxOperatorConfig(operator_stochasticity=True, lambda_op=lambda_op)
 

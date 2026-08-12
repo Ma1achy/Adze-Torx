@@ -8,6 +8,7 @@ import pickle
 
 import jax
 import jax.numpy as jnp
+import pytest
 
 from adze_t.backends.deterministic import DeterministicOps
 from adze_t.backends.mapping import deterministic_to_torx
@@ -23,6 +24,9 @@ from adze_t.training import (
     stochastic_model_update_mask,
     stochastic_train_step,
 )
+
+
+pytestmark = pytest.mark.integration
 
 
 def _tiny_config():

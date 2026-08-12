@@ -27,6 +27,9 @@ from adze_t.parity import compare_ordered_model_traces
 from adze_t.teacher import canonical_teacher_structure
 
 
+pytestmark = pytest.mark.integration
+
+
 def _torx_ops(key: int = 0, *, observer=None, rho_enabled: bool = False) -> TorxOps:
     return TorxOps.create(
         jax.random.key(key),

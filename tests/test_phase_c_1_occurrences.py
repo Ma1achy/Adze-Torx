@@ -21,6 +21,9 @@ from adze_t.objectives import loss_components, total_loss
 from adze_t.parity import compare_ordered_model_traces
 
 
+pytestmark = pytest.mark.integration
+
+
 def _batch() -> tuple[jax.Array, jax.Array]:
     values = jnp.arange(1, 9, dtype=jnp.int32)[None, :]
     return values, jnp.ones_like(values, dtype=bool)
