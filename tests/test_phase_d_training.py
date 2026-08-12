@@ -186,7 +186,10 @@ def test_d3_initialization_freshens_noncodec_and_restores_exact_codec():
 
 def test_accepted_phase_b_checkpoints_map_to_torx_means_exactly():
     checkpoint_root = Path(__file__).resolve().parents[1] / "results/phase_b/checkpoints"
-    for name in ("target_codec_b1", "copy", "reverse"):
+    names = ("target_codec_b1", "copy", "reverse")
+    if not all((checkpoint_root / f"{name}.pkl").is_file() for name in names):
+        pytest.skip("accepted Phase-B checkpoint fixtures are not present in this checkout")
+    for name in names:
         with (checkpoint_root / f"{name}.pkl").open("rb") as stream:
             deterministic = jax.tree.map(
                 jnp.asarray,
