@@ -24,6 +24,9 @@ from .proposal import apply_proposal, init_proposal_params
 from .unpool import unpool_values
 
 
+CLEAN_TARGET_MEAN_TEACHER_V0 = "CLEAN_TARGET_MEAN_TEACHER_V0"
+
+
 def _dit_config(config: ReferenceConfig) -> DiTConfig:
     m = config.model
     return DiTConfig(
@@ -107,6 +110,7 @@ def apply_model(
     *,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
     ops: LearnedOps | None = None,
+    target_ops: LearnedOps | None = None,
     committed_c_b: jax.Array | None = None,
     committed_activity: jax.Array | None = None,
     committed_length: jax.Array | None = None,
@@ -117,7 +121,7 @@ def apply_model(
     if target.shape[1] > config.carrier.C * config.carrier.L_max:
         raise ValueError("target sequence width exceeds carrier emission capacity")
     prompt_ops = ops.with_scope("prompt")
-    target_ops = ops.with_scope("target")
+    clean_target_ops = (target_ops or ops).with_scope("target")
     prompt_frontend = shared_byte_frontend(
         prompt, prompt_mask, params["encoder"], config, prompt_ops
     )
@@ -125,10 +129,10 @@ def apply_model(
         prompt_frontend, prompt_mask, params["encoder"], config, prompt_ops
     )
     target_frontend = shared_byte_frontend(
-        target, target_mask, params["encoder"], config, target_ops
+        target, target_mask, params["encoder"], config, clean_target_ops
     )
     target_codec = encode_target_from_hidden(
-        target_frontend, target, target_mask, params["encoder"], config, target_ops
+        target_frontend, target, target_mask, params["encoder"], config, clean_target_ops
     )
     teacher = target_codec["teacher"]
     c_b = teacher.boundaries if committed_c_b is None else committed_c_b

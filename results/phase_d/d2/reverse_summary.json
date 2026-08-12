@@ -1,0 +1,60 @@
+{
+  "checks": {
+    "applied_rho_gradient_zero": true,
+    "checkpoint_map_exact": true,
+    "clean_teacher_parameters_bitwise_fixed": true,
+    "finite_training_metrics": true,
+    "permitted_means_changed": true,
+    "raw_rho_connectivity_nonzero": true,
+    "rho_first_moments_bitwise_fixed": true,
+    "rho_parameters_bitwise_fixed": true,
+    "rho_second_moments_bitwise_fixed": true
+  },
+  "evaluation_root_base": 6200,
+  "final_mc": {
+    "byte_accuracy": {
+      "ci95": [
+        0.9653636260080374,
+        0.9660328583669626
+      ],
+      "count": 32,
+      "mean": 0.9656982421875,
+      "sample_sd": 0.0009281073580496013
+    },
+    "exact_sequence_accuracy": {
+      "ci95": [
+        0.774435897209163,
+        0.779275040290837
+      ],
+      "count": 32,
+      "mean": 0.77685546875,
+      "sample_sd": 0.006711038760840893
+    },
+    "loss": {
+      "ci95": [
+        0.12897129755797185,
+        0.12972385782418452
+      ],
+      "count": 32,
+      "mean": 0.12934757769107819,
+      "sample_sd": 0.001043668482452631
+    },
+    "nonfinite_rate": {
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "count": 32,
+      "mean": 0.0,
+      "sample_sd": 0.0
+    }
+  },
+  "passed": true,
+  "source_checkpoint": "results/phase_b/checkpoints/reverse.pkl",
+  "source_checkpoint_sha256": "1a1b3748d333e80037712568dc40762470a82cb95ab38de4d6c7bf709679bf6c",
+  "step": 100,
+  "task": "reverse",
+  "training_root": 5200,
+  "working_checkpoint": "results/runs/phase_d/d2/reverse.pkl",
+  "working_checkpoint_sha256": "fe5e29188fe4fb03150d6f1d8a491735d0376237956c4f33eac3494e3bd4278b"
+}

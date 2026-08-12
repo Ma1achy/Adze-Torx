@@ -8,6 +8,7 @@ import jax
 import jax.numpy as jnp
 
 from .backends.deterministic import DeterministicOps
+from .backends.torx import TorxOperatorConfig, TorxOps
 from .config import REFERENCE_SMALL_V0, ReferenceConfig
 from .model import apply_model, apply_target_codec, init_model_params
 from .objectives import (
@@ -32,6 +33,7 @@ _CODEC_ENCODER_NAMES = (
     "target_b",
     "target_l",
 )
+B3_INITIALIZATION_SEED = 700
 
 
 def _constant_mask(tree: Any, enabled: bool) -> Any:
@@ -56,9 +58,39 @@ def model_update_mask(params: dict[str, Any]) -> dict[str, Any]:
     return {**mask, "encoder": encoder}
 
 
+def stochastic_model_update_mask(params: dict[str, Any]) -> dict[str, Any]:
+    """Retain the Phase-B freeze boundary and disable every rho leaf."""
+    phase_b = model_update_mask(params)
+    return jax.tree_util.tree_map_with_path(
+        lambda path, enabled: (
+            jnp.asarray(enabled) & jnp.asarray("['rho']" not in jax.tree_util.keystr(path))
+        ),
+        phase_b,
+    )
+
+
 def _norm(*trees: Any) -> jax.Array:
     leaves = [leaf for tree in trees for leaf in jax.tree_util.tree_leaves(tree)]
     return jnp.sqrt(jnp.sum(jnp.stack([jnp.sum(leaf * leaf) for leaf in leaves])))
+
+
+def _path_norm(tree: Any, predicate: Any) -> jax.Array:
+    leaves = [
+        leaf
+        for path, leaf in jax.tree_util.tree_leaves_with_path(tree)
+        if predicate(jax.tree_util.keystr(path))
+    ]
+    if not leaves:
+        return jnp.asarray(0.0, dtype=jnp.float32)
+    return jnp.sqrt(jnp.sum(jnp.stack([jnp.sum(leaf * leaf) for leaf in leaves])))
+
+
+def _masked_gradients(grads: Any, update_mask: Any) -> Any:
+    return jax.tree_util.tree_map(
+        lambda grad, enabled: jnp.where(enabled, grad, jnp.zeros_like(grad)),
+        grads,
+        update_mask,
+    )
 
 
 def _gradient_metrics(grads: dict[str, Any]) -> dict[str, jax.Array]:
@@ -150,6 +182,104 @@ def train_step(
     )
 
 
+def stochastic_train_step(
+    params: Any,
+    moments: tuple[Any, Any],
+    step: jax.Array | int,
+    batch: dict[str, jax.Array],
+    training_root: jax.Array,
+    *,
+    config: ReferenceConfig = REFERENCE_SMALL_V0,
+    lambda_op: float | jax.Array = 1.0,
+) -> tuple[Any, tuple[Any, Any], dict[str, jax.Array]]:
+    """Run one pathwise Phase-D trajectory with frozen rho and a clean teacher."""
+    noisy_ops = TorxOps.create(
+        training_root,
+        config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=lambda_op),
+        optimizer_step=step,
+    )
+    clean_target_ops = TorxOps.create(
+        training_root,
+        config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
+        optimizer_step=step,
+    )
+
+    def objective(p):
+        outputs = apply_model(
+            p,
+            batch["prompt"],
+            batch["prompt_mask"],
+            batch["target"],
+            batch["target_mask"],
+            config=config,
+            ops=noisy_ops,
+            target_ops=clean_target_ops,
+        )
+        components = loss_components(outputs)
+        return total_loss(components, config), (components, outputs)
+
+    (loss, (components, outputs)), grads = jax.value_and_grad(objective, has_aux=True)(params)
+    update_mask = stochastic_model_update_mask(params)
+    permitted_grads = _masked_gradients(grads, update_mask)
+    raw_norm = _norm(grads)
+    permitted_norm = _norm(permitted_grads)
+    clipped_norm = jnp.minimum(permitted_norm, config.training.grad_clip_norm)
+    gradient_metrics = _gradient_metrics(grads)
+    rho_norm = _path_norm(grads, lambda path: "['rho']" in path)
+    direct_norm = _path_norm(
+        grads,
+        lambda path: any(
+            f"['{name}']" in path for name in ("a_log", "d_skip", "delta_bias", "layer_scale")
+        ),
+    )
+    direct_permitted_norm = _path_norm(
+        permitted_grads,
+        lambda path: any(
+            f"['{name}']" in path for name in ("a_log", "d_skip", "delta_bias", "layer_scale")
+        ),
+    )
+    clip_scale = jnp.minimum(
+        1.0, config.training.grad_clip_norm / jnp.maximum(permitted_norm, 1.0e-8)
+    )
+    params, moments, optimizer_grad_norm = adamw_step(
+        params,
+        grads,
+        moments,
+        step,
+        learning_rate=config.training.learning_rate,
+        weight_decay=config.training.weight_decay,
+        clip_norm=config.training.grad_clip_norm,
+        update_mask=update_mask,
+    )
+    teacher = outputs["target"]["teacher"]
+    byte_accuracy, sequence_accuracy = emitted_metrics(
+        outputs["byte_logits"], teacher.slot_bytes, teacher.slot_mask
+    )
+    return (
+        params,
+        moments,
+        {
+            "loss": loss,
+            **components,
+            "byte_accuracy": byte_accuracy,
+            "sequence_accuracy": sequence_accuracy,
+            "grad_raw_norm": raw_norm,
+            "grad_permitted_norm": permitted_norm,
+            "grad_clipped_applied_norm": clipped_norm,
+            "grad_optimizer_reported_norm": optimizer_grad_norm,
+            "grad_direct_ssm_norm": direct_norm,
+            "grad_direct_ssm_applied_norm": direct_permitted_norm * clip_scale,
+            "grad_rho_raw_norm": rho_norm,
+            "grad_rho_applied_norm": jnp.asarray(0.0, dtype=rho_norm.dtype),
+            **gradient_metrics,
+            "activation_packed_input": outputs["activation_rms"]["packed_input"],
+            "activation_unpooled_carrier": outputs["activation_rms"]["unpooled_carrier"],
+            "activation_block_rms": outputs["dit_aux"]["block_rms"],
+            "activation_cycle_rms": outputs["dit_aux"]["cycle_rms"],
+        },
+    )
+
+
 def codec_pretrain_step(
     params: Any,
     moments: tuple[Any, Any],
@@ -232,3 +362,24 @@ def initialise_training(
     params = init_model_params(key, config)
     zeros = adamw_init(params)
     return params, (zeros, zeros)
+
+
+def accepted_b3_scratch_initialization(
+    target_codec_params: Any,
+    config: ReferenceConfig = REFERENCE_SMALL_V0,
+) -> Any:
+    """Reproduce B3: fresh seed-700 generative state plus accepted clean codec.
+
+    This deliberately does not consume task-trained COPY/REVERSE parameters.
+    The codec update mask identifies the exact leaves copied from
+    ``target_codec_b1.pkl``; every other leaf comes from a fresh deterministic
+    initialization using the same seed/procedure as the accepted B3 run.
+    """
+    fresh = init_model_params(jax.random.PRNGKey(B3_INITIALIZATION_SEED), config)
+    mask = codec_update_mask(fresh)
+    return jax.tree_util.tree_map(
+        lambda initialized, codec, use_codec: jnp.where(use_codec, codec, initialized),
+        fresh,
+        target_codec_params,
+        mask,
+    )

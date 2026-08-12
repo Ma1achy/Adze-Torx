@@ -238,6 +238,7 @@ def main() -> None:
         {
             "records": gradient_records,
             "rho_gradient_max_absolute": rho_gradient_max,
+            "all_records_passed": all(item["passed"] for item in gradient_records),
             "worst_parameter": max(
                 gradient_records, key=lambda item: item["max_absolute_difference"]
             )["path"],

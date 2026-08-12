@@ -9,6 +9,8 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
+from .torx import PHASE_D_INITIAL_SIGMA, rho_from_sigma
+
 
 _DIRECT_MEAN_ONLY = {"a_log", "d_skip", "delta_bias", "layer_scale"}
 
@@ -26,12 +28,12 @@ def _join(path: tuple[str, ...]) -> str:
 
 
 def _rho(width: int, initial_sigma: float) -> jax.Array:
-    raw = jnp.log(jnp.expm1(jnp.asarray(initial_sigma, dtype=jnp.float32)))
+    raw = rho_from_sigma(initial_sigma)
     return jnp.full((width,), raw)
 
 
 def deterministic_to_torx(
-    params: Any, *, initial_sigma: float = 1.0e-3
+    params: Any, *, initial_sigma: float = PHASE_D_INITIAL_SIGMA
 ) -> tuple[Any, tuple[ParameterMapEntry, ...]]:
     """Map by semantic dictionary/list paths, never pytree leaf order."""
     entries: list[ParameterMapEntry] = []

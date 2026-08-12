@@ -1,4 +1,5 @@
 {
+  "all_records_passed": true,
   "records": [
     {
       "atol": 1e-05,

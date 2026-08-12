@@ -1,0 +1,406 @@
+[
+  {
+    "byte_accuracy": 0.9462890625,
+    "exact_sequence_accuracy": 0.6484375,
+    "loss": 0.1832868605852127,
+    "nonfinite_rate": 0.0,
+    "root_index": 0,
+    "root_key": [
+      3500592898,
+      3512647533
+    ],
+    "stages": {
+      "carrier": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6737264394760132
+      },
+      "decoder_logits": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 3.5488572120666504
+      },
+      "dit.q0.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7250534892082214
+      },
+      "dit.q0.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7396262884140015
+      },
+      "dit.q0.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7626696228981018
+      },
+      "dit.q0.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7892282605171204
+      },
+      "dit.q0.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7892282605171204
+      },
+      "dit.q1.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.8119297623634338
+      },
+      "dit.q1.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.8253201842308044
+      },
+      "dit.q1.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.855175256729126
+      },
+      "dit.q1.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.886978805065155
+      },
+      "dit.q1.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.886978805065155
+      },
+      "dit.q2.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.908385157585144
+      },
+      "dit.q2.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9264440536499023
+      },
+      "dit.q2.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9641256928443909
+      },
+      "dit.q2.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9953646659851074
+      },
+      "dit.q2.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9953646659851074
+      },
+      "frontend": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.16381996870040894
+      },
+      "h_hat": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6737264394760132
+      },
+      "pack": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6253849267959595
+      },
+      "proposal": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 1.944605827331543
+      },
+      "unpool": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 1.1890443563461304
+      }
+    }
+  },
+  {
+    "byte_accuracy": 0.9462890625,
+    "exact_sequence_accuracy": 0.6484375,
+    "loss": 0.1832868605852127,
+    "nonfinite_rate": 0.0,
+    "root_index": 1,
+    "root_key": [
+      2306097649,
+      1764604304
+    ],
+    "stages": {
+      "carrier": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6737264394760132
+      },
+      "decoder_logits": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 3.5488572120666504
+      },
+      "dit.q0.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7250534892082214
+      },
+      "dit.q0.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7396262884140015
+      },
+      "dit.q0.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7626696228981018
+      },
+      "dit.q0.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7892282605171204
+      },
+      "dit.q0.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7892282605171204
+      },
+      "dit.q1.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.8119297623634338
+      },
+      "dit.q1.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.8253201842308044
+      },
+      "dit.q1.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.855175256729126
+      },
+      "dit.q1.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.886978805065155
+      },
+      "dit.q1.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.886978805065155
+      },
+      "dit.q2.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.908385157585144
+      },
+      "dit.q2.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9264440536499023
+      },
+      "dit.q2.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9641256928443909
+      },
+      "dit.q2.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9953646659851074
+      },
+      "dit.q2.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9953646659851074
+      },
+      "frontend": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.16381996870040894
+      },
+      "h_hat": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6737264394760132
+      },
+      "pack": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6253849267959595
+      },
+      "proposal": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 1.944605827331543
+      },
+      "unpool": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 1.1890443563461304
+      }
+    }
+  },
+  {
+    "byte_accuracy": 0.9462890625,
+    "exact_sequence_accuracy": 0.6484375,
+    "loss": 0.1832868605852127,
+    "nonfinite_rate": 0.0,
+    "root_index": 2,
+    "root_key": [
+      1121160012,
+      1171689951
+    ],
+    "stages": {
+      "carrier": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6737264394760132
+      },
+      "decoder_logits": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 3.5488572120666504
+      },
+      "dit.q0.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7250534892082214
+      },
+      "dit.q0.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7396262884140015
+      },
+      "dit.q0.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7626696228981018
+      },
+      "dit.q0.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7892282605171204
+      },
+      "dit.q0.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7892282605171204
+      },
+      "dit.q1.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.8119297623634338
+      },
+      "dit.q1.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.8253201842308044
+      },
+      "dit.q1.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.855175256729126
+      },
+      "dit.q1.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.886978805065155
+      },
+      "dit.q1.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.886978805065155
+      },
+      "dit.q2.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.908385157585144
+      },
+      "dit.q2.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9264440536499023
+      },
+      "dit.q2.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9641256928443909
+      },
+      "dit.q2.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9953646659851074
+      },
+      "dit.q2.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9953646659851074
+      },
+      "frontend": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.16381996870040894
+      },
+      "h_hat": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6737264394760132
+      },
+      "pack": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6253849267959595
+      },
+      "proposal": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 1.944605827331543
+      },
+      "unpool": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 1.1890443563461304
+      }
+    }
+  },
+  {
+    "byte_accuracy": 0.9462890625,
+    "exact_sequence_accuracy": 0.6484375,
+    "loss": 0.1832868605852127,
+    "nonfinite_rate": 0.0,
+    "root_index": 3,
+    "root_key": [
+      2431094764,
+      1198567873
+    ],
+    "stages": {
+      "carrier": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6737264394760132
+      },
+      "decoder_logits": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 3.5488572120666504
+      },
+      "dit.q0.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7250534892082214
+      },
+      "dit.q0.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7396262884140015
+      },
+      "dit.q0.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7626696228981018
+      },
+      "dit.q0.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7892282605171204
+      },
+      "dit.q0.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.7892282605171204
+      },
+      "dit.q1.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.8119297623634338
+      },
+      "dit.q1.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.8253201842308044
+      },
+      "dit.q1.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.855175256729126
+      },
+      "dit.q1.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.886978805065155
+      },
+      "dit.q1.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.886978805065155
+      },
+      "dit.q2.block0": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.908385157585144
+      },
+      "dit.q2.block1": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9264440536499023
+      },
+      "dit.q2.block2": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9641256928443909
+      },
+      "dit.q2.block3": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9953646659851074
+      },
+      "dit.q2.cycle": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.9953646659851074
+      },
+      "frontend": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.16381996870040894
+      },
+      "h_hat": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6737264394760132
+      },
+      "pack": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 0.6253849267959595
+      },
+      "proposal": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 1.944605827331543
+      },
+      "unpool": {
+        "perturbation_rms": 0.0,
+        "signal_rms": 1.1890443563461304
+      }
+    }
+  }
+]

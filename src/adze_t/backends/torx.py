@@ -18,6 +18,15 @@ import jax.numpy as jnp
 import torx
 
 
+PHASE_D_NOISE_POLICY_V0 = "PHASE_D_NOISE_POLICY_V0"
+PHASE_D_DIRECT_PARAMETER_NOISE_POLICY_V0_MEAN_ONLY = (
+    "PHASE_D_DIRECT_PARAMETER_NOISE_POLICY_V0_MEAN_ONLY"
+)
+PHASE_D_INITIAL_SIGMA = 1.0e-3
+PHASE_D_SIGMA_MIN = 1.0e-6
+PHASE_D_SIGMA_MAX = 0.25
+
+
 def stable_occurrence_id(name: str) -> int:
     """Return a process-independent uint32 identity for a static module path."""
     return int.from_bytes(hashlib.blake2s(name.encode("utf-8"), digest_size=4).digest(), "little")
@@ -27,8 +36,8 @@ def stable_occurrence_id(name: str) -> int:
 class TorxOperatorConfig:
     lambda_op: float | Array = 0.0
     operator_stochasticity: bool | Array = False
-    sigma_min: float = 1.0e-6
-    sigma_max: float = 0.25
+    sigma_min: float = PHASE_D_SIGMA_MIN
+    sigma_max: float = PHASE_D_SIGMA_MAX
 
 
 @dataclass(frozen=True)
@@ -200,12 +209,28 @@ class MeanParameterFactor(torx.AbstractReferenceFactor):
         return (output, {"mean": output}) if return_aux else output
 
 
+def sigma_from_rho(
+    rho: Array,
+    *,
+    sigma_min: float = PHASE_D_SIGMA_MIN,
+    sigma_max: float = PHASE_D_SIGMA_MAX,
+) -> Array:
+    """Public Phase-D rho transform used by operators and statistical oracles."""
+    return jnp.clip(jax.nn.softplus(rho), sigma_min, sigma_max)
+
+
+def rho_from_sigma(sigma: float | Array) -> Array:
+    """Return the unconstrained rho whose unclipped softplus is ``sigma``."""
+    sigma_array = jnp.asarray(sigma, dtype=jnp.float32)
+    return jnp.log(jnp.expm1(sigma_array))
+
+
 def _exact_or_noisy(key: Array, mean: Array, rho: Array, config: TorxOperatorConfig) -> Array:
     """Trace both paths safely while preserving an exact zero-noise mean."""
     enabled = jnp.asarray(config.operator_stochasticity) & (jnp.asarray(config.lambda_op) != 0)
 
     def noisy(_: None) -> Array:
-        sigma = jnp.clip(jax.nn.softplus(rho), config.sigma_min, config.sigma_max)
+        sigma = sigma_from_rho(rho, sigma_min=config.sigma_min, sigma_max=config.sigma_max)
         return mean + jnp.asarray(config.lambda_op, mean.dtype) * sigma * jax.random.normal(
             key, mean.shape, dtype=mean.dtype
         )
@@ -215,6 +240,7 @@ def _exact_or_noisy(key: Array, mean: Array, rho: Array, config: TorxOperatorCon
 
 FactorObserver = Callable[[str, str], None]
 OccurrenceObserver = Callable[[str, str, str, Array], None]
+SampleObserver = Callable[[str, str, str, Array, Array, Array], None]
 
 
 @dataclass(frozen=True)
@@ -225,6 +251,7 @@ class TorxOps:
     config: TorxOperatorConfig = TorxOperatorConfig()
     observer: FactorObserver | None = None
     occurrence_observer: OccurrenceObserver | None = None
+    sample_observer: SampleObserver | None = None
 
     @classmethod
     def create(
@@ -236,12 +263,14 @@ class TorxOps:
         optimizer_step: int | Array = 0,
         observer: FactorObserver | None = None,
         occurrence_observer: OccurrenceObserver | None = None,
+        sample_observer: SampleObserver | None = None,
     ) -> "TorxOps":
         return cls(
             OccurrenceContext(key, evaluation_id=evaluation_id, optimizer_step=optimizer_step),
             config or TorxOperatorConfig(),
             observer,
             occurrence_observer,
+            sample_observer,
         )
 
     def _sample(self, factor: Any, inputs: Mapping[str, Any], params: Any, name: str, kind: str):
@@ -250,7 +279,18 @@ class TorxOps:
         key = self.context.key_for(name)
         if self.occurrence_observer is not None:
             self.occurrence_observer(kind, name, self.context.occurrence_path(name), key)
-        return factor.sample(key, inputs, params, self.config, return_aux=False)
+        if self.sample_observer is None:
+            return factor.sample(key, inputs, params, self.config, return_aux=False)
+        output, aux = factor.sample(key, inputs, params, self.config, return_aux=True)
+        self.sample_observer(
+            kind,
+            name,
+            self.context.occurrence_path(name),
+            key,
+            aux["mean"],
+            output,
+        )
+        return output
 
     def linear(self, x: Array, params: Any, *, name: str = "linear") -> Array:
         return self._sample(

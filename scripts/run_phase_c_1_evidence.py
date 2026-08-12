@@ -15,7 +15,7 @@ from adze_t.backends.mapping import (
     parameter_counts,
     torx_means_to_deterministic,
 )
-from adze_t.backends.torx import TorxOperatorConfig, TorxOps
+from adze_t.backends.torx import TorxOperatorConfig, TorxOps, stable_occurrence_id
 from adze_t.config import REFERENCE_SMALL_V0
 from adze_t.model import apply_model, init_model_params
 from adze_t.objectives import loss_components, total_loss
@@ -89,6 +89,17 @@ def main() -> None:
     prompt_target = selected(records, "frontend.byte_embed")
     q_projection = selected(records, "dit.block_0.q")
     modulation = selected(records, "dit.block_0.modulation")
+    identity_sources = {
+        *(f"module:{item['parameter_path']}" for item in records),
+        *(
+            f"scope:{scope}"
+            for item in records
+            for scope in item["occurrence_path"].rsplit("/", 1)[0].split("/")
+            if "/" in item["occurrence_path"]
+        ),
+    }
+    identity_ids = {source: stable_occurrence_id(source) for source in identity_sources}
+    collision_free = len(set(identity_ids.values())) == len(identity_ids)
     occurrence_evidence = {
         "base_commit": "ae19b50dce9bef04cf483314169533c0b7ef5961",
         "root_key": _key(jax.random.key(201)),
@@ -119,12 +130,15 @@ def main() -> None:
         ],
         "parameter_counts": counts,
         "factor_occurrence_count": len(records),
+        "observed_scope_module_ids": identity_ids,
+        "observed_scope_module_ids_collision_free": collision_free,
         "passed": (
             len(prompt_target) == 2
             and prompt_target[0]["derived_key"] != prompt_target[1]["derived_key"]
             and len({tuple(item["derived_key"]) for item in q_projection}) == 3
             and len({tuple(item["derived_key"]) for item in modulation}) == 3
             and records == repeated
+            and collision_free
         ),
     }
     _write("occurrence_keys.json", occurrence_evidence)
@@ -226,7 +240,7 @@ def main() -> None:
             "passed": (
                 first_divergence is None
                 and invariance_divergence is None
-                and worst_gradient["passed"]
+                and all(record["passed"] for record in gradient_records)
                 and rho_gradient_max == 0.0
             ),
         },
