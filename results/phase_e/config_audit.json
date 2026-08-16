@@ -1,0 +1,64 @@
+{
+  "aliases": {
+    "E_PARAMMATCH_Q1": "E_Q1",
+    "E_REF_DEPTHCOND": "E_REF"
+  },
+  "checks": {
+    "depth_conditioning_toggle_available": true,
+    "lambda0_finite": {
+      "E_Q1": true,
+      "E_REF": true,
+      "E_REF_NODEPTHCOND": true,
+      "E_UNSHARED12": true
+    },
+    "ref_q1_exact_parameter_match": true,
+    "ref_q1_parameter_mismatch_zero": true,
+    "unshared12_has_twelve_distinct_block_entries": true
+  },
+  "git_sha": "b10f097060cbe10b0bbed2fce87f86a830e5dae5",
+  "init_seed": 0,
+  "passed": true,
+  "rows": [
+    {
+      "config": "E_REF",
+      "cycles_Q": 3,
+      "effective_applications": 12,
+      "effective_depth_conditioning": true,
+      "parameter_count": 2268245,
+      "parameter_mismatch_fraction": 0.0,
+      "physical_blocks": 4,
+      "weight_sharing": true
+    },
+    {
+      "config": "E_Q1",
+      "cycles_Q": 1,
+      "effective_applications": 4,
+      "effective_depth_conditioning": true,
+      "parameter_count": 2268245,
+      "parameter_mismatch_fraction": 0.0,
+      "physical_blocks": 4,
+      "weight_sharing": false
+    },
+    {
+      "config": "E_UNSHARED12",
+      "cycles_Q": 1,
+      "effective_applications": 12,
+      "effective_depth_conditioning": true,
+      "parameter_count": 4380757,
+      "parameter_mismatch_fraction": 0.9313420728360473,
+      "physical_blocks": 12,
+      "weight_sharing": false
+    },
+    {
+      "config": "E_REF_NODEPTHCOND",
+      "cycles_Q": 3,
+      "effective_applications": 12,
+      "effective_depth_conditioning": false,
+      "parameter_count": 2268245,
+      "parameter_mismatch_fraction": 0.0,
+      "physical_blocks": 4,
+      "weight_sharing": true
+    }
+  ],
+  "torx_pin": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae"
+}

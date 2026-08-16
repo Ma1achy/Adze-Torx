@@ -44,6 +44,7 @@ class ModelConfig:
     mamba_state_dim: int = 16
     mamba_conv_kernel: int = 3
     residual_gate_init: float = 0.1
+    effective_depth_conditioning: bool = True
 
 
 @dataclass(frozen=True)

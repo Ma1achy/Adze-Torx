@@ -151,6 +151,9 @@ def _paired_example_statistics(
     lambda_op: float | jax.Array,
     *,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
+    dit_cycles: int | None = None,
+    depth_code_override: str = "correct",
+    suppress_cycle: int | None = None,
 ) -> dict[str, jax.Array]:
     """Evaluate one example in a root world with an explicit stable identity."""
     mask_prompt = jnp.ones_like(prompt, dtype=bool)
@@ -174,6 +177,9 @@ def _paired_example_statistics(
         config=config,
         ops=clean_ops,
         target_ops=clean_ops,
+        dit_cycles=dit_cycles,
+        depth_code_override=depth_code_override,
+        suppress_cycle=suppress_cycle,
     )
     noisy = apply_model(
         params,
@@ -184,6 +190,9 @@ def _paired_example_statistics(
         config=config,
         ops=noisy_ops,
         target_ops=clean_ops,
+        dit_cycles=dit_cycles,
+        depth_code_override=depth_code_override,
+        suppress_cycle=suppress_cycle,
     )
     teacher = noisy["target"]["teacher"]
     correct = (jnp.argmax(noisy["byte_logits"], axis=-1) == teacher.slot_bytes) & teacher.slot_mask
@@ -227,6 +236,9 @@ def paired_chunk_statistics(
     lambda_op: float | jax.Array,
     *,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
+    dit_cycles: int | None = None,
+    depth_code_override: str = "correct",
+    suppress_cycle: int | None = None,
 ) -> dict[str, jax.Array]:
     """Evaluate a chunk as independently identified B=1 stochastic executions.
 
@@ -242,6 +254,9 @@ def paired_chunk_statistics(
             sample_id,
             lambda_op,
             config=config,
+            dit_cycles=dit_cycles,
+            depth_code_override=depth_code_override,
+            suppress_cycle=suppress_cycle,
         )
     )(prompt, target, global_example_ids)
 

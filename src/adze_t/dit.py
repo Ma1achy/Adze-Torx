@@ -29,6 +29,7 @@ class DiTConfig:
     max_slots: int = 8
     max_extent: int = 4
     residual_gate_init: float = 0.1
+    effective_depth_conditioning: bool = True
 
 
 def init_dit_params(
@@ -117,7 +118,8 @@ def apply_attention(
     ops: LearnedOps,
     *,
     name: str,
-) -> jax.Array:
+    return_weights: bool = False,
+) -> Any:
     batch, positions, _ = x.shape
     q = ops.linear(x, block["q"], name=f"{name}.q").reshape(
         batch, positions, config.heads, config.head_dim
@@ -135,7 +137,8 @@ def apply_attention(
     attended = jnp.einsum("bhts,bshd->bthd", weights, v).reshape(batch, positions, -1)
     projected = ops.linear(attended, block["o"], name=f"{name}.o")
     has_kv = jnp.any(mask, axis=-1)
-    return jnp.where(has_kv[..., None], projected, 0.0)
+    output = jnp.where(has_kv[..., None], projected, 0.0)
+    return (output, weights) if return_weights else output
 
 
 def apply_physical_block(
@@ -149,19 +152,40 @@ def apply_physical_block(
     ops: LearnedOps,
     *,
     block_index: int,
-) -> jax.Array:
+    capture_aux: bool = False,
+) -> Any:
     prefix = f"dit.block_{block_index}"
     modulation = ops.linear(conditioning, block["modulation"], name=f"{prefix}.modulation")
     shift_a, scale_a, gate_a, shift_f, scale_f, gate_f = jnp.split(modulation, 6, axis=-1)
     normed = _layer_norm(x) * (1.0 + scale_a[:, None, :]) + shift_a[:, None, :]
-    x = x + gate_a[:, None, :] * apply_attention(
-        normed, block, mask, carrier_id, config, ops, name=prefix
+    attention_result = apply_attention(
+        normed, block, mask, carrier_id, config, ops, name=prefix, return_weights=capture_aux
     )
+    attention_weights = jnp.zeros((1,), dtype=x.dtype)
+    if capture_aux:
+        attention, attention_weights = attention_result
+    else:
+        attention = attention_result
+    attention_update = gate_a[:, None, :] * attention
+    x = x + attention_update
     normed = _layer_norm(x) * (1.0 + scale_f[:, None, :]) + shift_f[:, None, :]
     up = ops.linear(normed, block["up"], name=f"{prefix}.ffn_up")
     gate = jax.nn.silu(ops.linear(normed, block["gate"], name=f"{prefix}.ffn_gate"))
-    x = x + gate_f[:, None, :] * ops.linear(up * gate, block["down"], name=f"{prefix}.ffn_down")
-    return jnp.where(query_mask[..., None], x, 0.0)
+    ffn_update = gate_f[:, None, :] * ops.linear(
+        up * gate, block["down"], name=f"{prefix}.ffn_down"
+    )
+    x = x + ffn_update
+    output = jnp.where(query_mask[..., None], x, 0.0)
+    auxiliary = {
+        "attention_rms": jnp.sqrt(jnp.mean(attention_update**2)),
+        "ffn_rms": jnp.sqrt(jnp.mean(ffn_update**2)),
+        "attention_weight_rms": (
+            jnp.sqrt(jnp.mean(attention_weights**2)) if capture_aux else jnp.asarray(0.0)
+        ),
+        "attention_gate_mean": jnp.mean(gate_a),
+        "ffn_gate_mean": jnp.mean(gate_f),
+    }
+    return (output, auxiliary) if capture_aux else output
 
 
 def apply_dit_cycle(
@@ -179,13 +203,19 @@ def apply_dit_cycle(
     noise: jax.Array | float = 0.0,
     denoise_step: jax.Array | int = 0,
     refinement_step: jax.Array | int = 0,
-) -> tuple[jax.Array, jax.Array, jax.Array, jax.Array]:
+    capture_aux: bool = False,
+) -> Any:
     """Apply one tied physical stack at recurrence position ``cycle_index``."""
     ops = ops or DeterministicOps()
     block_rms = []
     block_states = []
     depths = []
+    attention_rms = []
+    ffn_rms = []
+    attention_gate_means = []
+    ffn_gate_means = []
     for block_index, block in enumerate(params["blocks"]):
+        block_aux: dict[str, jax.Array] = {}
         depth = cycle_index * config.physical_blocks + block_index
         block_ops = ops.with_occurrence(
             recurrence_cycle=cycle_index,
@@ -199,7 +229,7 @@ def apply_dit_cycle(
             0 if mode == "draft" else 1,
             denoise_step,
             refinement_step,
-            depth,
+            depth if config.effective_depth_conditioning else 0,
         )
         conditioning = jax.nn.silu(
             block_ops.linear(
@@ -208,7 +238,7 @@ def apply_dit_cycle(
                 name="dit.conditioning_trunk",
             )
         )
-        x = apply_physical_block(
+        block_result = apply_physical_block(
             x,
             block,
             conditioning,
@@ -218,11 +248,30 @@ def apply_dit_cycle(
             config,
             block_ops,
             block_index=block_index,
+            capture_aux=capture_aux,
         )
+        if capture_aux:
+            x, block_aux = block_result
+        else:
+            x = block_result
         depths.append(depth)
         block_rms.append(jnp.sqrt(jnp.mean(x**2)))
         block_states.append(x)
-    return x, jnp.stack(block_rms), jnp.asarray(depths, dtype=jnp.int32), jnp.stack(block_states)
+        if capture_aux:
+            attention_rms.append(block_aux["attention_rms"])
+            ffn_rms.append(block_aux["ffn_rms"])
+            attention_gate_means.append(block_aux["attention_gate_mean"])
+            ffn_gate_means.append(block_aux["ffn_gate_mean"])
+    result = x, jnp.stack(block_rms), jnp.asarray(depths, dtype=jnp.int32), jnp.stack(block_states)
+    auxiliary = {
+        "attention_rms": jnp.stack(attention_rms) if capture_aux else jnp.zeros((0,), x.dtype),
+        "ffn_rms": jnp.stack(ffn_rms) if capture_aux else jnp.zeros((0,), x.dtype),
+        "attention_gate_mean": (
+            jnp.stack(attention_gate_means) if capture_aux else jnp.zeros((0,), x.dtype)
+        ),
+        "ffn_gate_mean": jnp.stack(ffn_gate_means) if capture_aux else jnp.zeros((0,), x.dtype),
+    }
+    return (*result, auxiliary) if capture_aux else result
 
 
 def apply_dit(
@@ -240,6 +289,9 @@ def apply_dit(
     cycles: int | None = None,
     observed_b: jax.Array | None = None,
     observed_l: jax.Array | None = None,
+    depth_code_override: str = "correct",
+    suppress_cycle: int | None = None,
+    capture_diagnostics: bool = False,
 ) -> tuple[jax.Array, dict[str, Any]]:
     """Apply (B_L ... B_1)^Q with block parameters tied across Q."""
     ops = ops or DeterministicOps()
@@ -290,8 +342,16 @@ def apply_dit(
     block_rms = []
     depths = []
     block_states = []
+    cycle_aux = []
+    previous_x = x
     for cycle in range(cycle_count):
-        x, cycle_block_rms, cycle_depths, cycle_block_states = apply_dit_cycle(
+        block_aux: dict[str, jax.Array] = {}
+        cycle_index_for_conditioning = cycle
+        if depth_code_override == "all_q0":
+            cycle_index_for_conditioning = 0
+        elif depth_code_override == "reversed":
+            cycle_index_for_conditioning = cycle_count - 1 - cycle
+        cycle_result = apply_dit_cycle(
             x,
             params,
             prompt_global,
@@ -299,17 +359,27 @@ def apply_dit(
             safe_carrier,
             query,
             config,
-            cycle_index=cycle,
+            cycle_index=cycle_index_for_conditioning,
             ops=ops,
             mode=mode,
             noise=noise,
             denoise_step=denoise_step,
             refinement_step=refinement_step,
+            capture_aux=capture_diagnostics,
         )
+        if capture_diagnostics:
+            x, cycle_block_rms, cycle_depths, cycle_block_states, block_aux = cycle_result
+        else:
+            x, cycle_block_rms, cycle_depths, cycle_block_states = cycle_result
+        if suppress_cycle == cycle:
+            x = previous_x
         block_rms.append(cycle_block_rms)
         depths.append(cycle_depths)
         block_states.append(cycle_block_states)
         cycle_states.append(x)
+        if capture_diagnostics:
+            cycle_aux.append(block_aux)
+        previous_x = x
     x = ops.linear(x, params["output_proj"], name="dit.output_proj")
     x = jnp.where(query[..., None], x, 0.0)
     return x.reshape(batch, blocks, slots, -1), {
@@ -319,4 +389,24 @@ def apply_dit(
         "effective_depths": jnp.concatenate(depths),
         "block_rms": jnp.concatenate(block_rms),
         "cycle_rms": jnp.stack([jnp.sqrt(jnp.mean(state**2)) for state in cycle_states]),
+        "cycle_attention_rms": (
+            jnp.concatenate([item["attention_rms"] for item in cycle_aux])
+            if capture_diagnostics
+            else jnp.zeros((0,), dtype=x.dtype)
+        ),
+        "cycle_ffn_rms": (
+            jnp.concatenate([item["ffn_rms"] for item in cycle_aux])
+            if capture_diagnostics
+            else jnp.zeros((0,), dtype=x.dtype)
+        ),
+        "attention_gate_mean": (
+            jnp.concatenate([item["attention_gate_mean"] for item in cycle_aux])
+            if capture_diagnostics
+            else jnp.zeros((0,), dtype=x.dtype)
+        ),
+        "ffn_gate_mean": (
+            jnp.concatenate([item["ffn_gate_mean"] for item in cycle_aux])
+            if capture_diagnostics
+            else jnp.zeros((0,), dtype=x.dtype)
+        ),
     }

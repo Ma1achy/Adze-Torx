@@ -1,0 +1,13 @@
+{
+  "note": "Compile time is separate from steady-state timing; values are seconds and examples per second.",
+  "runs": [
+    {"task": "copy", "config": "E_REF", "compile_seconds": 61.418285, "steady_step_seconds": 1.106470, "examples_per_second": 28.920813},
+    {"task": "copy", "config": "E_Q1", "compile_seconds": 26.198568, "steady_step_seconds": 0.613249, "examples_per_second": 52.181082},
+    {"task": "copy", "config": "E_UNSHARED12", "compile_seconds": 76.282569, "steady_step_seconds": 0.972335, "examples_per_second": 32.910467},
+    {"task": "copy", "config": "E_REF_NODEPTHCOND", "compile_seconds": 57.676004, "steady_step_seconds": 1.067494, "examples_per_second": 29.976760},
+    {"task": "reverse", "config": "E_REF", "compile_seconds": 53.577344, "steady_step_seconds": 1.133598, "examples_per_second": 28.228703},
+    {"task": "reverse", "config": "E_Q1", "compile_seconds": 24.752200, "steady_step_seconds": 0.619808, "examples_per_second": 51.628862},
+    {"task": "reverse", "config": "E_UNSHARED12", "compile_seconds": 69.512119, "steady_step_seconds": 1.005444, "examples_per_second": 31.826751},
+    {"task": "reverse", "config": "E_REF_NODEPTHCOND", "compile_seconds": 160.354843, "steady_step_seconds": 1.044786, "examples_per_second": 30.628275}
+  ]
+}
