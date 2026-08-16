@@ -1,0 +1,128 @@
+{
+  "git_sha": "c358e079cd797182d3696d137b573c09f86cd0a0",
+  "seeds": {
+    "test": 922,
+    "train": 920,
+    "validation": 921
+  },
+  "spec": {
+    "chance_byte_accuracy": 0.1,
+    "chance_exact_sequence_accuracy": 1.0000000000000005e-08,
+    "max_depth": 11,
+    "n_states": 10,
+    "prompt_bytes": 120,
+    "queries": 8,
+    "target_bytes": 8
+  },
+  "split_overlap_check": true,
+  "task_version": "POINTER_V0",
+  "test": {
+    "chance_byte_accuracy": 0.1,
+    "chance_exact_sequence_accuracy": 1.0000000000000005e-08,
+    "checks": {
+      "all_depths_present": true,
+      "oracle_matches_target": true,
+      "permutations_valid": true,
+      "prompt_width_constant": true,
+      "target_bytes_in_state_space": true,
+      "target_width_constant": true,
+      "version": "POINTER_V0"
+    },
+    "count": 4096,
+    "depth_counts": [
+      0,
+      385,
+      366,
+      367,
+      378,
+      368,
+      393,
+      337,
+      381,
+      362,
+      360,
+      399
+    ],
+    "max_depth": 11,
+    "n_states": 10,
+    "prompt_bytes": 120,
+    "queries": 8,
+    "seed": 922,
+    "split": "test",
+    "target_bytes": 8,
+    "version": "POINTER_V0"
+  },
+  "torx_pin": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+  "train": {
+    "chance_byte_accuracy": 0.1,
+    "chance_exact_sequence_accuracy": 1.0000000000000005e-08,
+    "checks": {
+      "all_depths_present": true,
+      "oracle_matches_target": true,
+      "permutations_valid": true,
+      "prompt_width_constant": true,
+      "target_bytes_in_state_space": true,
+      "target_width_constant": true,
+      "version": "POINTER_V0"
+    },
+    "count": 65536,
+    "depth_counts": [
+      0,
+      5694,
+      6004,
+      5920,
+      5897,
+      5981,
+      5949,
+      5996,
+      6078,
+      6062,
+      6012,
+      5943
+    ],
+    "max_depth": 11,
+    "n_states": 10,
+    "prompt_bytes": 120,
+    "queries": 8,
+    "seed": 920,
+    "split": "train",
+    "target_bytes": 8,
+    "version": "POINTER_V0"
+  },
+  "validation": {
+    "chance_byte_accuracy": 0.1,
+    "chance_exact_sequence_accuracy": 1.0000000000000005e-08,
+    "checks": {
+      "all_depths_present": true,
+      "oracle_matches_target": true,
+      "permutations_valid": true,
+      "prompt_width_constant": true,
+      "target_bytes_in_state_space": true,
+      "target_width_constant": true,
+      "version": "POINTER_V0"
+    },
+    "count": 4096,
+    "depth_counts": [
+      0,
+      381,
+      351,
+      387,
+      341,
+      366,
+      395,
+      357,
+      386,
+      389,
+      382,
+      361
+    ],
+    "max_depth": 11,
+    "n_states": 10,
+    "prompt_bytes": 120,
+    "queries": 8,
+    "seed": 921,
+    "split": "validation",
+    "target_bytes": 8,
+    "version": "POINTER_V0"
+  }
+}

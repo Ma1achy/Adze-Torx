@@ -39,7 +39,8 @@ def _stage_values(outputs: dict[str, Any], config: ReferenceConfig) -> tuple[Any
     ]
     block_trajectory = outputs["dit_aux"]["block_trajectory"]
     cycle_trajectory = outputs["dit_aux"]["trajectory"]
-    for cycle in range(config.model.cycles_Q):
+    cycle_count = int(cycle_trajectory.shape[0])
+    for cycle in range(cycle_count):
         offset = cycle * config.model.physical_blocks_L
         stages.extend(
             block_trajectory[offset + layer] for layer in range(config.model.physical_blocks_L)
@@ -154,6 +155,7 @@ def _paired_example_statistics(
     dit_cycles: int | None = None,
     depth_code_override: str = "correct",
     suppress_cycle: int | None = None,
+    shuffle_cycle: int | None = None,
 ) -> dict[str, jax.Array]:
     """Evaluate one example in a root world with an explicit stable identity."""
     mask_prompt = jnp.ones_like(prompt, dtype=bool)
@@ -180,6 +182,7 @@ def _paired_example_statistics(
         dit_cycles=dit_cycles,
         depth_code_override=depth_code_override,
         suppress_cycle=suppress_cycle,
+        shuffle_cycle=shuffle_cycle,
     )
     noisy = apply_model(
         params,
@@ -239,6 +242,7 @@ def paired_chunk_statistics(
     dit_cycles: int | None = None,
     depth_code_override: str = "correct",
     suppress_cycle: int | None = None,
+    shuffle_cycle: int | None = None,
 ) -> dict[str, jax.Array]:
     """Evaluate a chunk as independently identified B=1 stochastic executions.
 
@@ -257,6 +261,7 @@ def paired_chunk_statistics(
             dit_cycles=dit_cycles,
             depth_code_override=depth_code_override,
             suppress_cycle=suppress_cycle,
+            shuffle_cycle=shuffle_cycle,
         )
     )(prompt, target, global_example_ids)
 

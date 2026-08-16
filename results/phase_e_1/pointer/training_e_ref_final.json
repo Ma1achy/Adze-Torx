@@ -1,0 +1,9 @@
+{
+  "checkpoint": "results/runs/phase_e_1/pointer/E_REF/init0_stoch0.pkl",
+  "checkpoint_sha256": "fc3d72e2f43ce56756d4b48554c726c31bbb59a32b7546514d2b3d10e4d90b40",
+  "config": "E_REF",
+  "init_seed": 0,
+  "optimizer_step": 500,
+  "stochastic_training_seed": 0,
+  "wall_clock_seconds": 1887.3459780830308
+}

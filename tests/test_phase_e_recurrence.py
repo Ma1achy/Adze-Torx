@@ -42,6 +42,18 @@ def test_phase_e_q_execution_and_cycle_capture_shapes():
         assert aux["effective_depths"].tolist() == list(range(q * 2))
 
 
+def test_phase_e_q_zero_is_a_finite_diagnostic_bypass():
+    cfg, params, metadata, packed, context = _inputs()
+    output, aux = apply_dit(
+        packed, metadata, context, params, cfg, cycles=0, capture_diagnostics=True
+    )
+    assert output.shape == packed.shape
+    assert aux["trajectory"].shape == (0, 1, 4, 8)
+    assert aux["block_trajectory"].shape == (0, 1, 4, 8)
+    assert aux["effective_depths"].shape == (0,)
+    assert jnp.all(jnp.isfinite(output))
+
+
 def test_phase_e_depth_toggle_and_intervention_paths_are_finite():
     cfg, params, metadata, packed, context = _inputs()
     no_depth = replace(cfg, effective_depth_conditioning=False)

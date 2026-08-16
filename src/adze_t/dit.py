@@ -291,6 +291,7 @@ def apply_dit(
     observed_l: jax.Array | None = None,
     depth_code_override: str = "correct",
     suppress_cycle: int | None = None,
+    shuffle_cycle: int | None = None,
     capture_diagnostics: bool = False,
 ) -> tuple[jax.Array, dict[str, Any]]:
     """Apply (B_L ... B_1)^Q with block parameters tied across Q."""
@@ -373,6 +374,8 @@ def apply_dit(
             x, cycle_block_rms, cycle_depths, cycle_block_states = cycle_result
         if suppress_cycle == cycle:
             x = previous_x
+        if shuffle_cycle == cycle:
+            x = jnp.roll(x, shift=1, axis=0)
         block_rms.append(cycle_block_rms)
         depths.append(cycle_depths)
         block_states.append(cycle_block_states)
@@ -382,31 +385,39 @@ def apply_dit(
         previous_x = x
     x = ops.linear(x, params["output_proj"], name="dit.output_proj")
     x = jnp.where(query[..., None], x, 0.0)
+    empty_cycle = jnp.zeros((0, batch, positions, config.d_model), dtype=x.dtype)
+    empty_blocks = jnp.zeros((0, batch, positions, config.d_model), dtype=x.dtype)
+    empty_depths = jnp.zeros((0,), dtype=jnp.int32)
+    empty_rms = jnp.zeros((0,), dtype=x.dtype)
     return x.reshape(batch, blocks, slots, -1), {
-        "trajectory": jnp.stack(cycle_states),
-        "block_trajectory": jnp.concatenate(block_states, axis=0),
+        "trajectory": jnp.stack(cycle_states) if cycle_states else empty_cycle,
+        "block_trajectory": jnp.concatenate(block_states, axis=0) if block_states else empty_blocks,
         "mask": mask,
-        "effective_depths": jnp.concatenate(depths),
-        "block_rms": jnp.concatenate(block_rms),
-        "cycle_rms": jnp.stack([jnp.sqrt(jnp.mean(state**2)) for state in cycle_states]),
+        "effective_depths": jnp.concatenate(depths) if depths else empty_depths,
+        "block_rms": jnp.concatenate(block_rms) if block_rms else empty_rms,
+        "cycle_rms": (
+            jnp.stack([jnp.sqrt(jnp.mean(state**2)) for state in cycle_states])
+            if cycle_states
+            else empty_rms
+        ),
         "cycle_attention_rms": (
             jnp.concatenate([item["attention_rms"] for item in cycle_aux])
-            if capture_diagnostics
+            if capture_diagnostics and cycle_aux
             else jnp.zeros((0,), dtype=x.dtype)
         ),
         "cycle_ffn_rms": (
             jnp.concatenate([item["ffn_rms"] for item in cycle_aux])
-            if capture_diagnostics
+            if capture_diagnostics and cycle_aux
             else jnp.zeros((0,), dtype=x.dtype)
         ),
         "attention_gate_mean": (
             jnp.concatenate([item["attention_gate_mean"] for item in cycle_aux])
-            if capture_diagnostics
+            if capture_diagnostics and cycle_aux
             else jnp.zeros((0,), dtype=x.dtype)
         ),
         "ffn_gate_mean": (
             jnp.concatenate([item["ffn_gate_mean"] for item in cycle_aux])
-            if capture_diagnostics
+            if capture_diagnostics and cycle_aux
             else jnp.zeros((0,), dtype=x.dtype)
         ),
     }

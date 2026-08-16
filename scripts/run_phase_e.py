@@ -193,6 +193,7 @@ def evaluate(
     dit_cycles: int | None = None,
     depth_code_override: str = "correct",
     suppress_cycle: int | None = None,
+    global_ids: jax.Array | None = None,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     call = jax.jit(
         paired_chunk_statistics,
@@ -206,7 +207,11 @@ def evaluate(
                 prompt[start : start + BATCH],
                 target[start : start + BATCH],
                 phase_d_root(base, index),
-                jnp.arange(start, min(start + BATCH, len(prompt)), dtype=jnp.uint32),
+                (
+                    jnp.arange(start, min(start + BATCH, len(prompt)), dtype=jnp.uint32)
+                    if global_ids is None
+                    else global_ids[start : min(start + BATCH, len(prompt))]
+                ),
                 jnp.asarray(lambda_op, jnp.float32),
                 config=config,
                 dit_cycles=dit_cycles,
