@@ -4,6 +4,7 @@ import jax.numpy as jnp
 from adze_t.phase_e_1_fixed_transition import (
     FIXED_TRANSITION_V0,
     audit_fixed_transition_dataset,
+    balanced_transition_indices,
     bytes_to_little_endian_bits,
     fixed_transition_example_hashes,
     fixed_transition_oracle,
@@ -86,6 +87,12 @@ def test_fixed_transition_dataset_is_balanced_reproducible_and_task_relevant():
         jnp.asarray([jnp.sum(depths == depth) for depth in FIXED_TRANSITION_V0.depths]) == 128
     )
     assert jnp.array_equal(target, iterate_rule30(prompt[:, 2:], depths))
+    selected = balanced_transition_indices(depths, 64)
+    assert selected.shape == (512,)
+    assert jnp.all(
+        jnp.asarray([jnp.sum(depths[selected] == depth) for depth in FIXED_TRANSITION_V0.depths])
+        == 64
+    )
 
 
 def test_fixed_transition_splits_have_no_complete_example_overlap():

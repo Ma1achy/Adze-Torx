@@ -41,6 +41,24 @@ class FixedTransitionSpec:
 FIXED_TRANSITION_V0 = FixedTransitionSpec()
 
 
+def balanced_transition_indices(
+    depths: jax.Array,
+    per_depth: int,
+    *,
+    spec: FixedTransitionSpec = FIXED_TRANSITION_V0,
+) -> jax.Array:
+    """Select the first deterministic examples from each transition-depth bucket."""
+    if depths.ndim != 1 or per_depth < 1:
+        raise ValueError("depths must be one-dimensional and per_depth must be positive")
+    selected = []
+    for depth in spec.depths:
+        indices = jnp.flatnonzero(depths == depth, size=per_depth, fill_value=-1)
+        if bool(jnp.any(indices < 0)):
+            raise ValueError(f"depth {depth} has fewer than {per_depth} examples")
+        selected.append(indices)
+    return jnp.concatenate(selected).astype(jnp.int32)
+
+
 def bytes_to_little_endian_bits(states: jax.Array) -> jax.Array:
     """Expand `[batch, 8]` bytes to bit positions 0..63, LSB first per byte."""
     if states.ndim != 2 or states.shape[1] != FIXED_TRANSITION_V0.state_bytes:
