@@ -1,8 +1,7 @@
 # Phase E.1 — Controlled Computational Depth × Q
 
-Status: **incomplete / unresolved**. The implementation and generator audits
-are complete, but the calibration evaluator did not finish within the available
-runtime window. No recurrence conclusion is drawn.
+Status: Phase E.1A calibration complete; **POINTER_V0_TOO_HARD**. No
+recurrence conclusion is drawn.
 
 ## Implemented
 
@@ -15,14 +14,28 @@ runtime window. No recurrence conclusion is drawn.
 - Depth-conditioned paired Q evaluation, final-answer/intermediate frozen probe
   support, recurrent suppression, state shuffling, and depth-bucket reporting.
 
-## Calibration progress
+## Phase E.1A calibration
 
-- `P_REF`, seed `(0,0)`, reached step 500 with finite loss `2.35130`.
-- `P_Q1`, seed `(0,0)`, reached step 100 with finite loss `2.58916`.
-- Evaluation artifacts from the first implementation contained an invalid
-  NaN bucket aggregation and are not scientific evidence; masked aggregation
-  was corrected before the final calibration rerun.
-- No valid Q=0/Q=1 localization table, final MC evaluation, intervention
-  table, replication, or VM result is recorded yet.
+The infrastructure commit `c638e95` recorded an interim unresolved status
+because its calibration run had not completed. E.1A resumed the durable
+checkpoints and preserves that status as historical, non-final context.
 
-The resumable working checkpoints remain ignored under `results/runs/phase_e_1`.
+- Both `P_Q1` and `P_REF`, seed `(0,0)`, resumed from durable checkpoints and
+  completed 5000 steps on the deterministic 16,384-example subset.
+- On the balanced 704-example validation set, `P_Q1` Q1 accuracy was 10.80%.
+  `P_REF` Q0/Q1/Q2/Q3 accuracy was 10.80%/10.51%/10.78%/10.78%. All exact
+  accuracies were zero and all logit nonfinite rates were zero.
+- Q2/Q3 NLL approached `ln(10)` without above-chance accuracy. This is
+  valid-output support/marginal learning, not pointer-state prediction.
+- Fresh P_REF diagnostics memorized 1 example by step 25, 8 examples by step
+  250, and a balanced 264-example set by step 1000 (98.96% byte, 93.56%
+  exact). The model/path can fit pointer targets, but did not generalize from
+  the calibration corpus by 5k.
+- The calibration diagnosis is `POINTER_V0_TOO_HARD`. The apparent Q-dependent
+  NLL improvement is only DiT output-distribution localization because pointer
+  accuracy remains at chance.
+
+Full evidence is in `pointer/CALIBRATION.md`, `pointer/calibration.json`, and
+the referenced JSONL/final-evaluation files. No MC, probes, VM, unshared
+controls, or expensive interventions were run. The resumable working
+checkpoints remain ignored under `results/runs/phase_e_1`.

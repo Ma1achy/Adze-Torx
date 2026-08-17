@@ -1,13 +1,18 @@
 # Phase E.1 decision
 
-Decision: **PHASE_E_1_DIFFICULTY_Q_UNRESOLVED**.
+Phase E.1A benchmark diagnosis: **POINTER_V0_TOO_HARD**.
 
-The task generator, Q=0 localization path, paired depth/Q evaluator, and
-diagnostic hooks are implemented and targeted tests pass. Runtime prevented
-completion of the required valid calibration and final evidence ladder.
+No final Phase E.1 scientific decision is issued by this calibration stage.
+The earlier `PHASE_E_1_DIFFICULTY_Q_UNRESOLVED` entry was an interim runtime
+status, not a completed milestone result.
 
-This result must not be interpreted as Q neutrality, support, or negativity.
-The next run should resume the saved checkpoints, complete the corrected
-chunked calibration, enforce both output and computation-localization gates,
-and only then proceed to final training or the predeclared register-machine
-fallback.
+Historical record from infrastructure commit `c638e95`: calibration had not
+completed within that session's runtime window, so the working status was
+`PHASE_E_1_DIFFICULTY_Q_UNRESOLVED`. Phase E.1A resumed those durable
+checkpoints; it did not amend, squash, or discard that commit.
+
+Both calibration models remained at chance through 5000 steps, while fresh
+P_REF diagnostics strongly overfit fixed sets of 1, 8, and 264 examples.
+POINTER_V0 therefore failed the held-out learnability gate under the approved
+calibration regime. This must not be interpreted as Q neutrality, support, or
+negativity. An authoritative Phase E.1 run was not started.

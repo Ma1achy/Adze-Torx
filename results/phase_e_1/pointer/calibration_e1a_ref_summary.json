@@ -1,0 +1,8 @@
+{
+  "calibration_curve": "results/phase_e_1/pointer/calibration_e1a_ref.jsonl",
+  "checkpoint": "results/runs/phase_e_1/pointer/E_REF/init0_stoch0.pkl",
+  "checkpoint_sha256": "bcd5afae8fe60ba382dbfa40c54f5bc4b3de70a1a901c584d9339c35e4df47b1",
+  "config": "E_REF",
+  "optimizer_step": 5000,
+  "wall_clock_seconds_this_run": 10158.390916667006
+}

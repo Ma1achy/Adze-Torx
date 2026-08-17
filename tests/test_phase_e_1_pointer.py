@@ -3,6 +3,7 @@ import jax.numpy as jnp
 from adze_t.phase_e_1_pointer import (
     POINTER_V0,
     audit_pointer_dataset,
+    balanced_depth_indices,
     generate_pointer_dataset,
     pointer_intermediate_states,
     pointer_oracle,
@@ -37,3 +38,14 @@ def test_pointer_spec_reports_chance_baselines():
     assert POINTER_V0.target_bytes == 8
     assert POINTER_V0.target_bytes == POINTER_V0.queries
     assert POINTER_V0.n_states == 10
+
+
+def test_balanced_depth_selection_is_deterministic():
+    prompt, target, depths, _ = generate_pointer_dataset(4_096, 921)
+    first = balanced_depth_indices(depths, 64)
+    second = balanced_depth_indices(depths, 64)
+    assert jnp.array_equal(first, second)
+    assert first.shape == (704,)
+    assert jnp.all(jnp.bincount(depths[first], length=12)[1:] == 64)
+    assert prompt[first].shape == (704, 120)
+    assert target[first].shape == (704, 8)

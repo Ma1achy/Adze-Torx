@@ -25,6 +25,7 @@ from adze_t.objectives import adamw_init
 from adze_t.phase_e_1_pointer import (
     POINTER_V0,
     audit_pointer_dataset,
+    balanced_depth_indices,
     generate_pointer_dataset,
     pointer_intermediate_states,
 )
@@ -38,9 +39,14 @@ WORK = ROOT / "results" / "runs" / "phase_e_1"
 DATA_SEEDS = {"train": 920, "validation": 921, "test": 922}
 TRAIN_COUNT = 65_536
 EVAL_COUNT = 4_096
-CALIBRATION_COUNT = 256
+CALIBRATION_TRAIN_COUNT = 16_384
+CALIBRATION_PER_DEPTH = 64
+CALIBRATION_COUNT = POINTER_V0.max_depth * CALIBRATION_PER_DEPTH
 MC_ROOTS_FINAL = 32
 CHECKPOINTS_E1 = (100, 250, 500, 1_000, 2_000, 5_000, 10_000, 20_000, 40_000, 60_000)
+CHECKPOINTS_E1A = (100, 250, 500, 1_000, 2_000, 5_000)
+OVERFIT_CHECKPOINTS = (1, 10, 25, 50, 100, 250, 500, 1_000, 2_000)
+OVERFIT_CAPS = {"one": 500, "few": 1_000, "small": 2_000}
 
 
 def serialise(value: Any) -> Any:
@@ -85,6 +91,13 @@ def dataset(split: str, count: int) -> tuple[jax.Array, jax.Array, jax.Array, di
     return prompt, target, depths, {"split": split, **audit}
 
 
+def calibration_validation() -> tuple[jax.Array, jax.Array, jax.Array, jax.Array]:
+    """Return the frozen balanced 64-example-per-depth validation subset."""
+    prompt, target, depths, _ = dataset("validation", EVAL_COUNT)
+    ids = balanced_depth_indices(depths, CALIBRATION_PER_DEPTH)
+    return prompt[ids], target[ids], depths[ids], ids.astype(jnp.uint32)
+
+
 def dataset_audit() -> None:
     payload: dict[str, Any] = {
         "git_sha": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
@@ -115,6 +128,111 @@ def dataset_audit() -> None:
         not jnp.any(jnp.all(train_prompt[:, None, :] == valid_prompt[None, :, :], axis=-1))
     )
     write(EVIDENCE / "pointer" / "dataset_audit.json", payload)
+
+
+def _lambda_zero_example_stats(
+    params: Any,
+    prompt: jax.Array,
+    target: jax.Array,
+    ids: jax.Array,
+    root: jax.Array,
+    config: Any,
+    cycles: int,
+) -> dict[str, jax.Array]:
+    """Single-pass deterministic metrics for cheap calibration."""
+
+    def one(sample_prompt: jax.Array, sample_target: jax.Array, example_id: jax.Array):
+        ops = TorxOps.create(
+            root,
+            config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
+            global_example_id=example_id,
+        )
+        output = apply_model(
+            params,
+            sample_prompt[None, :],
+            jnp.ones_like(sample_prompt[None, :], bool),
+            sample_target[None, :],
+            jnp.ones_like(sample_target[None, :], bool),
+            config=config,
+            ops=ops,
+            target_ops=ops,
+            dit_cycles=cycles,
+        )
+        teacher = output["target"]["teacher"]
+        mask = teacher.slot_mask
+        predicted = jnp.argmax(output["byte_logits"], axis=-1)
+        correct = (predicted == teacher.slot_bytes) & mask
+        log_probs = jax.nn.log_softmax(output["byte_logits"], axis=-1)
+        selected = jnp.take_along_axis(log_probs, teacher.slot_bytes[..., None], axis=-1)[..., 0]
+        count = jnp.maximum(jnp.sum(mask), 1)
+        return {
+            "byte_accuracy": jnp.sum(correct) / count,
+            "exact_accuracy": jnp.all(correct | ~mask),
+            "byte_nll": -jnp.sum(jnp.where(mask, selected, 0.0)) / count,
+            "logit_nonfinite_rate": jnp.mean(~jnp.isfinite(output["byte_logits"])),
+        }
+
+    return jax.vmap(one)(prompt, target, ids)
+
+
+def calibration_depth_evaluation(
+    params: Any,
+    config: Any,
+    prompt: jax.Array,
+    target: jax.Array,
+    depths: jax.Array,
+    ids: jax.Array,
+    *,
+    cycles: tuple[int, ...],
+) -> dict[str, Any]:
+    """Evaluate only the predeclared lambda-zero calibration curves."""
+    call = jax.jit(_lambda_zero_example_stats, static_argnames=("config", "cycles"))
+    root = phase_d_root(9410, 0)
+    values: dict[int, dict[str, jax.Array]] = {}
+    for q in cycles:
+        chunks = [
+            call(
+                params,
+                prompt[start : start + BATCH],
+                target[start : start + BATCH],
+                ids[start : start + BATCH],
+                root,
+                config=config,
+                cycles=q,
+            )
+            for start in range(0, len(prompt), BATCH)
+        ]
+        values[q] = {key: jnp.concatenate([chunk[key] for chunk in chunks]) for key in chunks[0]}
+    rows = []
+    for depth in range(1, POINTER_V0.max_depth + 1):
+        mask = depths == depth
+        row: dict[str, Any] = {"depth": depth, "count": int(jnp.sum(mask))}
+        for q in cycles:
+            for metric in (
+                "byte_accuracy",
+                "exact_accuracy",
+                "byte_nll",
+                "logit_nonfinite_rate",
+            ):
+                row[f"q{q}_{metric}"] = jnp.mean(values[q][metric][mask])
+        rows.append(row)
+    return {
+        "lambda_op": 0.0,
+        "examples": len(prompt),
+        "per_depth_count": CALIBRATION_PER_DEPTH,
+        "cycles": list(cycles),
+        "per_depth": rows,
+        "overall": {
+            f"q{q}_{metric}": jnp.mean(values[q][metric])
+            for q in cycles
+            for metric in (
+                "byte_accuracy",
+                "exact_accuracy",
+                "byte_nll",
+                "logit_nonfinite_rate",
+            )
+        },
+    }
 
 
 def _example_stats(
@@ -218,6 +336,309 @@ def paired_depth_evaluation(
         "paired_benefit_by_example": benefits,
         "linear_trend_slope": trend,
     }
+
+
+def _recorded_steps(path: Path) -> set[int]:
+    if not path.exists():
+        return set()
+    return {int(json.loads(line)["step"]) for line in path.read_text().splitlines() if line.strip()}
+
+
+def calibrate(
+    name: str,
+    *,
+    init_seed: int,
+    stochastic_training_seed: int,
+    max_steps: int,
+) -> dict[str, Any]:
+    """Run the runtime-bounded E.1A calibration using existing checkpoints."""
+    if max_steps > 5_000:
+        raise ValueError("Phase E.1A calibration may not exceed 5,000 steps")
+    config = configs()[name]
+    state_path = WORK / f"pointer/{name}/init{init_seed}_stoch{stochastic_training_seed}.pkl"
+    short_name = "ref" if name == "E_REF" else "q1"
+    curve_path = EVIDENCE / "pointer" / f"calibration_e1a_{short_name}.jsonl"
+    progress_path = (
+        WORK / f"pointer/{name}/init{init_seed}_stoch{stochastic_training_seed}.progress.json"
+    )
+    train_prompt, train_target, _, _ = dataset("train", CALIBRATION_TRAIN_COUNT)
+    valid_prompt, valid_target, valid_depths, valid_ids = calibration_validation()
+    if state_path.exists():
+        state = load(state_path)
+        params, moments, start = state["params"], state["moments"], int(state["step"])
+    else:
+        params = initialise(config, init_seed)
+        zero = adamw_init(params)
+        moments, start = (zero, zero), 0
+    if start > max_steps:
+        raise ValueError(
+            f"checkpoint step {start} is beyond requested calibration step {max_steps}"
+        )
+    update = jax.jit(stochastic_train_step, static_argnames=("config",))
+    training_root = jax.random.fold_in(
+        jax.random.PRNGKey(stochastic_training_seed),
+        stable_occurrence_id(f"phase_e_1:pointer:{name}"),
+    )
+    cycles = (0, 1, 2, 3) if name == "E_REF" else (1,)
+    recorded = _recorded_steps(curve_path)
+    started = time.monotonic()
+
+    def record(step: int, train_metrics: Any | None, resumed: bool) -> None:
+        nonlocal recorded
+        if step in recorded:
+            return
+        evaluation_started = time.monotonic()
+        evaluation = calibration_depth_evaluation(
+            params,
+            config,
+            valid_prompt,
+            valid_target,
+            valid_depths,
+            valid_ids,
+            cycles=cycles,
+        )
+        jax.block_until_ready(evaluation["overall"][f"q{cycles[-1]}_byte_nll"])
+        append(
+            curve_path,
+            {
+                "git_sha": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+                "stage": "PHASE_E_1A_RUNTIME_EFFICIENT_POINTER_CALIBRATION",
+                "task_version": POINTER_V0.name,
+                "config": name,
+                "init_seed": init_seed,
+                "stochastic_training_seed": stochastic_training_seed,
+                "step": step,
+                "resumed_existing_checkpoint": resumed,
+                "training_subset": {
+                    "selection": "first deterministic examples from POINTER_V0 seed 920",
+                    "count": CALIBRATION_TRAIN_COUNT,
+                    "reason": (
+                        "maximum approved calibration subset preserves the usable pre-existing "
+                        "P_REF step-500 checkpoint, which consumed the first 16,000 examples"
+                    ),
+                },
+                "validation_subset": {
+                    "selection": "first 64 examples in each depth bucket from seed 921",
+                    "count": CALIBRATION_COUNT,
+                    "global_example_ids": valid_ids,
+                },
+                "train": train_metrics,
+                "lambda_zero": evaluation,
+                "evaluation_seconds": time.monotonic() - evaluation_started,
+                "elapsed_seconds_this_run": time.monotonic() - started,
+            },
+        )
+        save(state_path, {"params": params, "moments": moments, "step": step})
+        recorded.add(step)
+        print(f"pointer calibration {name} step={step}", flush=True)
+
+    if start in CHECKPOINTS_E1A:
+        record(start, None, True)
+    for step in range(start + 1, max_steps + 1):
+        offset = ((step - 1) * BATCH) % CALIBRATION_TRAIN_COUNT
+        batch = make_fixed_structure_batch(
+            train_prompt[offset : offset + BATCH],
+            train_target[offset : offset + BATCH],
+            config=config,
+        )
+        params, moments, metrics = update(
+            params, moments, step, batch, training_root, config=config
+        )
+        jax.block_until_ready(metrics["loss"])
+        if step in CHECKPOINTS_E1A:
+            record(step, metrics, False)
+        elif step % 100 == 0:
+            save(state_path, {"params": params, "moments": moments, "step": step})
+            write(
+                progress_path,
+                {
+                    "config": name,
+                    "step": step,
+                    "loss": metrics["loss"],
+                    "elapsed_seconds_this_run": time.monotonic() - started,
+                },
+            )
+    result = {
+        "config": name,
+        "optimizer_step": max_steps,
+        "checkpoint": str(state_path.relative_to(ROOT)),
+        "checkpoint_sha256": sha256(state_path),
+        "calibration_curve": str(curve_path.relative_to(ROOT)),
+        "wall_clock_seconds_this_run": time.monotonic() - started,
+    }
+    write(EVIDENCE / "pointer" / f"calibration_e1a_{short_name}_summary.json", result)
+    return result
+
+
+def _overfit_examples(case: str) -> tuple[jax.Array, jax.Array, jax.Array, jax.Array]:
+    """Select deterministic fixed examples without changing POINTER_V0."""
+    prompt, target, depths, _ = dataset("train", CALIBRATION_TRAIN_COUNT)
+    if case == "one":
+        selected = balanced_depth_indices(depths, 1)[5:6]
+    elif case == "few":
+        first_by_depth = balanced_depth_indices(depths, 1)
+        selected = first_by_depth[jnp.asarray((0, 1, 3, 5, 7, 8, 9, 10))]
+    elif case == "small":
+        selected = balanced_depth_indices(depths, 24)
+    else:
+        raise ValueError(f"unknown overfit case: {case}")
+    return prompt[selected], target[selected], depths[selected], selected.astype(jnp.uint32)
+
+
+def _overfit_evaluation(
+    params: Any,
+    config: Any,
+    prompt: jax.Array,
+    target: jax.Array,
+    ids: jax.Array,
+) -> dict[str, Any]:
+    call = jax.jit(_lambda_zero_example_stats, static_argnames=("config", "cycles"))
+    root = phase_d_root(9420, 0)
+    chunks = [
+        call(
+            params,
+            prompt[start : start + BATCH],
+            target[start : start + BATCH],
+            ids[start : start + BATCH],
+            root,
+            config=config,
+            cycles=3,
+        )
+        for start in range(0, len(prompt), BATCH)
+    ]
+    values = {key: jnp.concatenate([chunk[key] for chunk in chunks]) for key in chunks[0]}
+    return {key: jnp.mean(value) for key, value in values.items()}
+
+
+def overfit_diagnostic(
+    case: str,
+    *,
+    init_seed: int,
+    stochastic_training_seed: int,
+) -> dict[str, Any]:
+    """Test whether faithful P_REF can memorize a fixed tiny pointer corpus."""
+    config = configs()["E_REF"]
+    cap = OVERFIT_CAPS[case]
+    state_path = (
+        WORK / f"pointer/overfit_{case}/init{init_seed}_stoch{stochastic_training_seed}.pkl"
+    )
+    curve_path = EVIDENCE / "pointer" / f"overfit_{case}.jsonl"
+    prompt, target, depths, ids = _overfit_examples(case)
+    if state_path.exists():
+        state = load(state_path)
+        params, moments, start = state["params"], state["moments"], int(state["step"])
+    else:
+        params = initialise(config, init_seed)
+        zero = adamw_init(params)
+        moments, start = (zero, zero), 0
+    update = jax.jit(stochastic_train_step, static_argnames=("config",))
+    training_root = jax.random.fold_in(
+        jax.random.PRNGKey(stochastic_training_seed),
+        stable_occurrence_id(f"phase_e_1:pointer:overfit:{case}"),
+    )
+    recorded = _recorded_steps(curve_path)
+    started = time.monotonic()
+    prior_rows = (
+        [json.loads(line) for line in curve_path.read_text().splitlines() if line.strip()]
+        if curve_path.exists()
+        else []
+    )
+    final_evaluation: dict[str, Any] | None = (
+        prior_rows[-1]["lambda_zero_q3"] if prior_rows else None
+    )
+    memorized = bool(
+        final_evaluation is not None
+        and final_evaluation["byte_accuracy"] >= 0.95
+        and final_evaluation["byte_nll"] <= 0.25
+    )
+    final_step = start
+    stop = start if memorized else cap
+    for step in range(start + 1, stop + 1):
+        final_step = step
+        indices = jnp.arange((step - 1) * BATCH, step * BATCH) % len(prompt)
+        batch = make_fixed_structure_batch(prompt[indices], target[indices], config=config)
+        params, moments, metrics = update(
+            params, moments, step, batch, training_root, config=config
+        )
+        jax.block_until_ready(metrics["loss"])
+        if step in OVERFIT_CHECKPOINTS and step not in recorded:
+            evaluation = _overfit_evaluation(params, config, prompt, target, ids)
+            jax.block_until_ready(evaluation["byte_nll"])
+            append(
+                curve_path,
+                {
+                    "git_sha": subprocess.check_output(
+                        ["git", "rev-parse", "HEAD"], text=True
+                    ).strip(),
+                    "stage": "PHASE_E_1A_POINTER_OVERFIT_DIAGNOSTIC",
+                    "task_version": POINTER_V0.name,
+                    "case": case,
+                    "examples": len(prompt),
+                    "depth_counts": jnp.bincount(depths, length=12),
+                    "selection_global_example_ids": ids,
+                    "step": step,
+                    "train": metrics,
+                    "lambda_zero_q3": evaluation,
+                    "elapsed_seconds_this_run": time.monotonic() - started,
+                },
+            )
+            final_evaluation = evaluation
+            recorded.add(step)
+            memorized = bool(evaluation["byte_accuracy"] >= 0.95 and evaluation["byte_nll"] <= 0.25)
+            save(state_path, {"params": params, "moments": moments, "step": step})
+            print(f"pointer overfit {case} step={step} memorized={memorized}", flush=True)
+            if memorized:
+                break
+        elif step % 100 == 0:
+            save(state_path, {"params": params, "moments": moments, "step": step})
+    result = {
+        "case": case,
+        "examples": len(prompt),
+        "cap": cap,
+        "optimizer_step": final_step,
+        "memorized": memorized,
+        "criterion": {"byte_accuracy_at_least": 0.95, "byte_nll_at_most": 0.25},
+        "final_lambda_zero_q3": final_evaluation,
+        "checkpoint": str(state_path.relative_to(ROOT)),
+        "wall_clock_seconds_this_run": time.monotonic() - started,
+    }
+    write(EVIDENCE / "pointer" / f"overfit_{case}_summary.json", result)
+    return result
+
+
+def refresh_calibration_evaluation(
+    name: str,
+    *,
+    init_seed: int,
+    stochastic_training_seed: int,
+) -> dict[str, Any]:
+    """Re-evaluate a completed 5k checkpoint without resuming training."""
+    config = configs()[name]
+    state_path = WORK / f"pointer/{name}/init{init_seed}_stoch{stochastic_training_seed}.pkl"
+    state = load(state_path)
+    if int(state["step"]) != 5_000:
+        raise ValueError(f"expected completed step-5000 checkpoint, got {state['step']}")
+    prompt, target, depths, ids = calibration_validation()
+    cycles = (0, 1, 2, 3) if name == "E_REF" else (1,)
+    started = time.monotonic()
+    evaluation = calibration_depth_evaluation(
+        state["params"], config, prompt, target, depths, ids, cycles=cycles
+    )
+    jax.block_until_ready(evaluation["overall"][f"q{cycles[-1]}_byte_nll"])
+    result = {
+        "git_sha": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+        "task_version": POINTER_V0.name,
+        "config": name,
+        "optimizer_step": 5_000,
+        "init_seed": init_seed,
+        "stochastic_training_seed": stochastic_training_seed,
+        "checkpoint_sha256": sha256(state_path),
+        "evaluation_seconds": time.monotonic() - started,
+        "lambda_zero": evaluation,
+    }
+    short_name = "ref" if name == "E_REF" else "q1"
+    write(EVIDENCE / "pointer" / f"calibration_e1a_{short_name}_final_eval.json", result)
+    return result
 
 
 def train(
@@ -542,27 +963,58 @@ def frozen_probes(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--stage", choices=("audit", "calibration", "primary"), default="audit")
-    parser.add_argument("--max-steps", type=int, default=20_000)
-    parser.add_argument("--configs", nargs="*", default=["E_REF", "E_Q1"])
+    parser.add_argument(
+        "--stage",
+        choices=("audit", "calibration", "calibration-eval", "overfit", "primary"),
+        default="audit",
+    )
+    parser.add_argument("--max-steps", type=int)
+    parser.add_argument("--configs", nargs="*", default=["E_Q1", "E_REF"])
     parser.add_argument("--init-seed", type=int, default=0)
     parser.add_argument("--stochastic-training-seed", type=int, default=0)
+    parser.add_argument("--overfit-cases", nargs="*", default=["one", "few", "small"])
     args = parser.parse_args()
     if args.stage == "audit":
         dataset_audit()
         return
-    steps = 500 if args.stage == "calibration" else args.max_steps
+    if args.stage == "overfit":
+        unknown_cases = set(args.overfit_cases) - set(OVERFIT_CAPS)
+        if unknown_cases:
+            parser.error(f"unknown overfit cases: {sorted(unknown_cases)}")
+        for case in args.overfit_cases:
+            overfit_diagnostic(
+                case,
+                init_seed=args.init_seed,
+                stochastic_training_seed=args.stochastic_training_seed,
+            )
+        return
+    if args.stage == "calibration-eval":
+        for name in args.configs:
+            refresh_calibration_evaluation(
+                name,
+                init_seed=args.init_seed,
+                stochastic_training_seed=args.stochastic_training_seed,
+            )
+        return
+    steps = args.max_steps or (5_000 if args.stage == "calibration" else 40_000)
     unknown = set(args.configs) - {"E_REF", "E_Q1"}
     if unknown:
         parser.error(f"unknown configurations: {sorted(unknown)}")
     for name in args.configs:
-        result = train(
-            name,
-            init_seed=args.init_seed,
-            stochastic_training_seed=args.stochastic_training_seed,
-            max_steps=steps,
-        )
-        if args.stage == "primary":
+        if args.stage == "calibration":
+            calibrate(
+                name,
+                init_seed=args.init_seed,
+                stochastic_training_seed=args.stochastic_training_seed,
+                max_steps=steps,
+            )
+        else:
+            result = train(
+                name,
+                init_seed=args.init_seed,
+                stochastic_training_seed=args.stochastic_training_seed,
+                max_steps=steps,
+            )
             final_evaluation(
                 result,
                 init_seed=args.init_seed,

@@ -1,0 +1,19 @@
+{
+  "cap": 2000,
+  "case": "small",
+  "checkpoint": "results/runs/phase_e_1/pointer/overfit_small/init0_stoch0.pkl",
+  "criterion": {
+    "byte_accuracy_at_least": 0.95,
+    "byte_nll_at_most": 0.25
+  },
+  "examples": 264,
+  "final_lambda_zero_q3": {
+    "byte_accuracy": 0.9895833730697632,
+    "byte_nll": 0.0355188362300396,
+    "exact_accuracy": 0.935606062412262,
+    "logit_nonfinite_rate": 0.0
+  },
+  "memorized": true,
+  "optimizer_step": 1000,
+  "wall_clock_seconds_this_run": 2086.5604395410046
+}

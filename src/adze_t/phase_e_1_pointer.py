@@ -31,6 +31,23 @@ class PointerSpec:
 POINTER_V0 = PointerSpec()
 
 
+def balanced_depth_indices(
+    depths: jax.Array, per_depth: int, *, spec: PointerSpec = POINTER_V0
+) -> jax.Array:
+    """Select the first deterministic examples from each depth bucket."""
+    if depths.ndim != 1:
+        raise ValueError("depths must be one-dimensional")
+    if per_depth < 1:
+        raise ValueError("per_depth must be positive")
+    selected = []
+    for depth in range(1, spec.max_depth + 1):
+        indices = jnp.flatnonzero(depths == depth, size=per_depth, fill_value=-1)
+        if bool(jnp.any(indices < 0)):
+            raise ValueError(f"depth {depth} has fewer than {per_depth} examples")
+        selected.append(indices)
+    return jnp.concatenate(selected).astype(jnp.int32)
+
+
 def _permutation(key: jax.Array, n_states: int) -> jax.Array:
     return jax.random.permutation(key, n_states).astype(jnp.int32)
 

@@ -1,0 +1,114 @@
+{
+  "checkpoint_sha256": "fcd187f6c8afdd222b6416a6cc879b6c6cbe2f77f8d1d3ed1a93d7a360318615",
+  "config": "E_Q1",
+  "evaluation_seconds": 6.70038024999667,
+  "git_sha": "c638e95e163abf5aa8a6420de250876d93a99e6f",
+  "init_seed": 0,
+  "lambda_zero": {
+    "cycles": [
+      1
+    ],
+    "examples": 704,
+    "lambda_op": 0.0,
+    "overall": {
+      "q1_byte_accuracy": 0.10795454680919647,
+      "q1_byte_nll": 2.304365634918213,
+      "q1_exact_accuracy": 0.0,
+      "q1_logit_nonfinite_rate": 0.0
+    },
+    "per_depth": [
+      {
+        "count": 64,
+        "depth": 1,
+        "q1_byte_accuracy": 0.107421875,
+        "q1_byte_nll": 2.2961578369140625,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      },
+      {
+        "count": 64,
+        "depth": 2,
+        "q1_byte_accuracy": 0.0859375,
+        "q1_byte_nll": 2.3081185817718506,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      },
+      {
+        "count": 64,
+        "depth": 3,
+        "q1_byte_accuracy": 0.0859375,
+        "q1_byte_nll": 2.309068441390991,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      },
+      {
+        "count": 64,
+        "depth": 4,
+        "q1_byte_accuracy": 0.11328125,
+        "q1_byte_nll": 2.3021421432495117,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      },
+      {
+        "count": 64,
+        "depth": 5,
+        "q1_byte_accuracy": 0.109375,
+        "q1_byte_nll": 2.3049607276916504,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      },
+      {
+        "count": 64,
+        "depth": 6,
+        "q1_byte_accuracy": 0.09765625,
+        "q1_byte_nll": 2.3066189289093018,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      },
+      {
+        "count": 64,
+        "depth": 7,
+        "q1_byte_accuracy": 0.125,
+        "q1_byte_nll": 2.303292751312256,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      },
+      {
+        "count": 64,
+        "depth": 8,
+        "q1_byte_accuracy": 0.1328125,
+        "q1_byte_nll": 2.3026833534240723,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      },
+      {
+        "count": 64,
+        "depth": 9,
+        "q1_byte_accuracy": 0.091796875,
+        "q1_byte_nll": 2.3062028884887695,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      },
+      {
+        "count": 64,
+        "depth": 10,
+        "q1_byte_accuracy": 0.115234375,
+        "q1_byte_nll": 2.302286148071289,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      },
+      {
+        "count": 64,
+        "depth": 11,
+        "q1_byte_accuracy": 0.123046875,
+        "q1_byte_nll": 2.3064918518066406,
+        "q1_exact_accuracy": 0.0,
+        "q1_logit_nonfinite_rate": 0.0
+      }
+    ],
+    "per_depth_count": 64
+  },
+  "optimizer_step": 5000,
+  "stochastic_training_seed": 0,
+  "task_version": "POINTER_V0"
+}

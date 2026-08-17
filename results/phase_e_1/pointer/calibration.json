@@ -1,0 +1,66 @@
+{
+  "benchmark": "POINTER_V0",
+  "calibration_decision": "POINTER_V0_TOO_HARD",
+  "calibration_stage": "PHASE_E_1A_RUNTIME_EFFICIENT_POINTER_CALIBRATION",
+  "chance_baselines": {
+    "byte_accuracy": 0.1,
+    "exact_sequence_accuracy": 1e-08
+  },
+  "dataset": {
+    "training_examples": 16384,
+    "training_selection": "first deterministic examples from POINTER_V0 seed 920",
+    "validation_examples": 704,
+    "validation_per_depth": 64,
+    "validation_seed": 921
+  },
+  "gate": {
+    "finite_stable_optimization": true,
+    "genuine_above_chance_validation_accuracy": false,
+    "meaningful_depth_gradient": false,
+    "non_ceiling_hard_buckets": true,
+    "pointer_computation_localized_to_dit": false,
+    "tiny_fixed_set_overfit_succeeds": true
+  },
+  "interpretation": {
+    "output_support_learning": "Q2/Q3 NLL converged near ln(10) while accuracy remained near 10%.",
+    "localization": "Q execution improved output-distribution NLL, but did not demonstrate useful pointer computation.",
+    "recurrence_conclusion": "none",
+    "reason": "Both calibration models remained at chance through 5000 steps, while fresh P_REF strongly overfit fixed sets of 1, 8, and 264 examples."
+  },
+  "overfit": {
+    "one": {
+      "examples": 1,
+      "step": 25,
+      "byte_accuracy": 1.0,
+      "exact_accuracy": 1.0,
+      "byte_nll": 0.00017481805116403848
+    },
+    "few": {
+      "examples": 8,
+      "step": 250,
+      "byte_accuracy": 1.0,
+      "exact_accuracy": 1.0,
+      "byte_nll": 0.000021084209947730415
+    },
+    "small": {
+      "examples": 264,
+      "step": 1000,
+      "byte_accuracy": 0.9895833730697632,
+      "exact_accuracy": 0.935606062412262,
+      "byte_nll": 0.0355188362300396
+    }
+  },
+  "primary_seed": {
+    "init_seed": 0,
+    "stochastic_training_seed": 0
+  },
+  "source_files": {
+    "p_q1_curve": "calibration_e1a_q1.jsonl",
+    "p_q1_final": "calibration_e1a_q1_final_eval.json",
+    "p_ref_curve": "calibration_e1a_ref.jsonl",
+    "p_ref_final": "calibration_e1a_ref_final_eval.json",
+    "overfit_one": "overfit_one.jsonl",
+    "overfit_few": "overfit_few.jsonl",
+    "overfit_small": "overfit_small.jsonl"
+  }
+}
