@@ -1,0 +1,10 @@
+{
+  "boundaries": "pass",
+  "format_check": "pass (116 files)",
+  "full_test": "pass (132 passed, 8 deselected)",
+  "lint": "pass",
+  "private_torx_import_scan": "pass (zero matches in src, tests, and scripts)",
+  "slow_test": "pass (8 passed, 132 deselected)",
+  "targeted_fixed_transition_and_hardening": "pass (8 passed)",
+  "typecheck": "pass (0 errors, 0 warnings)"
+}

@@ -1,0 +1,10 @@
+{
+  "arm": "T_REF",
+  "checkpoint": "results/runs/phase_e_1/fixed_transition/calibration/T_REF/init0_stoch0.pkl",
+  "checkpoint_sha256": "33c98fbb119be098557ebced028bcbd55bb3557f641fa410d42fe4808841375c",
+  "curve": "results/phase_e_1/fixed_transition/calibration/training_ref_init0_stoch0.jsonl",
+  "init_seed": 0,
+  "optimizer_step": 5000,
+  "stochastic_training_seed": 0,
+  "wall_clock_seconds_this_run": 11627.883795875008
+}

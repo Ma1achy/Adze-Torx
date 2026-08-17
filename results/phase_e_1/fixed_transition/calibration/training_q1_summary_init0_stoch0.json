@@ -1,0 +1,10 @@
+{
+  "arm": "T_Q1",
+  "checkpoint": "results/runs/phase_e_1/fixed_transition/calibration/T_Q1/init0_stoch0.pkl",
+  "checkpoint_sha256": "df0c8b1b9449cbf3f10439fb3a017b95ffcb746467e85b38c23951167794f615",
+  "curve": "results/phase_e_1/fixed_transition/calibration/training_q1_init0_stoch0.jsonl",
+  "init_seed": 0,
+  "optimizer_step": 5000,
+  "stochastic_training_seed": 0,
+  "wall_clock_seconds_this_run": 5122.655693417008
+}

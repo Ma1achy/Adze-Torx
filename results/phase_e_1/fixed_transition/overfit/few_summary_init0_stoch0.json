@@ -1,0 +1,24 @@
+{
+  "cap": 1000,
+  "case": "few",
+  "checkpoint": "results/runs/phase_e_1/fixed_transition/overfit/few/init0_stoch0.pkl",
+  "checkpoint_sha256": "a999d5e8ccdf913b6c430b850f554c9aa48536c29fa487f83c2c1eaaf5523d1c",
+  "criterion": {
+    "byte_accuracy_at_least": 0.95,
+    "byte_nll_at_most": 0.25
+  },
+  "curve": "results/phase_e_1/fixed_transition/overfit/few_init0_stoch0.jsonl",
+  "examples": 8,
+  "final_lambda_zero_q3": {
+    "bit_accuracy": 0.986328125,
+    "byte_accuracy": 0.96875,
+    "byte_nll": 0.14119690656661987,
+    "exact_accuracy": 0.75,
+    "logit_nonfinite_rate": 0.0
+  },
+  "init_seed": 0,
+  "memorized": true,
+  "optimizer_step": 50,
+  "stochastic_training_seed": 0,
+  "wall_clock_seconds_this_run": 78.5413302910165
+}

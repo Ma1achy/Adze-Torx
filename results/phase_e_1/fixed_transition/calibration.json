@@ -1,0 +1,124 @@
+{
+  "benchmark": "FIXED_STATE_TRANSITION_V0",
+  "calibration_decision": "FIXED_TRANSITION_V0_TOO_HARD",
+  "calibration_only": true,
+  "chance_baselines": {
+    "bit_accuracy": 0.5,
+    "byte_accuracy": 0.00390625,
+    "exact_state_accuracy": 5.421010862427522e-20
+  },
+  "corpus": {
+    "training_examples": 8192,
+    "validation_examples": 512,
+    "validation_examples_per_depth": 64
+  },
+  "depths": [1, 2, 3, 4, 6, 8, 12, 16],
+  "implementation_commits": {
+    "audit_and_calibration_runner": "8f36c2f1ad20c4030aac97d0a30d011b3ed7b73e",
+    "dataset_audit": "68e17ca",
+    "overfit_diagnostic": "c8b30a2"
+  },
+  "interpretation": {
+    "authoritative_experiment_started": false,
+    "physical_block_localization_established": false,
+    "reason": "T_Q1 and T_REF remained at chance on held-out examples through 5000 steps at every depth and Q execution count. Fresh T_REF models nevertheless strongly memorized fixed sets of 1, 8, and 256 examples. This is a held-out learnability failure, not evidence about recurrence.",
+    "recurrence_verdict": null
+  },
+  "seeds": {
+    "dataset_train": 930,
+    "dataset_validation": 931,
+    "init": 0,
+    "stochastic_training": 0
+  },
+  "skipped": {
+    "authoritative_training": "Calibration failed held-out learnability and depth-structure gates.",
+    "causal_interventions": "Gated until an authoritative model is selected.",
+    "lambda1_mc32": "Gated until calibration passes; calibration used lambda=0 evaluation only.",
+    "probes": "Optional and gated behind primary metrics.",
+    "replication": "No material recurrence effect was observed and no authoritative experiment ran.",
+    "strong_controls": "No material same-model Q effect was observed on a valid learned benchmark."
+  },
+  "step_5000": {
+    "T_Q1_Q1": {
+      "bit_accuracy": 0.4976806640625,
+      "byte_accuracy": 0.0029296875,
+      "byte_nll": 6.0973944664001465,
+      "exact_state_accuracy": 0.0,
+      "logit_nonfinite_rate": 0.0,
+      "training_batch_byte_accuracy": 0.08984375,
+      "training_batch_loss": 4.559107303619385,
+      "training_gradient_applied_norm": 1.0,
+      "training_gradient_raw_norm": 5.932867050170898
+    },
+    "T_REF": {
+      "Q0": {
+        "bit_accuracy": 0.499664306640625,
+        "byte_accuracy": 0.00390625,
+        "byte_nll": 6.009913444519043,
+        "exact_state_accuracy": 0.0,
+        "logit_nonfinite_rate": 0.0
+      },
+      "Q1": {
+        "bit_accuracy": 0.495941162109375,
+        "byte_accuracy": 0.003173828125,
+        "byte_nll": 6.0698466300964355,
+        "exact_state_accuracy": 0.0,
+        "logit_nonfinite_rate": 0.0
+      },
+      "Q2": {
+        "bit_accuracy": 0.496002197265625,
+        "byte_accuracy": 0.003173828125,
+        "byte_nll": 6.164706707000732,
+        "exact_state_accuracy": 0.0,
+        "logit_nonfinite_rate": 0.0
+      },
+      "Q3": {
+        "bit_accuracy": 0.4947509765625,
+        "byte_accuracy": 0.002685546875,
+        "byte_nll": 6.415651798248291,
+        "exact_state_accuracy": 0.0,
+        "logit_nonfinite_rate": 0.0
+      },
+      "training_batch_byte_accuracy": 0.07421875,
+      "training_batch_loss": 4.793035507202148,
+      "training_gradient_applied_norm": 1.0,
+      "training_gradient_raw_norm": 5.8658342361450195
+    }
+  },
+  "tiny_fixed_set_overfit": {
+    "few": {
+      "bit_accuracy": 0.986328125,
+      "byte_accuracy": 0.96875,
+      "byte_nll": 0.14119690656661987,
+      "exact_state_accuracy": 0.75,
+      "examples": 8,
+      "memorized": true,
+      "optimizer_step": 50
+    },
+    "one": {
+      "bit_accuracy": 1.0,
+      "byte_accuracy": 1.0,
+      "byte_nll": 0.000013172004400985315,
+      "exact_state_accuracy": 1.0,
+      "examples": 1,
+      "memorized": true,
+      "optimizer_step": 25
+    },
+    "small": {
+      "bit_accuracy": 0.997802734375,
+      "byte_accuracy": 0.9951171875,
+      "byte_nll": 0.021690331399440765,
+      "exact_state_accuracy": 0.96484375,
+      "examples": 256,
+      "memorized": true,
+      "optimizer_step": 1000
+    }
+  },
+  "timing_seconds": {
+    "T_Q1_calibration": 5122.655693417008,
+    "T_REF_calibration": 11627.883795875008,
+    "overfit_few": 78.5413302910165,
+    "overfit_one": 103.96906479197787,
+    "overfit_small": 1517.5637053340324
+  }
+}
