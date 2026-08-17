@@ -1,0 +1,139 @@
+{
+  "audit_version": "PHASE_F_CORRUPTION_AUDIT_V0",
+  "audited_git_sha": "11a7a68bc8065ff4f20e07edb4798410c31629ce",
+  "audit_date": "2026-08-17",
+  "architecture_contract": "docs/architecture/adze-architecture-v3.md",
+  "torx_pin": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+  "milestone_status": "F0_CORRUPTION_CONTRACT_BLOCKED",
+  "top_level_phase_f_status": {
+    "value": "PHASE_F_S_UNRESOLVED",
+    "qualification": "administrative/contract status only — Phase F experiments not started because the corruption law is undefined"
+  },
+  "experiment_status": {
+    "phase_f_experiments_started": false,
+    "evidence_for_or_against_denoising_depth_s": false,
+    "f0_gate_passed": false
+  },
+  "continuous_scope_identifier": "PHASE_F_CONTINUOUS_S_FIXED_STRUCTURE_V0",
+  "repository_findings": {
+    "corruption_module": {
+      "path": "src/adze_t/corruption.py",
+      "status": "intentional_stub",
+      "implemented_symbols": [],
+      "module_text": "Typed h/b/l corruption kernels. Phase F/G after deterministic core parity. Intentionally not implemented in the Phase A scaffold."
+    },
+    "content_corruption_equation": {
+      "architecture_only_form": "h_nu = alpha(nu) * h_0 + sigma(nu) * epsilon",
+      "implemented_alpha": false,
+      "implemented_sigma": false,
+      "accepted_nu_domain": null,
+      "accepted_endpoint_convention": null,
+      "usable_content_corruption_law": false
+    },
+    "inter_step_recorruption": {
+      "implemented": false,
+      "kernel": null,
+      "eta_diff_semantics": null,
+      "master_s_schedule": null
+    },
+    "diffusion_prng": {
+      "implemented_namespace": false,
+      "key_derivation": null,
+      "paired_prefix_semantics": null
+    },
+    "current_model_path": {
+      "implementation": "src/adze_t/model.py:apply_model",
+      "declared_graph": "S=1,R=0",
+      "continuous_input_to_heavy_path": "context-derived proposal_h",
+      "corrupted_continuous_carrier_input": false,
+      "self_generated_continuous_trajectory": false,
+      "target_codec_roles": [
+        "clean target supervision",
+        "fixed teacher boundary structure",
+        "fixed teacher extent/activity",
+        "loss and metric targets"
+      ],
+      "target_h0_used_as_corrupted_model_input": false
+    },
+    "conditioning": {
+      "noise_conditioning_exists": true,
+      "noise_default": 0.0,
+      "denoise_step_conditioning_exists": true,
+      "denoise_step_default": 0,
+      "apply_model_supplies_noise": false,
+      "apply_model_supplies_denoise_step": false,
+      "interpretation": "Conditioning coordinates with constant defaults; they do not define alpha, sigma, nu sampling, initial corruption, or re-corruption."
+    },
+    "prior_training": {
+      "phase_b_sampled_content_corruption_levels": false,
+      "phase_d_sampled_content_corruption_levels": false,
+      "phase_e_sampled_content_corruption_levels": false,
+      "fixed_or_default_content_corruption_level": null,
+      "operator_stochasticity_present": true,
+      "diffusion_stochasticity_present": false,
+      "interpretation": "Phase B/D/E Torx stochasticity perturbs learned operators. It is not content corruption or diffusion stochasticity and must not be described retroactively as such."
+    },
+    "structure": {
+      "current_routing": "fixed clean teacher structure unless explicit committed structure is supplied",
+      "sampled_structure_in_s_trajectory": false,
+      "discrete_score_bridge_used_for_phase_f": false
+    },
+    "corruption_datatypes": {
+      "implemented": false,
+      "content_dtype": null,
+      "boundary_dtype": null,
+      "extent_dtype": null
+    }
+  },
+  "scientific_choices_required_to_unblock": [
+    {
+      "id": 1,
+      "name": "forward_corruption_family",
+      "required_decision": "Choose and freeze the functional relation between alpha(nu) and sigma(nu)."
+    },
+    {
+      "id": 2,
+      "name": "noise_coordinate",
+      "required_decision": "Define the domain and meaning of nu."
+    },
+    {
+      "id": 3,
+      "name": "training_distribution",
+      "required_decision": "Define how corruption levels are sampled during one-step training."
+    },
+    {
+      "id": 4,
+      "name": "multi_s_schedule",
+      "required_decision": "Define nu_0 > nu_1 > ... for rollout and schedule-prefix comparisons."
+    },
+    {
+      "id": 5,
+      "name": "recorruption_semantics",
+      "required_decision": "Define how predicted x0 is converted into the next noisy state."
+    },
+    {
+      "id": 6,
+      "name": "diffusion_stochasticity",
+      "required_decision": "Define eta_diff and the diffusion-noise PRNG/key semantics."
+    },
+    {
+      "id": 7,
+      "name": "endpoint_convention",
+      "required_decision": "Specify what nu=0 and the maximum/noisiest endpoint mean."
+    }
+  ],
+  "explicitly_not_selected": [
+    "alpha(nu)",
+    "sigma(nu)",
+    "nu domain",
+    "DDPM schedule",
+    "VP schedule",
+    "VE schedule",
+    "DDIM or ODE semantics",
+    "eta_diff",
+    "diffusion PRNG namespace",
+    "training corruption distribution",
+    "multi-S schedule"
+  ],
+  "next_required_contract": "PHASE_F_CORRUPTION_CONTRACT_V0"
+}
