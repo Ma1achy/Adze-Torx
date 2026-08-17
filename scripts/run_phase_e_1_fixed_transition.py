@@ -41,6 +41,8 @@ CALIBRATION_TRAIN_COUNT = 8_192
 CALIBRATION_PER_DEPTH = 64
 CALIBRATION_COUNT = len(FIXED_TRANSITION_V0.depths) * CALIBRATION_PER_DEPTH
 CHECKPOINTS = (100, 250, 500, 1_000, 2_000, 5_000)
+OVERFIT_CHECKPOINTS = (1, 10, 25, 50, 100, 250, 500, 1_000, 2_000)
+OVERFIT_CAPS = {"one": 500, "few": 1_000, "small": 2_000}
 ARMS = {"T_REF": "E_REF", "T_Q1": "E_Q1"}
 
 
@@ -269,6 +271,156 @@ def _recorded_steps(path: Path) -> set[int]:
     return {int(json.loads(line)["step"]) for line in path.read_text().splitlines() if line.strip()}
 
 
+def overfit_examples(case: str) -> tuple[jax.Array, jax.Array, jax.Array, jax.Array]:
+    """Select a deterministic fixed corpus from the unchanged calibration split."""
+    prompt, target, depths, _ = dataset("train", CALIBRATION_TRAIN_COUNT)
+    if case == "one":
+        selected = balanced_transition_indices(depths, 1)[:1]
+    elif case == "few":
+        selected = balanced_transition_indices(depths, 1)
+    elif case == "small":
+        selected = balanced_transition_indices(depths, 32)
+    else:
+        raise ValueError(f"unknown overfit case: {case}")
+    return prompt[selected], target[selected], depths[selected], selected.astype(jnp.uint32)
+
+
+def overfit_diagnostic(
+    case: str,
+    *,
+    init_seed: int,
+    stochastic_training_seed: int,
+) -> dict[str, Any]:
+    """Test whether fresh T_REF can memorize a fixed Rule-30 corpus."""
+    config = arm_config("T_REF")
+    cap = OVERFIT_CAPS[case]
+    state_path = checkpoint_path(
+        WORK,
+        benchmark="fixed_transition",
+        stage="overfit",
+        arm=case,
+        init_seed=init_seed,
+        stochastic_training_seed=stochastic_training_seed,
+    )
+    curve_path = evidence_path(
+        EVIDENCE,
+        benchmark="fixed_transition",
+        stage="overfit",
+        stem=case,
+        init_seed=init_seed,
+        stochastic_training_seed=stochastic_training_seed,
+        suffix=".jsonl",
+    )
+    summary_path = evidence_path(
+        EVIDENCE,
+        benchmark="fixed_transition",
+        stage="overfit",
+        stem=f"{case}_summary",
+        init_seed=init_seed,
+        stochastic_training_seed=stochastic_training_seed,
+        suffix=".json",
+    )
+    prompt, target, depths, ids = overfit_examples(case)
+    params, moments, start = initialize_or_resume(state_path, config, init_seed)
+    update = jax.jit(stochastic_train_step, static_argnames=("config",))
+    training_root = jax.random.fold_in(
+        jax.random.PRNGKey(stochastic_training_seed),
+        stable_occurrence_id(f"phase_e_1:fixed_transition:overfit:{case}"),
+    )
+    recorded = _recorded_steps(curve_path)
+    prior_rows = (
+        [json.loads(line) for line in curve_path.read_text().splitlines() if line.strip()]
+        if curve_path.exists()
+        else []
+    )
+    final_evaluation: dict[str, Any] | None = (
+        prior_rows[-1]["lambda_zero_q3"] if prior_rows else None
+    )
+    memorized = bool(
+        final_evaluation is not None
+        and final_evaluation["byte_accuracy"] >= 0.95
+        and final_evaluation["byte_nll"] <= 0.25
+    )
+    started = time.monotonic()
+    final_step = start
+    stop = start if memorized else cap
+    for step in range(start + 1, stop + 1):
+        final_step = step
+        indices = jnp.arange((step - 1) * BATCH, step * BATCH) % len(prompt)
+        batch = make_fixed_structure_batch(prompt[indices], target[indices], config=config)
+        params, moments, metrics = update(
+            params, moments, step, batch, training_root, config=config
+        )
+        jax.block_until_ready(metrics["loss"])
+        if step in OVERFIT_CHECKPOINTS and step not in recorded:
+            evaluation = calibration_evaluation(
+                params,
+                config,
+                prompt,
+                target,
+                depths,
+                ids,
+                cycles=(3,),
+            )
+            overall = {
+                key.removeprefix("q3_"): value for key, value in evaluation["overall"].items()
+            }
+            jax.block_until_ready(overall["byte_nll"])
+            append(
+                curve_path,
+                {
+                    "git_sha": subprocess.check_output(
+                        ["git", "rev-parse", "HEAD"], text=True
+                    ).strip(),
+                    "stage": "PHASE_E_1B_FIXED_TRANSITION_OVERFIT_DIAGNOSTIC",
+                    "task_version": FIXED_TRANSITION_V0.name,
+                    "rule": FIXED_TRANSITION_V0.rule_name,
+                    "case": case,
+                    "init_seed": init_seed,
+                    "stochastic_training_seed": stochastic_training_seed,
+                    "examples": len(prompt),
+                    "depth_counts": {
+                        str(depth): int(jnp.sum(depths == depth))
+                        for depth in FIXED_TRANSITION_V0.depths
+                    },
+                    "selection_global_example_ids": ids,
+                    "step": step,
+                    "train": metrics,
+                    "lambda_zero_q3": overall,
+                    "elapsed_seconds_this_run": time.monotonic() - started,
+                },
+            )
+            final_evaluation = overall
+            recorded.add(step)
+            memorized = bool(overall["byte_accuracy"] >= 0.95 and overall["byte_nll"] <= 0.25)
+            save(state_path, {"params": params, "moments": moments, "step": step})
+            print(
+                f"fixed-transition overfit {case} step={step} memorized={memorized}",
+                flush=True,
+            )
+            if memorized:
+                break
+        elif step % 100 == 0:
+            save(state_path, {"params": params, "moments": moments, "step": step})
+    result = {
+        "case": case,
+        "examples": len(prompt),
+        "cap": cap,
+        "optimizer_step": final_step,
+        "init_seed": init_seed,
+        "stochastic_training_seed": stochastic_training_seed,
+        "memorized": memorized,
+        "criterion": {"byte_accuracy_at_least": 0.95, "byte_nll_at_most": 0.25},
+        "final_lambda_zero_q3": final_evaluation,
+        "checkpoint": str(state_path.relative_to(ROOT)),
+        "checkpoint_sha256": sha256(state_path),
+        "curve": str(curve_path.relative_to(ROOT)),
+        "wall_clock_seconds_this_run": time.monotonic() - started,
+    }
+    write(summary_path, result)
+    return result
+
+
 def calibrate(
     arm: str,
     *,
@@ -399,14 +551,26 @@ def calibrate(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--stage", choices=("audit", "calibration"), default="audit")
+    parser.add_argument("--stage", choices=("audit", "calibration", "overfit"), default="audit")
     parser.add_argument("--arms", nargs="*", default=["T_Q1", "T_REF"])
+    parser.add_argument("--overfit-cases", nargs="*", default=["one", "few", "small"])
     parser.add_argument("--max-steps", type=int, default=5_000)
     parser.add_argument("--init-seed", type=int, default=0)
     parser.add_argument("--stochastic-training-seed", type=int, default=0)
     args = parser.parse_args()
     if args.stage == "audit":
         run_dataset_audit()
+        return
+    if args.stage == "overfit":
+        unknown_cases = set(args.overfit_cases) - set(OVERFIT_CAPS)
+        if unknown_cases:
+            parser.error(f"unknown overfit cases: {sorted(unknown_cases)}")
+        for case in args.overfit_cases:
+            overfit_diagnostic(
+                case,
+                init_seed=args.init_seed,
+                stochastic_training_seed=args.stochastic_training_seed,
+            )
         return
     unknown = set(args.arms) - set(ARMS)
     if unknown:
