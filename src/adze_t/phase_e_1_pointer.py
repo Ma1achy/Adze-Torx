@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
 from typing import Any
 
 import jax
@@ -29,6 +30,23 @@ class PointerSpec:
 
 
 POINTER_V0 = PointerSpec()
+
+
+def pointer_example_hashes(prompt: jax.Array, target: jax.Array, depths: jax.Array) -> set[str]:
+    """Hash complete examples for full deterministic split-overlap audits."""
+    if prompt.shape[0] != target.shape[0] or prompt.shape[0] != depths.shape[0]:
+        raise ValueError("prompt, target, and depths must contain the same number of examples")
+    prompt_host, target_host, depths_host = jax.device_get((prompt, target, depths))
+    hashes = set()
+    for sample_prompt, sample_target, sample_depth in zip(
+        prompt_host, target_host, depths_host, strict=True
+    ):
+        digest = hashlib.sha256()
+        digest.update(sample_prompt.tobytes())
+        digest.update(sample_target.tobytes())
+        digest.update(sample_depth.tobytes())
+        hashes.add(digest.hexdigest())
+    return hashes
 
 
 def balanced_depth_indices(

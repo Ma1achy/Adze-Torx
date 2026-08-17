@@ -27,8 +27,10 @@ from adze_t.phase_e_1_pointer import (
     audit_pointer_dataset,
     balanced_depth_indices,
     generate_pointer_dataset,
+    pointer_example_hashes,
     pointer_intermediate_states,
 )
+from adze_t.phase_e_1_paths import checkpoint_path, evidence_path, resolve_run_state
 from adze_t.training import make_fixed_structure_batch, stochastic_train_step
 from run_phase_e import BATCH, configs, initialise
 
@@ -86,6 +88,23 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def initialize_or_resume(state_path: Path, config: Any, init_seed: int) -> tuple[Any, Any, int]:
+    """Resume only an exact stage/arm/seed state, otherwise initialize from scratch."""
+
+    def load_existing(path: Path) -> tuple[Any, Any, int]:
+        state = load(path)
+        return state["params"], state["moments"], int(state["step"])
+
+    def initialize_scratch() -> tuple[Any, Any, int]:
+        params = initialise(config, init_seed)
+        zero = adamw_init(params)
+        return params, (zero, zero), 0
+
+    return resolve_run_state(
+        state_path, load_state=load_existing, initialize_state=initialize_scratch
+    )
+
+
 def dataset(split: str, count: int) -> tuple[jax.Array, jax.Array, jax.Array, dict[str, Any]]:
     prompt, target, depths, audit = generate_pointer_dataset(count, DATA_SEEDS[split])
     return prompt, target, depths, {"split": split, **audit}
@@ -103,6 +122,8 @@ def dataset_audit() -> None:
         "git_sha": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
         "torx_pin": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
         "task_version": POINTER_V0.name,
+        "generator_version": "phase_e_1_pointer.py:POINTER_V0",
+        "overlap_check_scope": "full prompt+target+depth hash sets",
         "spec": {
             "n_states": POINTER_V0.n_states,
             "max_depth": POINTER_V0.max_depth,
@@ -114,20 +135,27 @@ def dataset_audit() -> None:
         },
         "seeds": DATA_SEEDS,
     }
+    split_hashes: dict[str, set[str]] = {}
     for split, count in (("train", TRAIN_COUNT), ("validation", EVAL_COUNT), ("test", EVAL_COUNT)):
         prompt, target, depths, audit = dataset(split, count)
         checks = audit_pointer_dataset(prompt, target, depths)
+        hashes = pointer_example_hashes(prompt, target, depths)
+        split_hashes[split] = hashes
         payload[split] = {
             **audit,
             "checks": checks,
             "depth_counts": jnp.bincount(depths, length=12),
+            "example_hash_count": len(hashes),
+            "duplicate_count": count - len(hashes),
         }
-    train_prompt, _, _, _ = dataset("train", 256)
-    valid_prompt, _, _, _ = dataset("validation", 256)
-    payload["split_overlap_check"] = bool(
-        not jnp.any(jnp.all(train_prompt[:, None, :] == valid_prompt[None, :, :], axis=-1))
-    )
-    write(EVIDENCE / "pointer" / "dataset_audit.json", payload)
+    intersections = {
+        "train_validation": len(split_hashes["train"] & split_hashes["validation"]),
+        "train_test": len(split_hashes["train"] & split_hashes["test"]),
+        "validation_test": len(split_hashes["validation"] & split_hashes["test"]),
+    }
+    payload["split_intersection_counts"] = intersections
+    payload["split_overlap_check"] = all(count == 0 for count in intersections.values())
+    write(EVIDENCE / "pointer" / "dataset_audit_v2.json", payload)
 
 
 def _lambda_zero_example_stats(
@@ -355,21 +383,28 @@ def calibrate(
     if max_steps > 5_000:
         raise ValueError("Phase E.1A calibration may not exceed 5,000 steps")
     config = configs()[name]
-    state_path = WORK / f"pointer/{name}/init{init_seed}_stoch{stochastic_training_seed}.pkl"
-    short_name = "ref" if name == "E_REF" else "q1"
-    curve_path = EVIDENCE / "pointer" / f"calibration_e1a_{short_name}.jsonl"
-    progress_path = (
-        WORK / f"pointer/{name}/init{init_seed}_stoch{stochastic_training_seed}.progress.json"
+    state_path = checkpoint_path(
+        WORK,
+        benchmark="pointer",
+        stage="calibration",
+        arm=name,
+        init_seed=init_seed,
+        stochastic_training_seed=stochastic_training_seed,
     )
+    short_name = "ref" if name == "E_REF" else "q1"
+    curve_path = evidence_path(
+        EVIDENCE,
+        benchmark="pointer",
+        stage="calibration",
+        stem=f"calibration_e1a_{short_name}",
+        init_seed=init_seed,
+        stochastic_training_seed=stochastic_training_seed,
+        suffix=".jsonl",
+    )
+    progress_path = state_path.with_suffix(".progress.json")
     train_prompt, train_target, _, _ = dataset("train", CALIBRATION_TRAIN_COUNT)
     valid_prompt, valid_target, valid_depths, valid_ids = calibration_validation()
-    if state_path.exists():
-        state = load(state_path)
-        params, moments, start = state["params"], state["moments"], int(state["step"])
-    else:
-        params = initialise(config, init_seed)
-        zero = adamw_init(params)
-        moments, start = (zero, zero), 0
+    params, moments, start = initialize_or_resume(state_path, config, init_seed)
     if start > max_steps:
         raise ValueError(
             f"checkpoint step {start} is beyond requested calibration step {max_steps}"
@@ -466,7 +501,18 @@ def calibrate(
         "calibration_curve": str(curve_path.relative_to(ROOT)),
         "wall_clock_seconds_this_run": time.monotonic() - started,
     }
-    write(EVIDENCE / "pointer" / f"calibration_e1a_{short_name}_summary.json", result)
+    write(
+        evidence_path(
+            EVIDENCE,
+            benchmark="pointer",
+            stage="calibration",
+            stem=f"calibration_e1a_{short_name}_summary",
+            init_seed=init_seed,
+            stochastic_training_seed=stochastic_training_seed,
+            suffix=".json",
+        ),
+        result,
+    )
     return result
 
 
@@ -519,18 +565,25 @@ def overfit_diagnostic(
     """Test whether faithful P_REF can memorize a fixed tiny pointer corpus."""
     config = configs()["E_REF"]
     cap = OVERFIT_CAPS[case]
-    state_path = (
-        WORK / f"pointer/overfit_{case}/init{init_seed}_stoch{stochastic_training_seed}.pkl"
+    state_path = checkpoint_path(
+        WORK,
+        benchmark="pointer",
+        stage="overfit",
+        arm=case,
+        init_seed=init_seed,
+        stochastic_training_seed=stochastic_training_seed,
     )
-    curve_path = EVIDENCE / "pointer" / f"overfit_{case}.jsonl"
+    curve_path = evidence_path(
+        EVIDENCE,
+        benchmark="pointer",
+        stage="overfit",
+        stem=case,
+        init_seed=init_seed,
+        stochastic_training_seed=stochastic_training_seed,
+        suffix=".jsonl",
+    )
     prompt, target, depths, ids = _overfit_examples(case)
-    if state_path.exists():
-        state = load(state_path)
-        params, moments, start = state["params"], state["moments"], int(state["step"])
-    else:
-        params = initialise(config, init_seed)
-        zero = adamw_init(params)
-        moments, start = (zero, zero), 0
+    params, moments, start = initialize_or_resume(state_path, config, init_seed)
     update = jax.jit(stochastic_train_step, static_argnames=("config",))
     training_root = jax.random.fold_in(
         jax.random.PRNGKey(stochastic_training_seed),
@@ -602,7 +655,18 @@ def overfit_diagnostic(
         "checkpoint": str(state_path.relative_to(ROOT)),
         "wall_clock_seconds_this_run": time.monotonic() - started,
     }
-    write(EVIDENCE / "pointer" / f"overfit_{case}_summary.json", result)
+    write(
+        evidence_path(
+            EVIDENCE,
+            benchmark="pointer",
+            stage="overfit",
+            stem=f"{case}_summary",
+            init_seed=init_seed,
+            stochastic_training_seed=stochastic_training_seed,
+            suffix=".json",
+        ),
+        result,
+    )
     return result
 
 
@@ -614,7 +678,14 @@ def refresh_calibration_evaluation(
 ) -> dict[str, Any]:
     """Re-evaluate a completed 5k checkpoint without resuming training."""
     config = configs()[name]
-    state_path = WORK / f"pointer/{name}/init{init_seed}_stoch{stochastic_training_seed}.pkl"
+    state_path = checkpoint_path(
+        WORK,
+        benchmark="pointer",
+        stage="calibration",
+        arm=name,
+        init_seed=init_seed,
+        stochastic_training_seed=stochastic_training_seed,
+    )
     state = load(state_path)
     if int(state["step"]) != 5_000:
         raise ValueError(f"expected completed step-5000 checkpoint, got {state['step']}")
@@ -637,7 +708,18 @@ def refresh_calibration_evaluation(
         "lambda_zero": evaluation,
     }
     short_name = "ref" if name == "E_REF" else "q1"
-    write(EVIDENCE / "pointer" / f"calibration_e1a_{short_name}_final_eval.json", result)
+    write(
+        evidence_path(
+            EVIDENCE,
+            benchmark="pointer",
+            stage="calibration",
+            stem=f"calibration_e1a_{short_name}_final_eval",
+            init_seed=init_seed,
+            stochastic_training_seed=stochastic_training_seed,
+            suffix=".json",
+        ),
+        result,
+    )
     return result
 
 
@@ -649,19 +731,28 @@ def train(
     max_steps: int,
 ) -> dict[str, Any]:
     config = configs()[name]
-    state_path = WORK / f"pointer/{name}/init{init_seed}_stoch{stochastic_training_seed}.pkl"
-    curve_path = EVIDENCE / "pointer" / f"training_{'ref' if name == 'E_REF' else 'q1'}.jsonl"
+    state_path = checkpoint_path(
+        WORK,
+        benchmark="pointer",
+        stage="primary",
+        arm=name,
+        init_seed=init_seed,
+        stochastic_training_seed=stochastic_training_seed,
+    )
+    short_name = "ref" if name == "E_REF" else "q1"
+    curve_path = evidence_path(
+        EVIDENCE,
+        benchmark="pointer",
+        stage="primary",
+        stem=f"training_{short_name}",
+        init_seed=init_seed,
+        stochastic_training_seed=stochastic_training_seed,
+        suffix=".jsonl",
+    )
     train_prompt, train_target, _, _ = dataset("train", TRAIN_COUNT)
     validation_count = CALIBRATION_COUNT if max_steps <= 500 else EVAL_COUNT
     valid_prompt, valid_target, valid_depths, _ = dataset("validation", validation_count)
-    if state_path.exists():
-        state = load(state_path)
-        params, moments, start = state["params"], state["moments"], int(state["step"])
-    else:
-        params = initialise(config, init_seed)
-        zero = adamw_init(params)
-        moments, start = (zero, zero), 0
-        curve_path.unlink(missing_ok=True)
+    params, moments, start = initialize_or_resume(state_path, config, init_seed)
     update = jax.jit(stochastic_train_step, static_argnames=("config",))
     training_root = jax.random.fold_in(
         jax.random.PRNGKey(stochastic_training_seed),
@@ -716,7 +807,18 @@ def train(
         "checkpoint_sha256": sha256(state_path),
         "wall_clock_seconds": time.monotonic() - started,
     }
-    write(EVIDENCE / "pointer" / f"training_{name.lower()}_final.json", final)
+    write(
+        evidence_path(
+            EVIDENCE,
+            benchmark="pointer",
+            stage="primary",
+            stem=f"training_{short_name}_final",
+            init_seed=init_seed,
+            stochastic_training_seed=stochastic_training_seed,
+            suffix=".json",
+        ),
+        final,
+    )
     return {"params": params, "config": config, "metadata": final}
 
 
@@ -736,7 +838,19 @@ def final_evaluation(run: dict[str, Any], *, init_seed: int, stochastic_training
         output[label] = paired_depth_evaluation(
             run["params"], config, prompt, target, depths, ids, lambda_op=lambda_op, roots=roots
         )
-    write(EVIDENCE / "pointer" / f"depth_metrics_{output['config'].lower()}.json", output)
+
+    def final_path(stem: str) -> Path:
+        return evidence_path(
+            EVIDENCE,
+            benchmark="pointer",
+            stage="primary",
+            stem=stem,
+            init_seed=init_seed,
+            stochastic_training_seed=stochastic_training_seed,
+            suffix=".json",
+        )
+
+    write(final_path(f"depth_metrics_{output['config'].lower()}"), output)
 
     if config.model.cycles_Q != 3:
         return
@@ -788,7 +902,7 @@ def final_evaluation(run: dict[str, Any], *, init_seed: int, stochastic_training
                     }
                 )
         localization[label] = rows
-    write(EVIDENCE / "pointer" / "localization.json", localization)
+    write(final_path("localization"), localization)
     intervention_result: dict[str, Any] = {}
     for lambda_op, label in ((0.0, "lambda0"), (1.0, "lambda1")):
         intervention_result[label] = {}
@@ -797,7 +911,7 @@ def final_evaluation(run: dict[str, Any], *, init_seed: int, stochastic_training
             ("suppress_q1_to_q2", {"suppress_cycle": 1}),
             ("suppress_q2_to_q3", {"suppress_cycle": 2}),
             ("shuffle_q1_to_q2", {"shuffle_cycle": 1}),
-            ("stop_gradient_identity_q1_to_q2", {"suppress_cycle": 1}),
+            ("stop_gradient_identity_q1_to_q2", {"stop_gradient_after_cycle": 0}),
         )
         for name, kwargs in interventions:
             correct_by_depth: list[list[jax.Array]] = [[] for _ in range(12)]
@@ -841,9 +955,9 @@ def final_evaluation(run: dict[str, Any], *, init_seed: int, stochastic_training
                 for depth, values in enumerate(correct_by_depth)
                 if depth > 0
             ]
-    write(EVIDENCE / "pointer" / "interventions.json", intervention_result)
+    write(final_path("interventions"), intervention_result)
     write(
-        EVIDENCE / "pointer" / "frozen_probes.json",
+        final_path("frozen_probes"),
         frozen_probes(run["params"], config, init_seed, stochastic_training_seed),
     )
 
@@ -879,10 +993,21 @@ def _probe_representations(
             dit_cycles=cycles,
             capture_diagnostics=True,
         )
-        features["x_pre"].append(out["packed_carrier"].mean(axis=(1, 2)))
+        x_pre = out["packed_carrier"].mean(axis=(1, 2))
+        if x_pre.ndim != 2 or x_pre.shape[0] != end - start:
+            raise ValueError(f"x_pre probe matrix must be [batch, features], got {x_pre.shape}")
+        features["x_pre"].append(x_pre)
         for index in range(cycles):
-            features[f"x_q{index + 1}"].append(out["dit_aux"]["trajectory"][index].mean(axis=2))
-        features["h_hat"].append(out["prediction"][0].mean(axis=1))
+            x_q = out["dit_aux"]["trajectory"][index].mean(axis=1)
+            if x_q.ndim != 2 or x_q.shape[0] != end - start:
+                raise ValueError(
+                    f"x_q{index + 1} probe matrix must be [batch, features], got {x_q.shape}"
+                )
+            features[f"x_q{index + 1}"].append(x_q)
+        h_hat = out["prediction"][0].mean(axis=1)
+        if h_hat.ndim != 2 or h_hat.shape[0] != end - start:
+            raise ValueError(f"h_hat probe matrix must be [batch, features], got {h_hat.shape}")
+        features["h_hat"].append(h_hat)
     return {key: jnp.concatenate(value) for key, value in features.items()}
 
 

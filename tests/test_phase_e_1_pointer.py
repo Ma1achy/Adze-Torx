@@ -5,6 +5,7 @@ from adze_t.phase_e_1_pointer import (
     audit_pointer_dataset,
     balanced_depth_indices,
     generate_pointer_dataset,
+    pointer_example_hashes,
     pointer_intermediate_states,
     pointer_oracle,
 )
@@ -49,3 +50,20 @@ def test_balanced_depth_selection_is_deterministic():
     assert jnp.all(jnp.bincount(depths[first], length=12)[1:] == 64)
     assert prompt[first].shape == (704, 120)
     assert target[first].shape == (704, 8)
+
+
+def test_full_example_hashes_detect_duplicates_and_seed_isolation():
+    train = generate_pointer_dataset(1_024, 920)
+    validation = generate_pointer_dataset(1_024, 921)
+    train_hashes = pointer_example_hashes(*train[:3])
+    validation_hashes = pointer_example_hashes(*validation[:3])
+    assert len(train_hashes) == 1_024
+    assert len(validation_hashes) == 1_024
+    assert not train_hashes & validation_hashes
+
+    duplicated_hashes = pointer_example_hashes(
+        jnp.concatenate((train[0][:1], train[0][:1])),
+        jnp.concatenate((train[1][:1], train[1][:1])),
+        jnp.concatenate((train[2][:1], train[2][:1])),
+    )
+    assert len(duplicated_hashes) == 1

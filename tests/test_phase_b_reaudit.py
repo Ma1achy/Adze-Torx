@@ -215,7 +215,8 @@ def test_dit_manual_unroll_matches_recurrent_driver():
             carrier_id,
             query,
             cfg,
-            cycle_index=cycle,
+            actual_cycle_index=cycle,
+            conditioning_cycle_index=cycle,
         )
     x = ops.linear(x, params["output_proj"], name="dit.output_proj")
     expected = jnp.where(query[..., None], x, 0.0).reshape(batch, blocks, slots, -1)

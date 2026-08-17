@@ -10,7 +10,9 @@ recurrence conclusion is drawn.
 - JAX-only deterministic generation with independent per-example mappings,
   direct composition oracle, split seeds `920/921/922`, and chance baselines
   of 0.10 byte accuracy and `1e-8` exact-sequence accuracy.
-- Diagnostic-only `Q_exec=0` bypass and computation-localization capture.
+- Diagnostic-only `Q_exec=0` zero-physical-block / DiT-shell baseline and
+  physical-block localization capture. Learned shell projections and
+  structural embeddings remain active at Q0.
 - Depth-conditioned paired Q evaluation, final-answer/intermediate frozen probe
   support, recurrent suppression, state shuffling, and depth-bucket reporting.
 

@@ -1,0 +1,16 @@
+{
+  "base_git_sha": "3f9867e",
+  "decision": "HARDENING_PASS",
+  "private_torx_import_scan": "clean",
+  "recurrence_decision": null,
+  "tests": {
+    "boundaries": "pass",
+    "format_check": "pass",
+    "lint": "pass",
+    "slow_deselected": 126,
+    "slow_passed": 8,
+    "standard_deselected": 8,
+    "standard_passed": 126,
+    "typecheck": "pass"
+  }
+}

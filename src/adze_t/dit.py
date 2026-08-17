@@ -197,7 +197,8 @@ def apply_dit_cycle(
     query_mask: jax.Array,
     config: DiTConfig,
     *,
-    cycle_index: int,
+    actual_cycle_index: int,
+    conditioning_cycle_index: int,
     ops: LearnedOps | None = None,
     mode: str = "draft",
     noise: jax.Array | float = 0.0,
@@ -205,7 +206,7 @@ def apply_dit_cycle(
     refinement_step: jax.Array | int = 0,
     capture_aux: bool = False,
 ) -> Any:
-    """Apply one tied physical stack at recurrence position ``cycle_index``."""
+    """Apply one tied stack with separate occurrence and conditioning indices."""
     ops = ops or DeterministicOps()
     block_rms = []
     block_states = []
@@ -216,9 +217,9 @@ def apply_dit_cycle(
     ffn_gate_means = []
     for block_index, block in enumerate(params["blocks"]):
         block_aux: dict[str, jax.Array] = {}
-        depth = cycle_index * config.physical_blocks + block_index
+        depth = conditioning_cycle_index * config.physical_blocks + block_index
         block_ops = ops.with_occurrence(
-            recurrence_cycle=cycle_index,
+            recurrence_cycle=actual_cycle_index,
             physical_layer=block_index,
             denoise_step=denoise_step,
             refinement_step=refinement_step,
@@ -292,12 +293,15 @@ def apply_dit(
     depth_code_override: str = "correct",
     suppress_cycle: int | None = None,
     shuffle_cycle: int | None = None,
+    stop_gradient_after_cycle: int | None = None,
     capture_diagnostics: bool = False,
 ) -> tuple[jax.Array, dict[str, Any]]:
     """Apply (B_L ... B_1)^Q with block parameters tied across Q."""
     ops = ops or DeterministicOps()
     ops = ops.with_scope(f"mode:{mode}")
     cycle_count = config.cycles if cycles is None else cycles
+    if depth_code_override not in {"correct", "all_q0", "reversed"}:
+        raise ValueError(f"unknown depth-code override: {depth_code_override}")
     batch, blocks, slots, _ = packed.shape
     positions = blocks * slots
     query = metadata.query_mask.reshape(batch, positions)
@@ -347,11 +351,11 @@ def apply_dit(
     previous_x = x
     for cycle in range(cycle_count):
         block_aux: dict[str, jax.Array] = {}
-        cycle_index_for_conditioning = cycle
+        conditioning_cycle_index = cycle
         if depth_code_override == "all_q0":
-            cycle_index_for_conditioning = 0
+            conditioning_cycle_index = 0
         elif depth_code_override == "reversed":
-            cycle_index_for_conditioning = cycle_count - 1 - cycle
+            conditioning_cycle_index = cycle_count - 1 - cycle
         cycle_result = apply_dit_cycle(
             x,
             params,
@@ -360,7 +364,8 @@ def apply_dit(
             safe_carrier,
             query,
             config,
-            cycle_index=cycle_index_for_conditioning,
+            actual_cycle_index=cycle,
+            conditioning_cycle_index=conditioning_cycle_index,
             ops=ops,
             mode=mode,
             noise=noise,
@@ -376,6 +381,8 @@ def apply_dit(
             x = previous_x
         if shuffle_cycle == cycle:
             x = jnp.roll(x, shift=1, axis=0)
+        if stop_gradient_after_cycle == cycle:
+            x = jax.lax.stop_gradient(x)
         block_rms.append(cycle_block_rms)
         depths.append(cycle_depths)
         block_states.append(cycle_block_states)

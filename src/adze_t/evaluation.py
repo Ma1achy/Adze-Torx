@@ -156,6 +156,7 @@ def _paired_example_statistics(
     depth_code_override: str = "correct",
     suppress_cycle: int | None = None,
     shuffle_cycle: int | None = None,
+    stop_gradient_after_cycle: int | None = None,
 ) -> dict[str, jax.Array]:
     """Evaluate one example in a root world with an explicit stable identity."""
     mask_prompt = jnp.ones_like(prompt, dtype=bool)
@@ -183,6 +184,7 @@ def _paired_example_statistics(
         depth_code_override=depth_code_override,
         suppress_cycle=suppress_cycle,
         shuffle_cycle=shuffle_cycle,
+        stop_gradient_after_cycle=stop_gradient_after_cycle,
     )
     noisy = apply_model(
         params,
@@ -196,6 +198,8 @@ def _paired_example_statistics(
         dit_cycles=dit_cycles,
         depth_code_override=depth_code_override,
         suppress_cycle=suppress_cycle,
+        shuffle_cycle=shuffle_cycle,
+        stop_gradient_after_cycle=stop_gradient_after_cycle,
     )
     teacher = noisy["target"]["teacher"]
     correct = (jnp.argmax(noisy["byte_logits"], axis=-1) == teacher.slot_bytes) & teacher.slot_mask
@@ -243,6 +247,7 @@ def paired_chunk_statistics(
     depth_code_override: str = "correct",
     suppress_cycle: int | None = None,
     shuffle_cycle: int | None = None,
+    stop_gradient_after_cycle: int | None = None,
 ) -> dict[str, jax.Array]:
     """Evaluate a chunk as independently identified B=1 stochastic executions.
 
@@ -262,6 +267,7 @@ def paired_chunk_statistics(
             depth_code_override=depth_code_override,
             suppress_cycle=suppress_cycle,
             shuffle_cycle=shuffle_cycle,
+            stop_gradient_after_cycle=stop_gradient_after_cycle,
         )
     )(prompt, target, global_example_ids)
 

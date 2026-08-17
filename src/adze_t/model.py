@@ -120,6 +120,7 @@ def apply_model(
     depth_code_override: str = "correct",
     suppress_cycle: int | None = None,
     shuffle_cycle: int | None = None,
+    stop_gradient_after_cycle: int | None = None,
     capture_diagnostics: bool = False,
 ) -> dict[str, Any]:
     """Run the shared S=1,R=0 graph with deterministic teacher routing."""
@@ -184,6 +185,7 @@ def apply_model(
         depth_code_override=depth_code_override,
         suppress_cycle=suppress_cycle,
         shuffle_cycle=shuffle_cycle,
+        stop_gradient_after_cycle=stop_gradient_after_cycle,
         capture_diagnostics=capture_diagnostics,
     )
     unpooled = unpool_values(packed_out, metadata, C=config.carrier.C)
