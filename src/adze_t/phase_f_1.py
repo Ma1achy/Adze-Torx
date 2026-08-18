@@ -1,4 +1,4 @@
-"""Leakage-safe DENOISE_V0 data and initial-corruption helpers."""
+"""Leakage-safe Phase-F denoising data and initial-corruption helpers."""
 
 from __future__ import annotations
 
@@ -19,6 +19,8 @@ from .corruption import (
 
 
 PHASE_F_1_DENOISE_V0_PROPOSAL_AUX_DISABLED = "PHASE_F_1_DENOISE_V0_PROPOSAL_AUX_DISABLED"
+PHASE_F_1_DENOISE_V1_PROPOSAL_AUX_DISABLED = "PHASE_F_1_DENOISE_V1_PROPOSAL_AUX_DISABLED"
+DENOISE_V1_TARGET_DOMAIN = (1, 32)
 
 
 @dataclass(frozen=True)
@@ -27,9 +29,16 @@ class DenoiseV0Spec:
     task_tag: int = 0xF1
     prompt_bytes: int = 1
     target_bytes: int = 8
+    target_min: int = 0
+    target_max: int = 255
 
 
 DENOISE_V0 = DenoiseV0Spec()
+DENOISE_V1 = DenoiseV0Spec(
+    name="DENOISE_V1",
+    target_min=DENOISE_V1_TARGET_DOMAIN[0],
+    target_max=DENOISE_V1_TARGET_DOMAIN[1],
+)
 
 
 def generate_denoise_v0(
@@ -41,8 +50,8 @@ def generate_denoise_v0(
     target = jax.random.randint(
         jax.random.PRNGKey(seed),
         (count, spec.target_bytes),
-        0,
-        256,
+        spec.target_min,
+        spec.target_max + 1,
         dtype=jnp.int32,
     )
     prompt = jnp.full((count, spec.prompt_bytes), spec.task_tag, dtype=jnp.int32)
@@ -107,7 +116,7 @@ def make_initial_corruption(
 def dataset_audit(
     prompt: Array, target: Array, *, spec: DenoiseV0Spec = DENOISE_V0
 ) -> dict[str, Any]:
-    """Return model-independent DENOISE_V0 format checks."""
+    """Return model-independent denoising-benchmark format checks."""
     return {
         "task_version": spec.name,
         "count": int(prompt.shape[0]),
@@ -115,5 +124,9 @@ def dataset_audit(
         "prompt_shape_valid": prompt.shape == (target.shape[0], spec.prompt_bytes),
         "target_shape_valid": target.shape == (prompt.shape[0], spec.target_bytes),
         "target_bytes_in_range": bool(jnp.all((target >= 0) & (target < 256))),
+        "target_domain_valid": bool(
+            jnp.all((target >= spec.target_min) & (target <= spec.target_max))
+        ),
+        "target_domain": [spec.target_min, spec.target_max],
         "all_target_bytes_meaningful": True,
     }

@@ -1,0 +1,408 @@
+{
+  "checkpoint_step": 5000,
+  "examples_per_nu": 64,
+  "initial_diffusion_epsilon_fixed_across_lambda_and_nu": true,
+  "lambda_one_roots": [
+    {
+      "cycles": [
+        3
+      ],
+      "examples_per_nu": 64,
+      "lambda_op": 1.0,
+      "per_nu": [
+        {
+          "count": 64,
+          "nu": 0.1,
+          "q3_boundary_loss": 3.3338765206281096e-05,
+          "q3_byte_accuracy": 1.0,
+          "q3_byte_nll": 0.006077036261558533,
+          "q3_exact_accuracy": 1.0,
+          "q3_extent_loss": 4.2408311855979264e-05,
+          "q3_h0_mse": 0.01685165986418724,
+          "q3_noise_rms": 0.15639230608940125,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 4.239974021911621,
+          "q3_signal_rms": 0.6629907488822937
+        },
+        {
+          "count": 64,
+          "nu": 0.25,
+          "q3_boundary_loss": 5.402610986493528e-05,
+          "q3_byte_accuracy": 0.814453125,
+          "q3_byte_nll": 0.6201273202896118,
+          "q3_exact_accuracy": 0.140625,
+          "q3_extent_loss": 5.898320159758441e-05,
+          "q3_h0_mse": 0.020129475742578506,
+          "q3_noise_rms": 0.3825802803039551,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 1.6212555170059204,
+          "q3_signal_rms": 0.6201587319374084
+        },
+        {
+          "count": 64,
+          "nu": 0.5,
+          "q3_boundary_loss": 5.4831132729304954e-05,
+          "q3_byte_accuracy": 0.28125,
+          "q3_byte_nll": 2.4797072410583496,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 8.034628990571946e-05,
+          "q3_h0_mse": 0.0303078331053257,
+          "q3_noise_rms": 0.7069161534309387,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.6715460419654846,
+          "q3_signal_rms": 0.47464892268180847
+        },
+        {
+          "count": 64,
+          "nu": 0.75,
+          "q3_boundary_loss": 3.377048415131867e-05,
+          "q3_byte_accuracy": 0.1015625,
+          "q3_byte_nll": 3.2762503623962402,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 8.547278412152082e-05,
+          "q3_h0_mse": 0.04015811160206795,
+          "q3_noise_rms": 0.9236304759979248,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.27816349267959595,
+          "q3_signal_rms": 0.256878137588501
+        },
+        {
+          "count": 64,
+          "nu": 0.9,
+          "q3_boundary_loss": 2.7076945116277784e-05,
+          "q3_byte_accuracy": 0.048828125,
+          "q3_byte_nll": 3.4513511657714844,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 0.00010271594510413706,
+          "q3_h0_mse": 0.046138882637023926,
+          "q3_noise_rms": 0.9874222278594971,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.10636249929666519,
+          "q3_signal_rms": 0.10500746965408325
+        }
+      ],
+      "validation_epsilon_paired_across_nu": true
+    },
+    {
+      "cycles": [
+        3
+      ],
+      "examples_per_nu": 64,
+      "lambda_op": 1.0,
+      "per_nu": [
+        {
+          "count": 64,
+          "nu": 0.1,
+          "q3_boundary_loss": 3.3391090255463496e-05,
+          "q3_byte_accuracy": 1.0,
+          "q3_byte_nll": 0.006150747649371624,
+          "q3_exact_accuracy": 1.0,
+          "q3_extent_loss": 4.2522366129560396e-05,
+          "q3_h0_mse": 0.016837235540151596,
+          "q3_noise_rms": 0.15639230608940125,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 4.239974021911621,
+          "q3_signal_rms": 0.6629907488822937
+        },
+        {
+          "count": 64,
+          "nu": 0.25,
+          "q3_boundary_loss": 5.419701483333483e-05,
+          "q3_byte_accuracy": 0.814453125,
+          "q3_byte_nll": 0.6215686202049255,
+          "q3_exact_accuracy": 0.140625,
+          "q3_extent_loss": 5.906225123908371e-05,
+          "q3_h0_mse": 0.020117226988077164,
+          "q3_noise_rms": 0.3825802803039551,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 1.6212555170059204,
+          "q3_signal_rms": 0.6201587319374084
+        },
+        {
+          "count": 64,
+          "nu": 0.5,
+          "q3_boundary_loss": 5.510708797373809e-05,
+          "q3_byte_accuracy": 0.28125,
+          "q3_byte_nll": 2.4801251888275146,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 8.052092016441748e-05,
+          "q3_h0_mse": 0.030303938314318657,
+          "q3_noise_rms": 0.7069161534309387,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.6715460419654846,
+          "q3_signal_rms": 0.47464892268180847
+        },
+        {
+          "count": 64,
+          "nu": 0.75,
+          "q3_boundary_loss": 3.399230627110228e-05,
+          "q3_byte_accuracy": 0.10546875,
+          "q3_byte_nll": 3.2766318321228027,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 8.583291491959244e-05,
+          "q3_h0_mse": 0.04016659036278725,
+          "q3_noise_rms": 0.9236304759979248,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.27816349267959595,
+          "q3_signal_rms": 0.256878137588501
+        },
+        {
+          "count": 64,
+          "nu": 0.9,
+          "q3_boundary_loss": 2.7302809030516073e-05,
+          "q3_byte_accuracy": 0.046875,
+          "q3_byte_nll": 3.451660633087158,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 0.00010292221850249916,
+          "q3_h0_mse": 0.046160414814949036,
+          "q3_noise_rms": 0.9874222278594971,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.10636249929666519,
+          "q3_signal_rms": 0.10500746965408325
+        }
+      ],
+      "validation_epsilon_paired_across_nu": true
+    },
+    {
+      "cycles": [
+        3
+      ],
+      "examples_per_nu": 64,
+      "lambda_op": 1.0,
+      "per_nu": [
+        {
+          "count": 64,
+          "nu": 0.1,
+          "q3_boundary_loss": 3.333640415803529e-05,
+          "q3_byte_accuracy": 1.0,
+          "q3_byte_nll": 0.0061667850241065025,
+          "q3_exact_accuracy": 1.0,
+          "q3_extent_loss": 4.247605465934612e-05,
+          "q3_h0_mse": 0.016835041344165802,
+          "q3_noise_rms": 0.15639230608940125,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 4.239974021911621,
+          "q3_signal_rms": 0.6629907488822937
+        },
+        {
+          "count": 64,
+          "nu": 0.25,
+          "q3_boundary_loss": 5.403132672654465e-05,
+          "q3_byte_accuracy": 0.810546875,
+          "q3_byte_nll": 0.6218360662460327,
+          "q3_exact_accuracy": 0.140625,
+          "q3_extent_loss": 5.899254392716102e-05,
+          "q3_h0_mse": 0.020113123580813408,
+          "q3_noise_rms": 0.3825802803039551,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 1.6212555170059204,
+          "q3_signal_rms": 0.6201587319374084
+        },
+        {
+          "count": 64,
+          "nu": 0.5,
+          "q3_boundary_loss": 5.4859588999534026e-05,
+          "q3_byte_accuracy": 0.279296875,
+          "q3_byte_nll": 2.481353521347046,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 8.02993235993199e-05,
+          "q3_h0_mse": 0.030295245349407196,
+          "q3_noise_rms": 0.7069161534309387,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.6715460419654846,
+          "q3_signal_rms": 0.47464892268180847
+        },
+        {
+          "count": 64,
+          "nu": 0.75,
+          "q3_boundary_loss": 3.3944314054679126e-05,
+          "q3_byte_accuracy": 0.10546875,
+          "q3_byte_nll": 3.2768807411193848,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 8.545689343009144e-05,
+          "q3_h0_mse": 0.04015330970287323,
+          "q3_noise_rms": 0.9236304759979248,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.27816349267959595,
+          "q3_signal_rms": 0.256878137588501
+        },
+        {
+          "count": 64,
+          "nu": 0.9,
+          "q3_boundary_loss": 2.7198828320251778e-05,
+          "q3_byte_accuracy": 0.048828125,
+          "q3_byte_nll": 3.451719284057617,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 0.00010231185297016054,
+          "q3_h0_mse": 0.04614195227622986,
+          "q3_noise_rms": 0.9874222278594971,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.10636249929666519,
+          "q3_signal_rms": 0.10500746965408325
+        }
+      ],
+      "validation_epsilon_paired_across_nu": true
+    },
+    {
+      "cycles": [
+        3
+      ],
+      "examples_per_nu": 64,
+      "lambda_op": 1.0,
+      "per_nu": [
+        {
+          "count": 64,
+          "nu": 0.1,
+          "q3_boundary_loss": 3.3435197110520676e-05,
+          "q3_byte_accuracy": 1.0,
+          "q3_byte_nll": 0.006239005364477634,
+          "q3_exact_accuracy": 1.0,
+          "q3_extent_loss": 4.247284960001707e-05,
+          "q3_h0_mse": 0.01681852713227272,
+          "q3_noise_rms": 0.15639230608940125,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 4.239974021911621,
+          "q3_signal_rms": 0.6629907488822937
+        },
+        {
+          "count": 64,
+          "nu": 0.25,
+          "q3_boundary_loss": 5.4275282309390604e-05,
+          "q3_byte_accuracy": 0.8125,
+          "q3_byte_nll": 0.6209439635276794,
+          "q3_exact_accuracy": 0.140625,
+          "q3_extent_loss": 5.9013094869442284e-05,
+          "q3_h0_mse": 0.020100034773349762,
+          "q3_noise_rms": 0.3825802803039551,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 1.6212555170059204,
+          "q3_signal_rms": 0.6201587319374084
+        },
+        {
+          "count": 64,
+          "nu": 0.5,
+          "q3_boundary_loss": 5.505360968527384e-05,
+          "q3_byte_accuracy": 0.279296875,
+          "q3_byte_nll": 2.4805803298950195,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 8.028231241041794e-05,
+          "q3_h0_mse": 0.03029458597302437,
+          "q3_noise_rms": 0.7069161534309387,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.6715460419654846,
+          "q3_signal_rms": 0.47464892268180847
+        },
+        {
+          "count": 64,
+          "nu": 0.75,
+          "q3_boundary_loss": 3.3860691473819315e-05,
+          "q3_byte_accuracy": 0.103515625,
+          "q3_byte_nll": 3.2764830589294434,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 8.528032049071044e-05,
+          "q3_h0_mse": 0.04016251862049103,
+          "q3_noise_rms": 0.9236304759979248,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.27816349267959595,
+          "q3_signal_rms": 0.256878137588501
+        },
+        {
+          "count": 64,
+          "nu": 0.9,
+          "q3_boundary_loss": 2.7083784516435117e-05,
+          "q3_byte_accuracy": 0.048828125,
+          "q3_byte_nll": 3.451385259628296,
+          "q3_exact_accuracy": 0.0,
+          "q3_extent_loss": 0.00010225485311821103,
+          "q3_h0_mse": 0.04615699499845505,
+          "q3_noise_rms": 0.9874222278594971,
+          "q3_nonfinite_rate": 0.0,
+          "q3_signal_noise_rms_ratio": 0.10636249929666519,
+          "q3_signal_rms": 0.10500746965408325
+        }
+      ],
+      "validation_epsilon_paired_across_nu": true
+    }
+  ],
+  "lambda_zero": {
+    "cycles": [
+      3
+    ],
+    "examples_per_nu": 64,
+    "lambda_op": 0.0,
+    "per_nu": [
+      {
+        "count": 64,
+        "nu": 0.1,
+        "q3_boundary_loss": 3.339086833875626e-05,
+        "q3_byte_accuracy": 1.0,
+        "q3_byte_nll": 0.006153551861643791,
+        "q3_exact_accuracy": 1.0,
+        "q3_extent_loss": 4.244066076353192e-05,
+        "q3_h0_mse": 0.016816675662994385,
+        "q3_noise_rms": 0.15639230608940125,
+        "q3_nonfinite_rate": 0.0,
+        "q3_signal_noise_rms_ratio": 4.239974021911621,
+        "q3_signal_rms": 0.6629907488822937
+      },
+      {
+        "count": 64,
+        "nu": 0.25,
+        "q3_boundary_loss": 5.411777601693757e-05,
+        "q3_byte_accuracy": 0.8125,
+        "q3_byte_nll": 0.6208095550537109,
+        "q3_exact_accuracy": 0.140625,
+        "q3_extent_loss": 5.896102811675519e-05,
+        "q3_h0_mse": 0.020090971142053604,
+        "q3_noise_rms": 0.3825802803039551,
+        "q3_nonfinite_rate": 0.0,
+        "q3_signal_noise_rms_ratio": 1.6212555170059204,
+        "q3_signal_rms": 0.6201587319374084
+      },
+      {
+        "count": 64,
+        "nu": 0.5,
+        "q3_boundary_loss": 5.4858624935150146e-05,
+        "q3_byte_accuracy": 0.28515625,
+        "q3_byte_nll": 2.4804165363311768,
+        "q3_exact_accuracy": 0.0,
+        "q3_extent_loss": 8.027227886486799e-05,
+        "q3_h0_mse": 0.030271479859948158,
+        "q3_noise_rms": 0.7069161534309387,
+        "q3_nonfinite_rate": 0.0,
+        "q3_signal_noise_rms_ratio": 0.6715460419654846,
+        "q3_signal_rms": 0.47464892268180847
+      },
+      {
+        "count": 64,
+        "nu": 0.75,
+        "q3_boundary_loss": 3.383849252713844e-05,
+        "q3_byte_accuracy": 0.10546875,
+        "q3_byte_nll": 3.276564121246338,
+        "q3_exact_accuracy": 0.0,
+        "q3_extent_loss": 8.533617801731452e-05,
+        "q3_h0_mse": 0.04012764245271683,
+        "q3_noise_rms": 0.9236304759979248,
+        "q3_nonfinite_rate": 0.0,
+        "q3_signal_noise_rms_ratio": 0.27816349267959595,
+        "q3_signal_rms": 0.256878137588501
+      },
+      {
+        "count": 64,
+        "nu": 0.9,
+        "q3_boundary_loss": 2.7142967155668885e-05,
+        "q3_byte_accuracy": 0.048828125,
+        "q3_byte_nll": 3.451516628265381,
+        "q3_exact_accuracy": 0.0,
+        "q3_extent_loss": 0.00010215587099082768,
+        "q3_h0_mse": 0.046113915741443634,
+        "q3_noise_rms": 0.9874222278594971,
+        "q3_nonfinite_rate": 0.0,
+        "q3_signal_noise_rms_ratio": 0.10636249929666519,
+        "q3_signal_rms": 0.10500746965408325
+      }
+    ],
+    "validation_epsilon_paired_across_nu": true
+  },
+  "operator_roots": 4
+}

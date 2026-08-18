@@ -34,8 +34,9 @@ from adze_t.model import (
 from adze_t.objectives import adamw_init
 from adze_t.packing import build_pack_metadata_core
 from adze_t.phase_f_1 import (
-    DENOISE_V0,
-    PHASE_F_1_DENOISE_V0_PROPOSAL_AUX_DISABLED,
+    DENOISE_V1,
+    DENOISE_V1_TARGET_DOMAIN,
+    PHASE_F_1_DENOISE_V1_PROPOSAL_AUX_DISABLED,
     dataset_audit,
     denoise_example_hashes,
     generate_denoise_v0,
@@ -45,8 +46,8 @@ from adze_t.training import _CODEC_ENCODER_NAMES, stochastic_denoise_train_step
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EVIDENCE = ROOT / "results" / "phase_f" / "f1"
-WORK = ROOT / "results" / "runs" / "phase_f" / "f1"
+EVIDENCE = ROOT / "results" / "phase_f" / "f1" / "denoise_v1"
+WORK = ROOT / "results" / "runs" / "phase_f" / "f1" / "denoise_v1"
 CODEC = ROOT / "results" / "phase_b" / "checkpoints" / "target_codec_b1.pkl"
 BASE_SHA = "b513425ac71474c1fe977dc6ff8a3dcba84ad6bf"
 TORX_PIN = "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae"
@@ -126,7 +127,7 @@ def initialise() -> Any:
 
 
 def split(name: str, count: int) -> tuple[jax.Array, jax.Array, jax.Array]:
-    return generate_denoise_v0(count, DATA_SEEDS[name])
+    return generate_denoise_v0(count, DATA_SEEDS[name], spec=DENOISE_V1)
 
 
 def run_path_audit() -> dict[str, Any]:
@@ -171,7 +172,7 @@ def run_path_audit() -> dict[str, Any]:
             "extent_weight": 1.0,
             "byte_weight": 1.0,
             "proposal_weight": 0.0,
-            "proposal_policy": PHASE_F_1_DENOISE_V0_PROPOSAL_AUX_DISABLED,
+            "proposal_policy": PHASE_F_1_DENOISE_V1_PROPOSAL_AUX_DISABLED,
         },
         "decoder_input": "predicted clean h_hat with fixed teacher length",
         "target_teacher_freeze": "accepted model update mask plus stop-gradient h0",
@@ -184,7 +185,7 @@ def run_path_audit() -> dict[str, Any]:
 def run_dataset_audit() -> dict[str, Any]:
     payload: dict[str, Any] = {
         "git_sha": git_sha(),
-        "task_version": DENOISE_V0.name,
+        "task_version": DENOISE_V1.name,
         "torx_pin": TORX_PIN,
         "seeds": DATA_SEEDS,
         "sizes": {
@@ -192,7 +193,12 @@ def run_dataset_audit() -> dict[str, Any]:
             "validation": VALIDATION_COUNT,
             "test": 4_096,
         },
-        "target_distribution": "JAX uniform integer bytes in [0, 255]",
+        "target_distribution": "JAX uniform integer bytes in [1, 32]",
+        "target_domain": DENOISE_V1_TARGET_DOMAIN,
+        "byte_chance_accuracy": 1.0 / 32.0,
+        "exact_eight_byte_chance_accuracy": (1.0 / 32.0) ** 8,
+        "decoder_logits": 256,
+        "logits_masked_to_domain": False,
         "training_nu_distribution": "Uniform(0.025, 0.9)",
         "eval_grid": EVAL_LEVELS,
         "validation_epsilon_pairing": (
@@ -250,14 +256,14 @@ def run_dataset_audit() -> dict[str, Any]:
     )
     write(EVIDENCE / "dataset_audit.json", payload)
     if not payload["passed"]:
-        raise RuntimeError("DENOISE_V0 dataset or structural invariance audit failed")
+        raise RuntimeError("DENOISE_V1 dataset or structural invariance audit failed")
     return payload
 
 
 def run_codec_audit() -> dict[str, Any]:
     cfg = config()
     deterministic = load(CODEC)
-    _, target, _ = split("validation", 4_096)
+    _, target, ids = split("validation", 4_096)
     mask = jnp.ones_like(target, bool)
     h_rows = []
     correct = exact = total = 0
@@ -283,8 +289,27 @@ def run_codec_audit() -> dict[str, Any]:
     off_diagonal = cosine[~jnp.eye(len(sample), dtype=bool)]
     host = jax.device_get(flattened)
     latent_hashes = {hashlib.sha256(row.tobytes()).hexdigest() for row in host}
+    epsilon = initial_diffusion_epsilon(h0, VALIDATION_DIFFUSION_ROOT, ids)
+    corruption_rms = []
+    for level in EVAL_LEVELS:
+        signal = alpha(level) * h0
+        noise = sigma(level) * epsilon
+        signal_rms = jnp.sqrt(jnp.mean(signal**2))
+        noise_rms = jnp.sqrt(jnp.mean(noise**2))
+        corruption_rms.append(
+            {
+                "nu": level,
+                "empirical_signal_rms": signal_rms,
+                "empirical_noise_rms": noise_rms,
+                "signal_noise_rms_ratio": signal_rms / jnp.maximum(noise_rms, 1e-12),
+            }
+        )
     payload = {
         "git_sha": git_sha(),
+        "task_version": DENOISE_V1.name,
+        "target_domain": DENOISE_V1_TARGET_DOMAIN,
+        "byte_chance_accuracy": 1.0 / 32.0,
+        "exact_eight_byte_chance_accuracy": (1.0 / 32.0) ** 8,
         "codec_checkpoint": str(CODEC.relative_to(ROOT)),
         "codec_sha256": sha256(CODEC),
         "examples": len(target),
@@ -296,6 +321,11 @@ def run_codec_audit() -> dict[str, Any]:
         "pairwise_cosine_std": jnp.std(off_diagonal),
         "unique_latent_hashes": len(latent_hashes),
         "duplicate_latent_count": len(target) - len(latent_hashes),
+        "corruption_rms": corruption_rms,
+        "coefficient_wording": (
+            "unit-energy trigonometric corruption coefficients; variance-preserving only "
+            "under unit-variance clean latents"
+        ),
         "gate": {"byte_accuracy_at_least": 0.99, "exact_accuracy_at_least": 0.95},
     }
     payload["passed"] = bool(
@@ -307,66 +337,7 @@ def run_codec_audit() -> dict[str, Any]:
     )
     write(EVIDENCE / "codec_audit.json", payload)
     if not payload["passed"]:
-        raise RuntimeError("accepted target codec failed DENOISE_V0 suitability gate")
-    return payload
-
-
-def run_codec_control() -> dict[str, Any]:
-    """Confirm the failed uniform-byte audit is domain shift, not a codec regression."""
-    path = EVIDENCE / "codec_audit.json"
-    payload = json.loads(path.read_text())
-    deterministic = load(CODEC)
-    target = jax.random.randint(
-        jax.random.PRNGKey(711), (256, 8), minval=1, maxval=33, dtype=jnp.int32
-    )
-    mask = jnp.ones_like(target, bool)
-    correct = exact = total = 0
-    for start in range(0, len(target), BATCH):
-        output = apply_target_codec(
-            deterministic,
-            target[start : start + BATCH],
-            mask[start : start + BATCH],
-            config=config(),
-        )
-        teacher = output["target"]["teacher"]
-        predicted = jnp.argmax(output["codec_logits"], axis=-1)
-        matches = (predicted == teacher.slot_bytes) & teacher.slot_mask
-        correct += int(jnp.sum(matches))
-        total += int(jnp.sum(teacher.slot_mask))
-        exact += int(jnp.sum(jnp.all(matches | ~teacher.slot_mask, axis=(1, 2))))
-    payload["accepted_domain_control"] = {
-        "distribution": "eight bytes uniformly sampled from integer values 1..32",
-        "seed": 711,
-        "examples": len(target),
-        "byte_accuracy": correct / total,
-        "exact_accuracy": exact / len(target),
-        "matches_historical_gate": correct / total >= 0.99 and exact / len(target) >= 0.95,
-    }
-    ids = jnp.arange(4_096, dtype=jnp.uint32)
-    zeros = jnp.zeros((4_096, config().carrier.C, config().carrier.h_dim), jnp.float32)
-    epsilon = initial_diffusion_epsilon(zeros, VALIDATION_DIFFUSION_ROOT, ids)
-    h0_rms = float(payload["global_h0_rms"])
-    payload["corruption_rms_interpretation"] = []
-    for level in EVAL_LEVELS:
-        signal_rms = float(alpha(level)) * h0_rms
-        noise_rms = float(jnp.sqrt(jnp.mean((sigma(level) * epsilon) ** 2)))
-        payload["corruption_rms_interpretation"].append(
-            {
-                "nu": level,
-                "empirical_signal_rms": signal_rms,
-                "empirical_noise_rms": noise_rms,
-                "signal_noise_rms_ratio": signal_rms / noise_rms,
-            }
-        )
-    payload["coefficient_wording"] = (
-        "unit-energy trigonometric corruption coefficients; variance-preserving only "
-        "under unit-variance clean latents"
-    )
-    payload["failure_interpretation"] = (
-        "Frozen codec remains valid on its accepted 1..32 byte domain but is unsuitable "
-        "for required uniform 0..255 DENOISE_V0 targets."
-    )
-    write(path, payload)
+        raise RuntimeError("accepted target codec failed DENOISE_V1 suitability gate")
     return payload
 
 
@@ -883,7 +854,6 @@ def main() -> None:
         choices=(
             "audit",
             "codec",
-            "codec-control",
             "gradient",
             "overfit",
             "calibration",
@@ -898,8 +868,6 @@ def main() -> None:
         run_dataset_audit()
     elif args.stage == "codec":
         run_codec_audit()
-    elif args.stage == "codec-control":
-        run_codec_control()
     elif args.stage == "gradient":
         run_first_gradient()
     elif args.stage == "overfit":

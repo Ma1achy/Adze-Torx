@@ -300,7 +300,7 @@ def stochastic_denoise_train_step(
 ) -> tuple[Any, tuple[Any, Any], dict[str, jax.Array]]:
     """Train one faithful S=1 x0 prediction from an occurrence-fresh corrupted carrier."""
     if config.training.proposal_weight != 0.0:
-        raise ValueError("DENOISE_V0 requires proposal_weight=0")
+        raise ValueError("Phase-F denoising benchmarks require proposal_weight=0")
     noisy_ops = TorxOps.create(
         operator_root,
         config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=lambda_op),

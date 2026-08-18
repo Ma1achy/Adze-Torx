@@ -43,3 +43,23 @@ on byte values `1..32`.
 Per the predeclared gate order, first-gradient, overfit, calibration, and
 lambda-op sanity runs were not started. No `PHASE_F_S_*` decision is issued and
 no S>1 implementation exists.
+
+## Phase F.1 continuation — PHASE_F_1_ONE_STEP_PASS
+
+The historical DENOISE_V0 blocker remains valid and preserved. DENOISE_V1
+changes only its target distribution to the frozen codec's accepted `1..32`
+domain. The new codec audit, stochastic first-gradient gate, fixed-corruption
+overfit gates, and 5,000-step one-step calibration all passed.
+
+DENOISE_V1 spans a useful corruption range: low-noise reconstruction is near
+ceiling, intermediate levels are learned but imperfect, and high-noise levels
+remain difficult. Finite Torx operator noise preserved one-step function over
+four sanity roots, with no nonfinite values. Qualified parity, leakage,
+fixed-structure, and paired-diffusion-key guarantees from the blocked milestone
+remain in force.
+
+The benchmark status is `DENOISE_V1_CALIBRATION_PASS` and the authoritative F1
+milestone status is `PHASE_F_1_ONE_STEP_PASS`. This supersedes the top-level F1
+blocked status without deleting or reinterpreting DENOISE_V0. No S>1 execution
+has occurred, so no benefit, neutrality, or negative decision about denoising
+depth S is issued.

@@ -1,0 +1,28 @@
+{
+  "cap": 2000,
+  "case": "few",
+  "checkpoint": "results/runs/phase_f/f1/denoise_v1/overfit/few/init0_stoch0.pkl",
+  "checkpoint_sha256": "8a43d3d5c8d04fd67894f43c3294f8d444d38b4c7d3e1b2a9ebb3b6407ad5e6c",
+  "criterion": {
+    "byte_accuracy": 1.0,
+    "exact_accuracy": 1.0
+  },
+  "examples": 8,
+  "final": {
+    "boundary_loss": 0.0011296226875856519,
+    "byte_accuracy": 1.0,
+    "byte_nll": 0.00018278727657161653,
+    "exact_accuracy": 1.0,
+    "extent_loss": 0.0019237676169723272,
+    "h0_mse": 0.15578296780586243,
+    "noise_rms": 0.7064164280891418,
+    "nonfinite_rate": 0.0,
+    "signal_noise_rms_ratio": 0.6736859083175659,
+    "signal_rms": 0.47586363554000854
+  },
+  "fixed_initial_corruption": true,
+  "fixed_nu": 0.5,
+  "optimizer_step": 100,
+  "passed": true,
+  "runtime_seconds": 235.8685563330073
+}

@@ -1,13 +1,15 @@
 # Phase F — faithful denoising/resampling depth S
 
-Current load-bearing status: **PHASE_F_1_ONE_STEP_BLOCKED**.
+Current load-bearing status: **PHASE_F_1_ONE_STEP_PASS**.
 
-No denoising-depth experiment has started. There is currently no evidence for
-or against additional denoising depth S.
+No denoising-depth experiment has started. There is still no evidence for or
+against additional denoising depth S; this milestone establishes only a valid
+one-step denoiser and benchmark.
 
-For tooling that requires a top-level Phase-F field, the administrative status
-is `PHASE_F_S_UNRESOLVED`: **administrative/contract status only — Phase F
-experiments not started because the corruption law is undefined**.
+No top-level `PHASE_F_S_*` scientific label is issued because S>1 has not been
+implemented or evaluated. The former F0 administrative status is retained
+below only as historical provenance; its corruption-contract blocker was
+resolved by Phase F.0.1.
 
 ## F0 corruption audit
 
@@ -105,3 +107,34 @@ result.
 Phase F.1 validation: format, lint, type checking, dependency boundaries, and
 the private-Torx import scan passed; the test suites reported 155 regular tests
 and 9 slow tests passing.
+
+## Phase F.1 continuation — DENOISE_V1
+
+The DENOISE_V0 record above is preserved as a benchmark/domain failure. The
+domain-aligned DENOISE_V1 changes only the target distribution to eight iid
+bytes in `1..32`, exactly matching the accepted frozen codec's historical
+domain. The decoder remains an unmasked 256-way head. Chance is 3.125% per byte
+and `(1/32)^8` per exact sequence.
+
+The fresh 4,096-example V1 codec audit passed at 99.4568% byte and 95.7275%
+exact reconstruction. The stochastic first-gradient gate passed with all
+required connected families finite and nonzero, proposal gradient correctly
+zero under the benchmark-local disabled proposal auxiliary, rho frozen, and
+the target teacher bitwise unchanged. Fixed-corruption overfit reached 100%
+exact accuracy for one and eight examples; the 256-example run reached 97.3145%
+byte accuracy and NLL 0.112626.
+
+F_ONE_STEP_V1 then trained for 5,000 steps. Its final lambda-zero byte accuracy
+was 99.7070%, 78.4668%, 27.5879%, 9.4971%, and 5.0293% at `nu` 0.10, 0.25,
+0.50, 0.75, and 0.90 respectively, versus 3.125% byte chance. This establishes
+a learnable, non-ceiling, corruption-dependent range. Four finite
+`lambda_op=1` roots closely matched lambda zero with no nonfinite values.
+
+The benchmark-local status is `DENOISE_V1_CALIBRATION_PASS`; the milestone
+status is `PHASE_F_1_ONE_STEP_PASS`. Detailed evidence is under
+`f1/denoise_v1/`. No S>1 code or experiment was run, so no `PHASE_F_S_*`
+scientific decision is issued.
+
+Completion validation passed with 120 files formatted, lint and type checking
+clean, dependency boundaries intact, 156 regular tests, 9 slow tests, 9 focused
+F1 tests, and zero private-Torx imports.

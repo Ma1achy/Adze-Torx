@@ -18,6 +18,8 @@ from adze_t.model import _dit_config, apply_clean_target_teacher, apply_model, i
 from adze_t.objectives import adamw_init
 from adze_t.packing import pack_values
 from adze_t.phase_f_1 import (
+    DENOISE_V1,
+    DENOISE_V1_TARGET_DOMAIN,
     dataset_audit,
     generate_denoise_v0,
     initial_diffusion_epsilon,
@@ -80,6 +82,18 @@ def test_denoise_v0_generation_is_deterministic_constant_context_and_random_targ
     assert dataset_audit(prompt, target)["constant_prompt"]
     assert jnp.array_equal(ids, jnp.arange(64, dtype=jnp.uint32))
     assert bool(jnp.any(target[1:] != target[:-1]))
+
+
+def test_denoise_v1_changes_only_the_target_domain():
+    prompt, target, ids = generate_denoise_v0(4_096, 940, spec=DENOISE_V1)
+    audit = dataset_audit(prompt, target, spec=DENOISE_V1)
+    assert audit["task_version"] == "DENOISE_V1"
+    assert audit["target_domain"] == list(DENOISE_V1_TARGET_DOMAIN)
+    assert audit["target_domain_valid"]
+    assert int(jnp.min(target)) == 1
+    assert int(jnp.max(target)) == 32
+    assert jnp.all(prompt == 0xF1)
+    assert jnp.array_equal(ids, jnp.arange(4_096, dtype=jnp.uint32))
 
 
 def test_validation_epsilon_is_paired_across_nu_and_training_occurrences_are_fresh():

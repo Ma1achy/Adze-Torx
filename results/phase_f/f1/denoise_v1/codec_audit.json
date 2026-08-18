@@ -1,0 +1,59 @@
+{
+  "byte_accuracy": 0.99456787109375,
+  "byte_chance_accuracy": 0.03125,
+  "codec_checkpoint": "results/phase_b/checkpoints/target_codec_b1.pkl",
+  "codec_sha256": "55f057f78f795f1585d7aac28fa7ff37846d4c1098507ede375e86b21c4f8ff6",
+  "coefficient_wording": "unit-energy trigonometric corruption coefficients; variance-preserving only under unit-variance clean latents",
+  "corruption_rms": [
+    {
+      "empirical_noise_rms": 0.15649588406085968,
+      "empirical_signal_rms": 0.6631839871406555,
+      "nu": 0.1,
+      "signal_noise_rms_ratio": 4.237709045410156
+    },
+    {
+      "empirical_noise_rms": 0.38283368945121765,
+      "empirical_signal_rms": 0.6203401684761047,
+      "nu": 0.25,
+      "signal_noise_rms_ratio": 1.620390772819519
+    },
+    {
+      "empirical_noise_rms": 0.7073845267295837,
+      "empirical_signal_rms": 0.47478604316711426,
+      "nu": 0.5,
+      "signal_noise_rms_ratio": 0.6711852550506592
+    },
+    {
+      "empirical_noise_rms": 0.9242422580718994,
+      "empirical_signal_rms": 0.2569523751735687,
+      "nu": 0.75,
+      "signal_noise_rms_ratio": 0.27801409363746643
+    },
+    {
+      "empirical_noise_rms": 0.9880762696266174,
+      "empirical_signal_rms": 0.10503794252872467,
+      "nu": 0.9,
+      "signal_noise_rms_ratio": 0.10630550235509872
+    }
+  ],
+  "duplicate_latent_count": 0,
+  "exact_accuracy": 0.957275390625,
+  "exact_eight_byte_chance_accuracy": 9.094947017729282e-13,
+  "examples": 4096,
+  "gate": {
+    "byte_accuracy_at_least": 0.99,
+    "exact_accuracy_at_least": 0.95
+  },
+  "git_sha": "90ed475606d733cab231acd7667a5e30a628a832",
+  "global_h0_rms": 0.6714488863945007,
+  "mean_coordinate_variance": 0.010297520086169243,
+  "pairwise_cosine_mean": 0.9772191643714905,
+  "pairwise_cosine_std": 0.0035462856758385897,
+  "passed": true,
+  "target_domain": [
+    1,
+    32
+  ],
+  "task_version": "DENOISE_V1",
+  "unique_latent_hashes": 4096
+}

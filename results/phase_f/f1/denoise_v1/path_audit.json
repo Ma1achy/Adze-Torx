@@ -1,0 +1,47 @@
+{
+  "base_git_sha": "b513425ac71474c1fe977dc6ff8a3dcba84ad6bf",
+  "carrier_injection": {
+    "packed_input": "carrier_in(carrier_h_input)",
+    "residual_base": "carrier_h_input + carrier_out(unpool(dit(pack(...))))"
+  },
+  "conditioning": {
+    "denoise_step": 0,
+    "noise": "actual nu through existing noise scalar embedding",
+    "q_effective_depth": "separate existing conditioning coordinate"
+  },
+  "current_git_sha": "90ed475606d733cab231acd7667a5e30a628a832",
+  "decoder_input": "predicted clean h_hat with fixed teacher length",
+  "explicit_current_carrier": "carrier_h_input",
+  "fixed_structural_teacher": [
+    "committed boundaries",
+    "committed lengths",
+    "activity",
+    "pack metadata",
+    "decoder emission routing"
+  ],
+  "inference_visible": [
+    "constant prompt/context",
+    "supplied corrupted carrier h_nu",
+    "fixed committed boundaries/length/activity",
+    "nu through existing DiT noise conditioning",
+    "operator stochastic state"
+  ],
+  "legacy_current_carrier": "proposal_h",
+  "loss": {
+    "boundary_weight": 1.0,
+    "byte_weight": 1.0,
+    "extent_weight": 1.0,
+    "h_weight": 1.0,
+    "proposal_policy": "PHASE_F_1_DENOISE_V1_PROPOSAL_AUX_DISABLED",
+    "proposal_weight": 0.0
+  },
+  "path_separable_without_architecture_decision": true,
+  "status": "F1_PATH_AUDIT_PASS",
+  "target_teacher_freeze": "accepted model update mask plus stop-gradient h0",
+  "teacher_or_loss_only": [
+    "clean target bytes",
+    "frozen clean target frontend",
+    "clean h0",
+    "byte labels"
+  ]
+}
