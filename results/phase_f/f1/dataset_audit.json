@@ -1,0 +1,78 @@
+{
+  "eval_grid": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "git_sha": "b513425ac71474c1fe977dc6ff8a3dcba84ad6bf",
+  "passed": true,
+  "seeds": {
+    "test": 942,
+    "train": 940,
+    "validation": 941
+  },
+  "sizes": {
+    "test": 4096,
+    "train": 16384,
+    "validation": 512
+  },
+  "split_intersections": {
+    "train_test": 0,
+    "train_validation": 0,
+    "validation_test": 0
+  },
+  "structure_content_invariance": {
+    "fields": {
+      "activity": true,
+      "carrier_to_k": true,
+      "carrier_to_m": true,
+      "committed_boundaries": true,
+      "committed_lengths": true,
+      "kv_mask": true,
+      "packed_to_carrier": true,
+      "query_mask": true
+    },
+    "passed": true,
+    "sample_count": 4096
+  },
+  "target_distribution": "JAX uniform integer bytes in [0, 255]",
+  "task_version": "DENOISE_V0",
+  "test": {
+    "all_target_bytes_meaningful": true,
+    "constant_prompt": true,
+    "count": 4096,
+    "duplicate_count": 0,
+    "prompt_shape_valid": true,
+    "target_bytes_in_range": true,
+    "target_shape_valid": true,
+    "task_version": "DENOISE_V0",
+    "unique_example_hashes": 4096
+  },
+  "torx_pin": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+  "train": {
+    "all_target_bytes_meaningful": true,
+    "constant_prompt": true,
+    "count": 16384,
+    "duplicate_count": 0,
+    "prompt_shape_valid": true,
+    "target_bytes_in_range": true,
+    "target_shape_valid": true,
+    "task_version": "DENOISE_V0",
+    "unique_example_hashes": 16384
+  },
+  "training_nu_distribution": "Uniform(0.025, 0.9)",
+  "validation": {
+    "all_target_bytes_meaningful": true,
+    "constant_prompt": true,
+    "count": 4096,
+    "duplicate_count": 0,
+    "prompt_shape_valid": true,
+    "target_bytes_in_range": true,
+    "target_shape_valid": true,
+    "task_version": "DENOISE_V0",
+    "unique_example_hashes": 4096
+  },
+  "validation_epsilon_pairing": "same root/example/stage/s epsilon reused across every nu and checkpoint"
+}

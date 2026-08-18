@@ -1,0 +1,5 @@
+{
+  "status": "SKIPPED_UPSTREAM_CODEC_GATE",
+  "reason": "The accepted frozen codec failed the mandatory arbitrary-random-byte suitability gate before first-gradient execution.",
+  "executed": false
+}

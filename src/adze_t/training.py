@@ -10,7 +10,12 @@ import jax.numpy as jnp
 from .backends.deterministic import DeterministicOps
 from .backends.torx import TorxOperatorConfig, TorxOps
 from .config import REFERENCE_SMALL_V0, ReferenceConfig
-from .model import apply_model, apply_target_codec, init_model_params
+from .model import (
+    apply_clean_target_teacher,
+    apply_model,
+    apply_target_codec,
+    init_model_params,
+)
 from .objectives import (
     adamw_init,
     adamw_step,
@@ -20,6 +25,7 @@ from .objectives import (
     total_loss,
 )
 from .teacher import canonical_teacher_structure
+from .phase_f_1 import make_initial_corruption
 
 
 _CODEC_ENCODER_NAMES = (
@@ -198,6 +204,7 @@ def stochastic_train_step(
         config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=lambda_op),
         optimizer_step=step,
     )
+
     clean_target_ops = TorxOps.create(
         training_root,
         config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
@@ -272,6 +279,125 @@ def stochastic_train_step(
             "grad_rho_raw_norm": rho_norm,
             "grad_rho_applied_norm": jnp.asarray(0.0, dtype=rho_norm.dtype),
             **gradient_metrics,
+            "activation_packed_input": outputs["activation_rms"]["packed_input"],
+            "activation_unpooled_carrier": outputs["activation_rms"]["unpooled_carrier"],
+            "activation_block_rms": outputs["dit_aux"]["block_rms"],
+            "activation_cycle_rms": outputs["dit_aux"]["cycle_rms"],
+        },
+    )
+
+
+def stochastic_denoise_train_step(
+    params: Any,
+    moments: tuple[Any, Any],
+    step: jax.Array | int,
+    batch: dict[str, jax.Array],
+    operator_root: jax.Array,
+    diffusion_root: jax.Array,
+    *,
+    config: ReferenceConfig = REFERENCE_SMALL_V0,
+    lambda_op: float | jax.Array = 1.0,
+) -> tuple[Any, tuple[Any, Any], dict[str, jax.Array]]:
+    """Train one faithful S=1 x0 prediction from an occurrence-fresh corrupted carrier."""
+    if config.training.proposal_weight != 0.0:
+        raise ValueError("DENOISE_V0 requires proposal_weight=0")
+    noisy_ops = TorxOps.create(
+        operator_root,
+        config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=lambda_op),
+        optimizer_step=step,
+    )
+    clean_target_ops = TorxOps.create(
+        operator_root,
+        config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
+        optimizer_step=step,
+    )
+
+    def objective(p):
+        target_analysis = apply_clean_target_teacher(
+            p,
+            batch["target"],
+            batch["target_mask"],
+            config=config,
+            ops=clean_target_ops,
+        )
+        clean_h = jax.lax.stop_gradient(target_analysis["target"]["h0"])
+        carrier_h_input, epsilon = make_initial_corruption(
+            clean_h,
+            batch["nu"],
+            diffusion_root,
+            batch["global_example_id"],
+            optimizer_step=batch["diffusion_occurrence"],
+        )
+        outputs = apply_model(
+            p,
+            batch["prompt"],
+            batch["prompt_mask"],
+            batch["target"],
+            batch["target_mask"],
+            config=config,
+            ops=noisy_ops,
+            target_ops=clean_target_ops,
+            target_analysis=target_analysis,
+            carrier_h_input=carrier_h_input,
+            noise_level=batch["nu"],
+            denoise_step=0,
+        )
+        components = loss_components(outputs)
+        return total_loss(components, config), (components, outputs, epsilon)
+
+    (loss, (components, outputs, epsilon)), grads = jax.value_and_grad(objective, has_aux=True)(
+        params
+    )
+    update_mask = stochastic_model_update_mask(params)
+    permitted_grads = _masked_gradients(grads, update_mask)
+    raw_norm = _norm(grads)
+    permitted_norm = _norm(permitted_grads)
+    clipped_norm = jnp.minimum(permitted_norm, config.training.grad_clip_norm)
+    gradient_metrics = _gradient_metrics(grads)
+    rho_norm = _path_norm(grads, lambda path: "['rho']" in path)
+    direct_names = ("a_log", "d_skip", "delta_bias", "layer_scale")
+    direct_norm = _path_norm(
+        grads, lambda path: any(f"['{name}']" in path for name in direct_names)
+    )
+    direct_permitted_norm = _path_norm(
+        permitted_grads,
+        lambda path: any(f"['{name}']" in path for name in direct_names),
+    )
+    clip_scale = jnp.minimum(
+        1.0, config.training.grad_clip_norm / jnp.maximum(permitted_norm, 1.0e-8)
+    )
+    params, moments, optimizer_grad_norm = adamw_step(
+        params,
+        grads,
+        moments,
+        step,
+        learning_rate=config.training.learning_rate,
+        weight_decay=config.training.weight_decay,
+        clip_norm=config.training.grad_clip_norm,
+        update_mask=update_mask,
+    )
+    teacher = outputs["target"]["teacher"]
+    byte_accuracy, sequence_accuracy = emitted_metrics(
+        outputs["byte_logits"], teacher.slot_bytes, teacher.slot_mask
+    )
+    return (
+        params,
+        moments,
+        {
+            "loss": loss,
+            **components,
+            "byte_accuracy": byte_accuracy,
+            "sequence_accuracy": sequence_accuracy,
+            "grad_raw_norm": raw_norm,
+            "grad_permitted_norm": permitted_norm,
+            "grad_clipped_applied_norm": clipped_norm,
+            "grad_optimizer_reported_norm": optimizer_grad_norm,
+            "grad_direct_ssm_norm": direct_norm,
+            "grad_direct_ssm_applied_norm": direct_permitted_norm * clip_scale,
+            "grad_rho_raw_norm": rho_norm,
+            "grad_rho_applied_norm": jnp.asarray(0.0, dtype=rho_norm.dtype),
+            **gradient_metrics,
+            "diffusion_epsilon_rms": jnp.sqrt(jnp.mean(epsilon**2)),
             "activation_packed_input": outputs["activation_rms"]["packed_input"],
             "activation_unpooled_carrier": outputs["activation_rms"]["unpooled_carrier"],
             "activation_block_rms": outputs["dit_aux"]["block_rms"],

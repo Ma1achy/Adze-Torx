@@ -14,7 +14,6 @@ from .decoder import apply_decoder, init_decoder_params
 from .dit import DiTConfig, apply_dit, init_dit_params
 from .encoder import (
     encode_context_from_hidden,
-    encode_target,
     encode_target_from_hidden,
     init_encoder_params,
     shared_byte_frontend,
@@ -85,8 +84,10 @@ def apply_target_codec(
     ops = ops or DeterministicOps()
     if target.shape[1] > config.carrier.C * config.carrier.L_max:
         raise ValueError("target sequence width exceeds carrier emission capacity")
-    target_ops = ops.with_scope("target")
-    target_codec = encode_target(target, target_mask, params["encoder"], config, target_ops)
+    target_analysis = apply_clean_target_teacher(
+        params, target, target_mask, config=config, ops=ops
+    )
+    target_codec = target_analysis["target"]
     codec_logits, codec_emit_mask = apply_decoder(
         target_codec["h0"],
         target_codec["teacher"].length,
@@ -102,6 +103,23 @@ def apply_target_codec(
     }
 
 
+def apply_clean_target_teacher(
+    params: dict[str, Any],
+    target: jax.Array,
+    target_mask: jax.Array,
+    *,
+    config: ReferenceConfig = REFERENCE_SMALL_V0,
+    ops: LearnedOps | None = None,
+) -> dict[str, Any]:
+    """Prepare the frozen clean target analysis used only by losses and corruption."""
+    ops = (ops or DeterministicOps()).with_scope("target")
+    target_frontend = shared_byte_frontend(target, target_mask, params["encoder"], config, ops)
+    target_codec = encode_target_from_hidden(
+        target_frontend, target, target_mask, params["encoder"], config, ops
+    )
+    return {"target_frontend": target_frontend, "target": target_codec}
+
+
 def apply_model(
     params: dict[str, Any],
     prompt: jax.Array,
@@ -112,6 +130,10 @@ def apply_model(
     config: ReferenceConfig = REFERENCE_SMALL_V0,
     ops: LearnedOps | None = None,
     target_ops: LearnedOps | None = None,
+    target_analysis: dict[str, Any] | None = None,
+    carrier_h_input: jax.Array | None = None,
+    noise_level: jax.Array | float = 0.0,
+    denoise_step: jax.Array | int = 0,
     committed_c_b: jax.Array | None = None,
     committed_activity: jax.Array | None = None,
     committed_length: jax.Array | None = None,
@@ -128,19 +150,22 @@ def apply_model(
     if target.shape[1] > config.carrier.C * config.carrier.L_max:
         raise ValueError("target sequence width exceeds carrier emission capacity")
     prompt_ops = ops.with_scope("prompt")
-    clean_target_ops = (target_ops or ops).with_scope("target")
     prompt_frontend = shared_byte_frontend(
         prompt, prompt_mask, params["encoder"], config, prompt_ops
     )
     context_seq, context_global = encode_context_from_hidden(
         prompt_frontend, prompt_mask, params["encoder"], config, prompt_ops
     )
-    target_frontend = shared_byte_frontend(
-        target, target_mask, params["encoder"], config, clean_target_ops
-    )
-    target_codec = encode_target_from_hidden(
-        target_frontend, target, target_mask, params["encoder"], config, clean_target_ops
-    )
+    if target_analysis is None:
+        target_analysis = apply_clean_target_teacher(
+            params,
+            target,
+            target_mask,
+            config=config,
+            ops=target_ops or ops,
+        )
+    target_frontend = target_analysis["target_frontend"]
+    target_codec = target_analysis["target"]
     teacher = target_codec["teacher"]
     c_b = teacher.boundaries if committed_c_b is None else committed_c_b
     length = teacher.length if committed_length is None else committed_length
@@ -159,6 +184,9 @@ def apply_model(
     proposal_h, proposal_b, proposal_l = apply_proposal(
         context_global, carrier_prior, params["proposal"], config, ops
     )
+    current_carrier = proposal_h if carrier_h_input is None else carrier_h_input
+    if current_carrier.shape != proposal_h.shape:
+        raise ValueError("carrier_h_input must match the proposal carrier shape")
     metadata = build_pack_metadata_core(
         c_b, activity, M_max=config.packing.M_max, K=config.packing.K
     )
@@ -169,7 +197,7 @@ def apply_model(
         if teacher_blocks > config.packing.M_max:
             raise ValueError("Phase-B teacher block count exceeds M_max")
         metadata = trim_padding_blocks(metadata, teacher_blocks)
-    carrier_input = ops.linear(proposal_h, params["carrier_in"], name="model.carrier_input")
+    carrier_input = ops.linear(current_carrier, params["carrier_in"], name="model.carrier_input")
     packed = pack_values(carrier_input, metadata)
     packed_out, dit_aux = apply_dit(
         packed,
@@ -179,6 +207,8 @@ def apply_model(
         _dit_config(config),
         ops=ops,
         mode=mode,
+        noise=noise_level,
+        denoise_step=denoise_step,
         observed_b=c_b,
         observed_l=length,
         cycles=dit_cycles,
@@ -190,7 +220,7 @@ def apply_model(
     )
     unpooled = unpool_values(packed_out, metadata, C=config.carrier.C)
     carrier_delta = ops.linear(unpooled, params["carrier_out"], name="model.carrier_output")
-    pre_head_carrier = proposal_h + carrier_delta
+    pre_head_carrier = current_carrier + carrier_delta
     h_hat = ops.linear(pre_head_carrier, params["h_head"], name="model.h_head")
     b_logits = ops.categorical_logits(pre_head_carrier, params["b_head"], name="model.b_head")
     l_logits = ops.categorical_logits(pre_head_carrier, params["l_head"], name="model.l_head")
@@ -213,6 +243,7 @@ def apply_model(
         "context_global": context_global,
         "target": target_codec,
         "proposal": (proposal_h, proposal_b, proposal_l),
+        "current_carrier_input": current_carrier,
         "pre_head_carrier": pre_head_carrier,
         "carrier": h_final,
         "prediction": (h_hat, b_logits, l_logits),

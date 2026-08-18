@@ -30,3 +30,16 @@ or a claim about original-Adze behaviour.
 
 No denoiser wiring, DENOISE_V0 calibration, rollout, or S-dependent experiment
 was performed. Therefore no `PHASE_F_S_*` scientific decision is issued.
+
+## Phase F.1 — PHASE_F_1_ONE_STEP_BLOCKED
+
+The explicit one-step corrupted-carrier substrate passed qualified parity,
+leakage, fixed-structure invariance, localization, and PRNG-pairing tests.
+However, the frozen target codec failed the mandatory DENOISE_V0 suitability
+gate on uniform random byte targets: 12.4512% byte reconstruction and 0% exact
+reconstruction, versus its preserved 99.4141%/95.3125% accepted-domain control
+on byte values `1..32`.
+
+Per the predeclared gate order, first-gradient, overfit, calibration, and
+lambda-op sanity runs were not started. No `PHASE_F_S_*` decision is issued and
+no S>1 implementation exists.

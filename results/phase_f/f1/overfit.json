@@ -1,0 +1,5 @@
+{
+  "status": "SKIPPED_UPSTREAM_CODEC_GATE",
+  "reason": "Tiny overfit is downstream of codec suitability and was not started after that mandatory gate failed.",
+  "executed": false
+}

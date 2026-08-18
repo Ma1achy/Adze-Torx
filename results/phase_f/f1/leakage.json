@@ -1,0 +1,29 @@
+{
+  "status": "F1_LEAKAGE_AND_LOCALIZATION_PASS",
+  "base_git_sha": "b513425ac71474c1fe977dc6ff8a3dcba84ad6bf",
+  "teacher_content_invariance": {
+    "result": "exact",
+    "description": "Changing teacher-only target analysis while fixing context, h_input, structure, nu, and keys leaves packed state and inference outputs unchanged."
+  },
+  "structure_content_invariance": {
+    "sample_count": 4096,
+    "committed_boundaries": true,
+    "committed_lengths": true,
+    "activity": true,
+    "pack_metadata": true,
+    "result": "pass"
+  },
+  "corrupted_carrier_localization": {
+    "description": "Changing only h_input changes packed carrier and downstream byte logits.",
+    "result": "pass"
+  },
+  "validation_epsilon_pairing": {
+    "same_example_same_epsilon_across_nu": true,
+    "different_h_nu_from_alpha_sigma": true,
+    "checkpoint_and_lambda_independent": true
+  },
+  "training_epsilon": {
+    "same_example_different_optimizer_step_changes_epsilon": true,
+    "same_occurrence_reproducible": true
+  }
+}

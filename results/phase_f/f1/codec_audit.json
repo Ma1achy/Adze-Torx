@@ -1,0 +1,61 @@
+{
+  "accepted_domain_control": {
+    "byte_accuracy": 0.994140625,
+    "distribution": "eight bytes uniformly sampled from integer values 1..32",
+    "exact_accuracy": 0.953125,
+    "examples": 256,
+    "matches_historical_gate": true,
+    "seed": 711
+  },
+  "byte_accuracy": 0.12451171875,
+  "codec_checkpoint": "results/phase_b/checkpoints/target_codec_b1.pkl",
+  "codec_sha256": "55f057f78f795f1585d7aac28fa7ff37846d4c1098507ede375e86b21c4f8ff6",
+  "coefficient_wording": "unit-energy trigonometric corruption coefficients; variance-preserving only under unit-variance clean latents",
+  "corruption_rms_interpretation": [
+    {
+      "empirical_noise_rms": 0.15649588406085968,
+      "empirical_signal_rms": 0.656659247238526,
+      "nu": 0.1,
+      "signal_noise_rms_ratio": 4.1960160880854716
+    },
+    {
+      "empirical_noise_rms": 0.38283368945121765,
+      "empirical_signal_rms": 0.6142362740546261,
+      "nu": 0.25,
+      "signal_noise_rms_ratio": 1.604446763645901
+    },
+    {
+      "empirical_noise_rms": 0.7073845267295837,
+      "empirical_signal_rms": 0.4701160976353087,
+      "nu": 0.5,
+      "signal_noise_rms_ratio": 0.6645835183994955
+    },
+    {
+      "empirical_noise_rms": 0.9242422580718994,
+      "empirical_signal_rms": 0.25442499887291525,
+      "nu": 0.75,
+      "signal_noise_rms_ratio": 0.27527955647005575
+    },
+    {
+      "empirical_noise_rms": 0.9880762696266174,
+      "empirical_signal_rms": 0.1040046224840383,
+      "nu": 0.9,
+      "signal_noise_rms_ratio": 0.1052597108959417
+    }
+  ],
+  "duplicate_latent_count": 0,
+  "exact_accuracy": 0.0,
+  "examples": 4096,
+  "failure_interpretation": "Frozen codec remains valid on its accepted 1..32 byte domain but is unsuitable for required uniform 0..255 DENOISE_V0 targets.",
+  "gate": {
+    "byte_accuracy_at_least": 0.99,
+    "exact_accuracy_at_least": 0.95
+  },
+  "git_sha": "b513425ac71474c1fe977dc6ff8a3dcba84ad6bf",
+  "global_h0_rms": 0.6648445725440979,
+  "mean_coordinate_variance": 0.0028524775989353657,
+  "pairwise_cosine_mean": 0.9936095476150513,
+  "pairwise_cosine_std": 0.001654397347010672,
+  "passed": false,
+  "unique_latent_hashes": 4096
+}

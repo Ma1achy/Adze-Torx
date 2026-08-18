@@ -1,0 +1,21 @@
+{
+  "status": "F1_ZERO_CORRUPTION_QUALIFIED_PARITY_PASS",
+  "base_git_sha": "b513425ac71474c1fe977dc6ff8a3dcba84ad6bf",
+  "legacy_regression_invariant": {
+    "semantics": "carrier_h_input omitted; proposal_h remains packed content and residual base",
+    "result": "exact",
+    "regression_test": "test_legacy_path_equals_explicit_proposal_state_and_zero_corruption_is_exact"
+  },
+  "explicit_state_heavy_core_equivalence": {
+    "packed_input_uses_h_input": true,
+    "residual_base_uses_h_input": true,
+    "tolerance": 1e-07,
+    "result": "pass",
+    "regression_test": "test_explicit_state_matches_independent_faithful_heavy_core_reference"
+  },
+  "zero_corruption": {
+    "law": "corrupt_h(h0, 0, epsilon) == h0",
+    "result": "exact"
+  },
+  "qualification": "Explicit h0 execution is not required to equal the distinct historical proposal_h execution."
+}

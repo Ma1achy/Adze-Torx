@@ -1,9 +1,9 @@
 # Phase F — faithful denoising/resampling depth S
 
-Load-bearing status: **F0_CORRUPTION_CONTRACT_BLOCKED**.
+Current load-bearing status: **PHASE_F_1_ONE_STEP_BLOCKED**.
 
-Phase F experiments have not started. There is currently no evidence for or
-against denoising depth S.
+No denoising-depth experiment has started. There is currently no evidence for
+or against additional denoising depth S.
 
 For tooling that requires a top-level Phase-F field, the administrative status
 is `PHASE_F_S_UNRESOLVED`: **administrative/contract status only — Phase F
@@ -77,3 +77,31 @@ sampling, and prefix-compatible S=4 schedule.
 No accepted model/training path changed and no S experiment started. The
 focused contract and numerical evidence are recorded in
 `corruption_contract_v0.md` and `corruption_contract_v0.json`.
+
+## Phase F.1 — faithful one-step corrupted carrier
+
+The explicit current-carrier interface is now architecture-faithful and
+backward compatible. Legacy calls still use `proposal_h`; explicit calls use
+`carrier_h_input` at both the packed heavy-core input and post-unpool residual
+base. The qualified parity, leakage, structural-invariance, carrier-localization,
+and paired-diffusion-key regressions pass.
+
+DENOISE_V0 disables the impossible constant-prompt proposal auxiliary objective
+with `PHASE_F_1_DENOISE_V0_PROPOSAL_AUX_DISABLED`; all other x0 objective
+weights remain one.
+
+The mandatory codec suitability gate blocked training. The accepted frozen
+codec was trained on byte values `1..32`. It retains its historical control
+performance of 99.4141% byte and 95.3125% exact accuracy there, but on required
+uniform `0..255` DENOISE_V0 targets it achieves only 12.4512% byte and 0% exact
+accuracy. Uniform-target h0 states are unique but highly clustered
+(mean coordinate variance 0.00285248; mean pairwise cosine 0.993610).
+
+No first gradient, overfit, calibration, lambda sanity evaluation, or S>1
+experiment was started after this gate failed. The authoritative F1 status is
+`PHASE_F_1_ONE_STEP_BLOCKED`; it is not an S-benefit, neutrality, or negative
+result.
+
+Phase F.1 validation: format, lint, type checking, dependency boundaries, and
+the private-Torx import scan passed; the test suites reported 155 regular tests
+and 9 slow tests passing.

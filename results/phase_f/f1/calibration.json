@@ -1,0 +1,10 @@
+{
+  "status": "DENOISE_V0_CALIBRATION_UNRESOLVED",
+  "phase_f_1_status": "PHASE_F_1_ONE_STEP_BLOCKED",
+  "blocking_gate": "TARGET_CODEC_SUITABILITY",
+  "reason": "The frozen accepted target codec reconstructs uniform random 0..255 DENOISE_V0 targets at only 0.12451171875 byte accuracy and 0 exact accuracy.",
+  "training_started": false,
+  "checkpoints_created": false,
+  "s_greater_than_one_implemented": false,
+  "phase_f_s_result_issued": false
+}

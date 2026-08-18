@@ -33,6 +33,7 @@ _DIFFUSION_NAMESPACE_ID = 0x50464430  # ASCII-like marker: "PFD0"
 _DIFFUSION_EXAMPLE_ID_MARKER = 0x4558414D  # "EXAM"
 _DIFFUSION_STAGE_MARKER = 0x53544745  # "STGE"
 _DIFFUSION_STEP_MARKER = 0x53544550  # "STEP"
+_DIFFUSION_TRAINING_OCCURRENCE_MARKER = 0x4F505453  # "OPTS"
 
 
 class DiffusionStage(IntEnum):
@@ -171,6 +172,13 @@ def diffusion_key(
     key = jax.random.fold_in(key, jnp.uint32(stage.value))
     key = jax.random.fold_in(key, jnp.uint32(_DIFFUSION_STEP_MARKER))
     return jax.random.fold_in(key, jnp.asarray(denoise_step, dtype=jnp.uint32))
+
+
+def training_diffusion_root(root_key: Array, optimizer_step: int | Array) -> Array:
+    """Derive a fresh diffusion root for one training occurrence."""
+    key = jax.random.fold_in(root_key, jnp.uint32(_DIFFUSION_NAMESPACE_ID))
+    key = jax.random.fold_in(key, jnp.uint32(_DIFFUSION_TRAINING_OCCURRENCE_MARKER))
+    return jax.random.fold_in(key, jnp.asarray(optimizer_step, dtype=jnp.uint32))
 
 
 def sample_initial_corruption(h0: Array, nu: Array | float, key: Array) -> CorruptionTrace:
