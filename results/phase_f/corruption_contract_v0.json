@@ -1,0 +1,94 @@
+{
+  "contract": "PHASE_F_CORRUPTION_CONTRACT_V0",
+  "status": "PHASE_F_CORRUPTION_CONTRACT_V0_FROZEN",
+  "milestone_decision": "PHASE_F_CORRUPTION_CONTRACT_V0_PASS",
+  "base_git_sha": "dac8d62773dd641d5b28ab9582743d437984e879",
+  "date": "2026-08-18",
+  "torx_pin": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+  "provenance": {
+    "kind": "explicit Phase-F design choice",
+    "recovered_original_adze": false,
+    "exact_named_diffusion_method": false,
+    "motivating_status": "F0_CORRUPTION_CONTRACT_BLOCKED"
+  },
+  "nu_domain": [0.0, 1.0],
+  "alpha": "cos(pi * nu / 2)",
+  "sigma": "sin(pi * nu / 2)",
+  "unit_energy_identity": "alpha(nu)^2 + sigma(nu)^2 = 1",
+  "endpoints": {
+    "nu_0": "h_nu = h_0",
+    "nu_1": "h_nu = epsilon (semantic pure-noise endpoint; recoverability is not assumed)"
+  },
+  "forward_corruption": "alpha(nu) * h_0 + sigma(nu) * epsilon, epsilon ~ N(0, I)",
+  "training_distribution": {
+    "family": "Uniform",
+    "minimum": 0.025,
+    "maximum": 0.9,
+    "implemented_in_training": false
+  },
+  "eval_grid": [0.1, 0.25, 0.5, 0.75, 0.9],
+  "master_schedule_multipliers": [1.0, 0.75, 0.5, 0.25],
+  "maximum_s": 4,
+  "schedule_policy": "shorter executions are strict prefixes; no per-S renormalization",
+  "recorruption": "alpha(nu_next) * h_hat_0 + eta_diff * sigma(nu_next) * epsilon",
+  "eta_diff_modes": {
+    "0": "deterministic mean re-corruption",
+    "1": "full fresh Gaussian re-noising"
+  },
+  "initial_corruption_uses_full_noise_independent_of_eta": true,
+  "diffusion_key_contract": {
+    "namespace_id_hex": "0x50464430",
+    "identity_fields": [
+      "root",
+      "fixed diffusion namespace",
+      "global_example_id",
+      "diffusion_stage",
+      "denoise_step"
+    ],
+    "stages": ["INITIAL_CORRUPTION", "RECORRUPTION"],
+    "depends_on_requested_total_s": false,
+    "separate_from_torx_operator_namespace": true
+  },
+  "structure_policy": "PHASE_F_CONTINUOUS_S_FIXED_STRUCTURE_V0",
+  "rollout_loss": {
+    "identifier": "PHASE_F_ROLLOUT_LOSS_V0",
+    "formula": "mean per-step ordinary x0 loss",
+    "implemented": false,
+    "clean_teacher_used_for_intermediate_state": false,
+    "hidden_stop_gradient": false
+  },
+  "model_path_changed": false,
+  "experiments_started": false,
+  "numerical_validation": {
+    "dtype": "float32",
+    "moment_seed": 75,
+    "sample_count": 8192,
+    "moment_absolute_tolerance": 0.03,
+    "eta_0_variance_tolerance": 1e-12,
+    "initial_mean_abs_error": 0.004276245832443237,
+    "initial_variance_abs_error": 0.00535014271736145,
+    "recorruption_eta_1_mean_abs_error": 0.004276245832443237,
+    "recorruption_eta_1_variance_abs_error": 0.00535014271736145,
+    "recorruption_eta_0_unbiased_variance": 1.0748270763000223e-13,
+    "unit_energy_max_abs_error": 5.960464477539063e-8,
+    "h0_gradient_max_abs_error": 0.0,
+    "nu_gradient_abs_error": 0.0,
+    "recorruption_eta_0_gradient_max_abs_error": 0.0,
+    "recorruption_eta_1_gradient_max_abs_error": 0.0
+  },
+  "validation": {
+    "targeted_phase_f_tests": 16,
+    "repository_validation": "pass",
+    "formatted_files": 117,
+    "lint": "pass",
+    "typecheck_errors": 0,
+    "typecheck_warnings": 0,
+    "boundaries": "pass",
+    "private_torx_import_matches": 0,
+    "regular_tests_passed": 147,
+    "regular_tests_deselected": 9,
+    "slow_tests_passed": 9,
+    "slow_tests_deselected": 147
+  },
+  "next_milestone": "Phase F.1 — wire corrupted carrier into faithful S=1 denoiser"
+}

@@ -58,10 +58,22 @@ schedule was implemented.
 
 ## Validation
 
-- `make format-check`: 116 files already formatted.
+- `make format-check`: 117 files already formatted.
 - `make lint`: passed.
 - `make typecheck`: 0 errors and 0 warnings.
-- `make test`: 132 passed, 8 deselected.
+- `make test`: 147 passed, 9 deselected.
 - `make boundaries`: passed.
-- `make test-slow`: 8 passed, 132 deselected.
+- `make test-slow`: 9 passed, 147 deselected.
 - Explicit private-Torx import scan: zero matches.
+
+## Phase F.0.1 contract resolution
+
+The explicit `PHASE_F_CORRUPTION_CONTRACT_V0` design decision resolves the F0
+blocker without claiming recovered original-Adze semantics. Its standalone JAX
+substrate implements the frozen trigonometric forward kernel, eta 0/1
+re-corruption primitive, dedicated diffusion-key namespace, reproducible
+sampling, and prefix-compatible S=4 schedule.
+
+No accepted model/training path changed and no S experiment started. The
+focused contract and numerical evidence are recorded in
+`corruption_contract_v0.md` and `corruption_contract_v0.json`.
