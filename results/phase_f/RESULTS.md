@@ -1,15 +1,10 @@
 # Phase F — faithful denoising/resampling depth S
 
-Current load-bearing status: **PHASE_F_1_ONE_STEP_PASS**.
+Current load-bearing status: **PHASE_F_2_SAME_MODEL_S_DEGRADATION**.
 
-No denoising-depth experiment has started. There is still no evidence for or
-against additional denoising depth S; this milestone establishes only a valid
-one-step denoiser and benchmark.
-
-No top-level `PHASE_F_S_*` scientific label is issued because S>1 has not been
-implemented or evaluated. The former F0 administrative status is retained
-below only as historical provenance; its corruption-contract blocker was
-resolved by Phase F.0.1.
+Phase F.2 evaluates repeated application of the accepted F1 one-step checkpoint
+without training or parameter mutation. The earlier F0/F1 sections below are
+retained as historical provenance.
 
 ## F0 corruption audit
 
@@ -138,3 +133,43 @@ scientific decision is issued.
 Completion validation passed with 120 files formatted, lint and type checking
 clean, dependency boundaries intact, 156 regular tests, 9 slow tests, 9 focused
 F1 tests, and zero private-Torx imports.
+
+## Phase F.2 — same-model denoising depth
+
+The accepted step-5000 F_ONE_STEP checkpoint and codec matched their required
+SHA-256 digests exactly. The primary `F2_STEP0_CONDITIONING` experiment used the
+actual rollout indices `0,1,2,3` for diffusion and Torx occurrence identity but
+held the learned denoise conditioning coordinate at `0` for every application.
+Thus S=1 exactly reproduces F1 and later steps introduce no untrained
+conditioning codes. `L=4`, `Q=3`, and `R=0` remained fixed.
+
+On all 4,096 frozen DENOISE_V1 test examples at lambda-op zero and eta zero,
+S4 versus S1 byte accuracy changed by -74.4995, -23.2483, and -5.6000
+percentage points at nu 0.25, 0.50, and 0.75. The corresponding paired
+bootstrap 95% intervals were [-74.9664, -74.0171], [-23.7610, -22.7325], and
+[-5.9540, -5.2429] percentage points. NLL worsened by 15.6146, 10.0101, and
+5.4611. Carrier MSE was mixed: +0.00891, -0.00465, and -0.01703. This latent
+movement does not offset the large, systematic degradation in decoded task
+metrics.
+
+The full eta-one test sweep showed the same result. The fixed 512-example,
+16-root Torx confirmation at lambda-op one and sigma-op 1e-3 also reproduced
+the eta-zero S4-S1 changes (-74.5651, -22.8333, and -5.6274 percentage points
+in the informative region), with narrow root-level Student-t intervals and no
+nonfinite values. No 1,024-example escalation was needed because there was no
+high-variance conflict or stochastic reversal.
+
+All parameter, rho, and teacher trees were bitwise equal before and after
+evaluation. The trajectory never accepts clean h0, sanitized target content
+placeholders are inference-inert, predicted structure never controls packing,
+and diffusion and operator namespaces remain distinct. The F1 nested audit's
+stale DENOISE_V0 metadata label is corrected only in new F2 provenance; the
+historical F1 evidence is unchanged. Literal native-S conditioning remains an
+unrun diagnostic and does not affect the decision.
+
+Detailed aggregate, per-example, bootstrap, Q0-shell, stochastic-root, and
+provenance evidence is under `f2/`. No optimizer or rollout training ran.
+
+Phase F.2 completion validation passed with 122 files formatted, lint and type
+checking clean, dependency boundaries intact, 162 regular tests, 9 slow tests,
+6 focused F2 tests, and zero private-Torx imports.

@@ -134,6 +134,8 @@ def apply_model(
     carrier_h_input: jax.Array | None = None,
     noise_level: jax.Array | float = 0.0,
     denoise_step: jax.Array | int = 0,
+    actual_s_index: jax.Array | int | None = None,
+    denoise_condition_index: jax.Array | int | None = None,
     committed_c_b: jax.Array | None = None,
     committed_activity: jax.Array | None = None,
     committed_length: jax.Array | None = None,
@@ -147,6 +149,13 @@ def apply_model(
 ) -> dict[str, Any]:
     """Run the shared S=1,R=0 graph with deterministic teacher routing."""
     ops = ops or DeterministicOps()
+    actual_s_index = denoise_step if actual_s_index is None else actual_s_index
+    denoise_condition_index = (
+        denoise_step if denoise_condition_index is None else denoise_condition_index
+    )
+    # S occurrence identity applies to the whole operator graph.  The learned
+    # denoise conditioning coordinate is deliberately independent (Phase F.2).
+    ops = ops.with_occurrence(denoise_step=actual_s_index)
     if target.shape[1] > config.carrier.C * config.carrier.L_max:
         raise ValueError("target sequence width exceeds carrier emission capacity")
     prompt_ops = ops.with_scope("prompt")
@@ -208,7 +217,8 @@ def apply_model(
         ops=ops,
         mode=mode,
         noise=noise_level,
-        denoise_step=denoise_step,
+        actual_s_index=actual_s_index,
+        denoise_condition_index=denoise_condition_index,
         observed_b=c_b,
         observed_l=length,
         cycles=dit_cycles,

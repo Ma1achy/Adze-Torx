@@ -1,0 +1,30 @@
+{
+  "all_trajectories_finite": true,
+  "functional_neutrality_threshold_byte_accuracy_percentage_points": 0.1,
+  "immutability_checks": {
+    "parameter_tree_bitwise_equal_before_after": true,
+    "rho_tree_bitwise_equal_before_after": true,
+    "teacher_tree_bitwise_equal_before_after": true
+  },
+  "informative_region": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "label": "PHASE_F_2_SAME_MODEL_S_DEGRADATION",
+  "native_s_conditioning": "diagnostic-only and not run unless separately requested",
+  "no_training": true,
+  "operator_diffusion_namespace_collision": false,
+  "parameter_tree_sha256": "8562a223a5fc399efbde5b2667d8dfc86e08f105c491da80cbbe966e5fb284fb",
+  "primary_condition": "F2_STEP0_CONDITIONING",
+  "primary_eta_diff": 0,
+  "primary_examples_per_nu": 4096,
+  "primary_lambda_op": 0.0,
+  "stochastic_confirmation": {
+    "examples_per_nu": 512,
+    "lambda_op": 1.0,
+    "operator_roots": 16,
+    "sigma_op": 0.001,
+    "student_t_df": 15
+  }
+}

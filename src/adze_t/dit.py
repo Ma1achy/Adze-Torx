@@ -203,11 +203,17 @@ def apply_dit_cycle(
     mode: str = "draft",
     noise: jax.Array | float = 0.0,
     denoise_step: jax.Array | int = 0,
+    actual_s_index: jax.Array | int | None = None,
+    denoise_condition_index: jax.Array | int | None = None,
     refinement_step: jax.Array | int = 0,
     capture_aux: bool = False,
 ) -> Any:
     """Apply one tied stack with separate occurrence and conditioning indices."""
     ops = ops or DeterministicOps()
+    actual_s_index = denoise_step if actual_s_index is None else actual_s_index
+    denoise_condition_index = (
+        denoise_step if denoise_condition_index is None else denoise_condition_index
+    )
     block_rms = []
     block_states = []
     depths = []
@@ -221,14 +227,14 @@ def apply_dit_cycle(
         block_ops = ops.with_occurrence(
             recurrence_cycle=actual_cycle_index,
             physical_layer=block_index,
-            denoise_step=denoise_step,
+            denoise_step=actual_s_index,
             refinement_step=refinement_step,
         )
         raw_conditioning = build_conditioning(
             prompt_global,
             noise,
             0 if mode == "draft" else 1,
-            denoise_step,
+            denoise_condition_index,
             refinement_step,
             depth if config.effective_depth_conditioning else 0,
         )
@@ -286,6 +292,8 @@ def apply_dit(
     mode: str = "draft",
     noise: jax.Array | float = 0.0,
     denoise_step: jax.Array | int = 0,
+    actual_s_index: jax.Array | int | None = None,
+    denoise_condition_index: jax.Array | int | None = None,
     refinement_step: jax.Array | int = 0,
     cycles: int | None = None,
     observed_b: jax.Array | None = None,
@@ -298,6 +306,10 @@ def apply_dit(
 ) -> tuple[jax.Array, dict[str, Any]]:
     """Apply (B_L ... B_1)^Q with block parameters tied across Q."""
     ops = ops or DeterministicOps()
+    actual_s_index = denoise_step if actual_s_index is None else actual_s_index
+    denoise_condition_index = (
+        denoise_step if denoise_condition_index is None else denoise_condition_index
+    )
     ops = ops.with_scope(f"mode:{mode}")
     cycle_count = config.cycles if cycles is None else cycles
     if depth_code_override not in {"correct", "all_q0", "reversed"}:
@@ -369,7 +381,8 @@ def apply_dit(
             ops=ops,
             mode=mode,
             noise=noise,
-            denoise_step=denoise_step,
+            actual_s_index=actual_s_index,
+            denoise_condition_index=denoise_condition_index,
             refinement_step=refinement_step,
             capture_aux=capture_diagnostics,
         )

@@ -63,3 +63,19 @@ milestone status is `PHASE_F_1_ONE_STEP_PASS`. This supersedes the top-level F1
 blocked status without deleting or reinterpreting DENOISE_V0. No S>1 execution
 has occurred, so no benefit, neutrality, or negative decision about denoising
 depth S is issued.
+
+## Phase F.2 — PHASE_F_2_SAME_MODEL_S_DEGRADATION
+
+The full 4,096-example, lambda-op-zero, eta-zero
+`F2_STEP0_CONDITIONING` result shows material and systematic decoded-task
+degradation from repeated application of the accepted one-step checkpoint in
+the predeclared informative region. Paired bootstrap intervals exclude zero by
+wide margins. The required finite 16-root Torx confirmation on the fixed
+512-example subset preserves the direction and magnitude without a
+high-variance reversal.
+
+This is specifically a same-model compositionality result with the learned
+denoise-step condition frozen at its trained value zero. It is not evidence
+about trained S2/S4 rollout models or the diagnostic untrained native-S
+conditioning codes. No training, optimizer step, structure commit, outer
+refinement, or parameter/rho/teacher mutation occurred. Stop at this result.
