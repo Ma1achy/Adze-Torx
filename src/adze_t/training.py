@@ -10,6 +10,12 @@ import jax.numpy as jnp
 from .backends.deterministic import DeterministicOps
 from .backends.torx import TorxOperatorConfig, TorxOps
 from .config import REFERENCE_SMALL_V0, ReferenceConfig
+from .corruption import alpha
+from .denoise import (
+    F3_NATIVE_S_CONDITIONING_TRAINED,
+    apply_denoising_trajectory,
+    make_sanitized_target_analysis,
+)
 from .model import (
     apply_clean_target_teacher,
     apply_model,
@@ -20,6 +26,7 @@ from .objectives import (
     adamw_init,
     adamw_step,
     codec_loss_components,
+    cross_entropy,
     emitted_metrics,
     loss_components,
     total_loss,
@@ -404,6 +411,208 @@ def stochastic_denoise_train_step(
             "activation_cycle_rms": outputs["dit_aux"]["cycle_rms"],
         },
     )
+
+
+def _rollout_step_components(
+    trajectory: Any,
+    step_index: int,
+    clean_h: jax.Array,
+    teacher: Any,
+) -> dict[str, jax.Array]:
+    """Compute one ordinary DENOISE_V1 x0 objective from a sanitized trajectory."""
+    h_hat = trajectory.h_hat[step_index]
+    b_logits = trajectory.b_logits[step_index]
+    l_logits = trajectory.l_logits[step_index]
+    byte_logits = trajectory.byte_logits[step_index]
+    ones_b = jnp.ones_like(teacher.boundaries[:, :-1], dtype=bool)
+    ones_l = jnp.ones_like(teacher.length, dtype=bool)
+    return {
+        "h": jnp.mean((h_hat - clean_h) ** 2),
+        "b": cross_entropy(b_logits[:, :-1], teacher.boundaries[:, :-1], ones_b),
+        "l": cross_entropy(l_logits, teacher.length, ones_l),
+        "byte": cross_entropy(byte_logits, teacher.slot_bytes, teacher.slot_mask),
+        "proposal": jnp.asarray(0.0, dtype=h_hat.dtype),
+    }
+
+
+def _rollout_step_metrics(
+    trajectory: Any,
+    step_index: int,
+    clean_h: jax.Array,
+    teacher: Any,
+) -> dict[str, jax.Array]:
+    components = _rollout_step_components(trajectory, step_index, clean_h, teacher)
+    byte_accuracy, exact_accuracy = emitted_metrics(
+        trajectory.byte_logits[step_index], teacher.slot_bytes, teacher.slot_mask
+    )
+    return {
+        "loss": components["h"] + components["b"] + components["l"] + components["byte"],
+        "h_mse": components["h"],
+        "byte_nll": components["byte"],
+        "byte_accuracy": byte_accuracy,
+        "exact_accuracy": exact_accuracy,
+        "boundary_loss": components["b"],
+        "extent_loss": components["l"],
+    }
+
+
+def s2_rollout_objective(
+    params: Any,
+    batch: dict[str, jax.Array],
+    operator_root: jax.Array,
+    diffusion_root: jax.Array,
+    optimizer_step: int | jax.Array,
+    *,
+    config: ReferenceConfig = REFERENCE_SMALL_V0,
+    lambda_op: float | jax.Array = 1.0,
+) -> tuple[jax.Array, dict[str, Any]]:
+    """Return the pathwise S=2 rollout loss without performing an optimizer update."""
+    weights = config.training
+    if (
+        weights.h_weight != 1.0
+        or weights.boundary_weight != 1.0
+        or weights.extent_weight != 1.0
+        or weights.byte_weight != 1.0
+        or weights.proposal_weight != 0.0
+    ):
+        raise ValueError("Phase-F rollout training requires frozen DENOISE_V1 loss weights")
+    clean_ops = TorxOps.create(
+        operator_root,
+        config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
+        optimizer_step=optimizer_step,
+    )
+    clean = apply_clean_target_teacher(
+        params,
+        batch["target"],
+        batch["target_mask"],
+        config=config,
+        ops=clean_ops,
+    )
+    clean = jax.tree.map(jax.lax.stop_gradient, clean)
+    clean_h = clean["target"]["h0"]
+    teacher = clean["target"]["teacher"]
+    initial_state, epsilon = make_initial_corruption(
+        clean_h,
+        batch["nu"],
+        diffusion_root,
+        batch["global_example_id"],
+        optimizer_step=batch["diffusion_occurrence"],
+    )
+    sanitized = make_sanitized_target_analysis(
+        teacher.boundaries,
+        teacher.length,
+        config=config,
+        target_width=batch["target"].shape[1],
+    )
+    trajectory = apply_denoising_trajectory(
+        params,
+        batch["prompt"],
+        batch["prompt_mask"],
+        initial_state,
+        sanitized,
+        batch["nu"],
+        batch["global_example_id"],
+        s_exec=2,
+        eta_diff=0,
+        diffusion_root=diffusion_root,
+        operator_backend="torx",
+        operator_root=operator_root,
+        operator_optimizer_step=optimizer_step,
+        operator_config=TorxOperatorConfig(
+            operator_stochasticity=True,
+            lambda_op=lambda_op,
+            sigma_min=1.0e-3,
+            sigma_max=1.0e-3,
+        ),
+        conditioning_mode=F3_NATIVE_S_CONDITIONING_TRAINED,
+        config=config,
+    )
+    step0 = _rollout_step_metrics(trajectory, 0, clean_h, teacher)
+    step1 = _rollout_step_metrics(trajectory, 1, clean_h, teacher)
+    loss = 0.5 * (step0["loss"] + step1["loss"])
+    expected_step1_input = alpha(0.75 * batch["nu"]).reshape((-1, 1, 1)) * trajectory.h_hat[0]
+    return loss, {
+        "step0": step0,
+        "step1": step1,
+        "trajectory": trajectory,
+        "clean_h": clean_h,
+        "teacher": teacher,
+        "initial_epsilon": epsilon,
+        "step1_input_error": jnp.max(jnp.abs(trajectory.input_states[1] - expected_step1_input)),
+    }
+
+
+def stochastic_s2_rollout_train_step(
+    params: Any,
+    moments: tuple[Any, Any],
+    step: jax.Array | int,
+    batch: dict[str, jax.Array],
+    operator_root: jax.Array,
+    diffusion_root: jax.Array,
+    *,
+    config: ReferenceConfig = REFERENCE_SMALL_V0,
+    lambda_op: float | jax.Array = 1.0,
+) -> tuple[Any, tuple[Any, Any], dict[str, jax.Array]]:
+    """Continue F1 with a shared-parameter, fully pathwise S=2 rollout update."""
+
+    def objective(p):
+        return s2_rollout_objective(
+            p,
+            batch,
+            operator_root,
+            diffusion_root,
+            step,
+            config=config,
+            lambda_op=lambda_op,
+        )
+
+    (loss, auxiliary), grads = jax.value_and_grad(objective, has_aux=True)(params)
+    update_mask = stochastic_model_update_mask(params)
+    permitted_grads = _masked_gradients(grads, update_mask)
+    raw_norm = _norm(grads)
+    permitted_norm = _norm(permitted_grads)
+    clipped_norm = jnp.minimum(permitted_norm, config.training.grad_clip_norm)
+    gradient_metrics = _gradient_metrics(grads)
+    rho_norm = _path_norm(grads, lambda path: "['rho']" in path)
+    direct_names = ("a_log", "d_skip", "delta_bias", "layer_scale")
+    direct_norm = _path_norm(
+        grads, lambda path: any(f"['{name}']" in path for name in direct_names)
+    )
+    direct_permitted_norm = _path_norm(
+        permitted_grads,
+        lambda path: any(f"['{name}']" in path for name in direct_names),
+    )
+    clip_scale = jnp.minimum(
+        1.0, config.training.grad_clip_norm / jnp.maximum(permitted_norm, 1.0e-8)
+    )
+    params, moments, optimizer_grad_norm = adamw_step(
+        params,
+        grads,
+        moments,
+        step,
+        learning_rate=config.training.learning_rate,
+        weight_decay=config.training.weight_decay,
+        clip_norm=config.training.grad_clip_norm,
+        update_mask=update_mask,
+    )
+    metrics = {
+        "loss": loss,
+        "rollout_loss": loss,
+        **{f"step0_{name}": value for name, value in auxiliary["step0"].items()},
+        **{f"step1_{name}": value for name, value in auxiliary["step1"].items()},
+        "step1_input_error": auxiliary["step1_input_error"],
+        "diffusion_epsilon_rms": jnp.sqrt(jnp.mean(auxiliary["initial_epsilon"] ** 2)),
+        "grad_raw_norm": raw_norm,
+        "grad_permitted_norm": permitted_norm,
+        "grad_clipped_applied_norm": clipped_norm,
+        "grad_optimizer_reported_norm": optimizer_grad_norm,
+        "grad_direct_ssm_norm": direct_norm,
+        "grad_direct_ssm_applied_norm": direct_permitted_norm * clip_scale,
+        "grad_rho_raw_norm": rho_norm,
+        "grad_rho_applied_norm": jnp.asarray(0.0, dtype=rho_norm.dtype),
+        **gradient_metrics,
+    }
+    return params, moments, metrics
 
 
 def codec_pretrain_step(

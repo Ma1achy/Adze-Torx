@@ -25,9 +25,11 @@ from .teacher import TeacherStructure
 
 F2_STEP0_CONDITIONING = "F2_STEP0_CONDITIONING"
 F2_NATIVE_S_CONDITIONING_UNTRAINED = "F2_NATIVE_S_CONDITIONING_UNTRAINED"
+F3_NATIVE_S_CONDITIONING_TRAINED = "F3_NATIVE_S_CONDITIONING_TRAINED"
 F2_CONDITIONING_MODES = (
     F2_STEP0_CONDITIONING,
     F2_NATIVE_S_CONDITIONING_UNTRAINED,
+    F3_NATIVE_S_CONDITIONING_TRAINED,
 )
 
 
@@ -128,7 +130,7 @@ def _as_model_target_analysis(value: SanitizedTargetAnalysis) -> dict[str, Any]:
 def _conditioning_index(mode: str, actual_s_index: int) -> int:
     if mode == F2_STEP0_CONDITIONING:
         return 0
-    if mode == F2_NATIVE_S_CONDITIONING_UNTRAINED:
+    if mode in (F2_NATIVE_S_CONDITIONING_UNTRAINED, F3_NATIVE_S_CONDITIONING_TRAINED):
         return actual_s_index
     raise ValueError(f"unknown F2 conditioning mode: {mode}")
 
@@ -147,6 +149,7 @@ def apply_denoising_trajectory(
     diffusion_root: Array,
     operator_backend: str = "deterministic",
     operator_root: Array | None = None,
+    operator_optimizer_step: int | Array = 0,
     operator_config: TorxOperatorConfig | None = None,
     conditioning_mode: str = F2_STEP0_CONDITIONING,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
@@ -207,6 +210,7 @@ def apply_denoising_trajectory(
                     resolved_operator_root,
                     config=resolved_operator_config,
                     global_example_id=example_id,
+                    optimizer_step=operator_optimizer_step,
                 ).with_occurrence(denoise_step=actual_s_index)
             else:
                 ops = DeterministicOps()
@@ -238,13 +242,19 @@ def apply_denoising_trajectory(
             condition_indices.append(denoise_condition_index)
             if actual_s_index + 1 < s_exec:
                 next_s_index = actual_s_index + 1
-                key = diffusion_key(
-                    diffusion_root,
-                    global_example_id=example_id,
-                    stage=DiffusionStage.RECORRUPTION,
-                    denoise_step=next_s_index,
-                )
-                epsilon = jax.random.normal(key, h_hat.shape[1:], dtype=h_hat.dtype)
+                deterministic_eta = isinstance(eta_diff, (int, DiffusionEtaMode)) and int(
+                    eta_diff
+                ) == int(DiffusionEtaMode.DETERMINISTIC_MEAN)
+                if deterministic_eta:
+                    epsilon = jnp.zeros(h_hat.shape[1:], dtype=h_hat.dtype)
+                else:
+                    key = diffusion_key(
+                        diffusion_root,
+                        global_example_id=example_id,
+                        stage=DiffusionStage.RECORRUPTION,
+                        denoise_step=next_s_index,
+                    )
+                    epsilon = jax.random.normal(key, h_hat.shape[1:], dtype=h_hat.dtype)
                 epsilons.append(epsilon)
                 state = recorrupt_h(
                     h_hat,
