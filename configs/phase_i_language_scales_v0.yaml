@@ -1,0 +1,33 @@
+version: PHASE_I_LANGUAGE_SCALES_V0
+status: preparation_only_not_authoritative
+byte_vocab: 256
+tokeniser: none
+codec_candidate: PHASE_I_FULL_BYTE_CODEC_V0
+scales:
+  smoke:
+    sequence_bytes: 128
+    carrier_capacity: 32
+    max_extent: 4
+    d_model: 128
+    physical_blocks: 4
+    cycles: 3
+    batch_size: 8
+    gradient_accumulation: 1
+  small:
+    sequence_bytes: 256
+    carrier_capacity: 64
+    max_extent: 4
+    d_model: 256
+    physical_blocks: 6
+    cycles: 3
+    batch_size: 16
+    gradient_accumulation: 2
+  medium:
+    sequence_bytes: 512
+    carrier_capacity: 128
+    max_extent: 4
+    d_model: 384
+    physical_blocks: 8
+    cycles: 4
+    batch_size: 16
+    gradient_accumulation: 4
