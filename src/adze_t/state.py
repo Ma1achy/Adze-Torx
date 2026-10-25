@@ -25,6 +25,7 @@ class PredictedStructure:
 
     b_logits: Array
     l_logits: Array
+    valid: Array | None = None
 
 
 @dataclass(frozen=True)
@@ -78,6 +79,8 @@ def validate_carrier_state(state: CarrierState) -> None:
                 raise ValueError(
                     f"{name} must start with shape {(batch, capacity)}, got {value.shape}"
                 )
+        if state.predicted.valid is not None and state.predicted.valid.shape != (batch, capacity):
+            raise ValueError("predicted.valid must match [batch, carrier]")
     if committed.length is not None and committed.length.shape != (batch, capacity):
         raise ValueError("committed.length must match [batch, carrier]")
 

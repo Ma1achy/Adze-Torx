@@ -1,77 +1,119 @@
-# Phase H draft/refinement engineering interface
+# Phase H draft/refinement engineering interface v1
 
-Status: implementation-only feature branch; not scientifically validated and
-not eligible for integration before Phase G passes its gates.
+Status: remediated branch-local engineering contract. It is not a live G/H
+integration, training result, or scientific claim.
 
-## Scope and invariants
+## Frozen branch-local ownership
 
-`adze_t.refinement` implements the deterministic outer control sequence:
+H owns persistent carrier-content orchestration:
 
 ```text
 shared denoiser in draft mode
-  -> select
-  -> reset selected carrier sites
+  -> select deterministic seeds
+  -> form an eligibility-safe closed region
+  -> reset selected h and observed structure
   -> same denoiser in global-refine mode
-  -> controlled structure commit boundary
+  -> optional structural-only G commit
+  -> validate routing and repack in the future live adapter
   -> repeat x R
 ```
 
-The controller accepts exactly one denoising callback for both modes. It keeps
-committed routing fixed through each denoising call and permits structural
-change only through an explicit post-trajectory commit callback. Global
-refinement may propose changes everywhere, but unselected carrier content,
-observations, and structure are pinned after the call.
+The controller cannot delegate `h`, observed structure, predictions, or carrier
+identity to a commit callback. A future G adapter may return only committed
+structure and structural diagnostics through `StructuralCommitResult`.
 
-Reset changes only selected `h` and observed/predicted structure; it never
-deletes/reindexes sites and never mutates committed routing. Refine-mode
-attention remains the existing global mask in `adze_t.masking`/`adze_t.dit`.
+Committed lengths are explicit at every H boundary. Prediction presence is
+site-resolved through `PredictedStructure.valid`; selected predictions may
+therefore emerge when the preceding state had none without inventing
+unselected predictions.
 
-## Public engineering interfaces
+## Public interfaces
 
-- `SelectionPolicy` / `select_regions`: deterministic threshold/top-k regions.
-- `reset_selected_carriers`: erase selected state without committing structure.
-- `preserve_unselected_state`: exact state pinning after global computation.
-- `run_draft_refinement`: shared-callback orchestration and commit boundary.
-- `RefinementTrace`: R-step state and structural transition trace.
-- `refinement_error_diagnostics` / `selector_diagnostics`: engineering metrics.
+- `SelectionPolicy`, `RegionSelection`, and `select_regions` distinguish the
+  pre-halo seed budget from the final closed region. Nonfinite scores never
+  become eligible. Inactive reactivation is an explicit policy flag.
+- `reset_selected_carriers` resets selected `h`, writes valid UNKNOWN codes,
+  invalidates selected old predictions, and never changes committed routing.
+- `preserve_unselected_state` pins every unselected content, observation, and
+  prediction field while retaining newly produced selected predictions.
+- `RefinementContext`, `RefinementOccurrence`, `DenoiseEvidence`, and
+  `DenoiseResult` form the compile-time boundary for the future full-S F
+  adapter and expose diffusion/operator occurrence evidence.
+- `StructureCommitMasks`, `StructuralCommitFn`, `StructuralCommitResult`,
+  `RegionClosureFn`, and `StructureKeyFn` form the compile-time boundary for a
+  future validated G adapter. H contains no edge-ownership, hysteresis,
+  sampling, routing, or score-gradient implementation.
+- `RefinementTrace` records selection, reset/regeneration/commit state,
+  observed/predicted/committed structure, validity/overflow, churn, keys,
+  S/operator evidence, support counts, and preservation checks.
+- Diagnostics return support and validity. Empty support is represented by
+  NaN, never a meaningful-looking zero.
+- `selector_calibration` reports support, Brier score, fixed-bin ECE, and
+  threshold coverage/error-capture curves independently from rollout metrics.
 
-## Proposed shared-interface changes
+## Structural UNKNOWN v1
 
-No shared interface is changed on this branch. Phase G should eventually
-provide an adapter implementing:
+`PHASE_H_STRUCTURE_UNKNOWN_V1` defines:
 
-```python
-CommitFn = Callable[[before, candidate, selected, refinement_step], CarrierState]
-```
+- observed boundary UNKNOWN: code `2`;
+- historical left-edge BOS: left-embedding row `2`, unchanged;
+- left-context boundary UNKNOWN: appended left-embedding row `3`;
+- observed extent UNKNOWN: code `L_max + 1`.
 
-The adapter must apply G's frozen commit policy only at this boundary. The
-local `STRUCTURE_UNKNOWN = -1` is bookkeeping only; G must freeze its encoded
-UNKNOWN representation before live denoising consumes reset observations.
+`migrate_model_structure_unknown_embeddings` returns a new deterministic
+candidate parameter tree. Every existing row is preserved bitwise and only
+one zero-initialized candidate row is appended to each structural embedding.
+Accepted checkpoint files are never edited. Migration occurs before the
+ordinary deterministic-to-Torx mapping so the established rho policy remains
+the sole owner of stochastic parameter construction.
 
-## Unresolved dependencies
+## Selector mechanics frozen for engineering tests
 
-1. Phase G commit/hysteresis API and generated-boundary repacking contract.
-2. Final encoded UNKNOWN values for boundary and extent inputs.
-3. First validated selector feature/calibration policy.
-4. Live S-step adapter carrying `mode="refine"` and `r_index` into conditioning.
-5. Reset distribution and PRNG namespace if stochastic reset is selected.
+- Every policy explicitly names budget scope; there is no default.
+- `budget_scope="seed"` caps threshold-passing seeds before halo expansion.
+- `budget_scope="expanded"` retains the capped seeds and deterministically
+  admits the highest-score, lowest-index eligible halo sites until the final
+  closed-region cap is reached.
+- Equal scores prefer the lower carrier index deterministically.
+- The closed region may exceed the seed budget.
+- Eligibility is reapplied after halo expansion.
+- Inactive sites remain ineligible unless
+  `allow_inactive_reactivation=True`; even then nonfinite sites remain
+  ineligible.
 
-## Resource requirements for deferred validation
+Traces retain seed/closed masks, counts, scope, and limit. These mechanics are
+an engineering protocol, not approved selector thresholds or a scientific H
+policy.
 
-- Current tests use tiny eager arrays and mock callbacks only.
-- After F3, run the full format/lint/type/test/boundary suite.
-- After G integration, run JIT/static-shape and deterministic/Torx parity tests.
-- Live H evaluation must use one shared checkpoint and paired examples/keys.
-- Authoritative H training/evaluation must wait for G's required gates.
+## Live dependencies intentionally unresolved
 
-## Exact integration prerequisites
+Validated G must supply:
 
-1. F3 completes and its decision/provenance are frozen.
-2. G is merged and its recovery/deletion/reactivation/UNKNOWN/churn gates pass.
-3. H's UNKNOWN bookkeeping is mapped to G's encoded representation.
-4. The live adapter proves one parameter tree is used in both modes and operator
-   keys distinguish refinement occurrences.
-5. Tests prove exact unselected preservation, between-trajectory-only commits,
-   and global refine attention.
-6. Only then may live intervention or an H decision run. This branch makes no
-   claim that live refinement works.
+1. topology-safe region closure and separate boundary-edge/extent-site masks;
+2. a structural-only result satisfying the H protocol;
+3. fail-closed validated routing and overflow evidence;
+4. namespaced structure keys bound to example/execution/R/S/commit identity;
+5. frozen edge ownership, commit/hysteresis, reactivation, and score-gradient
+   semantics;
+6. a validated repack result consumed by the next R application.
+
+The full-S F adapter must supply one shared parameter tree, actual-S and
+conditioning coordinates, exact diffusion/operator keys, Q/layer/scope
+coordinates, model-application counts, draft block-causal behavior, and refine
+global behavior.
+
+Until those adapters exist and their real-model tests pass, this branch cannot
+claim shared learned weights, global refinement, valid generated repacking,
+deterministic/Torx parity, or H scientific utility.
+
+## Integration order and recovery
+
+1. Preserve `120767a05ba9af60c98513b9f3bd63195b7d6c01` as the pre-remediation H
+   rollback point.
+2. F3 completion at main `2a0cab0c9c647832596013d56037c842ff3844ea` is merged.
+3. G must be corrected, integrated, and pass its separately authorized gates.
+4. Adapt H to the accepted G types without copying G policy into H.
+5. Run real F/G/H model-path, JIT/static-shape, public-Torx parity, and complete
+   occurrence tests.
+6. Only then may an H experiment be proposed. No training is authorized by
+   this engineering record.

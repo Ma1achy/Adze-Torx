@@ -13,6 +13,7 @@ from .backends.protocol import LearnedOps
 from .conditioning import build_conditioning
 from .masking import draft_attention_mask, refine_attention_mask
 from .packing import PackMetadata
+from .structure_unknown import resolve_structural_embedding_indices
 
 
 @dataclass(frozen=True)
@@ -327,11 +328,9 @@ def apply_dit(
         observed_b = jnp.zeros((batch, capacity), dtype=jnp.int32)
     if observed_l is None:
         observed_l = jnp.zeros((batch, capacity), dtype=jnp.int32)
-    right_boundary = observed_b[jnp.arange(batch)[:, None], safe_carrier].astype(jnp.int32)
-    previous_carrier = jnp.maximum(safe_carrier - 1, 0)
-    left_boundary = observed_b[jnp.arange(batch)[:, None], previous_carrier].astype(jnp.int32)
-    left_boundary = jnp.where(safe_carrier == 0, 2, left_boundary)
-    packed_length = observed_l[jnp.arange(batch)[:, None], safe_carrier].astype(jnp.int32)
+    right_boundary, left_boundary, packed_length = resolve_structural_embedding_indices(
+        observed_b, observed_l, safe_carrier, batch=batch
+    )
 
     x = packed.reshape(batch, positions, -1)
     x = ops.linear(x, params["input_proj"], name="dit.input_proj")
