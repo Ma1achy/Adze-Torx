@@ -1,0 +1,29 @@
+{
+  "converged": true,
+  "healthy": true,
+  "informative_levels": [
+    0.25,
+    0.5,
+    0.75
+  ],
+  "label": "PHASE_F_3_S2_TRAINING_NEUTRAL",
+  "no_s4": true,
+  "parent_checkpoint_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+  "protocol": {
+    "contract": "PHASE_F_3_EVALUATION_PROTOCOL_V0",
+    "deterministic_protocol_sha256": "f51e287ad27096cab62f0cc759cafdb04bdb856bf83367493ce40ebded67cdb9",
+    "operator_protocol_sha256": "e8c65f826e80edb36ae2bbcff470daa46edf90065acf30b53260ace995e27d99",
+    "protocol_sha256": "17e533a16ac861130e19d1a6245f8c121768dda455a1aa81957f549a8e6d5b4a",
+    "selected_checkpoint": {
+      "f3_rollout_updates": 10000,
+      "file_sha256": "af08d590fa338301c840e4fc2d795a75f9012c806296e2fb2a9c38003837a6c3",
+      "moment_tree_sha256": "191e0ca9de5df59945a5b475de54f6de89ad4c0d1c2cf2265d1c7fe6228d58b9",
+      "optimizer_absolute_step": 15000,
+      "parameter_tree_sha256": "0c18d71d78bd918437cdbfd95c582fc05f3b2af0ec2380540465075e92701157",
+      "parent_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+      "path": "results/runs/phase_f/f3/s2/init0_stoch0/rollout_10000.pkl"
+    }
+  },
+  "selected_f3_rollout_updates": 10000,
+  "selected_optimizer_absolute_step": 15000
+}
