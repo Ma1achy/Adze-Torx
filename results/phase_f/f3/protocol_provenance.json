@@ -1,0 +1,56 @@
+{
+  "contract": "PHASE_F_3_PROTOCOL_PROVENANCE_V0",
+  "committed_baseline": {
+    "commit": "cf129ef87fa9b12bf3249dc2d528b57c3813af64",
+    "parent": "d518cfff24366b0e44298a81ee1e7936c8e5aab4",
+    "subject": "phase-f: checkpoint F3 implementation pending runtime validation",
+    "evidence": [
+      "results/phase_f/f3/IMPLEMENTATION_CHECKPOINT.md@cf129ef:3-11",
+      "results/phase_f/f3/IMPLEMENTATION_CHECKPOINT.md@cf129ef:20-32",
+      "scripts/run_phase_f_3.py@cf129ef:69-85",
+      "scripts/run_phase_f_3.py@cf129ef:927-1060"
+    ],
+    "ambiguity_predicate": "At 512 examples per nu, escalate if any informative byte-accuracy root-level Student-t interval spans both -1 and +1 percentage points, or if lambda-zero benefit status disagrees with stochastic qualitative-benefit status. Aggregation refuses to continue while escalation_required is true."
+  },
+  "launched_snapshot": {
+    "implementation_git_sha": "cf129ef87fa9b12bf3249dc2d528b57c3813af64",
+    "implementation_source_sha256": "62545ce627447f509e6f6abd573c3667fa03a3a2540b18d3eacedcc06e426d4c",
+    "working_diff_sha256": "4a603f4395a5a6119958a8404f48d7151e77d708620855ee0ad2a856ab3f3ba3",
+    "source_last_modified": "2026-10-23T16:25:28+01:00",
+    "pre_execution_bindings": [
+      {
+        "artifact": "results/phase_f/f3/provenance.json",
+        "created": "2026-10-23T17:03:33+01:00",
+        "implementation_source_sha256": "62545ce627447f509e6f6abd573c3667fa03a3a2540b18d3eacedcc06e426d4c"
+      },
+      {
+        "artifact": "results/phase_f/f3/first_gradient.json",
+        "created": "2026-10-23T17:19:04+01:00",
+        "implementation_source_sha256": "62545ce627447f509e6f6abd573c3667fa03a3a2540b18d3eacedcc06e426d4c"
+      },
+      {
+        "artifact": "results/phase_f/f3/runtime_smoke.json",
+        "implementation_source_sha256": "62545ce627447f509e6f6abd573c3667fa03a3a2540b18d3eacedcc06e426d4c"
+      }
+    ],
+    "training_started": "2026-10-23T17:45:07+01:00",
+    "source_references": [
+      "scripts/run_phase_f_3.py:1574-1598",
+      "src/adze_t/phase_f_3.py:158-205",
+      "tests/test_phase_f_3.py:356-385"
+    ],
+    "ambiguity_predicate": "At 512 examples per nu, escalate when any informative root-level Student-t interval spans both the +/-1 percentage-point byte-accuracy practical scale or the +/-2% S1-NLL practical scale, or when the stochastic practical-effect pattern does not exactly match the lambda-zero pattern across benefit, neutral, and degradation."
+  },
+  "evaluation_snapshot": {
+    "implementation_git_sha": "cf129ef87fa9b12bf3249dc2d528b57c3813af64",
+    "implementation_source_sha256": "62545ce627447f509e6f6abd573c3667fa03a3a2540b18d3eacedcc06e426d4c",
+    "deterministic_protocol_sha256": "f51e287ad27096cab62f0cc759cafdb04bdb856bf83367493ce40ebded67cdb9",
+    "operator_protocol_sha256": "e8c65f826e80edb36ae2bbcff470daa46edf90065acf30b53260ace995e27d99"
+  },
+  "resolution": {
+    "governing_predicate": "launched_snapshot",
+    "basis": "The hardened source snapshot and its symmetric predicate were bound by provenance, gradient, smoke, training-validation, deterministic-evaluation, and stochastic-shard records before any outcome-dependent aggregation. The source hash did not change between the pre-execution gate and final evaluation.",
+    "outcome_independent": true,
+    "later_implementation_source_change_detected": false
+  }
+}

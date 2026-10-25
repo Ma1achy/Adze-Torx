@@ -152,6 +152,7 @@ def apply_denoising_trajectory(
     operator_optimizer_step: int | Array = 0,
     operator_config: TorxOperatorConfig | None = None,
     conditioning_mode: str = F2_STEP0_CONDITIONING,
+    detach_between_steps: bool = False,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
     dit_cycles: int | None = None,
 ) -> DenoisingTrajectory:
@@ -256,8 +257,11 @@ def apply_denoising_trajectory(
                     )
                     epsilon = jax.random.normal(key, h_hat.shape[1:], dtype=h_hat.dtype)
                 epsilons.append(epsilon)
+                transition_prediction = (
+                    jax.lax.stop_gradient(h_hat) if detach_between_steps else h_hat
+                )
                 state = recorrupt_h(
-                    h_hat,
+                    transition_prediction,
                     schedule[next_s_index],
                     epsilon[None, ...],
                     eta_diff,

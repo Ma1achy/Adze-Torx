@@ -22,11 +22,15 @@ Required parent SHA-256:
 When the machine is available:
 
 1. Run the focused F3 tests and the complete validation suite.
-2. Run the F3 provenance audit and first-gradient gate.
-3. Stop on any correctness, leakage, nonfinite, or gradient-pathology failure.
-4. Otherwise train through 5,000 new rollout updates from absolute optimizer
+2. Run the F3 provenance audit and first-gradient/gradient-conflict gate,
+   including the connected-versus-detached full-model regression.
+3. Run one non-persistent prospective optimizer update and the 10-update smoke.
+4. Stop on any correctness, leakage, provenance, nonfinite, frozen-state, or
+   gradient-pathology failure.
+5. Otherwise train through 5,000 new rollout updates from absolute optimizer
    step 5,000, retaining the accepted F1 Adam moments.
-5. Apply the predeclared 5k-to-10k extension rule.
-6. Run full-test, diagnostic, and finite-Torx evaluations.
-7. Only then write the F3 evidence, issue exactly one scientific F3 label, and
+6. Apply the predeclared 5k-to-10k extension rule.
+7. Run full-test, diagnostic, and finite-Torx evaluations with exact protocol
+   manifests on every deterministic result and stochastic shard.
+8. Only then write the F3 evidence, issue exactly one scientific F3 label, and
    update the Phase F history.

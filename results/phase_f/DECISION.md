@@ -79,3 +79,21 @@ denoise-step condition frozen at its trained value zero. It is not evidence
 about trained S2/S4 rollout models or the diagnostic untrained native-S
 conditioning codes. No training, optimizer step, structure commit, outer
 refinement, or parameter/rho/teacher mutation occurred. Stop at this result.
+
+## Phase F.3 decision
+
+**PHASE_F_3_S2_TRAINING_NEUTRAL**
+
+The validation-selected 10k F3 checkpoint is numerically healthy, preserves
+one-step capability, and has agreeing deterministic and 16-root finite-Torx
+evidence. S2 is materially worse than the same checkpoint at S1 only at
+`nu=.25`; `.50` and `.75` remain below the joint practical degradation gate.
+It has no informative material-benefit bucket. The result therefore satisfies
+the frozen NEUTRAL rule rather than BENEFIT, NEGATIVE, UNRESOLVED, or BLOCKED.
+
+The latent/decoder diagnostic is important but not decision-changing: S2 moves
+the carrier closer to clean at informative noise levels while decoded NLL and
+accuracy generally fail to improve. See `f3/F3_RESULTS.md` for the complete
+rule application and provenance. F0/F1/F2 evidence is unchanged. Do not infer
+a final `PHASE_F_S_*` verdict and do not begin S4 without new explicit
+authorization.
