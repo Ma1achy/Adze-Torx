@@ -465,6 +465,7 @@ def s2_rollout_objective(
     *,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
     lambda_op: float | jax.Array = 1.0,
+    detach_between_steps: bool = False,
 ) -> tuple[jax.Array, dict[str, Any]]:
     """Return the pathwise S=2 rollout loss without performing an optimizer update."""
     weights = config.training
@@ -525,6 +526,7 @@ def s2_rollout_objective(
             sigma_max=1.0e-3,
         ),
         conditioning_mode=F3_NATIVE_S_CONDITIONING_TRAINED,
+        detach_between_steps=detach_between_steps,
         config=config,
     )
     step0 = _rollout_step_metrics(trajectory, 0, clean_h, teacher)

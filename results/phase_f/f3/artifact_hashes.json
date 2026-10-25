@@ -1,0 +1,41 @@
+{
+  "contract": "PHASE_F_3_COMPLETION_ARTIFACT_HASHES_V0",
+  "algorithm": "sha256",
+  "files": {
+    "results/phase_f/DECISION.md": "388a974ba837022bcd866fd872de8b1094a92827de3c935ed7a26c3bd69dd00a",
+    "results/phase_f/RESULTS.md": "d1e29b79f4561be45c0f07e603221eba9ccabed309589ef95e38d0b0319710dc",
+    "results/phase_f/f3/F3_RESULTS.md": "94ef3834df068d4ee38234a4d2afd24ca1c58d2ca3b82307354ab1dc5ccadb38",
+    "results/phase_f/f3/IMPLEMENTATION_CHECKPOINT.md": "e966f4245cd1cb8dafb11eefa33b4995759e9f4ecd65e7b4d4413a92375839dd",
+    "results/phase_f/f3/checkpoint_selection.json": "1457a8fa25870b3c5024e8f72a02240b6abacbb26e40f470b5c63ff003b9cc2c",
+    "results/phase_f/f3/decoder_geometry.json": "62590f154cb1c39e22c8026bba8979c7a5361ffb729154ed1afe31e84cf8f8a3",
+    "results/phase_f/f3/eta1_diagnostic.json": "f83069c08843cde5ce997165fdaba3970dac15d46b20954e1502e5c23e5c9140",
+    "results/phase_f/f3/first_gradient.json": "25ca8d4b3dba12ff57731ee31687ef7ec75da58232d13066eb6951d9e07488b1",
+    "results/phase_f/f3/gradient_conflict.json": "8a48856326977300cc97e17d545d20b4677de59c4b7b1cd23165f1df1215e796",
+    "results/phase_f/f3/latent_distribution.json": "c9686eda66085f9c48619ccd30c4ffaf7bab810fea3e58715c0c475cc3a0bcf4",
+    "results/phase_f/f3/operator_noise_confirmation.json": "2358936fbf81917153224630edf1211ff2f55415f38f8603623d82ba23407c29",
+    "results/phase_f/f3/operator_noise_confirmation_512.json": "2358936fbf81917153224630edf1211ff2f55415f38f8603623d82ba23407c29",
+    "results/phase_f/f3/protocol_provenance.json": "57284acdad4b3f75822f2e9bbd980a3e9f4057a48ee3525b599b43673daa0081",
+    "results/phase_f/f3/provenance.json": "ba5fbb21e67942f04dcdef5957bc37b1d54aee485e46a0f30933735047ccae9b",
+    "results/phase_f/f3/result.json": "294b9647b7b21810997a932292acf7fe3e05ea05b51ff2c497544e467e5b1933",
+    "results/phase_f/f3/runtime_smoke.json": "c743e854f590792eceb8764d1aaac6c67c67d2303e2c69d7b07771f381b71b81",
+    "results/phase_f/f3/step0_conditioning_diagnostic.json": "bd332aff242e7e7ba5d7bd34be2dd5b338f1998bded1501112648b0791663011",
+    "results/phase_f/f3/training.jsonl": "32f833fa492eb2c82b50089cfdcf7267d047fc415e692d9c2060d563c0732d60",
+    "results/phase_f/f3/trial_update.json": "4a7a43def0b33d0a3b6789ebba9e79758a824c506d2996608499e31f67505af3",
+    "results/phase_f/f3/validation.json": "182a74997714875e41429f9636a1de959921993c9fce4c3c0666a6e1d398b852",
+    "results/phase_f/f3/validation_s1_s2.json": "b72eb1482130eae1575212c995c405ced719a156d99c65474b9de7a31022ae97",
+    "results/phase_f/f3/validation_s1_s2_per_example.jsonl": "2ead38dc1a2ed9abf108dce00cac73fdf7cc69e2efd36beacb3de047cd457d2f",
+    "scripts/run_phase_f_3.py": "9d7ae4982609663ff56f3ae21f96a6db9c13ee8dd77147d3afd79457328690ee",
+    "src/adze_t/denoise.py": "279f14b7bf1c640dcd59ab8d8c8d2a3ebed2fec182a56da13021b8d93293bebc",
+    "src/adze_t/phase_f_3.py": "f8d8c61da856ac73b1e57015a1ea70cd2230bf62ce8d16a7a0bf4785050fffbd",
+    "src/adze_t/training.py": "718436ae0da24ab69a404dc54f6c1c29c881293e379b2071aa45bbf8343718e7",
+    "tests/test_phase_f_3.py": "c0087b73edcf4ada67c0c25f9e6ad8a82bf3b1c77c84eaec7f6839e88ee42f0f"
+  },
+  "ignored_checkpoint": {
+    "path": "results/runs/phase_f/f3/s2/init0_stoch0/rollout_10000.pkl",
+    "sha256": "af08d590fa338301c840e4fc2d795a75f9012c806296e2fb2a9c38003837a6c3"
+  },
+  "parent_checkpoint": {
+    "path": "results/runs/phase_f/f1/denoise_v1/one_step/init0_stoch0.pkl",
+    "sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57"
+  }
+}

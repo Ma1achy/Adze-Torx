@@ -1,0 +1,171 @@
+{
+  "candidates": [
+    {
+      "eligible": true,
+      "exclusion_reasons": [],
+      "f3_rollout_updates": 100,
+      "informative_effects": [
+        "degradation",
+        "degradation",
+        "neutral"
+      ],
+      "informative_s2_accuracy_mean": 0.3444010416666667,
+      "informative_s2_nll_mean": 2.3208654125531516,
+      "informative_step0_forgetting_bucket_count": 1,
+      "optimizer_absolute_step": 5100,
+      "selection_rank_tuple": [
+        0,
+        -2,
+        0.3444010416666667,
+        -2.3208654125531516,
+        100
+      ]
+    },
+    {
+      "eligible": true,
+      "exclusion_reasons": [],
+      "f3_rollout_updates": 250,
+      "informative_effects": [
+        "degradation",
+        "degradation",
+        "neutral"
+      ],
+      "informative_s2_accuracy_mean": 0.348876953125,
+      "informative_s2_nll_mean": 2.2798170248667398,
+      "informative_step0_forgetting_bucket_count": 1,
+      "optimizer_absolute_step": 5250,
+      "selection_rank_tuple": [
+        0,
+        -2,
+        0.348876953125,
+        -2.2798170248667398,
+        250
+      ]
+    },
+    {
+      "eligible": true,
+      "exclusion_reasons": [],
+      "f3_rollout_updates": 500,
+      "informative_effects": [
+        "degradation",
+        "degradation",
+        "neutral"
+      ],
+      "informative_s2_accuracy_mean": 0.3602701822916667,
+      "informative_s2_nll_mean": 2.2596970200538635,
+      "informative_step0_forgetting_bucket_count": 1,
+      "optimizer_absolute_step": 5500,
+      "selection_rank_tuple": [
+        0,
+        -2,
+        0.3602701822916667,
+        -2.2596970200538635,
+        500
+      ]
+    },
+    {
+      "eligible": true,
+      "exclusion_reasons": [],
+      "f3_rollout_updates": 1000,
+      "informative_effects": [
+        "degradation",
+        "neutral",
+        "neutral"
+      ],
+      "informative_s2_accuracy_mean": 0.3673502604166667,
+      "informative_s2_nll_mean": 2.228140970071157,
+      "informative_step0_forgetting_bucket_count": 0,
+      "optimizer_absolute_step": 6000,
+      "selection_rank_tuple": [
+        0,
+        -1,
+        0.3673502604166667,
+        -2.228140970071157,
+        1000
+      ]
+    },
+    {
+      "eligible": true,
+      "exclusion_reasons": [],
+      "f3_rollout_updates": 2000,
+      "informative_effects": [
+        "degradation",
+        "degradation",
+        "neutral"
+      ],
+      "informative_s2_accuracy_mean": 0.364501953125,
+      "informative_s2_nll_mean": 2.233128547668457,
+      "informative_step0_forgetting_bucket_count": 0,
+      "optimizer_absolute_step": 7000,
+      "selection_rank_tuple": [
+        0,
+        -2,
+        0.364501953125,
+        -2.233128547668457,
+        2000
+      ]
+    },
+    {
+      "eligible": true,
+      "exclusion_reasons": [],
+      "f3_rollout_updates": 5000,
+      "informative_effects": [
+        "degradation",
+        "neutral",
+        "neutral"
+      ],
+      "informative_s2_accuracy_mean": 0.3749186197916667,
+      "informative_s2_nll_mean": 2.193382978439331,
+      "informative_step0_forgetting_bucket_count": 0,
+      "optimizer_absolute_step": 10000,
+      "selection_rank_tuple": [
+        0,
+        -1,
+        0.3749186197916667,
+        -2.193382978439331,
+        5000
+      ]
+    },
+    {
+      "eligible": true,
+      "exclusion_reasons": [],
+      "f3_rollout_updates": 10000,
+      "informative_effects": [
+        "degradation",
+        "neutral",
+        "neutral"
+      ],
+      "informative_s2_accuracy_mean": 0.384521484375,
+      "informative_s2_nll_mean": 2.1608108480771384,
+      "informative_step0_forgetting_bucket_count": 0,
+      "optimizer_absolute_step": 15000,
+      "selection_rank_tuple": [
+        0,
+        -1,
+        0.384521484375,
+        -2.1608108480771384,
+        10000
+      ]
+    }
+  ],
+  "contract": "PHASE_F_3_VALIDATION_ONLY_CHECKPOINT_SELECTION_V0",
+  "implementation_git_sha": "cf129ef87fa9b12bf3249dc2d528b57c3813af64",
+  "implementation_source_sha256": "62545ce627447f509e6f6abd573c3667fa03a3a2540b18d3eacedcc06e426d4c",
+  "record_sha256": "8dbfd58a3b2e2aaa36325c8e91951bda8c6481c2173a944862d943edd365e97f",
+  "selected_checkpoint": {
+    "f3_rollout_updates": 10000,
+    "file_sha256": "af08d590fa338301c840e4fc2d795a75f9012c806296e2fb2a9c38003837a6c3",
+    "moment_tree_sha256": "191e0ca9de5df59945a5b475de54f6de89ad4c0d1c2cf2265d1c7fe6228d58b9",
+    "optimizer_absolute_step": 15000,
+    "parameter_tree_sha256": "0c18d71d78bd918437cdbfd95c582fc05f3b2af0ec2380540465075e92701157",
+    "parent_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+    "path": "results/runs/phase_f/f3/s2/init0_stoch0/rollout_10000.pkl"
+  },
+  "selection_rule": {
+    "data_scope": "512-example validation split only; no test or finite-Torx results",
+    "eligibility": "exclude checkpoints with material step-0 forgetting in two or more informative buckets or any informative nonfinite flag",
+    "rank_order": "lexicographic maximum of (benefit bucket count, negative degradation bucket count, mean informative S2 byte accuracy, negative mean informative S2 byte NLL, F3 rollout updates)"
+  },
+  "validation_evidence_sha256": "14702c575a9ca33d8c6cbed35314952e7ccdb9ea423c65a5254990ee0f90f127",
+  "working_diff_sha256": "4a603f4395a5a6119958a8404f48d7151e77d708620855ee0ad2a856ab3f3ba3"
+}

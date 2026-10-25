@@ -7,6 +7,7 @@ import inspect
 
 import jax
 import jax.numpy as jnp
+import pytest
 
 from adze_t.backends.mapping import deterministic_to_torx
 from adze_t.backends.torx import TorxOps
@@ -20,16 +21,21 @@ from adze_t.model import init_model_params
 from adze_t.objectives import adamw_init
 from adze_t.phase_f_3 import (
     PHASE_F_3_S2_TRAINING_BENEFIT,
+    PHASE_F_3_S2_TRAINING_NEUTRAL,
     PHASE_F_3_S2_TRAINING_NEGATIVE,
+    PHASE_F_3_S2_TRAINING_UNRESOLVED,
     bucket_effect,
     classify,
+    effect_pattern,
     is_pareto_best_5k,
+    require_exact_protocol,
     should_extend_to_10k,
     step0_forgetting,
 )
 from adze_t.training import (
     _CODEC_ENCODER_NAMES,
     s2_rollout_objective,
+    stochastic_model_update_mask,
     stochastic_s2_rollout_train_step,
 )
 
@@ -175,6 +181,9 @@ def test_s2_update_freezes_rho_teacher_and_proposal_auxiliary():
     assert float(metrics["step1_input_error"]) == 0.0
     assert float(metrics["grad_rho_applied_norm"]) == 0.0
     assert float(metrics["grad_proposal"]) == 0.0
+    assert all(bool(jnp.all(jnp.isfinite(value))) for value in jax.tree.leaves(metrics))
+    assert all(bool(jnp.all(jnp.isfinite(value))) for value in jax.tree.leaves(updated))
+    assert all(bool(jnp.all(jnp.isfinite(value))) for value in jax.tree.leaves(updated_moments))
     before_paths = dict(
         (jax.tree_util.keystr(path), value)
         for path, value in jax.tree_util.tree_leaves_with_path(params)
@@ -199,6 +208,16 @@ def test_s2_update_freezes_rho_teacher_and_proposal_auxiliary():
                 moment_path = f"[{moment_index}]{path}"
                 assert jnp.array_equal(before_moment_paths[moment_path], moment_paths[moment_path])
     assert not _tree_equal(updated, params)
+    update_mask = stochastic_model_update_mask(params)
+    assert any(
+        bool(enabled) and not bool(jnp.array_equal(before, after))
+        for enabled, before, after in zip(
+            jax.tree.leaves(update_mask),
+            jax.tree.leaves(params),
+            jax.tree.leaves(updated),
+            strict=True,
+        )
+    )
 
 
 def test_full_pathwise_credit_crosses_a_deterministic_recorruption_boundary():
@@ -213,6 +232,33 @@ def test_full_pathwise_credit_crosses_a_deterministic_recorruption_boundary():
         return (h_hat_1 - 0.2) ** 2
 
     assert abs(float(jax.grad(step1_loss)(jnp.asarray(0.9)))) > 0.0
+
+
+@pytest.mark.integration
+def test_full_model_step1_gradient_differs_when_s2_boundary_is_detached():
+    cfg, params, batch = _fixture()
+
+    def step1_loss(model_params, detach_between_steps):
+        _, auxiliary = s2_rollout_objective(
+            model_params,
+            batch,
+            jax.random.key(1308),
+            jax.random.key(1309),
+            5001,
+            config=cfg,
+            lambda_op=0.0,
+            detach_between_steps=detach_between_steps,
+        )
+        return auxiliary["step1"]["loss"]
+
+    connected = jax.grad(lambda value: step1_loss(value, False))(params)
+    detached = jax.grad(lambda value: step1_loss(value, True))(params)
+    difference = jax.tree.map(lambda left, right: left - right, connected, detached)
+    difference_norm = jnp.sqrt(
+        jnp.sum(jnp.stack([jnp.sum(value * value) for value in jax.tree.leaves(difference)]))
+    )
+    assert jnp.isfinite(difference_norm)
+    assert float(difference_norm) > 0.0
 
 
 def test_operator_keys_separate_absolute_step_global_id_and_actual_s():
@@ -247,26 +293,38 @@ def _paired(direction: str):
                 "bootstrap_percentile_95_ci_high": -0.01,
             },
         }
+    if direction == "degradation":
+        return {
+            "byte_accuracy": {
+                "bootstrap_percentile_95_ci_low": -0.02,
+                "bootstrap_percentile_95_ci_high": -0.005,
+            },
+            "nll": {
+                "bootstrap_percentile_95_ci_low": 0.01,
+                "bootstrap_percentile_95_ci_high": 0.2,
+            },
+        }
     return {
         "byte_accuracy": {
-            "bootstrap_percentile_95_ci_low": -0.02,
-            "bootstrap_percentile_95_ci_high": -0.005,
+            "bootstrap_percentile_95_ci_low": -0.001,
+            "bootstrap_percentile_95_ci_high": 0.001,
         },
         "nll": {
-            "bootstrap_percentile_95_ci_low": 0.01,
-            "bootstrap_percentile_95_ci_high": 0.2,
+            "bootstrap_percentile_95_ci_low": -0.001,
+            "bootstrap_percentile_95_ci_high": 0.001,
         },
     }
 
 
 def _row(nu, effect):
     benefit = effect == "benefit"
+    degradation = effect == "degradation"
     return {
         "nu": nu,
         "s1_accuracy": 0.4,
-        "s2_accuracy": 0.415 if benefit else 0.385,
+        "s2_accuracy": 0.415 if benefit else 0.385 if degradation else 0.4,
         "s1_nll": 2.0,
-        "s2_nll": 1.9 if benefit else 2.1,
+        "s2_nll": 1.9 if benefit else 2.1 if degradation else 2.0,
         "paired": _paired(effect),
         "step0_forgetting": False,
     }
@@ -295,3 +353,47 @@ def test_predeclared_effect_forgetting_extension_and_label_gates():
     rows_5k = [{"nu": nu, "s2_accuracy": 0.311, "s2_nll": 2.0} for nu in (0.25, 0.5, 0.75)]
     assert should_extend_to_10k(rows_2k, rows_5k)
     assert is_pareto_best_5k([rows_2k], rows_5k)
+
+
+@pytest.mark.parametrize("pattern", ("benefit", "degradation", "neutral"))
+def test_unconverged_training_cannot_receive_a_terminal_scientific_label(pattern):
+    rows = [_row(nu, pattern) for nu in (0.25, 0.5, 0.75)]
+    assert effect_pattern(rows, require_uncertainty=True) == pattern
+    assert (
+        classify(rows, healthy=True, converged=False, stochastic_agrees=True)
+        == PHASE_F_3_S2_TRAINING_UNRESOLVED
+    )
+
+
+@pytest.mark.parametrize(
+    ("pattern", "terminal_label"),
+    (
+        ("benefit", PHASE_F_3_S2_TRAINING_BENEFIT),
+        ("degradation", PHASE_F_3_S2_TRAINING_NEGATIVE),
+        ("neutral", PHASE_F_3_S2_TRAINING_NEUTRAL),
+    ),
+)
+def test_finite_torx_confirmation_is_symmetric(pattern, terminal_label):
+    rows = [_row(nu, pattern) for nu in (0.25, 0.5, 0.75)]
+    assert classify(rows, healthy=True, converged=True, stochastic_agrees=True) == terminal_label
+    assert (
+        classify(rows, healthy=True, converged=True, stochastic_agrees=False)
+        == PHASE_F_3_S2_TRAINING_UNRESOLVED
+    )
+
+
+def test_protocol_provenance_rejects_mixed_or_stale_results():
+    expected = {
+        "contract": "PHASE_F_3_EVALUATION_PROTOCOL_V0",
+        "checkpoint": {"file_sha256": "checkpoint-a"},
+        "operator": {"root_index": 3, "lambda_op": 1.0},
+        "dataset": {"ordered_global_ids_sha256": "ids-a"},
+    }
+    require_exact_protocol(expected, expected, "matching")
+    for changed in (
+        {**expected, "checkpoint": {"file_sha256": "checkpoint-b"}},
+        {**expected, "operator": {"root_index": 4, "lambda_op": 1.0}},
+        {**expected, "dataset": {"ordered_global_ids_sha256": "ids-b"}},
+    ):
+        with pytest.raises(RuntimeError, match="mixed or stale"):
+            require_exact_protocol(changed, expected, "regression")
