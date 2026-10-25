@@ -41,6 +41,11 @@ requires the Wilson-95 lower bound for content-cut accuracy to exceed chance at
 a diagnostic. This task is explicitly conditional on a noisy observation of
 the clean teacher latent, not on raw target bytes supplied to the forward path.
 
+The exact deterministic CODEC artifact owns clean reconstruction, task labels,
+and the h0 used for initial corruption. A separate zero-noise parity gate checks
+that its frozen target-analysis path agrees with the corresponding F1 Torx mean
+path. The later-trained F1 output decoder is not mistaken for the clean codec.
+
 Task-specific commit ownership preserves the mandatory K-spaced scaffold and
 terminal edge. Argmax and sampling own every optional nonmandatory edge and all
 extent sites. Boundary CE may supervise the complete label array, but sampled

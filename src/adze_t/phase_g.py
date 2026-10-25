@@ -98,6 +98,8 @@ def evaluate_committed_replay(
     diffusion_root: jax.Array,
     occurrence: int,
     *,
+    clean_params: Any | None = None,
+    clean_ops: Any | None = None,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
 ) -> tuple[GeneratedByteMetrics, GeneratedReplay]:
     """Evaluate one committed structure with neutral observations and no mutation."""
@@ -108,7 +110,11 @@ def evaluate_committed_replay(
         optimizer_step=occurrence,
     )
     clean = apply_clean_target_teacher(
-        params, batch["target"], batch["target_mask"], config=config, ops=ops
+        params if clean_params is None else _jax_array_tree(clean_params),
+        batch["target"],
+        batch["target_mask"],
+        config=config,
+        ops=ops if clean_ops is None else clean_ops,
     )
     clean = jax.tree.map(jax.lax.stop_gradient, clean)
     teacher = clean["target"]["teacher"]

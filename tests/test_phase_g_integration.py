@@ -10,6 +10,7 @@ import jax.numpy as jnp
 import pytest
 
 from adze_t.backends.mapping import deterministic_to_torx
+from adze_t.backends.deterministic import DeterministicOps
 from adze_t.backends.torx import TorxOperatorConfig, TorxOps
 from adze_t.config import REFERENCE_SMALL_V0
 from adze_t.denoise import as_sanitized_model_target_analysis, make_sanitized_target_analysis
@@ -32,6 +33,8 @@ from adze_t.training import stochastic_model_update_mask
 ROOT = Path(__file__).resolve().parents[1]
 F1_PARENT = ROOT / "results/runs/phase_f/f1/denoise_v1/one_step/init0_stoch0.pkl"
 F1_SHA256 = "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57"
+CODEC = ROOT / "results/phase_b/checkpoints/target_codec_b1.pkl"
+CODEC_SHA256 = "55f057f78f795f1585d7aac28fa7ff37846d4c1098507ede375e86b21c4f8ff6"
 
 
 def _config():
@@ -90,8 +93,11 @@ def _length(structure: CommittedStructure) -> jax.Array:
 @pytest.mark.integration
 def test_accepted_torx_checkpoint_codec_and_guarded_replay_are_repeatable():
     assert hashlib.sha256(F1_PARENT.read_bytes()).hexdigest() == F1_SHA256
+    assert hashlib.sha256(CODEC.read_bytes()).hexdigest() == CODEC_SHA256
     with F1_PARENT.open("rb") as stream:
         state = pickle.load(stream)  # noqa: S301
+    with CODEC.open("rb") as stream:
+        codec_params = pickle.load(stream)  # noqa: S301
     target = jnp.arange(1, 9, dtype=jnp.int32)[None, :]
     mask = jnp.ones_like(target, dtype=bool)
     ops = TorxOps.create(
@@ -119,6 +125,8 @@ def test_accepted_torx_checkpoint_codec_and_guarded_replay_are_repeatable():
         jax.random.key(953),
         jax.random.key(954),
         0,
+        clean_params=codec_params,
+        clean_ops=DeterministicOps(),
         config=REFERENCE_SMALL_V0,
     )
     second_metrics, second_replay = evaluate_committed_replay(
@@ -128,6 +136,8 @@ def test_accepted_torx_checkpoint_codec_and_guarded_replay_are_repeatable():
         jax.random.key(953),
         jax.random.key(954),
         0,
+        clean_params=codec_params,
+        clean_ops=DeterministicOps(),
         config=REFERENCE_SMALL_V0,
     )
     assert bool(first_replay.executed)

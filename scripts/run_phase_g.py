@@ -17,9 +17,10 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
+from adze_t.backends.deterministic import DeterministicOps
 from adze_t.backends.torx import TorxOperatorConfig, TorxOps
 from adze_t.config import REFERENCE_SMALL_V0
-from adze_t.model import apply_target_codec
+from adze_t.model import apply_clean_target_teacher, apply_target_codec
 from adze_t.objectives import adamw_init
 from adze_t.phase_g import (
     evaluate_committed_replay,
@@ -316,7 +317,71 @@ def take_batch(data: dict[str, jax.Array], indices: jax.Array) -> dict[str, jax.
     return jax.tree.map(lambda value: value[indices], data)
 
 
-def _noisy_structure_identifiability(params: Any) -> list[dict[str, Any]]:
+def _codec_teacher_parity(codec_params: Any, f1_params: Any) -> dict[str, Any]:
+    """Verify the frozen clean teacher path before using codec h0 for corruption."""
+    cfg = config()
+    data = dataset(VALIDATION_COUNT, VALIDATION_SEED, global_id_offset=TRAIN_COUNT)
+    deterministic = apply_clean_target_teacher(
+        codec_params,
+        data["target"],
+        data["target_mask"],
+        config=cfg,
+        ops=DeterministicOps(),
+    )
+    torx_mean = apply_clean_target_teacher(
+        f1_params,
+        data["target"],
+        data["target_mask"],
+        config=cfg,
+        ops=TorxOps.create(
+            stochastic_root("operator"),
+            config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
+            optimizer_step=0,
+        ),
+    )
+    names = (
+        ("target_frontend", deterministic["target_frontend"], torx_mean["target_frontend"]),
+        ("h0", deterministic["target"]["h0"], torx_mean["target"]["h0"]),
+        ("b_logits", deterministic["target"]["b_logits"], torx_mean["target"]["b_logits"]),
+        ("l_logits", deterministic["target"]["l_logits"], torx_mean["target"]["l_logits"]),
+        (
+            "teacher_boundaries",
+            deterministic["target"]["teacher"].boundaries,
+            torx_mean["target"]["teacher"].boundaries,
+        ),
+        (
+            "teacher_lengths",
+            deterministic["target"]["teacher"].length,
+            torx_mean["target"]["teacher"].length,
+        ),
+        (
+            "teacher_slot_bytes",
+            deterministic["target"]["teacher"].slot_bytes,
+            torx_mean["target"]["teacher"].slot_bytes,
+        ),
+        (
+            "teacher_slot_mask",
+            deterministic["target"]["teacher"].slot_mask,
+            torx_mean["target"]["teacher"].slot_mask,
+        ),
+    )
+    rows = []
+    for name, expected, actual in names:
+        if jnp.issubdtype(expected.dtype, jnp.inexact):
+            maximum_error = float(jnp.max(jnp.abs(expected - actual)))
+            accepted = bool(jnp.allclose(expected, actual, rtol=1.0e-6, atol=1.0e-6))
+        else:
+            maximum_error = 0.0 if bool(jnp.array_equal(expected, actual)) else float("inf")
+            accepted = bool(jnp.array_equal(expected, actual))
+        rows.append({"name": name, "maximum_absolute_error": maximum_error, "accepted": accepted})
+    return {
+        "scope": "frozen clean target-analysis path; trainable output decoder excluded",
+        "rows": rows,
+        "passed": all(row["accepted"] for row in rows),
+    }
+
+
+def _noisy_structure_identifiability(f1_params: Any, codec_params: Any) -> list[dict[str, Any]]:
     """Use the accepted F1 denoise/decoder as a witness over G's corruption range."""
     cfg = config()
     data = dataset(VALIDATION_COUNT, VALIDATION_SEED, global_id_offset=TRAIN_COUNT)
@@ -330,12 +395,14 @@ def _noisy_structure_identifiability(params: Any) -> list[dict[str, Any]]:
     for nu in (0.025, 0.10, 0.25):
         batch = {**data, "nu": jnp.full((VALIDATION_COUNT,), nu)}
         _, replay = evaluate_committed_replay(
-            params,
+            f1_params,
             batch,
             neutral,
             stochastic_root("operator"),
             stochastic_root("diffusion"),
             0,
+            clean_params=codec_params,
+            clean_ops=DeterministicOps(),
             config=cfg,
         )
         decoded_slots = jnp.argmax(replay.byte_logits, axis=-1).astype(jnp.int32)
@@ -373,12 +440,8 @@ def _noisy_structure_identifiability(params: Any) -> list[dict[str, Any]]:
 def run_codec_gate() -> dict[str, Any]:
     audit()
     state = load_pickle(PARENT)
+    codec_params = load_pickle(CODEC)
     cfg = config()
-    ops = TorxOps.create(
-        stochastic_root("operator"),
-        config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
-        optimizer_step=0,
-    )
     rows = []
     for length in range(8, 65):
         target = jax.random.randint(
@@ -386,7 +449,7 @@ def run_codec_gate() -> dict[str, Any]:
         )
         mask = jnp.arange(64)[None, :] < length
         target = jnp.where(mask, target, 0)
-        output = apply_target_codec(state["params"], target, mask, config=cfg, ops=ops)
+        output = apply_target_codec(codec_params, target, mask, config=cfg)
         teacher = output["target"]["teacher"]
         predicted = jnp.argmax(output["codec_logits"], axis=-1)
         byte_accuracy = jnp.sum((predicted == teacher.slot_bytes) & teacher.slot_mask) / jnp.sum(
@@ -415,12 +478,14 @@ def run_codec_gate() -> dict[str, Any]:
         )
     aggregate = float(np.mean([row["accuracy"] for row in rows]))
     signature = float(np.mean([row["signature_accuracy"] for row in rows]))
-    noisy_identifiability = _noisy_structure_identifiability(state["params"])
+    teacher_parity = _codec_teacher_parity(codec_params, state["params"])
+    noisy_identifiability = _noisy_structure_identifiability(state["params"], codec_params)
     passed = (
         aggregate >= 0.99
         and min(row["accuracy"] for row in rows) >= 0.98
         and signature >= 0.99
         and not any(row["capacity_overflow"] or row["nonfinite"] for row in rows)
+        and teacher_parity["passed"]
         and all(
             row["finite"]
             and row["eligible_content_cuts"] > 0
@@ -436,6 +501,7 @@ def run_codec_gate() -> dict[str, Any]:
         "aggregate_accuracy": aggregate,
         "minimum_length_accuracy": min(row["accuracy"] for row in rows),
         "signature_accuracy": signature,
+        "codec_f1_zero_noise_teacher_parity": teacher_parity,
         "noisy_identifiability": noisy_identifiability,
         "noisy_identifiability_rule": (
             "accepted F1 denoise/decoder witness on the same corrupted carrier; "
