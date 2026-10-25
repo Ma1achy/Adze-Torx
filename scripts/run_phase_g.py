@@ -142,7 +142,11 @@ def implementation_sha() -> str:
 
 def load_pickle(path: Path) -> Any:
     with path.open("rb") as stream:
-        return pickle.load(stream)  # noqa: S301
+        value = pickle.load(stream)  # noqa: S301
+    return jax.tree.map(
+        lambda leaf: jnp.asarray(leaf) if isinstance(leaf, np.ndarray) else leaf,
+        value,
+    )
 
 
 def save_pickle(path: Path, value: Any) -> None:

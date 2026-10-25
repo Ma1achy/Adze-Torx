@@ -17,6 +17,7 @@ from adze_t.generated_structure import generated_routing_core
 from adze_t.model import apply_target_codec, init_model_params
 from adze_t.objectives import adamw_init
 from adze_t.phase_g import (
+    evaluate_committed_replay,
     fail_closed_adamw_step,
     generated_structure_truth,
     generated_train_step,
@@ -87,7 +88,7 @@ def _length(structure: CommittedStructure) -> jax.Array:
 
 
 @pytest.mark.integration
-def test_accepted_torx_checkpoint_codec_is_compatible_and_repeatable():
+def test_accepted_torx_checkpoint_codec_and_guarded_replay_are_repeatable():
     assert hashlib.sha256(F1_PARENT.read_bytes()).hexdigest() == F1_SHA256
     with F1_PARENT.open("rb") as stream:
         state = pickle.load(stream)  # noqa: S301
@@ -102,6 +103,44 @@ def test_accepted_torx_checkpoint_codec_is_compatible_and_repeatable():
     second = apply_target_codec(state["params"], target, mask, config=REFERENCE_SMALL_V0, ops=ops)
     assert jax.tree_util.tree_all(jax.tree.map(jnp.array_equal, first, second))
     assert all(bool(jnp.all(jnp.isfinite(leaf))) for leaf in jax.tree.leaves(first))
+    batch = {
+        "prompt": jnp.asarray([[0xF1]], jnp.int32),
+        "prompt_mask": jnp.ones((1, 1), bool),
+        "target": target,
+        "target_mask": mask,
+        "nu": jnp.asarray([0.1]),
+        "global_example_id": jnp.asarray([1024], jnp.uint32),
+    }
+    committed = neutral_structure(1, REFERENCE_SMALL_V0)
+    first_metrics, first_replay = evaluate_committed_replay(
+        state["params"],
+        batch,
+        committed,
+        jax.random.key(953),
+        jax.random.key(954),
+        0,
+        config=REFERENCE_SMALL_V0,
+    )
+    second_metrics, second_replay = evaluate_committed_replay(
+        state["params"],
+        batch,
+        committed,
+        jax.random.key(953),
+        jax.random.key(954),
+        0,
+        config=REFERENCE_SMALL_V0,
+    )
+    assert bool(first_replay.executed)
+    assert jax.tree_util.tree_all(
+        jax.tree.map(
+            jnp.array_equal,
+            (first_metrics, first_replay),
+            (second_metrics, second_replay),
+        )
+    )
+    assert all(
+        bool(jnp.all(jnp.isfinite(leaf))) for leaf in jax.tree.leaves((first_metrics, first_replay))
+    )
 
 
 def test_fail_closed_optimizer_preserves_params_moments_and_step_exactly():

@@ -60,6 +60,11 @@ def _explicit_length(structure: CommittedStructure) -> jax.Array:
     return structure.length
 
 
+def _jax_array_tree(value: Any) -> Any:
+    """Normalize persisted NumPy leaves before any traced Torx application."""
+    return jax.tree.map(jnp.asarray, value)
+
+
 def generated_structure_truth(
     slot_bytes: jax.Array,
     length: jax.Array,
@@ -96,6 +101,7 @@ def evaluate_committed_replay(
     config: ReferenceConfig = REFERENCE_SMALL_V0,
 ) -> tuple[GeneratedByteMetrics, GeneratedReplay]:
     """Evaluate one committed structure with neutral observations and no mutation."""
+    params = _jax_array_tree(params)
     ops = TorxOps.create(
         operator_root,
         config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
@@ -304,6 +310,7 @@ def generated_two_pass_objective(
     config: ReferenceConfig = REFERENCE_SMALL_V0,
 ) -> tuple[jax.Array, dict[str, jax.Array]]:
     """Predict once, commit at the boundary, then replay the same S1 input."""
+    params = _jax_array_tree(params)
     ops = TorxOps.create(
         operator_root,
         config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
