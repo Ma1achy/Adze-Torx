@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 from dataclasses import replace
+import hashlib
+from pathlib import Path
+import pickle
 
 import jax
 import jax.numpy as jnp
@@ -11,7 +14,7 @@ from adze_t.backends.torx import TorxOperatorConfig, TorxOps
 from adze_t.config import REFERENCE_SMALL_V0
 from adze_t.denoise import as_sanitized_model_target_analysis, make_sanitized_target_analysis
 from adze_t.generated_structure import generated_routing_core
-from adze_t.model import init_model_params
+from adze_t.model import apply_target_codec, init_model_params
 from adze_t.objectives import adamw_init
 from adze_t.phase_g import (
     fail_closed_adamw_step,
@@ -23,6 +26,11 @@ from adze_t.phase_g import (
 )
 from adze_t.state import CommittedStructure
 from adze_t.training import stochastic_model_update_mask
+
+
+ROOT = Path(__file__).resolve().parents[1]
+F1_PARENT = ROOT / "results/runs/phase_f/f1/denoise_v1/one_step/init0_stoch0.pkl"
+F1_SHA256 = "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57"
 
 
 def _config():
@@ -76,6 +84,24 @@ def _fixture():
 def _length(structure: CommittedStructure) -> jax.Array:
     assert structure.length is not None
     return structure.length
+
+
+@pytest.mark.integration
+def test_accepted_torx_checkpoint_codec_is_compatible_and_repeatable():
+    assert hashlib.sha256(F1_PARENT.read_bytes()).hexdigest() == F1_SHA256
+    with F1_PARENT.open("rb") as stream:
+        state = pickle.load(stream)  # noqa: S301
+    target = jnp.arange(1, 9, dtype=jnp.int32)[None, :]
+    mask = jnp.ones_like(target, dtype=bool)
+    ops = TorxOps.create(
+        jax.random.key(952),
+        config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
+        optimizer_step=0,
+    )
+    first = apply_target_codec(state["params"], target, mask, config=REFERENCE_SMALL_V0, ops=ops)
+    second = apply_target_codec(state["params"], target, mask, config=REFERENCE_SMALL_V0, ops=ops)
+    assert jax.tree_util.tree_all(jax.tree.map(jnp.array_equal, first, second))
+    assert all(bool(jnp.all(jnp.isfinite(leaf))) for leaf in jax.tree.leaves(first))
 
 
 def test_fail_closed_optimizer_preserves_params_moments_and_step_exactly():

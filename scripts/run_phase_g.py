@@ -17,6 +17,7 @@ import jax
 import jax.numpy as jnp
 import numpy as np
 
+from adze_t.backends.torx import TorxOperatorConfig, TorxOps
 from adze_t.config import REFERENCE_SMALL_V0
 from adze_t.model import apply_target_codec
 from adze_t.objectives import adamw_init
@@ -369,6 +370,11 @@ def run_codec_gate() -> dict[str, Any]:
     audit()
     state = load_pickle(PARENT)
     cfg = config()
+    ops = TorxOps.create(
+        stochastic_root("operator"),
+        config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0),
+        optimizer_step=0,
+    )
     rows = []
     for length in range(8, 65):
         target = jax.random.randint(
@@ -376,7 +382,7 @@ def run_codec_gate() -> dict[str, Any]:
         )
         mask = jnp.arange(64)[None, :] < length
         target = jnp.where(mask, target, 0)
-        output = apply_target_codec(state["params"], target, mask, config=cfg)
+        output = apply_target_codec(state["params"], target, mask, config=cfg, ops=ops)
         teacher = output["target"]["teacher"]
         predicted = jnp.argmax(output["codec_logits"], axis=-1)
         byte_accuracy = jnp.sum((predicted == teacher.slot_bytes) & teacher.slot_mask) / jnp.sum(
