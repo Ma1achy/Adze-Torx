@@ -28,6 +28,12 @@ BOOTSTRAP_RESAMPLES = 2_000
 ROOT_T_95_DF15 = 2.131449545559323
 
 
+def require_exact_protocol(actual: dict[str, Any], expected: dict[str, Any], source: str) -> None:
+    """Reject any evaluation artifact whose complete protocol manifest differs."""
+    if actual != expected:
+        raise RuntimeError(f"mixed or stale F3 evaluation protocol in {source}")
+
+
 def summary(values: np.ndarray) -> dict[str, float | int]:
     values = np.asarray(values, dtype=np.float64)
     count = len(values)
@@ -159,12 +165,30 @@ def classify(
 ) -> str:
     if blocked:
         return PHASE_F_3_BLOCKED
-    if not healthy:
+    if not healthy or not converged:
         return PHASE_F_3_S2_TRAINING_UNRESOLVED
     if len(informative_rows) != 3:
         raise ValueError("F3 classification requires exactly three informative rows")
-    effects = [bucket_effect(row, require_uncertainty=True) for row in informative_rows]
     forgetting = sum(bool(row["step0_forgetting"]) for row in informative_rows)
+    if forgetting >= 2 or not stochastic_agrees:
+        return PHASE_F_3_S2_TRAINING_UNRESOLVED
+    pattern = effect_pattern(informative_rows, require_uncertainty=True)
+    if pattern == "benefit":
+        return PHASE_F_3_S2_TRAINING_BENEFIT
+    if pattern == "degradation":
+        return PHASE_F_3_S2_TRAINING_NEGATIVE
+    if pattern == "neutral":
+        return PHASE_F_3_S2_TRAINING_NEUTRAL
+    return PHASE_F_3_S2_TRAINING_UNRESOLVED
+
+
+def effect_pattern(informative_rows: list[dict[str, Any]], *, require_uncertainty: bool) -> str:
+    """Classify useful-output S2 effects without considering convergence or forgetting."""
+    if len(informative_rows) != 3:
+        raise ValueError("effect pattern requires exactly three informative rows")
+    effects = [
+        bucket_effect(row, require_uncertainty=require_uncertainty) for row in informative_rows
+    ]
     benefit_count = effects.count("benefit")
     degradation_count = effects.count("degradation")
     remaining_nonnegative = all(
@@ -172,18 +196,10 @@ def classify(
         for row, effect in zip(informative_rows, effects, strict=True)
         if effect != "benefit"
     )
-    if (
-        benefit_count >= 2
-        and degradation_count == 0
-        and remaining_nonnegative
-        and forgetting < 2
-        and stochastic_agrees
-    ):
-        return PHASE_F_3_S2_TRAINING_BENEFIT
-    if not converged or forgetting >= 2 or (benefit_count and degradation_count):
-        return PHASE_F_3_S2_TRAINING_UNRESOLVED
+    if benefit_count >= 2 and degradation_count == 0 and remaining_nonnegative:
+        return "benefit"
     if degradation_count >= 2 and benefit_count == 0:
-        return PHASE_F_3_S2_TRAINING_NEGATIVE
-    if benefit_count < 2 and degradation_count < 2 and forgetting == 0:
-        return PHASE_F_3_S2_TRAINING_NEUTRAL
-    return PHASE_F_3_S2_TRAINING_UNRESOLVED
+        return "degradation"
+    if benefit_count < 2 and degradation_count < 2:
+        return "neutral"
+    return "mixed"

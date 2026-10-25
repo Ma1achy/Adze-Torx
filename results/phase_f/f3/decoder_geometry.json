@@ -1,0 +1,61 @@
+{
+  "delta_definition": "S2 minus S1",
+  "per_nu": [
+    {
+      "correlation_delta_h_mse_delta_byte_nll": 0.004748726456867003,
+      "nu": 0.1,
+      "quadrants": {
+        "latent_improves_decoder_improves": 5,
+        "latent_improves_decoder_worsens": 106,
+        "latent_worsens_decoder_improves": 180,
+        "latent_worsens_decoder_worsens": 3805,
+        "ties": 0
+      }
+    },
+    {
+      "correlation_delta_h_mse_delta_byte_nll": 0.09394719585185189,
+      "nu": 0.25,
+      "quadrants": {
+        "latent_improves_decoder_improves": 685,
+        "latent_improves_decoder_worsens": 3401,
+        "latent_worsens_decoder_improves": 3,
+        "latent_worsens_decoder_worsens": 7,
+        "ties": 0
+      }
+    },
+    {
+      "correlation_delta_h_mse_delta_byte_nll": 0.08819788107318877,
+      "nu": 0.5,
+      "quadrants": {
+        "latent_improves_decoder_improves": 1343,
+        "latent_improves_decoder_worsens": 2753,
+        "latent_worsens_decoder_improves": 0,
+        "latent_worsens_decoder_worsens": 0,
+        "ties": 0
+      }
+    },
+    {
+      "correlation_delta_h_mse_delta_byte_nll": 0.07607455872577333,
+      "nu": 0.75,
+      "quadrants": {
+        "latent_improves_decoder_improves": 1822,
+        "latent_improves_decoder_worsens": 2274,
+        "latent_worsens_decoder_improves": 0,
+        "latent_worsens_decoder_worsens": 0,
+        "ties": 0
+      }
+    },
+    {
+      "correlation_delta_h_mse_delta_byte_nll": 0.18324050423499968,
+      "nu": 0.9,
+      "quadrants": {
+        "latent_improves_decoder_improves": 2134,
+        "latent_improves_decoder_worsens": 1962,
+        "latent_worsens_decoder_improves": 0,
+        "latent_worsens_decoder_worsens": 0,
+        "ties": 0
+      }
+    }
+  ],
+  "source_protocol_sha256": "f51e287ad27096cab62f0cc759cafdb04bdb856bf83367493ce40ebded67cdb9"
+}

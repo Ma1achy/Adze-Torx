@@ -1,0 +1,46 @@
+{
+  "contract": "PHASE_F_3_CLOSURE_VALIDATION_V0",
+  "static_checks": {
+    "make format-check": "PASS: 125 files already formatted",
+    "make lint": "PASS: all checks passed",
+    "make typecheck": "PASS: 0 errors, 0 warnings, 0 informations",
+    "make boundaries": "PASS: public dependency-boundary check passed",
+    "private_torx_scan": "PASS: zero torx._ references in src, scripts, or tests"
+  },
+  "pre_execution_accepted_test_gate": {
+    "implementation_source_sha256": "62545ce627447f509e6f6abd573c3667fa03a3a2540b18d3eacedcc06e426d4c",
+    "regular_tests": 176,
+    "slow_tests": 9,
+    "status": "PASS",
+    "note": "Accepted before training; the same implementation source hash governed training and evaluation."
+  },
+  "closure_revalidation": {
+    "focused_attempt": "INCONCLUSIVE: four tests reported passing, then the pytest child disappeared without an exit status while the execution wrapper remained open",
+    "make_test_attempt": "INCONCLUSIVE: 73 tests reported passing through 40%, then pytest and make disappeared without an exit status while the execution wrapper remained open",
+    "isolated_regular_attempt": "PASS: all 176 collected regular tests completed and passed when files were run separately. The four initially unreported tests in tests/test_phase_d_evaluation.py subsequently passed one at a time; its long chunking-invariance test required approximately five minutes.",
+    "isolated_regular_passed": 176,
+    "isolated_regular_collected": 176,
+    "isolated_regular_without_closure_result": 0,
+    "isolated_slow_attempt": "PASS: all 9 collected slow tests completed and passed when slow-bearing files were run separately",
+    "isolated_slow_passed": 9,
+    "isolated_slow_collected": 9,
+    "assertion_failures_observed": 0,
+    "source_changes_after_accepted_gate": false,
+    "reason_not_counted_as_pass": "No final process exit status or pytest summary was returned."
+  },
+  "scientific_consistency": {
+    "checkpoint_manifest_audit": "PASS",
+    "validation_protocol_audit": "PASS",
+    "training_records_unique": true,
+    "training_metrics_finite": true,
+    "latest_matches_rollout_10000": true,
+    "frozen_teacher_rho_all_checkpoints": true,
+    "deterministic_result_protocol": "PASS",
+    "operator_shard_count": 16,
+    "operator_shard_protocols": "PASS",
+    "operator_retries": 0,
+    "operator_failures": 0,
+    "escalation_required": false
+  },
+  "closure_interpretation": "The accepted pre-execution test gate remains authoritative because the implementation source hash is unchanged. Closure-time static and scientific consistency checks passed. All regular and slow tests passed in isolated closure-time execution; the aggregate-run wrapper disappearances remain recorded as host/runtime-wrapper deviations, not test failures."
+}

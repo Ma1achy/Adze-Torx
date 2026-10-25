@@ -173,3 +173,29 @@ provenance evidence is under `f2/`. No optimizer or rollout training ran.
 Phase F.2 completion validation passed with 122 files formatted, lint and type
 checking clean, dependency boundaries intact, 162 regular tests, 9 slow tests,
 6 focused F2 tests, and zero private-Torx imports.
+
+## Phase F.3
+
+**PHASE_F_3_S2_TRAINING_NEUTRAL**
+
+Self-generated S=2 rollout training continued the accepted F1 model and Adam
+state for 10,000 new updates, ending at absolute optimizer step 15,000. The
+validation-only rule selected the 10k checkpoint before final-test results were
+exposed. Its SHA-256 is
+`af08d590fa338301c840e4fc2d795a75f9012c806296e2fb2a9c38003837a6c3`.
+
+On the full 4,096-example paired test, native trained conditioning `[0,1]`
+produced one material S2 degradation at `nu=.25`: accuracy fell 2.609
+percentage points and NLL rose 14.92%, even though latent MSE improved 13.31%.
+The `.50` and `.75` effects were neutral under the predeclared joint
+accuracy/NLL gates. F3 S1 improved over original F1 S1 in all buckets, so no
+step-0-forgetting flag fired. Sixteen finite-Torx roots on 512 examples per
+`nu` reproduced the same degradation/neutral/neutral pattern with low root
+variance; the preregistered 1,024-example escalation was not required.
+
+Training, gradient, trial-update, and numerical gates were healthy. Because
+there were neither two material benefit buckets nor two material degradation
+buckets, the frozen rule yields `PHASE_F_3_S2_TRAINING_NEUTRAL`. Detailed
+provenance, checkpoint selection, paired confidence intervals, diagnostics,
+and validation evidence are in `f3/F3_RESULTS.md`. F0/F1/F2 history remains
+unchanged. This is not a final Phase-F S label, and it does not authorize S4.

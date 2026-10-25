@@ -38,8 +38,10 @@ from adze_t.phase_f_3 import (
     ROOT_T_95_DF15,
     bucket_effect,
     classify,
+    effect_pattern,
     is_pareto_best_5k,
     paired_summary,
+    require_exact_protocol,
     should_extend_to_10k,
     step0_forgetting,
     summary,
@@ -83,6 +85,7 @@ CHECKPOINTS = (100, 250, 500, 1_000, 2_000, 5_000, 10_000)
 BATCH = 32
 ROOT_COUNT = 16
 PARENT_OPTIMIZER_STEP = 5_000
+EVALUATION_PROTOCOL = "PHASE_F_3_EVALUATION_PROTOCOL_V0"
 
 
 def config():
@@ -126,7 +129,7 @@ def append_jsonl(path: Path, value: Any) -> None:
 
 def load_pickle(path: Path) -> Any:
     with path.open("rb") as stream:
-        return jax.tree.map(jnp.asarray, pickle.load(stream))  # noqa: S301
+        return pickle.load(stream)  # noqa: S301
 
 
 def save_pickle(path: Path, value: Any) -> None:
@@ -144,6 +147,94 @@ def array_hash(value: Any) -> str:
         digest.update(np.asarray(array.shape, dtype=np.int64).tobytes())
         digest.update(array.tobytes())
     return digest.hexdigest()
+
+
+def json_hash(value: Any) -> str:
+    encoded = json.dumps(value, sort_keys=True, separators=(",", ":"), default=serialise).encode()
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def ids_hash(ids: Any) -> str:
+    return hashlib.sha256(np.asarray(ids, dtype=np.uint32).tobytes()).hexdigest()
+
+
+def implementation_source_hash() -> str:
+    digest = hashlib.sha256()
+    for path in (
+        ROOT / "src/adze_t/denoise.py",
+        ROOT / "src/adze_t/training.py",
+        ROOT / "src/adze_t/phase_f_3.py",
+        ROOT / "scripts/run_phase_f_3.py",
+    ):
+        digest.update(str(path.relative_to(ROOT)).encode())
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
+
+
+def checkpoint_manifest(path: Path, state: dict[str, Any]) -> dict[str, Any]:
+    f3_updates = int(state.get("f3_rollout_updates", 0))
+    absolute_step = int(state["step"])
+    if absolute_step != PARENT_OPTIMIZER_STEP + f3_updates:
+        raise RuntimeError(f"invalid checkpoint step coordinates: {path}")
+    if f3_updates and state.get("parent_sha256") != EXPECTED_PARENT_SHA256:
+        raise RuntimeError(f"invalid F3 parent provenance in checkpoint: {path}")
+    return {
+        "path": str(path.relative_to(ROOT)),
+        "file_sha256": sha256(path),
+        "parameter_tree_sha256": array_hash(state["params"]),
+        "moment_tree_sha256": array_hash(state["moments"]),
+        "f3_rollout_updates": f3_updates,
+        "optimizer_absolute_step": absolute_step,
+        "parent_sha256": EXPECTED_PARENT_SHA256,
+    }
+
+
+def evaluation_protocol(
+    checkpoint: dict[str, Any],
+    ids: Any,
+    *,
+    split_name: str,
+    conditioning_mode: str,
+    eta_diff: int,
+    lambda_op: float,
+    diffusion_root_seed: int,
+    operator_root_seed: int,
+    operator_root_index: int | None,
+    baseline_checkpoint: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    protocol = {
+        "contract": EVALUATION_PROTOCOL,
+        "implementation_git_sha": git_sha(),
+        "implementation_source_sha256": implementation_source_hash(),
+        "torx_pin": TORX_PIN,
+        "checkpoint": checkpoint,
+        "dataset": {
+            "split": split_name,
+            "seed": DATA_SEEDS[split_name],
+            "count": len(ids),
+            "ordered_global_ids_sha256": ids_hash(ids),
+        },
+        "trajectory": {
+            "s_exec": 2,
+            "conditioning_mode": conditioning_mode,
+            "actual_s_indices": [0, 1],
+            "eta_diff": eta_diff,
+            "cycles_Q": 3,
+            "physical_blocks_L": 4,
+            "outer_refinement_R": 0,
+            "levels": list(LEVELS),
+        },
+        "operator": {
+            "lambda_op": lambda_op,
+            "sigma_op": 1.0e-3 if lambda_op else 0.0,
+            "root_seed": operator_root_seed,
+            "root_index": operator_root_index,
+        },
+        "diffusion_root_seed": diffusion_root_seed,
+    }
+    if baseline_checkpoint is not None:
+        protocol["baseline_checkpoint"] = baseline_checkpoint
+    return {**protocol, "protocol_sha256": json_hash(protocol)}
 
 
 def split(name: str, count: int):
@@ -193,6 +284,7 @@ def run_audit() -> dict[str, Any]:
         "status": "F3_PROVENANCE_PASS",
         "base_git_sha": EXPECTED_BASE_GIT_SHA,
         "implementation_git_sha": git_sha(),
+        "implementation_source_sha256": implementation_source_hash(),
         "torx_pin": TORX_PIN,
         "parent": str(PARENT.relative_to(ROOT)),
         "parent_sha256": sha256(PARENT),
@@ -306,10 +398,11 @@ def _gradient_report(grads: Any) -> dict[str, Any]:
 
 def run_first_gradient() -> dict[str, Any]:
     state = load_parent()
+    parent_manifest = checkpoint_manifest(PARENT, state)
     prompt, target, ids = split("train", TRAIN_COUNT)
     batch = training_batch(prompt, target, ids, 5_001)
 
-    def component_objective(params, component):
+    def component_objective(params, component, *, detach_between_steps=False):
         _, auxiliary = s2_rollout_objective(
             params,
             batch,
@@ -317,11 +410,17 @@ def run_first_gradient() -> dict[str, Any]:
             TRAIN_DIFFUSION_ROOT,
             5_001,
             config=config(),
+            detach_between_steps=detach_between_steps,
         )
         return auxiliary[component]["loss"]
 
     g0 = jax.grad(lambda params: component_objective(params, "step0"))(state["params"])
     g1 = jax.grad(lambda params: component_objective(params, "step1"))(state["params"])
+    g1_detached = jax.grad(
+        lambda params: component_objective(params, "step1", detach_between_steps=True)
+    )(state["params"])
+    cross_boundary = jax.tree.map(lambda connected, detached: connected - detached, g1, g1_detached)
+    cross_boundary_norm = _norm(cross_boundary)
     combined_loss, g = jax.value_and_grad(
         lambda params: s2_rollout_objective(
             params,
@@ -361,9 +460,14 @@ def run_first_gradient() -> dict[str, Any]:
         + float(reports["step1"]["permitted_global_norm"])
     )
     cancellation_ratio = combined_norm / max(denominator, 1.0e-30)
-    finite = all(bool(jnp.all(jnp.isfinite(leaf))) for leaf in jax.tree.leaves((g0, g1, g)))
-    pathological = (not finite) or (
-        combined_norm >= 100.0 * F1_RAW_GRADIENT_NORM and cancellation_ratio <= 1.0e-3
+    finite = all(
+        bool(jnp.all(jnp.isfinite(leaf)))
+        for leaf in jax.tree.leaves((g0, g1, g1_detached, cross_boundary, g))
+    )
+    pathological = (
+        (not finite)
+        or (combined_norm >= 100.0 * F1_RAW_GRADIENT_NORM and cancellation_ratio <= 1.0e-3)
+        or float(cross_boundary_norm) <= 0.0
     )
 
     def toy_step1_loss(step0_weight):
@@ -375,10 +479,19 @@ def run_first_gradient() -> dict[str, Any]:
     toy_cross_boundary_gradient = jax.grad(toy_step1_loss)(jnp.asarray(0.9))
     payload = {
         "status": "F3_GRADIENT_PATHOLOGY" if pathological else "F3_FIRST_GRADIENT_PASS",
+        "checkpoint": parent_manifest,
+        "implementation_source_sha256": implementation_source_hash(),
         "optimizer_absolute_step": 5_001,
         "f3_rollout_updates": 1,
         "combined_loss": combined_loss,
         "gradients": reports,
+        "full_model_cross_boundary": {
+            "connected_step1_gradient_norm": _norm(g1),
+            "detached_step1_gradient_norm": _norm(g1_detached),
+            "connected_minus_detached_norm": cross_boundary_norm,
+            "identical_operator_and_diffusion_keys": True,
+            "passed": bool(jnp.isfinite(cross_boundary_norm) & (cross_boundary_norm > 0)),
+        },
         "cosines": cosines,
         "combined_equals_half_sum_error_norm": _norm(difference),
         "cancellation_ratio": cancellation_ratio,
@@ -398,6 +511,204 @@ def run_first_gradient() -> dict[str, Any]:
     )
     if pathological:
         raise RuntimeError("F3_GRADIENT_PATHOLOGY")
+    return payload
+
+
+def _tree_is_finite(tree: Any) -> bool:
+    return all(bool(jnp.all(jnp.isfinite(leaf))) for leaf in jax.tree.leaves(tree))
+
+
+def _prospective_update_audit(
+    before_params: Any,
+    after_params: Any,
+    before_moments: Any,
+    after_moments: Any,
+) -> dict[str, Any]:
+    mask = stochastic_model_update_mask(before_params)
+    before_paths = {
+        jax.tree_util.keystr(path): np.asarray(value)
+        for path, value in jax.tree.leaves_with_path(jax.device_get(before_params))
+    }
+    after_paths = {
+        jax.tree_util.keystr(path): np.asarray(value)
+        for path, value in jax.tree.leaves_with_path(jax.device_get(after_params))
+    }
+    mask_paths = {
+        jax.tree_util.keystr(path): bool(np.asarray(value))
+        for path, value in jax.tree.leaves_with_path(jax.device_get(mask))
+    }
+    before_moment_paths = {
+        jax.tree_util.keystr(path): np.asarray(value)
+        for path, value in jax.tree.leaves_with_path(jax.device_get(before_moments))
+    }
+    after_moment_paths = {
+        jax.tree_util.keystr(path): np.asarray(value)
+        for path, value in jax.tree.leaves_with_path(jax.device_get(after_moments))
+    }
+    changed_enabled_params = []
+    changed_disabled_params = []
+    changed_enabled_moments = []
+    changed_disabled_moments = []
+    for path, before in before_paths.items():
+        enabled = mask_paths[path]
+        changed = not np.array_equal(before, after_paths[path])
+        if changed:
+            (changed_enabled_params if enabled else changed_disabled_params).append(path)
+        for moment_index in (0, 1):
+            moment_path = f"[{moment_index}]{path}"
+            moment_changed = not np.array_equal(
+                before_moment_paths[moment_path], after_moment_paths[moment_path]
+            )
+            if moment_changed:
+                (changed_enabled_moments if enabled else changed_disabled_moments).append(
+                    moment_path
+                )
+    passed = bool(
+        changed_enabled_params
+        and changed_enabled_moments
+        and not changed_disabled_params
+        and not changed_disabled_moments
+        and _tree_is_finite(after_params)
+        and _tree_is_finite(after_moments)
+    )
+    return {
+        "passed": passed,
+        "all_parameters_finite": _tree_is_finite(after_params),
+        "all_moments_finite": _tree_is_finite(after_moments),
+        "changed_enabled_parameter_count": len(changed_enabled_params),
+        "changed_enabled_moment_count": len(changed_enabled_moments),
+        "changed_disabled_parameters": changed_disabled_params,
+        "changed_disabled_moments": changed_disabled_moments,
+        "changed_enabled_parameter_examples": changed_enabled_params[:20],
+    }
+
+
+def _require_gradient_gate(parent_manifest: dict[str, Any]) -> dict[str, Any]:
+    path = EVIDENCE / "first_gradient.json"
+    if not path.exists():
+        raise RuntimeError("run the F3 first-gradient gate before an optimizer update")
+    evidence = json.loads(path.read_text())
+    if (
+        evidence.get("checkpoint") != parent_manifest
+        or evidence.get("implementation_source_sha256") != implementation_source_hash()
+        or evidence.get("pathology")
+    ):
+        raise RuntimeError("stale, mixed, or failed F3 first-gradient evidence")
+    if not evidence.get("full_model_cross_boundary", {}).get("passed", False):
+        raise RuntimeError("F3 full-model cross-boundary gradient gate did not pass")
+    return evidence
+
+
+def run_trial_update() -> dict[str, Any]:
+    state = load_parent()
+    parent_manifest = checkpoint_manifest(PARENT, state)
+    _require_gradient_gate(parent_manifest)
+    prompt, target, ids = split("train", TRAIN_COUNT)
+    batch = training_batch(prompt, target, ids, 5_001)
+    update = jax.jit(stochastic_s2_rollout_train_step, static_argnames=("config",))
+    before_frozen = _frozen_hashes(state["params"], state["moments"])
+    updated_params, updated_moments, metrics = update(
+        state["params"],
+        state["moments"],
+        5_001,
+        batch,
+        TRAIN_OPERATOR_ROOT,
+        TRAIN_DIFFUSION_ROOT,
+        config=config(),
+    )
+    jax.block_until_ready(metrics["loss"])
+    metrics_finite = _tree_is_finite(metrics)
+    changes = _prospective_update_audit(
+        state["params"], updated_params, state["moments"], updated_moments
+    )
+    frozen_unchanged = before_frozen == _frozen_hashes(updated_params, updated_moments)
+    passed = bool(metrics_finite and changes["passed"] and frozen_unchanged)
+    payload = {
+        "status": "F3_TRIAL_UPDATE_PASS" if passed else "F3_TRIAL_UPDATE_FAIL",
+        "checkpoint": parent_manifest,
+        "implementation_source_sha256": implementation_source_hash(),
+        "optimizer_absolute_step": 5_001,
+        "f3_rollout_updates": 1,
+        "metrics": metrics,
+        "metrics_finite": metrics_finite,
+        "update_audit": changes,
+        "frozen_teacher_rho_params_and_moments_bitwise_unchanged": frozen_unchanged,
+        "persisted_optimizer_state": False,
+        "passed": passed,
+    }
+    write_json(EVIDENCE / "trial_update.json", payload)
+    if not passed:
+        raise RuntimeError("F3 prospective full-model optimizer update failed")
+    return payload
+
+
+def _require_trial_update(parent_manifest: dict[str, Any]) -> dict[str, Any]:
+    path = EVIDENCE / "trial_update.json"
+    if not path.exists():
+        raise RuntimeError("run the F3 prospective optimizer update before smoke training")
+    evidence = json.loads(path.read_text())
+    if (
+        evidence.get("checkpoint") != parent_manifest
+        or evidence.get("implementation_source_sha256") != implementation_source_hash()
+        or not evidence.get("passed", False)
+    ):
+        raise RuntimeError("stale, mixed, or failed F3 prospective optimizer update evidence")
+    return evidence
+
+
+def run_runtime_smoke() -> dict[str, Any]:
+    state = load_parent()
+    parent_manifest = checkpoint_manifest(PARENT, state)
+    _require_gradient_gate(parent_manifest)
+    _require_trial_update(parent_manifest)
+    prompt, target, ids = split("train", TRAIN_COUNT)
+    update = jax.jit(stochastic_s2_rollout_train_step, static_argnames=("config",))
+    params, moments = state["params"], state["moments"]
+    expected_frozen = _frozen_hashes(params, moments)
+    metric_rows = []
+    for f3_updates in range(1, 11):
+        absolute_step = PARENT_OPTIMIZER_STEP + f3_updates
+        batch = training_batch(prompt, target, ids, absolute_step)
+        params, moments, metrics = update(
+            params,
+            moments,
+            absolute_step,
+            batch,
+            TRAIN_OPERATOR_ROOT,
+            TRAIN_DIFFUSION_ROOT,
+            config=config(),
+        )
+        jax.block_until_ready(metrics["loss"])
+        if not _tree_is_finite((params, moments, metrics)):
+            raise RuntimeError(f"nonfinite F3 runtime smoke at update {f3_updates}")
+        if _frozen_hashes(params, moments) != expected_frozen:
+            raise RuntimeError(f"frozen F3 state changed during smoke update {f3_updates}")
+        metric_rows.append(
+            {
+                "f3_rollout_updates": f3_updates,
+                "optimizer_absolute_step": absolute_step,
+                "loss": metrics["loss"],
+                "step0_loss": metrics["step0_loss"],
+                "step1_loss": metrics["step1_loss"],
+                "grad_raw_norm": metrics["grad_raw_norm"],
+                "grad_clipped_applied_norm": metrics["grad_clipped_applied_norm"],
+            }
+        )
+    changes = _prospective_update_audit(state["params"], params, state["moments"], moments)
+    passed = bool(changes["passed"] and _tree_is_finite((params, moments)))
+    payload = {
+        "status": "F3_RUNTIME_SMOKE_PASS" if passed else "F3_RUNTIME_SMOKE_FAIL",
+        "checkpoint": parent_manifest,
+        "implementation_source_sha256": implementation_source_hash(),
+        "updates": 10,
+        "metrics": metric_rows,
+        "update_audit": changes,
+        "persisted_optimizer_state": False,
+        "passed": passed,
+    }
+    write_json(EVIDENCE / "runtime_smoke.json", payload)
+    if not passed:
+        raise RuntimeError("F3 10-update runtime smoke failed")
     return payload
 
 
@@ -606,8 +917,23 @@ def _read_validation() -> dict[str, Any]:
     return json.loads(path.read_text()) if path.exists() else {"checkpoints": []}
 
 
-def _routine_validation(params, f3_updates: int):
+def _routine_validation(params, f3_updates: int, checkpoint_path: Path):
     prompt, target, ids = split("validation", VALIDATION_COUNT)
+    checkpoint_state = load_pickle(checkpoint_path)
+    checkpoint = checkpoint_manifest(checkpoint_path, checkpoint_state)
+    parent_state = load_parent()
+    protocol = evaluation_protocol(
+        checkpoint,
+        ids,
+        split_name="validation",
+        conditioning_mode=F3_NATIVE_S_CONDITIONING_TRAINED,
+        eta_diff=0,
+        lambda_op=0.0,
+        diffusion_root_seed=10_402,
+        operator_root_seed=OPERATOR_ROOT_SEED,
+        operator_root_index=None,
+        baseline_checkpoint=checkpoint_manifest(PARENT, parent_state),
+    )
     raw = evaluate(
         params,
         prompt,
@@ -617,9 +943,8 @@ def _routine_validation(params, f3_updates: int):
         diffusion_root=VALIDATION_DIFFUSION_ROOT,
     )
     rows = summarize_evaluation(raw, seed_offset=f3_updates)
-    parent = load_parent()
     f1_raw = evaluate(
-        parent["params"],
+        parent_state["params"],
         prompt,
         target,
         ids,
@@ -637,13 +962,15 @@ def _routine_validation(params, f3_updates: int):
         row.update({**forgetting_input, "step0_forgetting": step0_forgetting(forgetting_input)})
         row["effect"] = bucket_effect(row, require_uncertainty=True)
     payload = _read_validation()
-    payload["checkpoints"] = [
-        item for item in payload["checkpoints"] if item["f3_rollout_updates"] != f3_updates
-    ]
+    existing = [item for item in payload["checkpoints"] if item["f3_rollout_updates"] == f3_updates]
+    if existing:
+        require_exact_protocol(existing[0].get("protocol", {}), protocol, str(checkpoint_path))
+        return existing[0]["rows"]
     payload["checkpoints"].append(
         {
             "f3_rollout_updates": f3_updates,
             "optimizer_absolute_step": PARENT_OPTIMIZER_STEP + f3_updates,
+            "protocol": protocol,
             "rows": rows,
         }
     )
@@ -652,17 +979,54 @@ def _routine_validation(params, f3_updates: int):
     return rows
 
 
+def _validate_recorded_validation() -> set[int]:
+    payload = _read_validation()
+    if not payload["checkpoints"]:
+        return set()
+    _, _, ids = split("validation", VALIDATION_COUNT)
+    parent_manifest = checkpoint_manifest(PARENT, load_parent())
+    recorded = set()
+    for item in payload["checkpoints"]:
+        f3_updates = int(item["f3_rollout_updates"])
+        checkpoint_path = WORK / f"rollout_{f3_updates:05d}.pkl"
+        if not checkpoint_path.exists():
+            raise RuntimeError(f"validation references missing checkpoint {checkpoint_path}")
+        expected = evaluation_protocol(
+            checkpoint_manifest(checkpoint_path, load_pickle(checkpoint_path)),
+            ids,
+            split_name="validation",
+            conditioning_mode=F3_NATIVE_S_CONDITIONING_TRAINED,
+            eta_diff=0,
+            lambda_op=0.0,
+            diffusion_root_seed=10_402,
+            operator_root_seed=OPERATOR_ROOT_SEED,
+            operator_root_index=None,
+            baseline_checkpoint=parent_manifest,
+        )
+        require_exact_protocol(item.get("protocol", {}), expected, str(checkpoint_path))
+        recorded.add(f3_updates)
+    return recorded
+
+
 def run_training(max_rollout_updates: int):
     if max_rollout_updates not in (5_000, 10_000):
         raise ValueError("max rollout updates must be 5000 or 10000")
-    if not (EVIDENCE / "first_gradient.json").exists():
-        raise RuntimeError("run and pass the F3 first-gradient gate before training")
-    gradient = json.loads((EVIDENCE / "first_gradient.json").read_text())
-    if gradient["pathology"]:
-        raise RuntimeError("F3_GRADIENT_PATHOLOGY")
+    parent_state = load_parent()
+    parent_manifest = checkpoint_manifest(PARENT, parent_state)
+    _require_gradient_gate(parent_manifest)
+    _require_trial_update(parent_manifest)
+    smoke_path = EVIDENCE / "runtime_smoke.json"
+    if not smoke_path.exists():
+        raise RuntimeError("run the F3 10-update runtime smoke before training")
+    smoke = json.loads(smoke_path.read_text())
+    if (
+        smoke.get("checkpoint") != parent_manifest
+        or smoke.get("implementation_source_sha256") != implementation_source_hash()
+        or not smoke.get("passed", False)
+    ):
+        raise RuntimeError("stale, mixed, or failed F3 runtime smoke evidence")
     params, moments, start = _load_training_state()
-    parent = load_parent()
-    expected_frozen = _frozen_hashes(parent["params"], parent["moments"])
+    expected_frozen = _frozen_hashes(parent_state["params"], parent_state["moments"])
     if _frozen_hashes(params, moments) != expected_frozen:
         raise RuntimeError("resumable F3 state changed frozen F1 rho/teacher parameters or moments")
     if max_rollout_updates == 10_000:
@@ -675,7 +1039,7 @@ def run_training(max_rollout_updates: int):
             )
     prompt, target, ids = split("train", TRAIN_COUNT)
     update = jax.jit(stochastic_s2_rollout_train_step, static_argnames=("config",))
-    recorded = {item["f3_rollout_updates"] for item in _read_validation()["checkpoints"]}
+    recorded = _validate_recorded_validation()
     frozen_before = _frozen_hashes(params, moments)
     for f3_updates in range(start + 1, max_rollout_updates + 1):
         absolute_step = PARENT_OPTIMIZER_STEP + f3_updates
@@ -697,16 +1061,20 @@ def run_training(max_rollout_updates: int):
             if _frozen_hashes(params, moments) != expected_frozen:
                 raise RuntimeError("rho or target teacher changed at an F3 checkpoint")
             _save_training_state(params, moments, f3_updates, checkpoint=True)
+            checkpoint_path = WORK / f"rollout_{f3_updates:05d}.pkl"
+            checkpoint_state = load_pickle(checkpoint_path)
+            checkpoint_info = checkpoint_manifest(checkpoint_path, checkpoint_state)
             if f3_updates not in recorded:
                 append_jsonl(
                     EVIDENCE / "training.jsonl",
                     {
                         "f3_rollout_updates": f3_updates,
                         "optimizer_absolute_step": absolute_step,
+                        "checkpoint": checkpoint_info,
                         "metrics": metrics,
                     },
                 )
-                _routine_validation(params, f3_updates)
+                _routine_validation(params, f3_updates, checkpoint_path)
             print(f"F3 rollout_updates={f3_updates} absolute_step={absolute_step}", flush=True)
         elif f3_updates % 100 == 0:
             if _frozen_hashes(params, moments) != expected_frozen:
@@ -753,11 +1121,20 @@ def _selected_checkpoint() -> tuple[int, Path]:
     return selected, WORK / f"rollout_{selected:05d}.pkl"
 
 
-def _write_per_example(path: Path, raw: dict[float, dict[str, np.ndarray]], ids: np.ndarray):
+def _write_per_example(
+    path: Path,
+    raw: dict[float, dict[str, np.ndarray]],
+    ids: np.ndarray,
+    protocol_sha256: str,
+):
     with path.open("w", encoding="utf-8") as stream:
         for level, metrics in raw.items():
             for index, example_id in enumerate(ids):
-                row = {"global_example_id": int(example_id), "nu": level}
+                row = {
+                    "global_example_id": int(example_id),
+                    "nu": level,
+                    "protocol_sha256": protocol_sha256,
+                }
                 for name in ("mse", "nll", "byte_accuracy", "exact_accuracy", "nonfinite"):
                     row[name] = metrics[name][index].tolist()
                 stream.write(json.dumps(row, sort_keys=True) + "\n")
@@ -853,6 +1230,80 @@ def run_final_evaluation():
     state = load_pickle(path)
     parent = load_parent()
     prompt, target, ids = split("test", TEST_COUNT)
+    checkpoint = checkpoint_manifest(path, state)
+    parent_checkpoint = checkpoint_manifest(PARENT, parent)
+    native_protocol = evaluation_protocol(
+        checkpoint,
+        ids,
+        split_name="test",
+        conditioning_mode=F3_NATIVE_S_CONDITIONING_TRAINED,
+        eta_diff=0,
+        lambda_op=0.0,
+        diffusion_root_seed=TEST_DIFFUSION_ROOT_SEED,
+        operator_root_seed=OPERATOR_ROOT_SEED,
+        operator_root_index=None,
+        baseline_checkpoint=parent_checkpoint,
+    )
+    step0_protocol = evaluation_protocol(
+        checkpoint,
+        ids,
+        split_name="test",
+        conditioning_mode=F2_STEP0_CONDITIONING,
+        eta_diff=0,
+        lambda_op=0.0,
+        diffusion_root_seed=TEST_DIFFUSION_ROOT_SEED,
+        operator_root_seed=OPERATOR_ROOT_SEED,
+        operator_root_index=None,
+    )
+    eta1_protocol = evaluation_protocol(
+        checkpoint,
+        ids,
+        split_name="test",
+        conditioning_mode=F3_NATIVE_S_CONDITIONING_TRAINED,
+        eta_diff=1,
+        lambda_op=0.0,
+        diffusion_root_seed=TEST_DIFFUSION_ROOT_SEED,
+        operator_root_seed=OPERATOR_ROOT_SEED,
+        operator_root_index=None,
+    )
+    existing_validation = _read_validation()
+    if "full_test_protocol" in existing_validation:
+        require_exact_protocol(
+            existing_validation["full_test_protocol"],
+            native_protocol,
+            str(EVIDENCE / "validation_s1_s2.json"),
+        )
+    raw_path = WORK / "final_native_raw.pkl"
+    if raw_path.exists():
+        existing_raw = load_pickle(raw_path)
+        require_exact_protocol(existing_raw.get("protocol", {}), native_protocol, str(raw_path))
+        if existing_raw.get("complete") is not True:
+            raise RuntimeError("incomplete deterministic F3 result")
+    for result_path, expected_protocol in (
+        (EVIDENCE / "step0_conditioning_diagnostic.json", step0_protocol),
+        (EVIDENCE / "eta1_diagnostic.json", eta1_protocol),
+    ):
+        if result_path.exists():
+            existing = json.loads(result_path.read_text())
+            require_exact_protocol(
+                existing.get("protocol", {}), expected_protocol, str(result_path)
+            )
+    for result_path in (
+        EVIDENCE / "decoder_geometry.json",
+        EVIDENCE / "latent_distribution.json",
+    ):
+        if result_path.exists():
+            existing = json.loads(result_path.read_text())
+            if existing.get("source_protocol_sha256") != native_protocol["protocol_sha256"]:
+                raise RuntimeError(f"mixed or stale deterministic F3 result in {result_path}")
+    per_example_path = EVIDENCE / "validation_s1_s2_per_example.jsonl"
+    if per_example_path.exists():
+        first_line = next((line for line in per_example_path.read_text().splitlines() if line), "")
+        if (
+            not first_line
+            or json.loads(first_line).get("protocol_sha256") != native_protocol["protocol_sha256"]
+        ):
+            raise RuntimeError(f"mixed or stale deterministic F3 result in {per_example_path}")
     operator_root = jax.random.PRNGKey(OPERATOR_ROOT_SEED)
     diffusion_root = jax.random.PRNGKey(TEST_DIFFUSION_ROOT_SEED)
     f3_raw = evaluate(
@@ -907,20 +1358,50 @@ def run_final_evaluation():
         row["effect"] = bucket_effect(row, require_uncertainty=True)
     write_json(
         EVIDENCE / "validation_s1_s2.json",
-        {**_read_validation(), "selected_checkpoint": selected, "full_test_rows": rows},
+        {
+            **_read_validation(),
+            "selected_checkpoint": selected,
+            "full_test_protocol": native_protocol,
+            "full_test_rows": rows,
+        },
     )
     write_json(
         EVIDENCE / "step0_conditioning_diagnostic.json",
-        {"conditioning": [0, 0], "rows": summarize_evaluation(step0_raw, seed_offset=120_000)},
+        {
+            "protocol": step0_protocol,
+            "conditioning": [0, 0],
+            "rows": summarize_evaluation(step0_raw, seed_offset=120_000),
+        },
     )
     write_json(
         EVIDENCE / "eta1_diagnostic.json",
-        {"eta_diff": 1, "rows": summarize_evaluation(eta1_raw, seed_offset=130_000)},
+        {
+            "protocol": eta1_protocol,
+            "eta_diff": 1,
+            "rows": summarize_evaluation(eta1_raw, seed_offset=130_000),
+        },
     )
-    write_json(EVIDENCE / "decoder_geometry.json", _decoder_geometry(f3_raw))
-    write_json(EVIDENCE / "latent_distribution.json", _latent_distribution(f3_raw, f1_raw))
-    _write_per_example(EVIDENCE / "validation_s1_s2_per_example.jsonl", f3_raw, np.asarray(ids))
-    save_pickle(WORK / "final_native_raw.pkl", f3_raw)
+    write_json(
+        EVIDENCE / "decoder_geometry.json",
+        {"source_protocol_sha256": native_protocol["protocol_sha256"], **_decoder_geometry(f3_raw)},
+    )
+    write_json(
+        EVIDENCE / "latent_distribution.json",
+        {
+            "source_protocol_sha256": native_protocol["protocol_sha256"],
+            **_latent_distribution(f3_raw, f1_raw),
+        },
+    )
+    _write_per_example(
+        per_example_path,
+        f3_raw,
+        np.asarray(ids),
+        native_protocol["protocol_sha256"],
+    )
+    save_pickle(
+        raw_path,
+        {"complete": True, "protocol": native_protocol, "raw": f3_raw},
+    )
     return {"selected_checkpoint": selected}
 
 
@@ -935,38 +1416,100 @@ def run_operator_confirmation(root_index: int, stochastic_count: int):
     positions = jax.random.permutation(jax.random.PRNGKey(STOCHASTIC_SUBSET_SEED), TEST_COUNT)[
         :stochastic_count
     ]
+    subset_ids = ids[positions]
+    checkpoint = checkpoint_manifest(path, state)
+    protocol = evaluation_protocol(
+        checkpoint,
+        subset_ids,
+        split_name="test",
+        conditioning_mode=F3_NATIVE_S_CONDITIONING_TRAINED,
+        eta_diff=0,
+        lambda_op=1.0,
+        diffusion_root_seed=TEST_DIFFUSION_ROOT_SEED,
+        operator_root_seed=OPERATOR_ROOT_SEED,
+        operator_root_index=root_index,
+    )
+    shard_path = WORK / "operator" / f"count_{stochastic_count}_root_{root_index:02d}.pkl"
+    if shard_path.exists():
+        existing = load_pickle(shard_path)
+        require_exact_protocol(existing.get("protocol", {}), protocol, str(shard_path))
+        if existing.get("complete") is not True:
+            raise RuntimeError(f"incomplete F3 operator shard: {shard_path}")
+        return existing
     operator_root = jax.random.fold_in(jax.random.PRNGKey(OPERATOR_ROOT_SEED), root_index)
     raw = evaluate(
         state["params"],
         prompt[positions],
         target[positions],
-        ids[positions],
+        subset_ids,
         lambda_op=1.0,
         operator_root=operator_root,
         diffusion_root=jax.random.PRNGKey(TEST_DIFFUSION_ROOT_SEED),
         runtime_batch=4,
     )
     save_pickle(
-        WORK / "operator" / f"count_{stochastic_count}_root_{root_index:02d}.pkl",
-        {"selected_checkpoint": selected, "root_index": root_index, "raw": raw},
+        shard_path,
+        {"complete": True, "protocol": protocol, "raw": raw},
     )
+    return {"complete": True, "protocol": protocol}
 
 
 def aggregate_operator_confirmation(stochastic_count: int):
     if stochastic_count not in (512, 1_024):
         raise ValueError("stochastic count must be 512 or 1024")
     roots = []
-    lambda_zero = load_pickle(WORK / "final_native_raw.pkl")
+    _, checkpoint_path = _selected_checkpoint()
+    checkpoint_state = load_pickle(checkpoint_path)
+    checkpoint = checkpoint_manifest(checkpoint_path, checkpoint_state)
+    lambda_zero_bundle = load_pickle(WORK / "final_native_raw.pkl")
+    if lambda_zero_bundle.get("complete") is not True:
+        raise RuntimeError("incomplete deterministic F3 result")
+    _, _, full_ids = split("test", TEST_COUNT)
+    expected_lambda_zero_protocol = evaluation_protocol(
+        checkpoint,
+        full_ids,
+        split_name="test",
+        conditioning_mode=F3_NATIVE_S_CONDITIONING_TRAINED,
+        eta_diff=0,
+        lambda_op=0.0,
+        diffusion_root_seed=TEST_DIFFUSION_ROOT_SEED,
+        operator_root_seed=OPERATOR_ROOT_SEED,
+        operator_root_index=None,
+        baseline_checkpoint=checkpoint_manifest(PARENT, load_parent()),
+    )
+    require_exact_protocol(
+        lambda_zero_bundle.get("protocol", {}),
+        expected_lambda_zero_protocol,
+        str(WORK / "final_native_raw.pkl"),
+    )
+    lambda_zero = lambda_zero_bundle["raw"]
     subset_positions = np.asarray(
         jax.random.permutation(jax.random.PRNGKey(STOCHASTIC_SUBSET_SEED), TEST_COUNT)[
             :stochastic_count
         ]
     )
+    shard_protocol_hashes = []
     for root_index in range(ROOT_COUNT):
         path = WORK / "operator" / f"count_{stochastic_count}_root_{root_index:02d}.pkl"
         if not path.exists():
             raise RuntimeError(f"missing operator root {root_index}")
-        roots.append(load_pickle(path)["raw"])
+        shard = load_pickle(path)
+        expected = evaluation_protocol(
+            checkpoint,
+            full_ids[subset_positions],
+            split_name="test",
+            conditioning_mode=F3_NATIVE_S_CONDITIONING_TRAINED,
+            eta_diff=0,
+            lambda_op=1.0,
+            diffusion_root_seed=TEST_DIFFUSION_ROOT_SEED,
+            operator_root_seed=OPERATOR_ROOT_SEED,
+            operator_root_index=root_index,
+        )
+        require_exact_protocol(shard.get("protocol", {}), expected, str(path))
+        if shard.get("complete") is not True:
+            raise RuntimeError(f"incomplete F3 operator shard: {path}")
+        shard_protocol_hashes.append(shard["protocol"]["protocol_sha256"])
+        roots.append(shard["raw"])
     rows = []
     for level_index, level in enumerate(LEVELS):
         root_changes: dict[str, np.ndarray] = {}
@@ -984,17 +1527,33 @@ def aggregate_operator_confirmation(stochastic_count: int):
                 "student_t_95_ci_low": stats["mean"] - half,
                 "student_t_95_ci_high": stats["mean"] + half,
             }
+        root_means = {
+            name: {
+                "s1": float(np.mean(values[:, 0])),
+                "s2": float(np.mean(values[:, 1])),
+            }
+            for name, values in root_averaged.items()
+        }
+        paired_after_root_averaging = {
+            name: paired_summary(
+                values[:, 0],
+                values[:, 1],
+                bootstrap_seed=BOOTSTRAP_SEED + 200_000 + 10 * level_index + index,
+            )
+            for index, (name, values) in enumerate(root_averaged.items())
+        }
+        effect_input = {
+            "s1_accuracy": root_means["byte_accuracy"]["s1"],
+            "s2_accuracy": root_means["byte_accuracy"]["s2"],
+            "s1_nll": root_means["nll"]["s1"],
+            "s2_nll": root_means["nll"]["s2"],
+            "paired": paired_after_root_averaging,
+        }
         rows.append(
             {
                 "nu": level,
                 "root_level_s2_minus_s1": root_level,
-                "root_averaged_means": {
-                    name: {
-                        "s1": float(np.mean(values[:, 0])),
-                        "s2": float(np.mean(values[:, 1])),
-                    }
-                    for name, values in root_averaged.items()
-                },
+                "root_averaged_means": root_means,
                 "matching_lambda_zero_subset": {
                     name: {
                         "s1": float(np.mean(lambda_zero[level][name][subset_positions, 0])),
@@ -1002,52 +1561,88 @@ def aggregate_operator_confirmation(stochastic_count: int):
                     }
                     for name in ("mse", "nll", "byte_accuracy")
                 },
-                "paired_after_root_averaging": {
-                    name: paired_summary(
-                        values[:, 0],
-                        values[:, 1],
-                        bootstrap_seed=BOOTSTRAP_SEED + 200_000 + 10 * level_index + index,
-                    )
-                    for index, (name, values) in enumerate(root_averaged.items())
-                },
+                "paired_after_root_averaging": paired_after_root_averaging,
+                "effect_input": effect_input,
+                "effect": bucket_effect(effect_input, require_uncertainty=True),
             }
         )
     informative = [row for row in rows if row["nu"] in INFORMATIVE_LEVELS]
-    benefit_directions = sum(
-        row["root_level_s2_minus_s1"]["byte_accuracy"]["mean"] >= 0
-        and row["root_level_s2_minus_s1"]["nll"]["mean"] <= 0
-        for row in informative
-    )
+    stochastic_effect_rows = [row["effect_input"] for row in informative]
+    stochastic_pattern = effect_pattern(stochastic_effect_rows, require_uncertainty=True)
     validation = _read_validation()
     lambda_zero_informative = [
         row for row in validation.get("full_test_rows", []) if row["nu"] in INFORMATIVE_LEVELS
     ]
-    lambda_zero_benefit = (
-        len(lambda_zero_informative) == 3
-        and sum(row["effect"] == "benefit" for row in lambda_zero_informative) >= 2
+    lambda_zero_pattern = (
+        effect_pattern(lambda_zero_informative, require_uncertainty=True)
+        if len(lambda_zero_informative) == 3
+        else "missing"
     )
-    qualitative_agreement = benefit_directions >= 2
+    symmetric_agreement = (
+        lambda_zero_pattern in {"benefit", "neutral", "degradation"}
+        and stochastic_pattern == lambda_zero_pattern
+    )
     high_variance = any(
-        row["root_level_s2_minus_s1"]["byte_accuracy"]["student_t_95_ci_low"] <= -0.01
-        and row["root_level_s2_minus_s1"]["byte_accuracy"]["student_t_95_ci_high"] >= 0.01
+        (
+            row["root_level_s2_minus_s1"]["byte_accuracy"]["student_t_95_ci_low"] <= -0.01
+            and row["root_level_s2_minus_s1"]["byte_accuracy"]["student_t_95_ci_high"] >= 0.01
+        )
+        or (
+            row["root_level_s2_minus_s1"]["nll"]["student_t_95_ci_low"]
+            <= -0.02 * abs(row["root_averaged_means"]["nll"]["s1"])
+            and row["root_level_s2_minus_s1"]["nll"]["student_t_95_ci_high"]
+            >= 0.02 * abs(row["root_averaged_means"]["nll"]["s1"])
+        )
         for row in informative
     )
-    escalation_required = stochastic_count == 512 and (
-        high_variance or lambda_zero_benefit != qualitative_agreement
-    )
+    escalation_required = stochastic_count == 512 and (high_variance or not symmetric_agreement)
+    aggregation_protocol_body = {
+        "contract": EVALUATION_PROTOCOL,
+        "checkpoint": checkpoint,
+        "deterministic_source_protocol_sha256": expected_lambda_zero_protocol["protocol_sha256"],
+        "stochastic_shard_protocol_sha256": shard_protocol_hashes,
+        "examples_per_nu": stochastic_count,
+        "operator_roots": ROOT_COUNT,
+    }
+    aggregation_protocol = {
+        **aggregation_protocol_body,
+        "protocol_sha256": json_hash(aggregation_protocol_body),
+    }
     payload = {
+        "protocol": aggregation_protocol,
         "examples_per_nu": stochastic_count,
         "operator_roots": ROOT_COUNT,
         "lambda_op": 1.0,
         "sigma_op": 1.0e-3,
         "student_t_df": 15,
         "per_nu": rows,
-        "qualitative_benefit_agreement": qualitative_agreement,
-        "lambda_zero_benefit_pattern": lambda_zero_benefit,
+        "lambda_zero_effect_pattern": lambda_zero_pattern,
+        "stochastic_effect_pattern": stochastic_pattern,
+        "symmetric_practical_effect_agreement": symmetric_agreement,
         "high_variance": high_variance,
         "escalation_required": escalation_required,
     }
-    write_json(EVIDENCE / "operator_noise_confirmation.json", payload)
+    detail_path = EVIDENCE / f"operator_noise_confirmation_{stochastic_count}.json"
+    if detail_path.exists():
+        existing = json.loads(detail_path.read_text())
+        require_exact_protocol(existing.get("protocol", {}), aggregation_protocol, str(detail_path))
+    write_json(detail_path, payload)
+    output_path = EVIDENCE / "operator_noise_confirmation.json"
+    if output_path.exists():
+        existing = json.loads(output_path.read_text())
+        same_count = existing.get("examples_per_nu") == stochastic_count
+        allowed_escalation = (
+            stochastic_count == 1_024
+            and existing.get("examples_per_nu") == 512
+            and existing.get("escalation_required") is True
+        )
+        if same_count:
+            require_exact_protocol(
+                existing.get("protocol", {}), aggregation_protocol, str(output_path)
+            )
+        elif not allowed_escalation:
+            raise RuntimeError(f"mixed or stale F3 operator confirmation in {output_path}")
+    write_json(output_path, payload)
     return payload
 
 
@@ -1059,6 +1654,32 @@ def aggregate_result():
     if operator.get("escalation_required", False):
         raise RuntimeError("finite-Torx ambiguity requires the predeclared 1024-example escalation")
     informative = [row for row in validation["full_test_rows"] if row["nu"] in INFORMATIVE_LEVELS]
+    selected_updates, selected_path = _selected_checkpoint()
+    selected_manifest = checkpoint_manifest(selected_path, load_pickle(selected_path))
+    expected_full_protocol = evaluation_protocol(
+        selected_manifest,
+        split("test", TEST_COUNT)[2],
+        split_name="test",
+        conditioning_mode=F3_NATIVE_S_CONDITIONING_TRAINED,
+        eta_diff=0,
+        lambda_op=0.0,
+        diffusion_root_seed=TEST_DIFFUSION_ROOT_SEED,
+        operator_root_seed=OPERATOR_ROOT_SEED,
+        operator_root_index=None,
+        baseline_checkpoint=checkpoint_manifest(PARENT, load_parent()),
+    )
+    require_exact_protocol(
+        validation.get("full_test_protocol", {}),
+        expected_full_protocol,
+        str(EVIDENCE / "validation_s1_s2.json"),
+    )
+    operator_protocol = operator.get("protocol", {})
+    if (
+        operator_protocol.get("checkpoint") != selected_manifest
+        or operator_protocol.get("deterministic_source_protocol_sha256")
+        != expected_full_protocol["protocol_sha256"]
+    ):
+        raise RuntimeError("mixed or stale F3 operator confirmation")
     checkpoints = {item["f3_rollout_updates"]: item["rows"] for item in validation["checkpoints"]}
     max_updates = max(checkpoints)
     converged = max_updates >= 5_000 and not (
@@ -1071,12 +1692,19 @@ def aggregate_result():
         informative,
         healthy=healthy,
         converged=converged,
-        stochastic_agrees=operator["qualitative_benefit_agreement"],
+        stochastic_agrees=operator["symmetric_practical_effect_agreement"],
     )
     if label == PHASE_F_3_BLOCKED:
         raise RuntimeError("blocked result cannot be aggregated as a completed experiment")
-    selected_updates = int(validation["selected_checkpoint"])
+    if int(validation["selected_checkpoint"]) != selected_updates:
+        raise RuntimeError("selected checkpoint disagrees with deterministic F3 provenance")
     result = {
+        "protocol": {
+            "contract": EVALUATION_PROTOCOL,
+            "deterministic_protocol_sha256": expected_full_protocol["protocol_sha256"],
+            "operator_protocol_sha256": operator_protocol.get("protocol_sha256"),
+            "selected_checkpoint": selected_manifest,
+        },
         "label": label,
         "selected_f3_rollout_updates": selected_updates,
         "selected_optimizer_absolute_step": PARENT_OPTIMIZER_STEP + selected_updates,
@@ -1086,7 +1714,12 @@ def aggregate_result():
         "informative_levels": INFORMATIVE_LEVELS,
         "no_s4": True,
     }
-    write_json(EVIDENCE / "result.json", result)
+    result["protocol"]["protocol_sha256"] = json_hash(result["protocol"])
+    result_path = EVIDENCE / "result.json"
+    if result_path.exists():
+        existing = json.loads(result_path.read_text())
+        require_exact_protocol(existing.get("protocol", {}), result["protocol"], str(result_path))
+    write_json(result_path, result)
     gradient = json.loads((EVIDENCE / "first_gradient.json").read_text())
     decoder = json.loads((EVIDENCE / "decoder_geometry.json").read_text())
     table = [
@@ -1143,8 +1776,8 @@ def aggregate_result():
         + "\n".join(decoder_lines)
         + "\n\n## Finite Torx\n\n"
         + f"The {operator['operator_roots']}-root, {operator['examples_per_nu']}-example "
-        + "confirmation had qualitative benefit agreement="
-        + f"`{operator['qualitative_benefit_agreement']}`.\n\n"
+        + "confirmation had symmetric practical-effect agreement="
+        + f"`{operator['symmetric_practical_effect_agreement']}`.\n\n"
         + "The label uses the full-test eta-zero native-trained `[0,1]` trajectory, paired "
         + "practical gates, F1 step-0 preservation, and finite-Torx confirmation. No S4 "
         + "training or architecture change was performed.\n"
@@ -1173,6 +1806,8 @@ def main():
         choices=(
             "audit",
             "gradient",
+            "trial-update",
+            "smoke",
             "train",
             "final",
             "operator",
@@ -1188,6 +1823,10 @@ def main():
         run_audit()
     elif args.stage == "gradient":
         run_first_gradient()
+    elif args.stage == "trial-update":
+        run_trial_update()
+    elif args.stage == "smoke":
+        run_runtime_smoke()
     elif args.stage == "train":
         run_training(args.max_rollout_updates)
     elif args.stage == "final":
