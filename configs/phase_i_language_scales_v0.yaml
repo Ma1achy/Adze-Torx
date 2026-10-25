@@ -5,29 +5,125 @@ tokeniser: none
 codec_candidate: PHASE_I_FULL_BYTE_CODEC_V0
 scales:
   smoke:
-    sequence_bytes: 128
-    carrier_capacity: 32
-    max_extent: 4
-    d_model: 128
-    physical_blocks: 4
-    cycles: 3
+    status: executable_engineering_candidate
     batch_size: 8
     gradient_accumulation: 1
+    reference_config:
+      carrier: {C: 32, h_dim: 64, L_max: 4}
+      packing: {M_max: 32, K: 8}
+      model:
+        byte_vocab: 256
+        prompt_max_bytes: 128
+        target_max_bytes: 128
+        d_front: 64
+        d_ctx: 128
+        frontend_layers: 2
+        context_layers: 2
+        target_layers: 2
+        proposal_layers: 2
+        proposal_hidden_dim: 64
+        d_model: 128
+        heads: 4
+        head_dim: 32
+        ffn_hidden: 256
+        physical_blocks_L: 4
+        cycles_Q: 3
+        d_dec: 128
+        decoder_layers: 2
+        mamba_expand: 2
+        mamba_state_dim: 16
+        mamba_conv_kernel: 3
+        residual_gate_init: 0.1
+        effective_depth_conditioning: true
+      training:
+        learning_rate: 0.0003
+        weight_decay: 0.01
+        grad_clip_norm: 1.0
+        batch_size: 8
+        h_weight: 1.0
+        boundary_weight: 1.0
+        extent_weight: 1.0
+        byte_weight: 1.0
+        proposal_weight: 0.25
   small:
-    sequence_bytes: 256
-    carrier_capacity: 64
-    max_extent: 4
-    d_model: 256
-    physical_blocks: 6
-    cycles: 3
+    status: unresolved_numeric_proposal
     batch_size: 16
     gradient_accumulation: 2
+    reference_config:
+      carrier: {C: 64, h_dim: 128, L_max: 4}
+      packing: {M_max: 64, K: 8}
+      model:
+        byte_vocab: 256
+        prompt_max_bytes: 256
+        target_max_bytes: 256
+        d_front: 128
+        d_ctx: 256
+        frontend_layers: 2
+        context_layers: 2
+        target_layers: 2
+        proposal_layers: 2
+        proposal_hidden_dim: 128
+        d_model: 256
+        heads: 8
+        head_dim: 32
+        ffn_hidden: 512
+        physical_blocks_L: 6
+        cycles_Q: 3
+        d_dec: 256
+        decoder_layers: 2
+        mamba_expand: 2
+        mamba_state_dim: 16
+        mamba_conv_kernel: 3
+        residual_gate_init: 0.1
+        effective_depth_conditioning: true
+      training:
+        learning_rate: 0.0003
+        weight_decay: 0.01
+        grad_clip_norm: 1.0
+        batch_size: 16
+        h_weight: 1.0
+        boundary_weight: 1.0
+        extent_weight: 1.0
+        byte_weight: 1.0
+        proposal_weight: 0.25
   medium:
-    sequence_bytes: 512
-    carrier_capacity: 128
-    max_extent: 4
-    d_model: 384
-    physical_blocks: 8
-    cycles: 4
+    status: unresolved_numeric_proposal
     batch_size: 16
     gradient_accumulation: 4
+    reference_config:
+      carrier: {C: 128, h_dim: 192, L_max: 4}
+      packing: {M_max: 128, K: 8}
+      model:
+        byte_vocab: 256
+        prompt_max_bytes: 512
+        target_max_bytes: 512
+        d_front: 192
+        d_ctx: 384
+        frontend_layers: 2
+        context_layers: 2
+        target_layers: 2
+        proposal_layers: 2
+        proposal_hidden_dim: 192
+        d_model: 384
+        heads: 12
+        head_dim: 32
+        ffn_hidden: 768
+        physical_blocks_L: 8
+        cycles_Q: 4
+        d_dec: 384
+        decoder_layers: 2
+        mamba_expand: 2
+        mamba_state_dim: 16
+        mamba_conv_kernel: 3
+        residual_gate_init: 0.1
+        effective_depth_conditioning: true
+      training:
+        learning_rate: 0.0003
+        weight_decay: 0.01
+        grad_clip_norm: 1.0
+        batch_size: 16
+        h_weight: 1.0
+        boundary_weight: 1.0
+        extent_weight: 1.0
+        byte_weight: 1.0
+        proposal_weight: 0.25

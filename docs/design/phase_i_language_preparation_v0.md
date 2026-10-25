@@ -1,6 +1,7 @@
 # Phase I language preparation — interface record v0
 
-Status: engineering preparation only; not an architecture or scientific milestone.
+Status: superseded preparation prototype. The corrected branch-local contract is
+`phase_i_remediation_v1.md`; neither document is a scientific milestone.
 
 ## Frozen constraints
 
