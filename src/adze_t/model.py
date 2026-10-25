@@ -139,6 +139,9 @@ def apply_model(
     committed_c_b: jax.Array | None = None,
     committed_activity: jax.Array | None = None,
     committed_length: jax.Array | None = None,
+    observed_b: jax.Array | None = None,
+    observed_l: jax.Array | None = None,
+    routing_metadata: Any | None = None,
     mode: str = "draft",
     dit_cycles: int | None = None,
     depth_code_override: str = "correct",
@@ -182,6 +185,10 @@ def apply_model(
     if committed_length is None and committed_activity is not None:
         # Phase-A compatibility only. New Phase-B paths derive activity from length.
         activity = committed_activity
+    observed_b = c_b if observed_b is None else observed_b
+    observed_l = length if observed_l is None else observed_l
+    if observed_b.shape != c_b.shape or observed_l.shape != length.shape:
+        raise ValueError("observed and committed structure must share [batch, carrier]")
 
     carrier_ids = jnp.arange(config.carrier.C)[None, :]
     carrier_prior = ops.embedding(
@@ -196,8 +203,10 @@ def apply_model(
     current_carrier = proposal_h if carrier_h_input is None else carrier_h_input
     if current_carrier.shape != proposal_h.shape:
         raise ValueError("carrier_h_input must match the proposal carrier shape")
-    metadata = build_pack_metadata_core(
-        c_b, activity, M_max=config.packing.M_max, K=config.packing.K
+    metadata = (
+        build_pack_metadata_core(c_b, activity, M_max=config.packing.M_max, K=config.packing.K)
+        if routing_metadata is None
+        else routing_metadata
     )
     if committed_c_b is None:
         # PROVISIONAL_PHASE_B_TEACHER has a static K-bucket partition. Its
@@ -219,8 +228,8 @@ def apply_model(
         noise=noise_level,
         actual_s_index=actual_s_index,
         denoise_condition_index=denoise_condition_index,
-        observed_b=c_b,
-        observed_l=length,
+        observed_b=observed_b,
+        observed_l=observed_l,
         cycles=dit_cycles,
         depth_code_override=depth_code_override,
         suppress_cycle=suppress_cycle,

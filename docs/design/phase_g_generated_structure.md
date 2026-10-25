@@ -1,78 +1,117 @@
-# Phase G generated-structure interface record
+# Phase G generated-structure interface
 
-Status: engineering implementation only; no scientific gate or training result.
+Status: engineering candidate. No authoritative Phase-G training or scientific
+claim has been made.
 
-## Frozen interface
+## Structural coordinates
 
-`PHASE_G_GENERATED_STRUCTURE_INTERFACE_V0` keeps three structural coordinates
-separate:
+`PHASE_G_GENERATED_STRUCTURE_INTERFACE_V1` keeps three coordinates separate:
 
-- observed `s_b/s_l`: model inputs only, never routing authority;
-- predicted `b_logits/l_logits`: supervised distributions;
-- committed `c_b/length/activity`: the only inputs to hard pack and emission.
+- observed `b/l` are forward inputs only;
+- predicted `b_logits/l_logits` are supervised distributions;
+- committed `c_b/activity/length` are the sole hard-pack and emission authority.
 
-`commit_predicted_structure` supports controlled `prediction_only`, stopped
-`argmax`, and explicitly keyed `sample` policies. A site mask permits commits at
-declared boundaries. Carrier indices never change. The final boundary is a
-forced terminal sentinel and is excluded from sampled log probability.
+The registered pytree records are `SampledStructure`, `StructureCommitResult`,
+`GeneratedRoutingResult`, `StructureHysteresisState`, and
+`StructureEstimatorOwner`. Array-first cores support compiled use; eager
+wrappers validate shape, dtype, finite logits, categorical domains, explicit
+lengths, terminal boundaries, activity/extent consistency, and capacity.
 
-`generated_routing` is the fixed-to-generated adapter. Both fixed teacher
-structure and committed generated structure enter the existing hard pack through
-the same `CommittedStructure -> PackMetadata` contract at static `M_max, K`.
-Overflow is surfaced in metadata and is never silently truncated.
+Policies are explicit: `prediction_only`, stopped `argmax`, `sample` with an
+explicit positive temperature, and `hysteresis` with an explicit configuration
+and state. Rejected hysteresis proposals retain prior confidence. Reactivation
+is either explicitly allowed or returns its own fail-closed error. An extent of
+zero leaves the carrier identity present but disables key/value participation,
+pooling, and emission.
 
-`ell=0` derives `activity=False`: the site stays query/identity present but is
-key/value, pooling, and emission inactive. A later nonzero committed extent
-reactivates the same carrier identity.
+## Identifiable generated-structure task
 
-## Gradient ownership
+The smoke task does not use independent random structure labels. It forces a
+cut every `K=8` carriers and adds a cut at an active carrier when that carrier's
+first clean codec slot is byte 1..16. Extents are the clean codec extents. Thus
+the label is a deterministic function of observable codec content, remains
+packable, and identical clean observations have identical labels.
 
-Prediction-only and argmax commits use ordinary boundary/extent cross-entropy;
-argmax decisions stop gradients. Sampled downstream commits return only the log
-probabilities of actual, selected stochastic occurrences. Their descendant loss
-may be passed to the restored, byte-for-byte-semantic M1.5 local score bridge.
-Native Torx estimators must not be wrapped, and continuous paths remain ordinary
-pathwise JAX gradients.
+The predictor is not shown clean slots: it receives the F1-corrupted teacher
+carrier over `nu in [0.025, 0.25]`. The compatibility gate therefore includes a
+separate noisy-latent recoverability witness. It passes each corrupted carrier
+through the accepted F1 denoiser/decoder, reconstructs the task signature, and
+requires the Wilson-95 lower bound for content-cut accuracy to exceed chance at
+`nu=.025,.10,.25`. Direct untrained boundary-head accuracy is recorded only as
+a diagnostic. This task is explicitly conditional on a noisy observation of
+the clean teacher latent, not on raw target bytes supplied to the forward path.
 
-## Diagnostics
+Task-specific commit ownership preserves the mandatory K-spaced scaffold and
+terminal edge. Argmax and sampling own every optional nonmandatory edge and all
+extent sites. Boundary CE may supervise the complete label array, but sampled
+log probability contains only owned optional occurrences. This makes arbitrary
+full-site extent/action draws packable without conditioning or resampling on
+validity; the ordinary fail-closed capacity checks remain unchanged.
 
-The interface reports boundary/extent/activity churn, reactivation and
-deactivation separately. Calibration covers accuracy, NLL, Brier score, and
-fixed-bin ECE; the forced terminal boundary is excluded.
+## Commit, routing, and loss
 
-## Proposed shared-interface changes
+Outgoing boundary edges can change only when both adjacent carriers are in the
+selected region. The terminal edge is forced and never sampled. Committed
+structure is validated before scatter. A whole invalid batch takes a
+`jax.lax.cond` failure branch that skips generated pack/DiT/unpool/residual,
+decoder, descendant loss, and AdamW update; host orchestration raises and writes
+no checkpoint.
 
-Integration will require `apply_model` to accept a `CommittedStructure` or the
-equivalent `GeneratedRouting`, instead of three loosely coupled optional arrays.
-That proposal is intentionally not applied on this branch while F3 provenance is
-live. The existing scalar-array arguments can be adapted at the integration
-boundary without changing model topology.
+Generated bytes use stable global carrier/slot compaction:
 
-## Unresolved dependencies
+`(overlap CE + log(256) * (missing + extra)) / max(target_count, 1)`.
 
-- The Phase G training/evaluation protocol must freeze commit timing, site masks,
-  sampling temperature, and block-churn acceptance gates.
-- Live sampled categorical factors must use public Torx APIs and prove
-  sample/log-probability consistency before authoritative training.
-- Overflow bucket policy remains the architecture's documented provisional
-  micro-semantic; authoritative runs need an explicit bucket choice.
-- Phase H must consume this committed interface only after G gates pass.
+Both-empty is exactly zero, and overlap NLL is reported separately. Common loss
+is boundary CE + extent CE + 0.5 predictor h-MSE. Descendant loss is 0.5 replay
+h-MSE plus generated-length byte loss. The sampled arm applies the existing
+local score bridge only when `StructureEstimatorOwner.LOCAL_SCORE_BRIDGE` owns
+the estimator; native Torx ownership cannot be double wrapped.
 
-## Resource requirements
+## Smoke protocol and gates
 
-Current tests are eager, small-array JAX unit tests. Integration later requires a
-focused JIT/full-model pass, score-gradient enumeration/Monte Carlo oracles, and
-eventually generated-structure training; none are run while F3 is active.
+The runner uses the exact F1 means, fresh zero Adam moments at step zero, new
+leaf seed 703, AdamW `(lr=3e-4, wd=.01, clip=1)`, batch 32, 1024/256 examples,
+seeds 950/951/952, lambda-op zero, and checkpoints 0/10/25/50/100. Teacher,
+stopped-argmax, and temperature-1 sampled arms start independently from F1.
+Predictor and replay are two applications to the same S1 corrupted carrier with
+condition index zero and no re-corruption.
 
-## Exact integration prerequisites
+Sampled smoke is forbidden until the production generated-length exact and
+fixed-seed Monte Carlo oracle passes. Every smoke arm is forbidden until durable
+codec, oracle, full-model update, eager/JIT, fail-closed, leakage, identity,
+reactivation, lint, and public-boundary evidence matches the exact protocol.
+After the teacher arm, correct structure must separately beat shifted cuts,
+permuted extents, their joint control, and fixed neutral structure by at least
+one accuracy point and two percent length-aware loss, with favorable paired
+bootstrap intervals.
 
-1. F3 completes and its source/protocol evidence is committed.
-2. Shared-interface proposal is reviewed.
-3. Full regular/slow suites and public/private Torx boundary scans pass.
-4. Boundary and extent recovery, internal deletion, reactivation, UNKNOWN
-   isolation, overflow, and churn gates are preregistered and pass.
-5. Sampled downstream structure passes the existing score-gradient oracle with
-   no estimator double counting.
+Runtime provenance is anchored to an immutable committed implementation SHA.
+Before audit, codec, oracle, preflight, or smoke execution, the runner rejects
+tracked edits and any untracked file outside runtime JSON/JSONL evidence. Each
+checkpoint and deterministic result embeds that exact protocol manifest.
 
-No Phase H live rollout or Phase I training may rely on this branch before those
-conditions hold.
+## Shared interface changes
+
+`apply_model` now separates observed structure from committed routing and may
+accept prevalidated routing metadata. Existing callers retain their historical
+defaults. Phase H must consume the committed interface, never predicted logits,
+and must keep its mock structure adapter until G integration gates pass.
+
+## Unresolved dependencies and integration prerequisites
+
+1. Resource-coordinated codec/full-model/preflight/smoke gates must still run.
+2. The teacher necessity gate may block generated arms even if engineering
+   tests pass.
+3. Phase G needs review and integration after Phase F; Phase H integration must
+   follow G, and Phase I real training must follow both interface gates.
+4. No authoritative generated-structure training is authorized by this branch.
+
+The bounded gate requires the accepted F1 checkpoint, codec checkpoint, CPU/JAX
+capacity for sequential full-model compilation, and storage for three 100-step
+resumable arms. Ignored prerequisites are hash-checked and copied into this
+worktree with `--stage import-artifacts --artifact-source-root PATH`; no symlink,
+checkpoint directory, or temporary evidence path is shared with another runner.
+The import record includes the resolved source path, source hash, resolved copy
+path, and independently recomputed copy hash; an existing nonidentical file is
+never overwritten.
+It uses no concurrent GPU or training process.

@@ -1,244 +1,458 @@
 from __future__ import annotations
 
+from dataclasses import replace
+from typing import Any
+
 import jax
 import jax.numpy as jnp
 import pytest
 
 from adze_t.generated_structure import (
-    PHASE_G_GENERATED_STRUCTURE_INTERFACE_V0,
+    COMMIT_REACTIVATION_FORBIDDEN,
+    COMMIT_LOGITS_NONFINITE,
+    COMMIT_TEMPERATURE_INVALID,
+    ROUTING_BLOCK_COUNT_OVERFLOW,
+    ROUTING_BLOCK_LENGTH_OVERFLOW,
+    ROUTING_DTYPE,
+    CategoricalCommitFactor,
+    CommitPolicy,
+    HysteresisConfig,
+    StructureEstimatorOwner,
+    StructureHysteresisState,
+    StructureKeyContext,
     categorical_calibration,
+    closed_commit_masks,
     commit_predicted_structure,
+    commit_predicted_structure_core,
+    full_commit_masks,
     generated_routing,
+    generated_routing_core,
     score_corrected_structure_loss,
-    structure_calibration,
     structure_churn,
 )
-from adze_t.state import CarrierState, CommittedStructure, ObservedStructure, PredictedStructure
+from adze_t.phase_g import (
+    generated_byte_metrics,
+    neutral_structure,
+    task_structure_commit_masks,
+)
+from adze_t.packing import pack_values
+from adze_t.state import CommittedStructure, PredictedStructure
+from adze_t.unpool import unpool_values
 
 
-def _committed():
-    length = jnp.array([[2, 0, 1, 1]], dtype=jnp.int32)
-    return CommittedStructure(
-        c_b=jnp.array([[0, 1, 0, 1]], dtype=jnp.int32),
-        activity=length > 0,
-        length=length,
+def _committed(batch: int = 1) -> CommittedStructure:
+    length = jnp.broadcast_to(jnp.array([[2, 0, 1, 1]], jnp.int32), (batch, 4))
+    boundary = jnp.broadcast_to(jnp.array([[0, 1, 0, 1]], jnp.int32), (batch, 4))
+    return CommittedStructure(boundary, length > 0, length)
+
+
+def _predicted(boundary, length) -> PredictedStructure:
+    return PredictedStructure(
+        jax.nn.one_hot(jnp.asarray(boundary), 2) * 12.0,
+        jax.nn.one_hot(jnp.asarray(length), 4) * 12.0,
     )
 
 
-def _logits(boundaries, lengths, *, extent_classes=4):
-    b = jax.nn.one_hot(jnp.asarray(boundaries), 2) * 12.0
-    ell = jax.nn.one_hot(jnp.asarray(lengths), extent_classes) * 12.0
-    return PredictedStructure(b, ell)
+def _context(batch: int = 1, **changes) -> StructureKeyContext:
+    values: dict[str, Any] = dict(
+        root_key=jax.random.key(7),
+        occurrence=3,
+        global_example_id=jnp.arange(batch, dtype=jnp.uint32),
+        actual_s_index=1,
+        refinement_index=2,
+        commit_occurrence=4,
+    )
+    values.update(changes)
+    return StructureKeyContext(**values)
 
 
-def test_prediction_only_never_rewrites_committed_routing():
-    previous = _committed()
-    predicted = _logits([[1, 0, 1, 0]], [[0, 3, 0, 2]])
-    transition = commit_predicted_structure(previous, predicted, policy="prediction_only")
-    assert PHASE_G_GENERATED_STRUCTURE_INTERFACE_V0.endswith("_V0")
-    assert jnp.array_equal(transition.committed.c_b, previous.c_b)
-    assert jnp.array_equal(transition.committed.effective_length(), previous.effective_length())
-    assert not bool(jnp.any(transition.changed))
-    assert jnp.array_equal(transition.descendant_log_prob, jnp.zeros((1,)))
-
-
-def test_argmax_commit_recovers_boundary_extent_and_forces_terminal_cut():
-    previous = _committed()
-    predicted = _logits([[1, 0, 1, 0]], [[0, 3, 0, 2]])
-    transition = commit_predicted_structure(previous, predicted, policy="argmax")
-    assert transition.committed.c_b.tolist() == [[1, 0, 1, 1]]
-    assert transition.committed.effective_length().tolist() == [[0, 3, 0, 2]]
-    assert transition.committed.activity.tolist() == [[False, True, False, True]]
-    assert transition.reactivated.tolist() == [[False, True, False, False]]
-    assert transition.deactivated.tolist() == [[True, False, True, False]]
-
-
-def test_partial_commit_preserves_unselected_sites_and_carrier_identity():
-    previous = _committed()
-    predicted = _logits([[1, 0, 1, 0]], [[0, 3, 0, 2]])
-    mask = jnp.array([[False, True, False, True]])
-    transition = commit_predicted_structure(previous, predicted, policy="argmax", commit_mask=mask)
-    assert transition.committed.c_b.tolist() == [[0, 0, 0, 1]]
-    assert transition.committed.effective_length().tolist() == [[2, 3, 1, 2]]
-
-
-def test_ell_zero_is_non_emitting_but_query_active_and_reactivatable():
-    previous = _committed()
-    before = generated_routing(previous, M_max=4, K=4)
-    m = int(before.metadata.carrier_to_m[0, 1])
-    k = int(before.metadata.carrier_to_k[0, 1])
-    assert bool(before.metadata.query_mask[0, m, k])
-    assert not bool(before.metadata.kv_mask[0, m, k])
-    assert not bool(before.metadata.pool_mask[0, m, k])
-    assert not bool(before.metadata.emit_mask[0, m, k])
-
-    predicted = _logits([[0, 1, 0, 1]], [[2, 3, 1, 1]])
-    after_commit = commit_predicted_structure(previous, predicted, policy="argmax")
-    after = generated_routing(after_commit.committed, M_max=4, K=4)
-    new_m = int(after.metadata.carrier_to_m[0, 1])
-    new_k = int(after.metadata.carrier_to_k[0, 1])
-    assert bool(after.metadata.kv_mask[0, new_m, new_k])
-    assert bool(after.metadata.emit_mask[0, new_m, new_k])
-
-
-def test_changed_boundaries_repack_without_reindexing_carriers():
-    previous = _committed()
-    old = generated_routing(previous, M_max=4, K=4)
-    predicted = _logits([[1, 0, 0, 1]], [[2, 0, 1, 1]])
-    transition = commit_predicted_structure(previous, predicted, policy="argmax")
-    new = generated_routing(transition.committed, M_max=4, K=4)
-    assert old.metadata.carrier_to_m.tolist() == [[0, 0, 1, 1]]
-    assert new.metadata.carrier_to_m.tolist() == [[0, 1, 1, 1]]
-    assert sorted(new.metadata.packed_to_carrier[0][new.metadata.slot_valid[0]].tolist()) == [
-        0,
-        1,
-        2,
-        3,
-    ]
-
-
-def test_fixed_and_generated_structure_share_identical_routing_interface():
-    fixed = _committed()
-    predicted = _logits(fixed.c_b, fixed.length)
-    generated = commit_predicted_structure(fixed, predicted, policy="argmax").committed
-    fixed_route = generated_routing(fixed, M_max=4, K=4)
-    generated_route = generated_routing(generated, M_max=4, K=4)
-    assert jax.tree_util.tree_all(
-        jax.tree_util.tree_map(jnp.array_equal, fixed_route.metadata, generated_route.metadata)
+def _commit(previous, predicted, *, policy: CommitPolicy = "argmax", masks=None, **kwargs):
+    shape = (previous.c_b.shape[0], previous.c_b.shape[1])
+    return commit_predicted_structure(
+        previous,
+        predicted,
+        full_commit_masks(shape) if masks is None else masks,
+        policy=policy,
+        max_extent=3,
+        estimator_owner=kwargs.pop("estimator_owner", StructureEstimatorOwner.NONE),
+        allow_reactivation=kwargs.pop("allow_reactivation", True),
+        **kwargs,
     )
 
 
-def test_unknown_observations_have_no_route_to_committed_packing():
-    committed = _committed()
-    first = CarrierState(
-        h=jnp.zeros((1, 4, 2)),
-        observed=ObservedStructure(
-            s_b=jnp.full((1, 4), 2, dtype=jnp.int32),
-            s_l=jnp.full((1, 4), 5, dtype=jnp.int32),
-        ),
-        committed=committed,
-    )
-    second = CarrierState(
-        h=first.h,
-        observed=ObservedStructure(
-            s_b=jnp.full((1, 4), 91, dtype=jnp.int32),
-            s_l=jnp.full((1, 4), -7, dtype=jnp.int32),
-        ),
-        committed=committed,
-    )
-    first_route = generated_routing(first.committed, M_max=4, K=4)
-    second_route = generated_routing(second.committed, M_max=4, K=4)
-    assert jax.tree_util.tree_all(
-        jax.tree_util.tree_map(jnp.array_equal, first_route.metadata, second_route.metadata)
-    )
-
-
-def test_sample_commit_is_keyed_and_reports_only_actual_occurrence_log_probs():
+def test_prediction_only_preserves_explicit_committed_state_exactly():
     previous = _committed()
+    result = _commit(previous, _predicted([[1, 0, 1, 0]], [[0, 3, 0, 2]]), policy="prediction_only")
+    assert jax.tree_util.tree_all(jax.tree.map(jnp.array_equal, result.committed, previous))
+    assert not bool(jnp.any(result.changed))
+
+
+def test_argmax_commit_separates_predictions_and_commit_and_forces_terminal():
+    previous = _committed()
+    result = _commit(previous, _predicted([[1, 0, 1, 0]], [[0, 3, 0, 2]]))
+    assert result.sampled.boundary.tolist() == [[1, 0, 1, 1]]
+    assert result.sampled.length.tolist() == [[0, 3, 0, 2]]
+    assert result.reactivated.tolist() == [[False, True, False, False]]
+    assert result.deactivated.tolist() == [[True, False, True, False]]
+
+
+def test_closed_masks_preserve_both_exterior_edges_and_terminal():
+    masks = closed_commit_masks(jnp.array([[False, True, True, False]]))
+    assert masks.extent_site.tolist() == [[False, True, True, False]]
+    assert masks.boundary_edge.tolist() == [[False, True, False, False]]
+    result = _commit(
+        _committed(),
+        _predicted([[1, 0, 1, 0]], [[0, 3, 0, 2]]),
+        masks=masks,
+    )
+    assert result.committed.c_b.tolist() == [[0, 0, 0, 1]]
+    assert result.committed.length is not None
+    assert result.committed.length.tolist() == [[2, 3, 0, 1]]
+
+
+def test_task_commit_ownership_fixes_mandatory_scaffold_and_scores_only_optional_edges():
+    cfg = replace_config()
+    previous = neutral_structure(1, cfg)
+    masks = task_structure_commit_masks(1, cfg)
+    mandatory = (jnp.arange(cfg.carrier.C) + 1) % cfg.packing.K == 0
+    assert jnp.all(~masks.boundary_edge[0, mandatory])
+    assert jnp.all(masks.boundary_edge[0, ~mandatory])
+    assert jnp.all(masks.extent_site)
     predicted = PredictedStructure(
-        b_logits=jnp.zeros((1, 4, 2)),
-        l_logits=jnp.zeros((1, 4, 4)),
+        jax.nn.one_hot(jnp.zeros((1, cfg.carrier.C), jnp.int32), 2) * 4.0,
+        jnp.zeros((1, cfg.carrier.C, cfg.carrier.L_max + 1)),
     )
-    mask = jnp.array([[True, False, True, True]])
-    first = commit_predicted_structure(
-        previous, predicted, policy="sample", commit_mask=mask, key=jax.random.key(7)
+    sampled = commit_predicted_structure_core(
+        previous,
+        predicted,
+        masks,
+        policy="sample",
+        max_extent=cfg.carrier.L_max,
+        key_context=_context(),
+        temperature=1.0,
+        estimator_owner=StructureEstimatorOwner.LOCAL_SCORE_BRIDGE,
+        allow_reactivation=True,
     )
-    second = commit_predicted_structure(
-        previous, predicted, policy="sample", commit_mask=mask, key=jax.random.key(7)
+    assert jnp.all(sampled.committed.c_b[0, mandatory] == 1)
+    assert jnp.all(sampled.sampled.boundary_log_prob[0, mandatory] == 0)
+    routed = generated_routing_core(
+        sampled.committed,
+        M_max=cfg.packing.M_max,
+        K=cfg.packing.K,
+        max_extent=cfg.carrier.L_max,
+        upstream_valid=sampled.valid,
+        upstream_error=sampled.error_code,
     )
-    assert jnp.array_equal(first.boundary_sample, second.boundary_sample)
-    assert jnp.array_equal(first.length_sample, second.length_sample)
-    assert first.boundary_log_prob[0, -1] == 0
-    assert first.boundary_log_prob[0, 1] == 0
-    assert first.length_log_prob[0, 1] == 0
+    assert bool(routed.executed)
 
 
-def test_sampled_downstream_effect_uses_frozen_score_bridge_and_has_gradient():
-    previous = CommittedStructure(
-        c_b=jnp.ones((1, 1), dtype=jnp.int32),
-        activity=jnp.ones((1, 1), dtype=bool),
-        length=jnp.ones((1, 1), dtype=jnp.int32),
-    )
-    boundary_logits = jnp.zeros((1, 1, 2))
-    key = jax.random.key(11)
-
-    def corrected(theta):
-        logits = jnp.stack((jnp.zeros_like(theta), theta)).reshape(1, 1, 2)
-        transition = commit_predicted_structure(
-            previous,
-            PredictedStructure(boundary_logits, logits),
-            policy="sample",
-            key=key,
-        )
-        descendant = 1.0 + transition.length_sample[:, 0].astype(jnp.float32)
-        return jnp.mean(score_corrected_structure_loss(descendant, transition))
-
-    value, gradient = jax.value_and_grad(corrected)(jnp.asarray(0.2))
-    assert value in (1.0, 2.0)
-    assert jnp.isfinite(gradient)
-    assert jnp.abs(gradient) > 0
-
-
-def test_score_bridge_rejects_argmax_to_prevent_estimator_double_counting():
-    transition = commit_predicted_structure(
-        _committed(), _logits([[0, 1, 0, 1]], [[2, 0, 1, 1]]), policy="argmax"
-    )
-    with pytest.raises(ValueError, match="sampled downstream"):
-        score_corrected_structure_loss(jnp.ones((1,)), transition)
-
-
-def test_churn_separates_boundary_extent_reactivation_and_deactivation():
+def test_reactivation_policy_has_distinct_fail_closed_code():
     previous = _committed()
-    current = commit_predicted_structure(
-        previous, _logits([[1, 1, 0, 1]], [[0, 2, 1, 0]]), policy="argmax"
-    ).committed
+    result = commit_predicted_structure_core(
+        previous,
+        _predicted(previous.c_b, [[2, 3, 1, 1]]),
+        full_commit_masks((previous.c_b.shape[0], previous.c_b.shape[1])),
+        policy="argmax",
+        max_extent=3,
+        estimator_owner=StructureEstimatorOwner.NONE,
+        allow_reactivation=False,
+    )
+    assert not bool(result.valid[0])
+    assert int(result.error_code[0]) == COMMIT_REACTIVATION_FORBIDDEN
+    with pytest.raises(ValueError, match="policy failure"):
+        _commit(
+            previous,
+            _predicted(previous.c_b, [[2, 3, 1, 1]]),
+            allow_reactivation=False,
+        )
+
+
+def test_committed_dtypes_fail_closed_in_core_and_eager_wrapper():
+    malformed = CommittedStructure(
+        _committed().c_b.astype(jnp.float32),
+        _committed().activity,
+        _committed().length,
+    )
+    routed = generated_routing_core(malformed, M_max=4, K=4, max_extent=3)
+    assert not bool(routed.executed)
+    assert int(routed.error_code[0]) == ROUTING_DTYPE
+    with pytest.raises(ValueError, match="error codes"):
+        generated_routing(malformed, M_max=4, K=4, max_extent=3)
+
+
+def test_sample_temperature_and_structural_logit_dtypes_are_validated():
+    integer_logits = PredictedStructure(
+        jnp.zeros((1, 4, 2), jnp.int32), jnp.zeros((1, 4, 4), jnp.int32)
+    )
+    with pytest.raises(ValueError, match="floating point"):
+        _commit(_committed(), integer_logits)
+    with pytest.raises(ValueError, match="finite, and positive"):
+        _commit(
+            _committed(),
+            _predicted([[0, 1, 0, 1]], [[2, 0, 1, 1]]),
+            policy="sample",
+            key_context=_context(),
+            temperature=0.0,
+            estimator_owner=StructureEstimatorOwner.LOCAL_SCORE_BRIDGE,
+        )
+
+
+def test_compiled_commit_invalid_numerics_fail_before_generated_scatter():
+    previous = _committed()
+    predicted = _predicted([[0, 1, 0, 1]], [[2, 0, 1, 1]])
+    predicted = replace(predicted, b_logits=predicted.b_logits.at[0, 0, 0].set(jnp.nan))
+    committed = commit_predicted_structure_core(
+        previous,
+        predicted,
+        full_commit_masks((1, 4)),
+        policy="argmax",
+        max_extent=3,
+        estimator_owner=StructureEstimatorOwner.NONE,
+        allow_reactivation=True,
+    )
+    assert not bool(committed.valid[0])
+    assert int(committed.error_code[0]) == COMMIT_LOGITS_NONFINITE
+    routed = generated_routing_core(
+        committed.committed,
+        M_max=4,
+        K=4,
+        max_extent=3,
+        upstream_valid=committed.valid,
+        upstream_error=committed.error_code,
+    )
+    assert not bool(routed.executed)
+    assert not bool(jnp.any(routed.metadata.slot_valid))
+
+    zero_temperature = commit_predicted_structure_core(
+        previous,
+        _predicted([[0, 1, 0, 1]], [[2, 0, 1, 1]]),
+        full_commit_masks((1, 4)),
+        policy="sample",
+        max_extent=3,
+        key_context=_context(),
+        temperature=0.0,
+        estimator_owner=StructureEstimatorOwner.LOCAL_SCORE_BRIDGE,
+        allow_reactivation=True,
+    )
+    assert not bool(zero_temperature.valid[0])
+    assert int(zero_temperature.error_code[0]) == COMMIT_TEMPERATURE_INVALID
+    assert jnp.all(jnp.isfinite(zero_temperature.sampled.descendant_log_prob))
+
+
+def test_hysteresis_rejection_preserves_prior_switch_and_confidence():
+    previous = _committed()
+    state = StructureHysteresisState(
+        jnp.zeros((1, 4), jnp.int32),
+        jnp.full((1, 4), 0.25),
+        jnp.zeros((1, 4), jnp.int32),
+        jnp.full((1, 4), 0.5),
+    )
+    result = _commit(
+        previous,
+        _predicted([[1, 0, 1, 0]], [[0, 3, 0, 2]]),
+        policy="hysteresis",
+        key_context=_context(),
+        hysteresis_config=HysteresisConfig(0.999999, 0.99, 10),
+        hysteresis_state=state,
+    )
+    assert result.hysteresis_state is not None
+    assert jnp.array_equal(
+        result.hysteresis_state.boundary_last_confidence, state.boundary_last_confidence
+    )
+    assert jnp.array_equal(
+        result.hysteresis_state.extent_last_confidence, state.extent_last_confidence
+    )
+
+
+def test_sampled_structure_uses_public_factor_and_explicit_local_owner():
+    logits = jnp.asarray([0.2, -0.3, 0.7])
+    factor = CategoricalCommitFactor(logits)
+    action = factor.sample(jax.random.key(9), {"logits": logits}, None, {"temperature": 1.0})
+    expected = jax.nn.log_softmax(logits)[action]
+    assert (
+        factor.log_probability({"logits": logits}, action, None, {"temperature": 1.0}) == expected
+    )
+    predicted = PredictedStructure(jnp.zeros((1, 4, 2)), jnp.zeros((1, 4, 4)))
+    result = _commit(
+        _committed(),
+        predicted,
+        policy="sample",
+        key_context=_context(),
+        temperature=1.0,
+        estimator_owner=StructureEstimatorOwner.LOCAL_SCORE_BRIDGE,
+    )
+    assert result.sampled.boundary_log_prob[0, -1] == 0
+    assert result.estimator_owner is StructureEstimatorOwner.LOCAL_SCORE_BRIDGE
+    with pytest.raises(ValueError, match="local_score_bridge ownership"):
+        _commit(
+            _committed(),
+            predicted,
+            policy="sample",
+            key_context=_context(),
+            temperature=1.0,
+            estimator_owner=StructureEstimatorOwner.NATIVE_TORX,
+        )
+
+
+def test_structure_keys_reproduce_and_separate_every_coordinate_and_namespace():
+    baseline = _context().keys("boundary", 4)
+    assert jnp.array_equal(baseline, _context().keys("boundary", 4))
+    assert not jnp.array_equal(baseline, _context(occurrence=4).keys("boundary", 4))
+    assert not jnp.array_equal(baseline, _context(actual_s_index=2).keys("boundary", 4))
+    assert not jnp.array_equal(baseline, _context(refinement_index=3).keys("boundary", 4))
+    assert not jnp.array_equal(baseline, _context(commit_occurrence=5).keys("boundary", 4))
+    assert not jnp.array_equal(baseline, _context().keys("extent", 4))
+    assert not jnp.array_equal(baseline[:, 0], baseline[:, 1])
+
+
+@pytest.mark.parametrize(
+    "mutator,match",
+    [
+        (lambda c: replace(c, c_b=c.c_b.at[:, -1].set(0)), "error codes"),
+        (lambda c: replace(c, c_b=c.c_b.at[:, 0].set(2)), "error codes"),
+        (lambda c: replace(c, length=c.length.at[:, 0].set(-1)), "error codes"),
+        (lambda c: replace(c, activity=jnp.zeros_like(c.activity)), "error codes"),
+    ],
+)
+def test_invalid_committed_state_is_rejected(mutator, match):
+    with pytest.raises(ValueError, match=match):
+        generated_routing(mutator(_committed()), M_max=4, K=4, max_extent=3)
+
+
+def test_phase_g_rejects_implicit_lengths_nonfinite_logits_and_nonboolean_masks():
+    previous = replace(_committed(), length=None)
+    with pytest.raises(ValueError, match="explicit"):
+        generated_routing(previous, M_max=4, K=4, max_extent=3)
+    predicted = _predicted([[0, 1, 0, 1]], [[2, 0, 1, 1]])
+    predicted = replace(predicted, b_logits=predicted.b_logits.at[0, 0, 0].set(jnp.nan))
+    with pytest.raises(ValueError, match="finite"):
+        _commit(_committed(), predicted)
+    bad_masks = replace(full_commit_masks((1, 4)), extent_site=jnp.ones((1, 4), jnp.int32))
+    with pytest.raises(ValueError, match="boolean"):
+        _commit(_committed(), _predicted([[0, 1, 0, 1]], [[2, 0, 1, 1]]), masks=bad_masks)
+
+
+def test_both_overflow_modes_return_nonconsumable_empty_metadata_and_eager_rejects():
+    count = CommittedStructure(
+        jnp.ones((1, 4), jnp.int32), jnp.ones((1, 4), bool), jnp.ones((1, 4), jnp.int32)
+    )
+    count_core = generated_routing_core(count, M_max=2, K=4, max_extent=3)
+    assert not bool(count_core.executed)
+    assert int(count_core.error_code[0]) == ROUTING_BLOCK_COUNT_OVERFLOW
+    assert not bool(jnp.any(count_core.metadata.slot_valid))
+    with pytest.raises(ValueError, match="capacity"):
+        generated_routing(count, M_max=2, K=4, max_extent=3)
+
+    long_block = CommittedStructure(
+        jnp.array([[0, 0, 0, 1]], jnp.int32),
+        jnp.ones((1, 4), bool),
+        jnp.ones((1, 4), jnp.int32),
+    )
+    length_core = generated_routing_core(long_block, M_max=2, K=2, max_extent=3)
+    assert not bool(length_core.executed)
+    assert int(length_core.error_code[0]) == ROUTING_BLOCK_LENGTH_OVERFLOW
+    assert not bool(jnp.any(length_core.metadata.slot_valid))
+
+
+def test_routing_records_execute_under_jit_and_scan():
+    structure = _committed(batch=2)
+    compiled = jax.jit(lambda value: generated_routing_core(value, M_max=4, K=4, max_extent=3))(
+        structure
+    )
+    assert bool(compiled.executed)
+
+    def body(carry, _):
+        result = generated_routing_core(carry, M_max=4, K=4, max_extent=3)
+        return result.structure, result.executed
+
+    final, executed = jax.lax.scan(body, structure, xs=None, length=2)
+    assert jnp.all(executed)
+    assert final.length is not None and structure.length is not None
+    assert jnp.array_equal(final.length, structure.length)
+
+
+def test_ell_zero_nonemitting_reactivation_and_pack_unpool_identity_batch_gt_one():
+    route = generated_routing(_committed(batch=2), M_max=4, K=4, max_extent=3)
+    for batch in range(2):
+        m = int(route.metadata.carrier_to_m[batch, 1])
+        k = int(route.metadata.carrier_to_k[batch, 1])
+        assert bool(route.metadata.query_mask[batch, m, k])
+        assert not bool(route.metadata.kv_mask[batch, m, k])
+        assert not bool(route.metadata.pool_mask[batch, m, k])
+        assert not bool(route.metadata.emit_mask[batch, m, k])
+
+
+def test_changed_boundaries_repack_and_unpool_the_same_carrier_identities():
+    previous = _committed()
+    changed = CommittedStructure(
+        jnp.asarray([[1, 0, 0, 1]], jnp.int32), previous.activity, previous.length
+    )
+    before = generated_routing(previous, M_max=4, K=4, max_extent=3)
+    after = generated_routing(changed, M_max=4, K=4, max_extent=3)
+    assert not jnp.array_equal(before.metadata.carrier_to_m, after.metadata.carrier_to_m)
+    values = jnp.arange(12, dtype=jnp.float32).reshape(1, 4, 3)
+    for route in (before, after):
+        packed = pack_values(values, route.metadata)
+        restored = unpool_values(packed, route.metadata, C=4)
+        assert jnp.array_equal(restored, values)
+
+
+def test_score_bridge_has_zero_primal_and_rejects_nonlocal_or_nonsampled_ownership():
+    predicted = PredictedStructure(jnp.zeros((1, 4, 2)), jnp.zeros((1, 4, 4)))
+    commit = _commit(
+        _committed(),
+        predicted,
+        policy="sample",
+        key_context=_context(),
+        temperature=1.0,
+        estimator_owner=StructureEstimatorOwner.LOCAL_SCORE_BRIDGE,
+    )
+    descendant = jnp.asarray([2.5])
+    assert jnp.array_equal(score_corrected_structure_loss(descendant, commit), descendant)
+    argmax = _commit(_committed(), predicted)
+    with pytest.raises(ValueError, match="local score"):
+        score_corrected_structure_loss(descendant, argmax)
+
+
+def test_extreme_calibration_nll_uses_log_softmax_without_probability_floor():
+    metrics = categorical_calibration(
+        jnp.asarray([[[1000.0, -1000.0]]]),
+        jnp.asarray([[1]]),
+        jnp.asarray([[True]]),
+    )
+    assert metrics["nll"] == pytest.approx(2000.0)
+
+
+def test_generated_length_loss_compacts_globally_and_penalizes_missing_extra():
+    logits = jnp.full((1, 2, 2, 256), -10.0)
+    logits = logits.at[0, 0, 0, 3].set(10.0)
+    logits = logits.at[0, 1, 0, 4].set(10.0)
+    target = jnp.array([[[3, 0], [4, 0]]], jnp.int32)
+    mask = jnp.array([[[True, False], [True, False]]])
+    exact = generated_byte_metrics(logits, jnp.array([[1, 1]]), target, mask)
+    assert exact.accuracy_per_example[0] == 1
+    assert exact.missing_count[0] == 0
+    missing = generated_byte_metrics(logits, jnp.array([[1, 0]]), target, mask)
+    assert missing.missing_count[0] == 1
+    assert missing.loss_per_example[0] > exact.loss_per_example[0]
+    empty = generated_byte_metrics(
+        logits, jnp.zeros((1, 2), jnp.int32), target, jnp.zeros_like(mask)
+    )
+    assert empty.loss_per_example[0] == 0
+
+
+def test_churn_reports_separate_transition_classes_and_neutral_structure_contract():
+    previous = _committed()
+    current = _commit(previous, _predicted([[1, 1, 0, 1]], [[0, 2, 1, 0]])).committed
     metrics = structure_churn(previous, current)
     assert metrics["boundary_change_rate"] == pytest.approx(1 / 3)
-    assert metrics["extent_change_rate"] == pytest.approx(0.75)
     assert metrics["reactivation_rate"] == pytest.approx(0.25)
-    assert metrics["deactivation_rate"] == pytest.approx(0.5)
+    neutral = neutral_structure(1, replace_config())
+    assert neutral.c_b[0, -1] == 1
+    assert jnp.all(neutral.length == 4)
 
 
-def test_boundary_and_extent_calibration_are_correct_for_confident_recovery():
-    labels_b = jnp.array([[0, 1, 0, 1]])
-    labels_l = jnp.array([[2, 0, 1, 3]])
-    predicted = _logits(labels_b, labels_l)
-    metrics = structure_calibration(predicted, labels_b, labels_l, bins=5)
-    assert metrics["boundary"]["count"] == 3
-    assert metrics["boundary"]["accuracy"] == 1
-    assert metrics["extent"]["accuracy"] == 1
-    assert metrics["boundary"]["nll"] < 1.0e-4
-    assert metrics["extent"]["brier"] < 1.0e-6
+def replace_config():
+    from adze_t.config import REFERENCE_SMALL_V0
 
-
-def test_calibration_rejects_invalid_bin_count():
-    with pytest.raises(ValueError, match="positive"):
-        categorical_calibration(
-            jnp.zeros((1, 1, 2)), jnp.zeros((1, 1), int), jnp.ones((1, 1), bool), bins=0
-        )
-
-
-def test_generated_routing_exposes_overflow_instead_of_truncating():
-    structure = CommittedStructure(
-        c_b=jnp.array([[1, 1, 1, 1]], dtype=jnp.int32),
-        activity=jnp.ones((1, 4), dtype=bool),
-        length=jnp.ones((1, 4), dtype=jnp.int32),
-    )
-    routing = generated_routing(structure, M_max=2, K=2)
-    assert bool(routing.metadata.block_count_overflow[0])
-
-
-def test_commit_shape_and_key_contracts_fail_closed():
-    previous = _committed()
-    with pytest.raises(ValueError, match="boundary logits"):
-        commit_predicted_structure(
-            previous,
-            PredictedStructure(jnp.zeros((1, 4, 3)), jnp.zeros((1, 4, 4))),
-            policy="argmax",
-        )
-    with pytest.raises(ValueError, match="explicit JAX key"):
-        commit_predicted_structure(
-            previous,
-            PredictedStructure(jnp.zeros((1, 4, 2)), jnp.zeros((1, 4, 4))),
-            policy="sample",
-        )
+    return REFERENCE_SMALL_V0

@@ -7,10 +7,12 @@ Architecture reference:
 """
 
 from dataclasses import dataclass
+import jax
 from jax import Array
 import jax.numpy as jnp
 
 
+@jax.tree_util.register_pytree_node_class
 @dataclass(frozen=True)
 class ObservedStructure:
     """Corrupted/observed structure used as model input."""
@@ -18,7 +20,16 @@ class ObservedStructure:
     s_b: Array
     s_l: Array
 
+    def tree_flatten(self):
+        return (self.s_b, self.s_l), None
 
+    @classmethod
+    def tree_unflatten(cls, aux_data, children):
+        del aux_data
+        return cls(*children)
+
+
+@jax.tree_util.register_pytree_node_class
 @dataclass(frozen=True)
 class PredictedStructure:
     """Current model predictions; must not immediately rewrite routing."""
@@ -26,7 +37,16 @@ class PredictedStructure:
     b_logits: Array
     l_logits: Array
 
+    def tree_flatten(self):
+        return (self.b_logits, self.l_logits), None
 
+    @classmethod
+    def tree_unflatten(cls, aux_data, children):
+        del aux_data
+        return cls(*children)
+
+
+@jax.tree_util.register_pytree_node_class
 @dataclass(frozen=True)
 class CommittedStructure:
     """Structure that controls block construction and participation."""
@@ -41,7 +61,16 @@ class CommittedStructure:
             return self.activity.astype(jnp.int32)
         return self.length
 
+    def tree_flatten(self):
+        return (self.c_b, self.activity, self.length), None
 
+    @classmethod
+    def tree_unflatten(cls, aux_data, children):
+        del aux_data
+        return cls(*children)
+
+
+@jax.tree_util.register_pytree_node_class
 @dataclass(frozen=True)
 class CarrierState:
     """Persistent fixed-capacity carrier."""
@@ -50,6 +79,14 @@ class CarrierState:
     observed: ObservedStructure
     committed: CommittedStructure
     predicted: PredictedStructure | None = None
+
+    def tree_flatten(self):
+        return (self.h, self.observed, self.committed, self.predicted), None
+
+    @classmethod
+    def tree_unflatten(cls, aux_data, children):
+        del aux_data
+        return cls(*children)
 
 
 def validate_carrier_state(state: CarrierState) -> None:
