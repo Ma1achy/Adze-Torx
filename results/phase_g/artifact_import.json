@@ -1,0 +1,20 @@
+{
+  "artifacts": [
+    {
+      "copy_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+      "destination": "/private/tmp/adze-phase-g/results/runs/phase_f/f1/denoise_v1/one_step/init0_stoch0.pkl",
+      "identical": true,
+      "source": "/Users/malachy/src/Adze-Torx/results/runs/phase_f/f1/denoise_v1/one_step/init0_stoch0.pkl",
+      "source_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57"
+    },
+    {
+      "copy_sha256": "55f057f78f795f1585d7aac28fa7ff37846d4c1098507ede375e86b21c4f8ff6",
+      "destination": "/private/tmp/adze-phase-g/results/phase_b/checkpoints/target_codec_b1.pkl",
+      "identical": true,
+      "source": "/Users/malachy/src/Adze-Torx/results/phase_b/checkpoints/target_codec_b1.pkl",
+      "source_sha256": "55f057f78f795f1585d7aac28fa7ff37846d4c1098507ede375e86b21c4f8ff6"
+    }
+  ],
+  "implementation_git_sha": "1a96675cab9bdc2d7c9c377b4f732d03c3124f1d",
+  "status": "G_LOCAL_ARTIFACT_IMPORT_PASS"
+}

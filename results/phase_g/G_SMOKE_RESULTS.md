@@ -1,6 +1,6 @@
 # Phase G bounded smoke results
 
-Status: not run.
+Status: not run; blocked by `G_CODEC_TASK_COMPATIBILITY_BLOCKED`.
 
 No teacher, argmax, or sampled Phase-G smoke arm has started. The runner is
 resume-safe and records checkpoints at updates 0, 10, 25, 50, and 100 with exact

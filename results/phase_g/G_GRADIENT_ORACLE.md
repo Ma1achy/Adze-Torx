@@ -1,6 +1,7 @@
 # Phase G sampled-gradient oracle
 
-Corrected production-loss oracle status: PASS in focused development checks.
+Corrected production-loss oracle status: `G_GRADIENT_ORACLE_PASS` at immutable
+implementation `1a96675cab9bdc2d7c9c377b4f732d03c3124f1d`.
 
 - Exact action space: `2^2 * 3^3 = 108`.
 - Exact local bridge: 23/23 tests passed.

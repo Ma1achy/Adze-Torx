@@ -1,0 +1,533 @@
+{
+  "aggregate_accuracy": 0.4341549988378558,
+  "minimum_length_accuracy": 0.25641027092933655,
+  "noisy_identifiability": [
+    {
+      "decoder_witness_content_accuracy": 0.7616361071932299,
+      "decoder_witness_wilson_95_lower": 0.7430671202549108,
+      "eligible_content_cuts": 2127,
+      "finite": true,
+      "nu": 0.025,
+      "untrained_direct_boundary_accuracy_diagnostic": 0.48848143219947815
+    },
+    {
+      "decoder_witness_content_accuracy": 0.7273154677950164,
+      "decoder_witness_wilson_95_lower": 0.7079924161640115,
+      "eligible_content_cuts": 2127,
+      "finite": true,
+      "nu": 0.1,
+      "untrained_direct_boundary_accuracy_diagnostic": 0.48848143219947815
+    },
+    {
+      "decoder_witness_content_accuracy": 0.6417489421720733,
+      "decoder_witness_wilson_95_lower": 0.6211331511359137,
+      "eligible_content_cuts": 2127,
+      "finite": true,
+      "nu": 0.25,
+      "untrained_direct_boundary_accuracy_diagnostic": 0.48848143219947815
+    }
+  ],
+  "noisy_identifiability_rule": "accepted F1 denoise/decoder witness on the same corrupted carrier; for content-dependent cuts, every nu Wilson-95 lower bound must exceed chance",
+  "protocol": {
+    "architecture": {
+      "C": 32,
+      "K": 8,
+      "L": 4,
+      "L_max": 4,
+      "M_max": 32,
+      "Q": 3,
+      "R": 0
+    },
+    "arms": [
+      "teacher",
+      "argmax",
+      "sample"
+    ],
+    "checkpoints": [
+      0,
+      10,
+      25,
+      50,
+      100
+    ],
+    "codec_sha256": "55f057f78f795f1585d7aac28fa7ff37846d4c1098507ede375e86b21c4f8ff6",
+    "config_batch_size": 32,
+    "data": {
+      "counts": {
+        "train": 1024,
+        "validation": 256
+      },
+      "domain": "iid bytes 1..32",
+      "global_id_ranges": {
+        "train": [
+          0,
+          1023
+        ],
+        "validation": [
+          1024,
+          1279
+        ]
+      },
+      "lengths": [
+        8,
+        64
+      ],
+      "nu": [
+        0.025,
+        0.25
+      ],
+      "seeds": [
+        950,
+        951,
+        952
+      ],
+      "stochastic_root_coordinates": {
+        "diffusion": 2,
+        "nu": 0,
+        "operator": 1,
+        "structure": 3
+      }
+    },
+    "implementation_git_sha": "5382ce6afb36c87e7068d00bfb33a6867008ea29",
+    "interfaces": {
+      "generated_structure": "PHASE_G_GENERATED_STRUCTURE_INTERFACE_V1",
+      "score_estimator_owner": "local_score_bridge for sample; none otherwise",
+      "training": "PHASE_G_TRAINING_PROTOCOL_V0"
+    },
+    "lambda_op": 0.0,
+    "loss": {
+      "common": "boundary CE + extent CE + 0.5 predictor h-MSE",
+      "descendant": "0.5 replay h-MSE + global compacted length-aware byte loss"
+    },
+    "optimizer": {
+      "batch_size": 32,
+      "clip_norm": 1.0,
+      "fresh_moments": true,
+      "initial_step": 0,
+      "learning_rate": 0.0003,
+      "name": "AdamW",
+      "weight_decay": 0.01
+    },
+    "parent_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+    "protocol": "PHASE_G_GENERATED_STRUCTURE_SMOKE_V0",
+    "structure_task": {
+      "commit_ownership": "mandatory K edges and terminal fixed; all optional nonmandatory edges and all extent sites owned",
+      "content_cut": "active carrier first clean codec slot byte in 1..16",
+      "extent": "clean codec extent",
+      "mandatory_cut_period": 8,
+      "noisy_identifiability_nu": [
+        0.025,
+        0.1,
+        0.25
+      ],
+      "predictor_observation": "F1-corrupted clean teacher carrier",
+      "version": "PHASE_G_IDENTIFIABLE_CONTENT_CUTS_V0"
+    },
+    "temperature_sample": 1.0,
+    "torx_pin": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+    "two_pass": "predictor and committed replay share one corrupted S1 input; condition index zero"
+  },
+  "rows": [
+    {
+      "accuracy": 0.875,
+      "capacity_overflow": false,
+      "length": 8,
+      "nonfinite": false,
+      "signature_accuracy": 1.0
+    },
+    {
+      "accuracy": 0.5555555820465088,
+      "capacity_overflow": false,
+      "length": 9,
+      "nonfinite": false,
+      "signature_accuracy": 0.968254029750824
+    },
+    {
+      "accuracy": 0.800000011920929,
+      "capacity_overflow": false,
+      "length": 10,
+      "nonfinite": false,
+      "signature_accuracy": 0.968254029750824
+    },
+    {
+      "accuracy": 0.7272727489471436,
+      "capacity_overflow": false,
+      "length": 11,
+      "nonfinite": false,
+      "signature_accuracy": 0.9841270446777344
+    },
+    {
+      "accuracy": 0.6666666865348816,
+      "capacity_overflow": false,
+      "length": 12,
+      "nonfinite": false,
+      "signature_accuracy": 1.0
+    },
+    {
+      "accuracy": 0.6153846383094788,
+      "capacity_overflow": false,
+      "length": 13,
+      "nonfinite": false,
+      "signature_accuracy": 0.9523810148239136
+    },
+    {
+      "accuracy": 0.5714285969734192,
+      "capacity_overflow": false,
+      "length": 14,
+      "nonfinite": false,
+      "signature_accuracy": 0.9523810148239136
+    },
+    {
+      "accuracy": 0.5333333611488342,
+      "capacity_overflow": false,
+      "length": 15,
+      "nonfinite": false,
+      "signature_accuracy": 0.9841270446777344
+    },
+    {
+      "accuracy": 0.5,
+      "capacity_overflow": false,
+      "length": 16,
+      "nonfinite": false,
+      "signature_accuracy": 0.968254029750824
+    },
+    {
+      "accuracy": 0.529411792755127,
+      "capacity_overflow": false,
+      "length": 17,
+      "nonfinite": false,
+      "signature_accuracy": 0.968254029750824
+    },
+    {
+      "accuracy": 0.4444444477558136,
+      "capacity_overflow": false,
+      "length": 18,
+      "nonfinite": false,
+      "signature_accuracy": 0.9365079998970032
+    },
+    {
+      "accuracy": 0.6315789222717285,
+      "capacity_overflow": false,
+      "length": 19,
+      "nonfinite": false,
+      "signature_accuracy": 0.9206349849700928
+    },
+    {
+      "accuracy": 0.3499999940395355,
+      "capacity_overflow": false,
+      "length": 20,
+      "nonfinite": false,
+      "signature_accuracy": 1.0
+    },
+    {
+      "accuracy": 0.380952388048172,
+      "capacity_overflow": false,
+      "length": 21,
+      "nonfinite": false,
+      "signature_accuracy": 0.9206349849700928
+    },
+    {
+      "accuracy": 0.5,
+      "capacity_overflow": false,
+      "length": 22,
+      "nonfinite": false,
+      "signature_accuracy": 0.9841270446777344
+    },
+    {
+      "accuracy": 0.3913043439388275,
+      "capacity_overflow": false,
+      "length": 23,
+      "nonfinite": false,
+      "signature_accuracy": 0.9523810148239136
+    },
+    {
+      "accuracy": 0.3333333432674408,
+      "capacity_overflow": false,
+      "length": 24,
+      "nonfinite": false,
+      "signature_accuracy": 0.968254029750824
+    },
+    {
+      "accuracy": 0.47999998927116394,
+      "capacity_overflow": false,
+      "length": 25,
+      "nonfinite": false,
+      "signature_accuracy": 0.9841270446777344
+    },
+    {
+      "accuracy": 0.3461538553237915,
+      "capacity_overflow": false,
+      "length": 26,
+      "nonfinite": false,
+      "signature_accuracy": 0.9206349849700928
+    },
+    {
+      "accuracy": 0.3333333432674408,
+      "capacity_overflow": false,
+      "length": 27,
+      "nonfinite": false,
+      "signature_accuracy": 0.9365079998970032
+    },
+    {
+      "accuracy": 0.2857142984867096,
+      "capacity_overflow": false,
+      "length": 28,
+      "nonfinite": false,
+      "signature_accuracy": 0.9047619700431824
+    },
+    {
+      "accuracy": 0.3448275923728943,
+      "capacity_overflow": false,
+      "length": 29,
+      "nonfinite": false,
+      "signature_accuracy": 0.9365079998970032
+    },
+    {
+      "accuracy": 0.46666666865348816,
+      "capacity_overflow": false,
+      "length": 30,
+      "nonfinite": false,
+      "signature_accuracy": 0.9365079998970032
+    },
+    {
+      "accuracy": 0.4838709533214569,
+      "capacity_overflow": false,
+      "length": 31,
+      "nonfinite": false,
+      "signature_accuracy": 0.9047619700431824
+    },
+    {
+      "accuracy": 0.5,
+      "capacity_overflow": false,
+      "length": 32,
+      "nonfinite": false,
+      "signature_accuracy": 0.9523810148239136
+    },
+    {
+      "accuracy": 0.27272728085517883,
+      "capacity_overflow": false,
+      "length": 33,
+      "nonfinite": false,
+      "signature_accuracy": 0.9365079998970032
+    },
+    {
+      "accuracy": 0.2647058963775635,
+      "capacity_overflow": false,
+      "length": 34,
+      "nonfinite": false,
+      "signature_accuracy": 0.9047619700431824
+    },
+    {
+      "accuracy": 0.3142857253551483,
+      "capacity_overflow": false,
+      "length": 35,
+      "nonfinite": false,
+      "signature_accuracy": 0.9047619700431824
+    },
+    {
+      "accuracy": 0.4444444477558136,
+      "capacity_overflow": false,
+      "length": 36,
+      "nonfinite": false,
+      "signature_accuracy": 0.9206349849700928
+    },
+    {
+      "accuracy": 0.4864864945411682,
+      "capacity_overflow": false,
+      "length": 37,
+      "nonfinite": false,
+      "signature_accuracy": 0.8571429252624512
+    },
+    {
+      "accuracy": 0.5263158082962036,
+      "capacity_overflow": false,
+      "length": 38,
+      "nonfinite": false,
+      "signature_accuracy": 0.9047619700431824
+    },
+    {
+      "accuracy": 0.25641027092933655,
+      "capacity_overflow": false,
+      "length": 39,
+      "nonfinite": false,
+      "signature_accuracy": 0.9365079998970032
+    },
+    {
+      "accuracy": 0.4000000059604645,
+      "capacity_overflow": false,
+      "length": 40,
+      "nonfinite": false,
+      "signature_accuracy": 0.9206349849700928
+    },
+    {
+      "accuracy": 0.3414634168148041,
+      "capacity_overflow": false,
+      "length": 41,
+      "nonfinite": false,
+      "signature_accuracy": 0.9206349849700928
+    },
+    {
+      "accuracy": 0.3095238208770752,
+      "capacity_overflow": false,
+      "length": 42,
+      "nonfinite": false,
+      "signature_accuracy": 0.888888955116272
+    },
+    {
+      "accuracy": 0.39534884691238403,
+      "capacity_overflow": false,
+      "length": 43,
+      "nonfinite": false,
+      "signature_accuracy": 0.9365079998970032
+    },
+    {
+      "accuracy": 0.34090909361839294,
+      "capacity_overflow": false,
+      "length": 44,
+      "nonfinite": false,
+      "signature_accuracy": 0.9523810148239136
+    },
+    {
+      "accuracy": 0.5111111402511597,
+      "capacity_overflow": false,
+      "length": 45,
+      "nonfinite": false,
+      "signature_accuracy": 0.9365079998970032
+    },
+    {
+      "accuracy": 0.41304346919059753,
+      "capacity_overflow": false,
+      "length": 46,
+      "nonfinite": false,
+      "signature_accuracy": 0.8412699103355408
+    },
+    {
+      "accuracy": 0.3404255211353302,
+      "capacity_overflow": false,
+      "length": 47,
+      "nonfinite": false,
+      "signature_accuracy": 0.8253968954086304
+    },
+    {
+      "accuracy": 0.4166666567325592,
+      "capacity_overflow": false,
+      "length": 48,
+      "nonfinite": false,
+      "signature_accuracy": 0.8412699103355408
+    },
+    {
+      "accuracy": 0.4693877696990967,
+      "capacity_overflow": false,
+      "length": 49,
+      "nonfinite": false,
+      "signature_accuracy": 0.9047619700431824
+    },
+    {
+      "accuracy": 0.4000000059604645,
+      "capacity_overflow": false,
+      "length": 50,
+      "nonfinite": false,
+      "signature_accuracy": 0.888888955116272
+    },
+    {
+      "accuracy": 0.3137255012989044,
+      "capacity_overflow": false,
+      "length": 51,
+      "nonfinite": false,
+      "signature_accuracy": 0.8730159401893616
+    },
+    {
+      "accuracy": 0.36538460850715637,
+      "capacity_overflow": false,
+      "length": 52,
+      "nonfinite": false,
+      "signature_accuracy": 0.8730159401893616
+    },
+    {
+      "accuracy": 0.3207547068595886,
+      "capacity_overflow": false,
+      "length": 53,
+      "nonfinite": false,
+      "signature_accuracy": 0.9047619700431824
+    },
+    {
+      "accuracy": 0.40740740299224854,
+      "capacity_overflow": false,
+      "length": 54,
+      "nonfinite": false,
+      "signature_accuracy": 0.8730159401893616
+    },
+    {
+      "accuracy": 0.38181817531585693,
+      "capacity_overflow": false,
+      "length": 55,
+      "nonfinite": false,
+      "signature_accuracy": 0.9047619700431824
+    },
+    {
+      "accuracy": 0.2678571343421936,
+      "capacity_overflow": false,
+      "length": 56,
+      "nonfinite": false,
+      "signature_accuracy": 0.9523810148239136
+    },
+    {
+      "accuracy": 0.4912280738353729,
+      "capacity_overflow": false,
+      "length": 57,
+      "nonfinite": false,
+      "signature_accuracy": 0.8571429252624512
+    },
+    {
+      "accuracy": 0.4482758641242981,
+      "capacity_overflow": false,
+      "length": 58,
+      "nonfinite": false,
+      "signature_accuracy": 0.888888955116272
+    },
+    {
+      "accuracy": 0.38983049988746643,
+      "capacity_overflow": false,
+      "length": 59,
+      "nonfinite": false,
+      "signature_accuracy": 0.888888955116272
+    },
+    {
+      "accuracy": 0.44999998807907104,
+      "capacity_overflow": false,
+      "length": 60,
+      "nonfinite": false,
+      "signature_accuracy": 0.7936508655548096
+    },
+    {
+      "accuracy": 0.3606557250022888,
+      "capacity_overflow": false,
+      "length": 61,
+      "nonfinite": false,
+      "signature_accuracy": 0.9206349849700928
+    },
+    {
+      "accuracy": 0.32258063554763794,
+      "capacity_overflow": false,
+      "length": 62,
+      "nonfinite": false,
+      "signature_accuracy": 0.9206349849700928
+    },
+    {
+      "accuracy": 0.380952388048172,
+      "capacity_overflow": false,
+      "length": 63,
+      "nonfinite": false,
+      "signature_accuracy": 0.7777778506278992
+    },
+    {
+      "accuracy": 0.296875,
+      "capacity_overflow": false,
+      "length": 64,
+      "nonfinite": false,
+      "signature_accuracy": 0.888888955116272
+    }
+  ],
+  "signature_accuracy": 0.9200780339408339,
+  "status": "G_CODEC_TASK_COMPATIBILITY_BLOCKED"
+}

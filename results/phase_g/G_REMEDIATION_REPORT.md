@@ -21,3 +21,10 @@ observable codec content and no longer use an independent random offset.
 Remaining work is runtime validation: codec/noisy-identifiability gate,
 full-model engineering preflight, teacher necessity preflight, and bounded
 smoke arms. No scientific Phase-G label is issued here.
+
+Runtime closure: provenance and the corrected production-loss oracle passed at
+immutable implementation `1a96675cab9bdc2d7c9c377b4f732d03c3124f1d`, but
+the exact codec/task compatibility gate blocked. Full-model preflight and smoke
+remain deliberately unrun. Resolving the block requires an explicitly approved
+codec/task milestone; thresholds and task semantics were not changed after the
+result.

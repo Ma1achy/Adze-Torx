@@ -1,6 +1,6 @@
 # Phase G integration preflight
 
-Status: `G_INTEGRATION_BLOCKED` pending runtime gates.
+Status: `G_INTEGRATION_BLOCKED` by codec/task incompatibility.
 
 Before any smoke arm, durable exact-protocol evidence must cover eager/JIT
 contracts, fail-closed routing/loss/update, sanitized-target leakage, carrier
@@ -26,3 +26,7 @@ permuted extents, joint shifted/permuted structure, and fixed neutral structure.
 For every control it needs at least +1 percentage point byte accuracy and at
 least 2% lower generated-length loss, with paired bootstrap intervals favorable
 for both metrics. Controls are not averaged.
+
+The source-bound corrected oracle passed 21/21 exact and 21/21 Monte Carlo
+cases, but the prerequisite codec gate failed before full-model engineering
+preflight. No teacher, argmax, or sampled arm is permitted to start.
