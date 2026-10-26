@@ -101,6 +101,7 @@ def evaluate_committed_replay(
     *,
     clean_params: Any | None = None,
     clean_ops: Any | None = None,
+    dynamic_capacity: bool = False,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
 ) -> tuple[GeneratedByteMetrics, GeneratedReplay]:
     """Evaluate one committed structure with neutral observations and no mutation."""
@@ -135,12 +136,22 @@ def evaluate_committed_replay(
         config=config,
         target_width=batch["target"].shape[1],
     )
-    routing = generated_routing_core(
-        committed,
-        M_max=config.packing.M_max,
-        K=config.packing.K,
-        max_extent=config.carrier.L_max,
-    )
+    if dynamic_capacity:
+        from .phase_g0 import dynamic_capacity_routing
+
+        routing = dynamic_capacity_routing(
+            committed,
+            M_max=config.packing.M_max,
+            K=config.packing.K,
+            max_extent=config.carrier.L_max,
+        ).routing
+    else:
+        routing = generated_routing_core(
+            committed,
+            M_max=config.packing.M_max,
+            K=config.packing.K,
+            max_extent=config.carrier.L_max,
+        )
     replay = guarded_generated_replay(
         params,
         batch,
@@ -448,6 +459,29 @@ def generated_two_pass_objective(
     )
     committed_length = _explicit_length(committed)
 
+    predicted_b = jnp.argmax(b_logits, -1).at[:, -1].set(1)
+    predicted_l = jnp.argmax(l_logits, -1)
+    actual_b, actual_l = committed.c_b, committed_length
+    tp = jnp.sum((actual_b[:, :-1] == 1) & (truth_boundary[:, :-1] == 1))
+    fp = jnp.sum((actual_b[:, :-1] == 1) & (truth_boundary[:, :-1] == 0))
+    fn = jnp.sum((actual_b[:, :-1] == 0) & (truth_boundary[:, :-1] == 1))
+    structure_metrics = {
+        "boundary_accuracy": jnp.mean(actual_b[:, :-1] == truth_boundary[:, :-1]),
+        "boundary_f1": 2.0 * tp / jnp.maximum(2 * tp + fp + fn, 1),
+        "extent_accuracy": jnp.mean(actual_l == truth_length),
+        "emitted_length_accuracy": jnp.mean(jnp.sum(actual_l, 1) == jnp.sum(truth_length, 1)),
+        "complete_structure_accuracy": jnp.mean(
+            jnp.all(actual_b == truth_boundary, 1) & jnp.all(actual_l == truth_length, 1)
+        ),
+        "prediction_boundary_accuracy": jnp.mean(predicted_b[:, :-1] == truth_boundary[:, :-1]),
+        "prediction_extent_accuracy": jnp.mean(predicted_l == truth_length),
+        "structural_churn": jnp.mean((actual_b != neutral.c_b) | (actual_l != neutral_length)),
+        "example_committed_b": actual_b,
+        "example_committed_l": actual_l,
+        "example_predicted_b": predicted_b,
+        "example_predicted_l": predicted_l,
+    }
+
     def valid_loss(_):
         common = (
             _cross_entropy_per_example(b_logits[:, :-1], truth_boundary[:, :-1])
@@ -466,6 +500,7 @@ def generated_two_pass_objective(
             descendant = score_corrected_structure_loss(descendant, commit)
         loss = jnp.mean(common + descendant)
         return loss, {
+            **structure_metrics,
             "executed": jnp.asarray(True),
             "error_code_max": jnp.max(routing.error_code),
             "common_loss": jnp.mean(common),
@@ -478,12 +513,21 @@ def generated_two_pass_objective(
             "byte_exact": jnp.mean(byte.exact_per_example),
             "missing_bytes": jnp.sum(byte.missing_count),
             "extra_bytes": jnp.sum(byte.extra_count),
+            "invalid_frequency": jnp.asarray(0.0, carrier_input.dtype),
+            "example_accuracy": byte.accuracy_per_example,
+            "example_length_loss": byte.loss_per_example,
+            "example_overlap_nll": byte.overlap_nll_per_example,
+            "example_exact": byte.exact_per_example,
+            "example_overlap_count": byte.overlap_count,
+            "overlap_byte_count": jnp.sum(byte.overlap_count),
+            "overlap_example_support": jnp.sum(byte.overlap_count > 0),
         }
 
     def invalid_loss(_):
         zero = jnp.asarray(0.0, carrier_input.dtype)
         zero_count = jnp.asarray(0, dtype=jnp.int32)
         return zero, {
+            **jax.tree.map(jnp.zeros_like, structure_metrics),
             "executed": jnp.asarray(False),
             "error_code_max": jnp.max(routing.error_code),
             "common_loss": zero,
@@ -496,6 +540,14 @@ def generated_two_pass_objective(
             "byte_exact": zero,
             "missing_bytes": zero_count,
             "extra_bytes": zero_count,
+            "invalid_frequency": jnp.asarray(1.0, carrier_input.dtype),
+            "example_accuracy": jnp.zeros((carrier_input.shape[0],), carrier_input.dtype),
+            "example_length_loss": jnp.zeros((carrier_input.shape[0],), carrier_input.dtype),
+            "example_overlap_nll": jnp.zeros((carrier_input.shape[0],), carrier_input.dtype),
+            "example_exact": jnp.zeros((carrier_input.shape[0],), bool),
+            "example_overlap_count": jnp.zeros((carrier_input.shape[0],), jnp.int32),
+            "overlap_byte_count": zero_count,
+            "overlap_example_support": zero_count,
         }
 
     return jax.lax.cond(routing.executed, valid_loss, invalid_loss, operand=None)
@@ -512,6 +564,7 @@ def generated_train_step(
     *,
     arm: GeneratedArm,
     temperature: float | None = None,
+    dynamic_capacity: bool = False,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
 ) -> tuple[Any, tuple[Any, Any], jax.Array, dict[str, Any]]:
     """One fail-closed Phase-G optimizer update."""
@@ -527,6 +580,7 @@ def generated_train_step(
             arm=arm,
             temperature=temperature,
             apply_score_correction=True,
+            dynamic_capacity=dynamic_capacity,
             config=config,
         )
 
@@ -535,12 +589,21 @@ def generated_train_step(
     gradients_finite = jnp.all(
         jnp.stack([jnp.all(jnp.isfinite(leaf)) for leaf in jax.tree.leaves(grads)])
     )
-    numerical_finite = jnp.isfinite(loss) & gradients_finite
+    masked_norm = jnp.sqrt(
+        sum(
+            jnp.sum(jnp.asarray(jnp.where(enabled, leaf, 0.0)) ** 2)
+            for leaf, enabled in zip(
+                jax.tree.leaves(grads), jax.tree.leaves(update_mask), strict=True
+            )
+        )
+    )
+    numerical_finite = jnp.isfinite(loss) & gradients_finite & jnp.isfinite(masked_norm)
     executed = metrics["executed"] & numerical_finite
 
     params, moments, next_step, raw_norm = fail_closed_adamw_step(
         params, grads, moments, step, executed, update_mask
     )
+    executed = executed & (next_step == jnp.asarray(step) + 1)
     return (
         params,
         moments,
@@ -549,7 +612,7 @@ def generated_train_step(
             **metrics,
             "executed": executed,
             "error_code_max": jnp.where(
-                metrics["executed"] & ~numerical_finite,
+                metrics["executed"] & ~executed,
                 TRAIN_NUMERICAL_INVALID,
                 metrics["error_code_max"],
             ),
@@ -581,7 +644,17 @@ def fail_closed_adamw_step(
             clip_norm=1.0,
             update_mask=update_mask,
         )
-        return updated, updated_moments, jnp.asarray(step) + 1, raw_norm
+        finite = jnp.isfinite(raw_norm) & jnp.all(
+            jnp.stack(
+                [jnp.all(jnp.isfinite(x)) for x in jax.tree.leaves((updated, updated_moments))]
+            )
+        )
+        return jax.lax.cond(
+            finite,
+            lambda _: (updated, updated_moments, jnp.asarray(step) + 1, raw_norm),
+            lambda _: (params, moments, jnp.asarray(step), raw_norm),
+            operand=None,
+        )
 
     dtype = jax.tree.leaves(params)[0].dtype
     return jax.lax.cond(
