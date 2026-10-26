@@ -1,0 +1,8 @@
+{
+  "G_input_ready": true,
+  "parameter_tree_sha256": "e65b5d6dc6e1300dd80c6bd8046fb9df469cab78842009d4b15db9369fa4ad15",
+  "path": "results/runs/phase_g/g0_1/v1/frozen_codec.pkl",
+  "selection_sha256": "c579942474079d35fcd2740d82f28996db1422351920df944ecf44e8d1b30525",
+  "sha256": "213d71be58b4e3a0eb685330ff8f20ad0d2574184d59060890baa4a2eed586e7",
+  "version": "PHASE_G_0_1_LENGTH_RECOVERY_V1"
+}
