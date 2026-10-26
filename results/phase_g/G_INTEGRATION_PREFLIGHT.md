@@ -30,3 +30,15 @@ for both metrics. Controls are not averaged.
 The source-bound corrected oracle passed 21/21 exact and 21/21 Monte Carlo
 cases, but the prerequisite codec gate failed before full-model engineering
 preflight. No teacher, argmax, or sampled arm is permitted to start.
+
+Post-evidence engineering commit
+`a5786fdaf542939439bf4ebb97973f870e063da4` passed 233 regular tests with one
+skip and 30 deselections, plus 30 slow tests with 234 deselections. The evidence
+JSON remains bound to `1a96675cab9bdc2d7c9c377b4f732d03c3124f1d` and is
+unchanged.
+
+Integration also remains blocked by an unresolved protocol mismatch: the
+proposal requires full-site boundary ownership, whereas the implementation
+fixes mandatory K-spaced and terminal edges and owns only optional boundary
+actions. This difference requires explicit approval before future smoke or
+training and must not be represented as protocol conformance.
