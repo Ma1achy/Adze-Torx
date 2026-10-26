@@ -48,7 +48,7 @@ class Journal:
         parent = None
         for step, path in enumerate(receipts):
             r = json.loads(path.read_text())
-            if path.stem != f"{step:03d}" or r["step"] != step:
+            if path.stem != f"{step:03d}" or r["step"] != step or r["completed"] is not True:
                 raise ValueError("noncontiguous completed journal")
             if r["protocol"] != self.protocol or r["parent"] != parent:
                 raise ValueError("protocol/parent mismatch")
@@ -123,12 +123,15 @@ def paired_bootstrap(a, b, lengths, *, seed, code=0):
         axis=1,
     )
     delta = (a[indices] - b[indices]).mean(1)
-    ratio = a[indices].mean(1) / b[indices].mean(1) - 1
+    denominators = b[indices].mean(1)
+    # Accuracy controls can correctly have zero hits. Their absolute paired
+    # effect remains defined; a relative effect with zero support does not.
+    ratio = a[indices].mean(1) / denominators - 1 if np.all(denominators > 0) else None
     return {
         "delta": float((a - b).mean()),
         "delta_ci95": np.percentile(delta, [2.5, 97.5]).tolist(),
-        "relative": float(a.mean() / b.mean() - 1),
-        "relative_ci95": np.percentile(ratio, [2.5, 97.5]).tolist(),
+        "relative": float(a.mean() / b.mean() - 1) if b.mean() > 0 else None,
+        "relative_ci95": np.percentile(ratio, [2.5, 97.5]).tolist() if ratio is not None else None,
         "replicates": 2000,
         "seed": seed,
         "control_code": code,

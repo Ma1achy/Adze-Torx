@@ -52,6 +52,9 @@ def test_stratified_bootstrap_preserves_pairs_and_rejects_unbalanced():
     assert result == paired_bootstrap(a, b, lengths, seed=1161)
     with pytest.raises(ValueError):
         paired_bootstrap(a[:-1], b[:-1], lengths[:-1], seed=1161)
+    zero = paired_bootstrap(np.ones(912), np.zeros(912), lengths, seed=1161)
+    assert zero["relative"] is None and zero["relative_ci95"] is None
+    assert zero["delta_ci95"] == [1.0, 1.0]
 
 
 def test_journal_roundtrip_orphan_stale_pointer_and_protocol(tmp_path):

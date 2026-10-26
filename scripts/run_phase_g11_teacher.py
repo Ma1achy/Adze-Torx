@@ -156,9 +156,11 @@ def audit():
     return params, codec, identity
 
 
-def frozen_hash(params):
+def frozen_hash(params, moments=None):
     mask = stochastic_model_update_mask(params)
-    return tree_hash(jax.tree.map(lambda p, m: jnp.where(m, jnp.zeros_like(p), p), params, mask))
+    tree = params if moments is None else (params, moments)
+    masks = mask if moments is None else (mask, (mask, mask))
+    return tree_hash(jax.tree.map(lambda p, m: jnp.where(m, jnp.zeros_like(p), p), tree, masks))
 
 
 def prepare(codec):
@@ -208,7 +210,7 @@ def summary(metrics):
     return result
 
 
-def evaluate(params, data, step, cut=False):
+def evaluate(params, data, step, cut=False, *, protocol):
     fn = jax.jit(lambda p, b: teacher_objective(p, b, 0, cut=cut, config=CFG))
     rows = []
     for start in range(0, len(data["q"]), 32):
@@ -221,6 +223,11 @@ def evaluate(params, data, step, cut=False):
         f"validation_{step:03d}_{'B' if cut else 'A'}.json",
         {
             "step": step,
+            "protocol": protocol,
+            "model_tree": tree_hash(params),
+            "validation_dataset_sha256": json.loads((v.OUT / "dataset_identity.json").read_text())[
+                "ordered_sha256"
+            ]["validation"],
             "case": "B" if cut else "A",
             "summary": summary(metrics),
             "per_example": metrics,
@@ -379,6 +386,7 @@ def train_run(params, codec, identity, train, val):
         }
         journal.append(state, {"initialization": True})
     frozen = frozen_hash(params)
+    frozen_state = frozen_hash(params, (adamw_init(params), adamw_init(params)))
     stepfn = jax.jit(lambda p, m, s, b: train_step(p, m, s, b, config=CFG))
     for current in range(state["step"], 101):
         if current in CHECKPOINTS:
@@ -386,7 +394,14 @@ def train_run(params, codec, identity, train, val):
                 path = OUT / f"validation_{current:03d}_{'B' if cut else 'A'}.json"
                 if not path.exists():
                     log(f"validation {current}, {'B' if cut else 'A'}")
-                    evaluate(state["params"], val, current, cut)
+                    evaluate(state["params"], val, current, cut, protocol=identity)
+                record = json.loads(path.read_text())
+                if (
+                    record["protocol"] != identity
+                    or record["model_tree"] != tree_hash(state["params"])
+                    or record["step"] != current
+                ):
+                    raise RuntimeError("stale/mixed validation evidence")
             receipt = json.loads((journal.root / "receipts" / f"{current:03d}.json").read_text())
             dump(f"checkpoint_{current:03d}.json", receipt)
         if current == 100:
@@ -401,6 +416,7 @@ def train_run(params, codec, identity, train, val):
             or not bool(metrics["executed"])
             or not finite((p, m, metrics))
             or frozen_hash(p) != frozen
+            or frozen_hash(p, m) != frozen_state
         ):
             raise RuntimeError(f"training failed at attempted update {current + 1}")
         state = {"params": p, "moments": m, "step": int(s), "protocol": identity}
@@ -418,6 +434,15 @@ def endpoint(state, codec, identity, val):
     a = json.loads((OUT / "validation_100_A.json").read_text())
     b = json.loads((OUT / "validation_100_B.json").read_text())
     baseline = json.loads((OUT / "validation_000_A.json").read_text())
+    for record in (a, b):
+        if (
+            record["protocol"] != identity
+            or record["model_tree"] != tree_hash(params)
+            or record["global_example_id"] != np.asarray(val["global_example_id"]).tolist()
+        ):
+            raise RuntimeError("endpoint comparison provenance/pairing mismatch")
+    if baseline["protocol"] != identity or baseline["model_tree"] != INIT:
+        raise RuntimeError("baseline provenance mismatch")
     am = {k: np.asarray(x) for k, x in a["per_example"].items()}
     bm = {k: np.asarray(x) for k, x in b["per_example"].items()}
     lengths = np.asarray(val["length"].sum(1))
@@ -490,6 +515,7 @@ def endpoint(state, codec, identity, val):
         "gap": gap,
         "length": lengths,
         "outside_competitor": outside.any(1).astype(int),
+        "outside_full_competitor": (outside & (np.asarray(val["length"]) == 4)).any(1).astype(int),
         "fixed_neutral_reachable": (q // 8 == peer // 8).astype(int),
         "final_partial": (lengths % 4 != 0).astype(int),
     }
