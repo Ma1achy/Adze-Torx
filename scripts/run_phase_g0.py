@@ -400,6 +400,71 @@ def readout_diagnostics(rows: dict[str, np.ndarray]) -> dict[str, Any]:
     }
 
 
+def counterfactual_audit() -> None:
+    """Controlled edits distinguish collapsed h0 from a wrong decoder readout."""
+    manifest = protocol()
+    frozen = json.loads((OUT / "frozen_codec.json").read_text())
+    frozen_path = ROOT / frozen["path"]
+    if digest(frozen_path) != frozen["sha256"]:
+        raise RuntimeError("frozen candidate changed")
+    values = jax.random.randint(jax.random.key(981), (57, 64), 1, 33)
+    lengths = jnp.arange(8, 65)
+    mask = jnp.arange(64)[None] < lengths[:, None]
+    last = lengths - 1
+    changed = values.at[jnp.arange(57), last].set(values[jnp.arange(57), last] % 32 + 1)
+    shortened = jnp.arange(64)[None] < (lengths - 1)[:, None]
+    hidden_edit = jnp.where(mask, values, values % 32 + 1)
+    result = {}
+    for name, params in (
+        ("accepted_f1_codec", codec_subtree(load(PARENT))),
+        (CODEC_VERSION, load(frozen_path)),
+    ):
+        evaluate = jax.jit(
+            lambda x, m: apply_target_codec(params, x, m, config=CONFIG)["target"]["h0"]
+        )
+        original = evaluate(values, mask)
+        content = evaluate(changed, mask)
+        extent = evaluate(values, shortened)
+        invisible = evaluate(hidden_edit, mask)
+        rows = []
+        for index, n in enumerate(range(8, 65)):
+            site = (n - 1) // 4
+            rows.append(
+                {
+                    "length": n,
+                    "carrier": site,
+                    "last_byte_edit_h0_rms": float(
+                        jnp.sqrt(jnp.mean((original[index, site] - content[index, site]) ** 2))
+                    ),
+                    "last_byte_edit_collapsed": bool(
+                        jnp.array_equal(original[index], content[index])
+                    ),
+                    "one_byte_shorter_h0_rms": float(
+                        jnp.sqrt(jnp.mean((original[index, site] - extent[index, site]) ** 2))
+                    ),
+                    "extent_edit_collapsed": bool(jnp.array_equal(original[index], extent[index])),
+                    "masked_byte_edit_invariant": bool(
+                        jnp.array_equal(original[index], invisible[index])
+                    ),
+                }
+            )
+        result[name] = {
+            "by_length": rows,
+            "content_collisions": sum(r["last_byte_edit_collapsed"] for r in rows),
+            "extent_collisions": sum(r["extent_edit_collapsed"] for r in rows),
+            "masked_edit_failures": sum(not r["masked_byte_edit_invariant"] for r in rows),
+        }
+    write(
+        OUT / "counterfactual_audit.json",
+        {
+            "verifier": manifest,
+            "codec_sha256": frozen["sha256"],
+            "results": result,
+            "interpretation": "noncollapsed counterfactuals establish local distinguishability, not global invertibility or robust recoverability",
+        },
+    )
+
+
 def verify_frozen() -> None:
     """Post-freeze diagnostics and matched-control initialization, no updates.
 
@@ -706,7 +771,9 @@ def train() -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--stage", choices=("diagnose", "train", "oracle", "verify-frozen"), required=True
+        "--stage",
+        choices=("diagnose", "train", "oracle", "verify-frozen", "counterfactual"),
+        required=True,
     )
     args = parser.parse_args()
     if args.stage == "diagnose":
@@ -715,5 +782,7 @@ if __name__ == "__main__":
         train()
     elif args.stage == "oracle":
         oracle()
-    else:
+    elif args.stage == "verify-frozen":
         verify_frozen()
+    else:
+        counterfactual_audit()

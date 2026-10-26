@@ -63,6 +63,37 @@ def test_capacity_does_not_repair_bad_semantics_and_count_overflow_fails_closed(
     assert jnp.all(overflow.routing.metadata.packed_to_carrier == -1)
 
 
+def test_dynamic_capacity_scan_vmap_and_inactive_identity():
+    from adze_t.packing import pack_values
+    from adze_t.unpool import unpool_values
+
+    s = CommittedStructure(
+        jnp.asarray([[0, 0, 1]], jnp.int32), jnp.zeros((1, 3), bool), jnp.zeros((1, 3), jnp.int32)
+    )
+
+    def fn(value):
+        return dynamic_capacity_routing(value, M_max=3, K=2, max_extent=2)
+
+    repeated = jax.tree.map(lambda x: jnp.stack((x, x)), s)
+    mapped = jax.vmap(fn)(repeated)
+    assert jnp.all(mapped.routing.executed)
+
+    def body(state, _):
+        route = fn(state)
+        return route.semantic, route.capacity_cut
+
+    final, cuts = jax.lax.scan(body, s, None, length=2)
+    assert jnp.array_equal(final.c_b, s.c_b)
+    assert cuts.shape == (2, 1, 3)
+    route = fn(s).routing
+    values = jnp.arange(6, dtype=jnp.float32).reshape(1, 3, 2)
+    assert jnp.array_equal(
+        unpool_values(pack_values(values, route.metadata), route.metadata, C=3), values
+    )
+    assert not jnp.any(route.metadata.kv_mask)
+    assert jnp.sum(route.metadata.query_mask) == 3
+
+
 @pytest.mark.parametrize("fixture", ["uniform", "asymmetric", "peaked"])
 def test_production_capacity_pushforward_exact_gradient_and_logp_ownership(fixture):
     parameters = fixture_parameters(fixture)
