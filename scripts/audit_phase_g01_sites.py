@@ -45,7 +45,7 @@ def main():
     result = {}
     for stage_index, (stage, x) in enumerate(stages.items()):
         head = parent["encoder"]["target_l"]
-        current = {
+        current: dict[str, object] = {
             "existing_codec_head": per_site(
                 np.asarray(jnp.argmax(jnp.asarray(x) @ head["weight"] + head["bias"], -1)), truth
             )
