@@ -464,6 +464,7 @@ def generated_two_pass_objective(
 
     def invalid_loss(_):
         zero = jnp.asarray(0.0, carrier_input.dtype)
+        zero_count = jnp.asarray(0, dtype=jnp.int32)
         return zero, {
             "executed": jnp.asarray(False),
             "error_code_max": jnp.max(routing.error_code),
@@ -475,8 +476,8 @@ def generated_two_pass_objective(
             "byte_overlap_nll": zero,
             "byte_accuracy": zero,
             "byte_exact": zero,
-            "missing_bytes": zero,
-            "extra_bytes": zero,
+            "missing_bytes": zero_count,
+            "extra_bytes": zero_count,
         }
 
     return jax.lax.cond(routing.executed, valid_loss, invalid_loss, operand=None)

@@ -371,26 +371,26 @@ def test_full_model_invalid_batch_skips_loss_parameter_moments_and_step():
 
 
 @pytest.mark.integration
-def test_full_model_nonfinite_objective_skips_optimizer_mutation():
+def test_full_model_nonfinite_nu_raises_before_caller_state_mutation():
     cfg, params, batch = _fixture()
     moments = (adamw_init(params), adamw_init(params))
+    params_before = jax.tree.map(jnp.copy, params)
+    moments_before = jax.tree.map(jnp.copy, moments)
     nonfinite_batch = {**batch, "nu": jnp.asarray([jnp.nan])}
-    updated, updated_moments, next_step, metrics = generated_train_step(
-        params,
-        moments,
-        0,
-        nonfinite_batch,
-        jax.random.key(618),
-        jax.random.key(619),
-        jax.random.key(620),
-        arm="teacher",
-        config=cfg,
-    )
-    assert not bool(metrics["executed"])
-    assert not bool(metrics["gradients_finite"])
-    assert next_step == 0
-    assert jax.tree_util.tree_all(jax.tree.map(jnp.array_equal, updated, params))
-    assert jax.tree_util.tree_all(jax.tree.map(jnp.array_equal, updated_moments, moments))
+    with pytest.raises(ValueError, match="nu must be finite"):
+        generated_train_step(
+            params,
+            moments,
+            0,
+            nonfinite_batch,
+            jax.random.key(618),
+            jax.random.key(619),
+            jax.random.key(620),
+            arm="teacher",
+            config=cfg,
+        )
+    assert jax.tree_util.tree_all(jax.tree.map(jnp.array_equal, params, params_before))
+    assert jax.tree_util.tree_all(jax.tree.map(jnp.array_equal, moments, moments_before))
 
 
 @pytest.mark.integration
