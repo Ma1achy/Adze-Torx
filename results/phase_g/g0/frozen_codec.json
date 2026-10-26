@@ -1,0 +1,8 @@
+{
+  "path": "results/runs/phase_g/g0/v1/frozen_codec.pkl",
+  "protocol_sha256": "94beda0e63b13e937cff697cd7ff0e263a40f2b2873f876924b09c5c8a906aa0",
+  "read_only_after_freeze": true,
+  "selection_sha256": "cd9b8fd4bdc02a893c3cd1e08b02eacbdc069c24d3bba8a7611cb7552792b23c",
+  "sha256": "0f4a54e221729b14c6e75d30bed84bd566182a490f975c76d574e540f936adab",
+  "version": "PHASE_G0_VARIABLE_LENGTH_CODEC_V1"
+}

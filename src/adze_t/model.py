@@ -187,6 +187,8 @@ def apply_model(
         activity = committed_activity
     observed_b = c_b if observed_b is None else observed_b
     observed_l = length if observed_l is None else observed_l
+    if observed_b is None or observed_l is None:
+        raise ValueError("explicit observed boundary and length arrays are required")
     if observed_b.shape != c_b.shape or observed_l.shape != length.shape:
         raise ValueError("observed and committed structure must share [batch, carrier]")
 

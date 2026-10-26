@@ -339,6 +339,237 @@ def diagnose() -> None:
     )
 
 
+def tree_hash(tree: Any) -> str:
+    result = hashlib.sha256()
+    for path, leaf in jax.tree_util.tree_leaves_with_path(tree):
+        value = np.asarray(leaf)
+        result.update(jax.tree_util.keystr(path).encode())
+        result.update(str((value.shape, value.dtype.str)).encode())
+        result.update(value.tobytes())
+    return result.hexdigest()
+
+
+def readout_diagnostics(rows: dict[str, np.ndarray]) -> dict[str, Any]:
+    """Expose sparse-site/partial-carrier errors hidden by field averages."""
+    full_lengths = rows["mask"].sum((1, 2))
+    reports = []
+    for n in range(8, 65):
+        selected = full_lengths == n
+        actual = rows["length"][selected]
+        predicted = rows["predicted_length"][selected]
+        content = (actual > 0) & (
+            (np.arange(CONFIG.carrier.C)[None, :] + 1) % CONFIG.packing.K != 0
+        )
+        partial = (actual > 0) & (actual < CONFIG.carrier.L_max)
+        exact_b = rows["signature"][selected] == rows["boundary"][selected]
+        direct = rows["direct_boundary"][selected] == rows["boundary"][selected]
+        reports.append(
+            {
+                "length": n,
+                "examples": int(selected.sum()),
+                "content_boundary_support": int(content.sum()),
+                "decoded_content_boundary_accuracy": float(exact_b[content].mean()),
+                "direct_content_boundary_accuracy": float(direct[content].mean()),
+                "exact_structure_accuracy": float(
+                    (exact_b.all(1) & (predicted == actual).all(1)).mean()
+                ),
+                "exact_emitted_length_accuracy": float((predicted.sum(1) == n).mean()),
+                "partial_support": int(partial.sum()),
+                "partial_extent_accuracy": None
+                if not partial.any()
+                else float((predicted[partial] == actual[partial]).mean()),
+            }
+        )
+    return {
+        "by_length": reports,
+        "exact_structure_accuracy": float(
+            np.mean([r["exact_structure_accuracy"] for r in reports])
+        ),
+        "exact_emitted_length_accuracy": float(
+            np.mean([r["exact_emitted_length_accuracy"] for r in reports])
+        ),
+        "partial_extent_accuracy": float(
+            np.mean(
+                [
+                    r["partial_extent_accuracy"]
+                    for r in reports
+                    if r["partial_extent_accuracy"] is not None
+                ]
+            )
+        ),
+    }
+
+
+def verify_frozen() -> None:
+    """Post-freeze diagnostics and matched-control initialization, no updates.
+
+    The original selection/test evidence is immutable. This reports the
+    difference between clean reconstruction under known extents and decoding
+    with extents predicted from h0. Neither is prompt-only generation.
+    """
+    from adze_t.backends.mapping import torx_means_to_deterministic
+    from adze_t.backends.torx import TorxOperatorConfig, TorxOps
+    from adze_t.decoder import apply_decoder
+    from adze_t.phase_g import generated_byte_metrics
+    from adze_t.phase_g0 import with_frozen_g0_codec
+
+    verifier = protocol()
+    frozen = json.loads((OUT / "frozen_codec.json").read_text())
+    path = ROOT / frozen["path"]
+    if digest(path) != frozen["sha256"]:
+        raise RuntimeError("frozen G.0 codec hash mismatch")
+    candidate = load(path)
+    f1_state = load(F1)
+    f1 = f1_state["params"]
+    original_hash = tree_hash(f1)
+    initialized = with_frozen_g0_codec(f1, candidate)
+    means = torx_means_to_deterministic(initialized)
+    if tree_hash(codec_subtree(means)) != tree_hash(candidate):
+        raise RuntimeError("G.0 codec overlay altered candidate means")
+    for key in set(f1) - {"encoder", "decoder"}:
+        if tree_hash(f1[key]) != tree_hash(initialized[key]):
+            raise RuntimeError(f"noncodec F1 state changed: {key}")
+    for name in set(f1["encoder"]) - set(candidate["encoder"]):
+        if tree_hash(f1["encoder"][name]) != tree_hash(initialized["encoder"][name]):
+            raise RuntimeError(f"noncodec encoder state changed: {name}")
+    for (p, left), (_, right) in zip(
+        jax.tree_util.tree_leaves_with_path(f1),
+        jax.tree_util.tree_leaves_with_path(initialized),
+        strict=True,
+    ):
+        if "rho" in jax.tree_util.keystr(p) and not np.array_equal(left, right):
+            raise RuntimeError("rho changed during initialization")
+    values, masks = data(32, 962)
+    baseline_readout = readout_diagnostics(chunks(codec_subtree(load(PARENT)), values, masks))
+    candidate_readout = readout_diagnostics(chunks(candidate, values, masks))
+    # Fixed slice covers each residue modulo Lmax and each target-length range.
+    indices = jnp.arange(0, len(values), 32)
+    x, m = values[indices], masks[indices]
+    ops = TorxOps.create(
+        jax.random.key(977), config=TorxOperatorConfig(operator_stochasticity=True, lambda_op=0.0)
+    )
+    deterministic = apply_target_codec(candidate, x, m, config=CONFIG)
+    mapped = apply_target_codec(initialized, x, m, config=CONFIG, ops=ops)
+    parity = {
+        name: float(jnp.max(jnp.abs(left - right)))
+        for name, left, right in (
+            ("h0", deterministic["target"]["h0"], mapped["target"]["h0"]),
+            ("codec_logits", deterministic["codec_logits"], mapped["codec_logits"]),
+            ("boundary_logits", deterministic["target"]["b_logits"], mapped["target"]["b_logits"]),
+            ("extent_logits", deterministic["target"]["l_logits"], mapped["target"]["l_logits"]),
+        )
+    }
+    if any(v != 0 for v in parity.values()):
+        raise RuntimeError("new frozen codec deterministic/Torx mean parity failed")
+
+    @jax.jit
+    def self_length(p, target, mask):
+        output = apply_target_codec(p, target, mask, config=CONFIG)
+        analysis = output["target"]
+        lengths = jnp.argmax(analysis["l_logits"], -1)
+        logits, _ = apply_decoder(analysis["h0"], lengths, p["decoder"], CONFIG)
+        teacher = analysis["teacher"]
+        return generated_byte_metrics(logits, lengths, teacher.slot_bytes, teacher.slot_mask)
+
+    all_rows = []
+    for start in range(0, len(values), 16):
+        all_rows.append(
+            self_length(candidate, values[start : start + 16], masks[start : start + 16])
+        )
+    combined = jax.tree.map(lambda *x: np.concatenate([np.asarray(v) for v in x]), *all_rows)
+    by_length = []
+    true_length = np.asarray(masks.sum(1))
+    for n in range(8, 65):
+        sel = true_length == n
+        by_length.append(
+            {
+                "length": n,
+                "byte_accuracy": float(combined.accuracy_per_example[sel].mean()),
+                "exact_sequence_accuracy": float(combined.exact_per_example[sel].mean()),
+                "length_aware_reconstruction_loss": float(combined.loss_per_example[sel].mean()),
+                "missing_bytes": int(combined.missing_count[sel].sum()),
+                "extra_bytes": int(combined.extra_count[sel].sum()),
+            }
+        )
+    split_sets = {}
+    split_records = {}
+    for name, count, seed in (
+        ("probe_train", 64, 960),
+        ("validation", 16, 961),
+        ("test", 32, 962),
+        ("candidate_train", 256, 963),
+    ):
+        xx, mm = map(np.asarray, data(count, seed))
+        hashes = [
+            hashlib.sha256(row[mask].tobytes()).hexdigest()
+            for row, mask in zip(xx, mm, strict=True)
+        ]
+        split_sets[name] = set(hashes)
+        split_records[name] = {
+            "count": len(hashes),
+            "unique": len(set(hashes)),
+            "ordered_sha256": canonical(hashes),
+            "seed": seed,
+        }
+    intersections = {
+        f"{a}/{b}": len(split_sets[a] & split_sets[b])
+        for a in split_sets
+        for b in split_sets
+        if a < b
+    }
+    if any(intersections.values()):
+        raise RuntimeError("G.0 split byte-sequence overlap")
+    if (
+        original_hash != tree_hash(f1)
+        or digest(F1) != EXPECTED_F1
+        or digest(PARENT) != EXPECTED_PARENT
+    ):
+        raise RuntimeError("accepted artifact/state mutation")
+    initialization_path = RUN / "matched_g_initialization.pkl"
+    if initialization_path.exists():
+        raise RuntimeError("refusing matched initialization overwrite")
+    save(initialization_path, initialized)
+    write(
+        OUT / "postfreeze_verification.json",
+        {
+            "verifier": verifier,
+            "training_protocol_sha256": frozen["protocol_sha256"],
+            "codec_sha256": frozen["sha256"],
+            "parity_max_absolute_error": parity,
+            "split_records": split_records,
+            "split_intersections": intersections,
+            "accepted_f1_tree_unchanged": True,
+            "rho_unchanged": True,
+            "noncodec_means_unchanged": True,
+            "matched_initialization": {
+                "path": str(initialization_path.relative_to(ROOT)),
+                "file_sha256": digest(initialization_path),
+                "complete_tree_sha256": tree_hash(initialized),
+                "all_future_arms": {
+                    arm: tree_hash(initialized) for arm in ("teacher", "argmax", "sample")
+                },
+                "fresh_adam_step": 0,
+                "new_g_leaves": [],
+            },
+            "self_predicted_extent_reconstruction": {
+                "interpretation": "clean teacher h0 plus its own predicted extents; diagnostic, NOT prompt-only generation",
+                "byte_accuracy": float(combined.accuracy_per_example.mean()),
+                "exact_sequence_accuracy": float(combined.exact_per_example.mean()),
+                "length_aware_reconstruction_loss": float(combined.loss_per_example.mean()),
+                "missing_bytes": int(combined.missing_count.sum()),
+                "extra_bytes": int(combined.extra_count.sum()),
+                "by_length": by_length,
+            },
+            "baseline_readout_diagnostics": baseline_readout,
+            "candidate_readout_diagnostics": candidate_readout,
+            "limitations": [
+                "historical compatibility threshold is aggregate field accuracy; partial-extent recovery must be reported separately",
+                "no G arms or generated-structure optimizer update executed",
+            ],
+        },
+    )
+
+
 def train() -> None:
     manifest = protocol()
     audit = json.loads((OUT / "representation_audit.json").read_text())
@@ -474,11 +705,15 @@ def train() -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--stage", choices=("diagnose", "train", "oracle"), required=True)
+    parser.add_argument(
+        "--stage", choices=("diagnose", "train", "oracle", "verify-frozen"), required=True
+    )
     args = parser.parse_args()
     if args.stage == "diagnose":
         diagnose()
     elif args.stage == "train":
         train()
-    else:
+    elif args.stage == "oracle":
         oracle()
+    else:
+        verify_frozen()

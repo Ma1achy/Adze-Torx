@@ -403,7 +403,7 @@ def generated_two_pass_objective(
             neutral,
             predicted,
             (
-                full_commit_masks(neutral.c_b.shape)
+                full_commit_masks((neutral.c_b.shape[0], neutral.c_b.shape[1]))
                 if dynamic_capacity
                 else task_structure_commit_masks(neutral.c_b.shape[0], config)
             ),

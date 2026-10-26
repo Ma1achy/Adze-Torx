@@ -195,3 +195,30 @@ def test_candidate_update_and_overlay_preserve_noncodec_f1_state():
         not jnp.array_equal(a, b)
         for a, b in zip(jax.tree.leaves(candidate), jax.tree.leaves(updated), strict=True)
     )
+
+
+@pytest.mark.integration
+def test_real_model_two_pass_accepts_full_site_dynamic_capacity_policy():
+    from dataclasses import replace
+    from test_phase_g_integration import _fixture
+    from adze_t.phase_g import generated_two_pass_objective
+
+    cfg, params, batch = _fixture()
+    cfg = replace(cfg, packing=replace(cfg.packing, K=2))
+    loss, metrics = jax.jit(
+        lambda p, b: generated_two_pass_objective(
+            p,
+            b,
+            jax.random.key(978),
+            jax.random.key(979),
+            jax.random.key(980),
+            0,
+            arm="sample",
+            temperature=1.0,
+            dynamic_capacity=True,
+            config=cfg,
+        )
+    )(params, batch)
+    assert metrics["executed"]
+    assert jnp.isfinite(loss)
+    assert jnp.isfinite(metrics["byte_loss"])
