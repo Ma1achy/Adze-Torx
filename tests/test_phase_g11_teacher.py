@@ -147,3 +147,21 @@ def test_valid_prospective_update_changes_decoder_not_frozen_leaves():
         if not bool(enabled):
             assert np.array_equal(before, after)
     assert all(np.isfinite(x).all() for x in jax.tree.leaves((updated, m)))
+
+
+def test_checkpoint_host_to_device_boundary_preserves_bits_and_real_eager_jit():
+    from adze_t.backends.mapping import torx_means_to_deterministic
+    from run_phase_g11_validation import forward
+
+    cfg, p, b = fixture()
+    host = jax.tree.map(np.asarray, torx_means_to_deterministic(p))
+    with pytest.raises(jax.errors.TracerArrayConversionError):
+        forward(host, b["source_h"], b["prompt"], b["boundary"], b["length"], cfg=cfg)
+    device = jax.tree.map(jnp.asarray, host)
+    assert same(host, device)
+    eager = forward(device, b["source_h"], b["prompt"], b["boundary"], b["length"], cfg=cfg)
+    compiled = jax.jit(
+        lambda p: forward(p, b["source_h"], b["prompt"], b["boundary"], b["length"], cfg=cfg)
+    )(device)
+    assert bool(eager["executed"]) and bool(compiled["executed"])
+    np.testing.assert_allclose(eager["logits"], compiled["logits"], atol=1e-5)

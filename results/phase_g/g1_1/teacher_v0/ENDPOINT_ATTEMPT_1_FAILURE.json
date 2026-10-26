@@ -1,0 +1,15 @@
+{
+  "source_commit": "4689293a73f22a37dbb156cef658820ea03985fd",
+  "protocol": "bd733883a39e307d920b4a81665a39eb0d370841424b0e0f3a05335386021153",
+  "command": "PYTHONPATH=src:scripts python scripts/run_phase_g11_teacher.py --stage endpoint",
+  "stage": "endpoint exact controls: eager/JIT comparison",
+  "exception": "jax.errors.TracerArrayConversionError",
+  "location": "src/adze_t/backends/deterministic.py:28, params[indices.astype(jnp.int32)]",
+  "cause": "Journal correctly reloads NumPy checkpoint arrays; eager lax.cond traces an index against a NumPy embedding table. Compiled parameter arguments work, but the eager helper requires JAX arrays.",
+  "counted_updates": 100,
+  "new_updates_in_attempt": 0,
+  "checkpoint_mutation": false,
+  "scientific_gate_failure": false,
+  "correction": "Separate endpoint wrapper verifies original source/protocol and parameter bits, then losslessly converts parameter containers to JAX before calling unchanged endpoint logic. No scientific settings change.",
+  "prior_outputs": "No endpoint flow, control, strata or decision file was completed by this attempt. Original 0/10/25/50/100 A/B validation and all checkpoint receipts remain unchanged."
+}
