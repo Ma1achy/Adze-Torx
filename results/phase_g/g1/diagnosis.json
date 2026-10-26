@@ -1,0 +1,847 @@
+{
+  "checkpoint_sha256": "203926286c4f991b316e9f9d8cb8bee529861da5124f374279b82d143decd220",
+  "codec_sha256": "213d71be58b4e3a0eb685330ff8f20ad0d2574184d59060890baa4a2eed586e7",
+  "parent_commit": "235ff5ba2be2579c848c988f6910513fd706123e",
+  "script_sha256": "1280cd325529cc92b5b9ae7bff28a1be78d67aec3ae6797ceaa4a543420f27db",
+  "protocol_sha256": "5d10d80bddef08008c393b6a62834d2252a2bcb24ab02c434b5d9dc2b2c2faa4",
+  "python": "3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:49:36) [Clang 16.0.6 ]",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "jax": "0.8.1",
+  "backend": "cpu",
+  "replication_max_error": {
+    "correct": 4.5696894327429405e-06,
+    "shifted_cuts": 2.706050872824939e-06
+  },
+  "parity": {
+    "local_decoder_first_carrier_max_error": 0.0,
+    "torx_mean_logits_max_error": 0.0,
+    "zero_proposal_logits_max_error": 0.0,
+    "decoder_previous_h_perturbation_logit_rms_by_site": [
+      0.0,
+      0.0,
+      1.2694147825241089,
+      0.3339215815067291,
+      0.034459035843610764,
+      0.013028938323259354,
+      0.006455551367253065,
+      0.0030035320669412613,
+      0.0019632463809102774,
+      0.0013035598676651716,
+      0.0010851474944502115,
+      0.0004439035546965897,
+      0.00016963115194812417,
+      0.0001526505220681429,
+      0.00011154983076266944,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "context_spread_across_examples": 0.0
+  },
+  "strata": {
+    "all": {
+      "correct": {
+        "sites": 8192,
+        "bytes": 8810,
+        "accuracy": 0.9519863791146425,
+        "nll": 0.1437690109014511
+      },
+      "shifted_cuts": {
+        "sites": 8192,
+        "bytes": 8810,
+        "accuracy": 0.9522133938706016,
+        "nll": 0.1406804770231247
+      },
+      "sequence_support": 256,
+      "sequence_accuracy": {
+        "correct": 0.3984375,
+        "shifted_cuts": 0.390625
+      }
+    },
+    "lost_later_peer": {
+      "correct": {
+        "sites": 447,
+        "bytes": 1788,
+        "accuracy": 0.9642058165548099,
+        "nll": 0.11348027735948563
+      },
+      "shifted_cuts": {
+        "sites": 447,
+        "bytes": 1788,
+        "accuracy": 0.9664429530201343,
+        "nll": 0.1078767403960228
+      },
+      "sequence_support": 219,
+      "sequence_accuracy": {
+        "correct": 0.3561643835616438,
+        "shifted_cuts": 0.3515981735159817
+      }
+    },
+    "no_lost_later_peer": {
+      "correct": {
+        "sites": 7745,
+        "bytes": 7022,
+        "accuracy": 0.9488749643976075,
+        "nll": 0.15148138999938965
+      },
+      "shifted_cuts": {
+        "sites": 7745,
+        "bytes": 7022,
+        "accuracy": 0.9485901452577613,
+        "nll": 0.14903324842453003
+      },
+      "sequence_support": 256,
+      "sequence_accuracy": {
+        "correct": 0.3984375,
+        "shifted_cuts": 0.390625
+      }
+    },
+    "first_in_block": {
+      "correct": {
+        "sites": 2112,
+        "bytes": 5235,
+        "accuracy": 0.9442215854823305,
+        "nll": 0.171457439661026
+      },
+      "shifted_cuts": {
+        "sites": 2112,
+        "bytes": 5235,
+        "accuracy": 0.9449856733524356,
+        "nll": 0.16842256486415863
+      },
+      "sequence_support": 256,
+      "sequence_accuracy": {
+        "correct": 0.3984375,
+        "shifted_cuts": 0.390625
+      }
+    },
+    "later_in_block": {
+      "correct": {
+        "sites": 6080,
+        "bytes": 3575,
+        "accuracy": 0.9633566433566434,
+        "nll": 0.10322383791208267
+      },
+      "shifted_cuts": {
+        "sites": 6080,
+        "bytes": 3575,
+        "accuracy": 0.9627972027972028,
+        "nll": 0.10005675256252289
+      },
+      "sequence_support": 245,
+      "sequence_accuracy": {
+        "correct": 0.3877551020408163,
+        "shifted_cuts": 0.3836734693877551
+      }
+    },
+    "original_uncorrupted": {
+      "correct": {
+        "sites": 0,
+        "bytes": 0,
+        "accuracy": null,
+        "nll": null
+      },
+      "shifted_cuts": {
+        "sites": 0,
+        "bytes": 0,
+        "accuracy": null,
+        "nll": null
+      },
+      "sequence_support": 0,
+      "sequence_accuracy": {
+        "correct": null,
+        "shifted_cuts": null
+      }
+    },
+    "extent_0": {
+      "correct": {
+        "sites": 5895,
+        "bytes": 0,
+        "accuracy": null,
+        "nll": null
+      },
+      "shifted_cuts": {
+        "sites": 5895,
+        "bytes": 0,
+        "accuracy": null,
+        "nll": null
+      },
+      "sequence_support": 0,
+      "sequence_accuracy": {
+        "correct": null,
+        "shifted_cuts": null
+      }
+    },
+    "extent_1": {
+      "correct": {
+        "sites": 59,
+        "bytes": 59,
+        "accuracy": 0.9830508474576272,
+        "nll": 0.10471638292074203
+      },
+      "shifted_cuts": {
+        "sites": 59,
+        "bytes": 59,
+        "accuracy": 0.9830508474576272,
+        "nll": 0.10750216990709305
+      },
+      "sequence_support": 59,
+      "sequence_accuracy": {
+        "correct": 0.4576271186440678,
+        "shifted_cuts": 0.4067796610169492
+      }
+    },
+    "extent_2": {
+      "correct": {
+        "sites": 66,
+        "bytes": 132,
+        "accuracy": 0.9545454545454546,
+        "nll": 0.14874716103076935
+      },
+      "shifted_cuts": {
+        "sites": 66,
+        "bytes": 132,
+        "accuracy": 0.9545454545454546,
+        "nll": 0.14862720668315887
+      },
+      "sequence_support": 66,
+      "sequence_accuracy": {
+        "correct": 0.3939393939393939,
+        "shifted_cuts": 0.42424242424242425
+      }
+    },
+    "extent_3": {
+      "correct": {
+        "sites": 69,
+        "bytes": 207,
+        "accuracy": 0.9371980676328503,
+        "nll": 0.19534987211227417
+      },
+      "shifted_cuts": {
+        "sites": 69,
+        "bytes": 207,
+        "accuracy": 0.9420289855072463,
+        "nll": 0.18677303194999695
+      },
+      "sequence_support": 69,
+      "sequence_accuracy": {
+        "correct": 0.391304347826087,
+        "shifted_cuts": 0.37681159420289856
+      }
+    },
+    "extent_4": {
+      "correct": {
+        "sites": 2103,
+        "bytes": 8412,
+        "accuracy": 0.9520922491678554,
+        "nll": 0.14269550144672394
+      },
+      "shifted_cuts": {
+        "sites": 2103,
+        "bytes": 8412,
+        "accuracy": 0.9522111269614836,
+        "nll": 0.1396542638540268
+      },
+      "sequence_support": 256,
+      "sequence_accuracy": {
+        "correct": 0.3984375,
+        "shifted_cuts": 0.390625
+      }
+    },
+    "block_length_1": {
+      "correct": {
+        "sites": 737,
+        "bytes": 2739,
+        "accuracy": 0.9350127783862724,
+        "nll": 0.1947035789489746
+      },
+      "shifted_cuts": {
+        "sites": 737,
+        "bytes": 2739,
+        "accuracy": 0.9346476816356335,
+        "nll": 0.19204989075660706
+      },
+      "sequence_support": 226,
+      "sequence_accuracy": {
+        "correct": 0.37610619469026546,
+        "shifted_cuts": 0.37168141592920356
+      }
+    },
+    "block_length_2": {
+      "correct": {
+        "sites": 710,
+        "bytes": 2663,
+        "accuracy": 0.9579421704844161,
+        "nll": 0.1257236897945404
+      },
+      "shifted_cuts": {
+        "sites": 710,
+        "bytes": 2663,
+        "accuracy": 0.9571911378144949,
+        "nll": 0.12504656612873077
+      },
+      "sequence_support": 185,
+      "sequence_accuracy": {
+        "correct": 0.3675675675675676,
+        "shifted_cuts": 0.3567567567567568
+      }
+    },
+    "block_length_3": {
+      "correct": {
+        "sites": 489,
+        "bytes": 1568,
+        "accuracy": 0.9528061224489796,
+        "nll": 0.14138197898864746
+      },
+      "shifted_cuts": {
+        "sites": 489,
+        "bytes": 1568,
+        "accuracy": 0.9566326530612245,
+        "nll": 0.13607171177864075
+      },
+      "sequence_support": 111,
+      "sequence_accuracy": {
+        "correct": 0.3333333333333333,
+        "shifted_cuts": 0.34234234234234234
+      }
+    },
+    "block_length_4": {
+      "correct": {
+        "sites": 356,
+        "bytes": 806,
+        "accuracy": 0.9602977667493796,
+        "nll": 0.12266579270362854
+      },
+      "shifted_cuts": {
+        "sites": 356,
+        "bytes": 806,
+        "accuracy": 0.9615384615384616,
+        "nll": 0.1122051328420639
+      },
+      "sequence_support": 57,
+      "sequence_accuracy": {
+        "correct": 0.3684210526315789,
+        "shifted_cuts": 0.38596491228070173
+      }
+    },
+    "block_length_5": {
+      "correct": {
+        "sites": 250,
+        "bytes": 379,
+        "accuracy": 0.9683377308707124,
+        "nll": 0.07268232107162476
+      },
+      "shifted_cuts": {
+        "sites": 250,
+        "bytes": 379,
+        "accuracy": 0.9683377308707124,
+        "nll": 0.06801950186491013
+      },
+      "sequence_support": 30,
+      "sequence_accuracy": {
+        "correct": 0.5,
+        "shifted_cuts": 0.4666666666666667
+      }
+    },
+    "block_length_6": {
+      "correct": {
+        "sites": 198,
+        "bytes": 289,
+        "accuracy": 0.972318339100346,
+        "nll": 0.08618155121803284
+      },
+      "shifted_cuts": {
+        "sites": 198,
+        "bytes": 289,
+        "accuracy": 0.9653979238754326,
+        "nll": 0.08883573114871979
+      },
+      "sequence_support": 24,
+      "sequence_accuracy": {
+        "correct": 0.5,
+        "shifted_cuts": 0.4583333333333333
+      }
+    },
+    "block_length_7": {
+      "correct": {
+        "sites": 196,
+        "bytes": 157,
+        "accuracy": 0.9745222929936306,
+        "nll": 0.08316284418106079
+      },
+      "shifted_cuts": {
+        "sites": 196,
+        "bytes": 157,
+        "accuracy": 0.9745222929936306,
+        "nll": 0.08122564852237701
+      },
+      "sequence_support": 14,
+      "sequence_accuracy": {
+        "correct": 0.42857142857142855,
+        "shifted_cuts": 0.42857142857142855
+      }
+    },
+    "block_length_8": {
+      "correct": {
+        "sites": 5256,
+        "bytes": 209,
+        "accuracy": 0.9856459330143541,
+        "nll": 0.059542860835790634
+      },
+      "shifted_cuts": {
+        "sites": 5256,
+        "bytes": 209,
+        "accuracy": 0.9856459330143541,
+        "nll": 0.0591777078807354
+      },
+      "sequence_support": 24,
+      "sequence_accuracy": {
+        "correct": 0.4583333333333333,
+        "shifted_cuts": 0.4166666666666667
+      }
+    },
+    "absolute_site_0_1": {
+      "correct": {
+        "sites": 256,
+        "bytes": 1024,
+        "accuracy": 0.8876953125,
+        "nll": 0.3572378158569336
+      },
+      "shifted_cuts": {
+        "sites": 256,
+        "bytes": 1024,
+        "accuracy": 0.88671875,
+        "nll": 0.3564411997795105
+      },
+      "sequence_support": 256,
+      "sequence_accuracy": {
+        "correct": 0.3984375,
+        "shifted_cuts": 0.390625
+      }
+    },
+    "absolute_site_1_4": {
+      "correct": {
+        "sites": 768,
+        "bytes": 2930,
+        "accuracy": 0.967235494880546,
+        "nll": 0.09461870044469833
+      },
+      "shifted_cuts": {
+        "sites": 768,
+        "bytes": 2930,
+        "accuracy": 0.9651877133105802,
+        "nll": 0.09428209811449051
+      },
+      "sequence_support": 256,
+      "sequence_accuracy": {
+        "correct": 0.3984375,
+        "shifted_cuts": 0.390625
+      }
+    },
+    "absolute_site_4_8": {
+      "correct": {
+        "sites": 1024,
+        "bytes": 2803,
+        "accuracy": 0.9554049232964681,
+        "nll": 0.13643930852413177
+      },
+      "shifted_cuts": {
+        "sites": 1024,
+        "bytes": 2803,
+        "accuracy": 0.9571887263646094,
+        "nll": 0.12881073355674744
+      },
+      "sequence_support": 212,
+      "sequence_accuracy": {
+        "correct": 0.3490566037735849,
+        "shifted_cuts": 0.3490566037735849
+      }
+    },
+    "absolute_site_8_16": {
+      "correct": {
+        "sites": 2048,
+        "bytes": 2053,
+        "accuracy": 0.9576229907452508,
+        "nll": 0.11744826287031174
+      },
+      "shifted_cuts": {
+        "sites": 2048,
+        "bytes": 2053,
+        "accuracy": 0.9595713589868485,
+        "nll": 0.11548768728971481
+      },
+      "sequence_support": 135,
+      "sequence_accuracy": {
+        "correct": 0.2814814814814815,
+        "shifted_cuts": 0.2814814814814815
+      }
+    },
+    "absolute_site_16_32": {
+      "correct": {
+        "sites": 4096,
+        "bytes": 0,
+        "accuracy": null,
+        "nll": null
+      },
+      "shifted_cuts": {
+        "sites": 4096,
+        "bytes": 0,
+        "accuracy": null,
+        "nll": null
+      },
+      "sequence_support": 0,
+      "sequence_accuracy": {
+        "correct": null,
+        "shifted_cuts": null
+      }
+    },
+    "block_ordinal_0_1": {
+      "correct": {
+        "sites": 505,
+        "bytes": 1913,
+        "accuracy": 0.9247255619445897,
+        "nll": 0.23205018043518066
+      },
+      "shifted_cuts": {
+        "sites": 505,
+        "bytes": 1913,
+        "accuracy": 0.9236800836382645,
+        "nll": 0.23232191801071167
+      },
+      "sequence_support": 256,
+      "sequence_accuracy": {
+        "correct": 0.3984375,
+        "shifted_cuts": 0.390625
+      }
+    },
+    "block_ordinal_1_4": {
+      "correct": {
+        "sites": 2042,
+        "bytes": 4350,
+        "accuracy": 0.9645977011494253,
+        "nll": 0.10844598710536957
+      },
+      "shifted_cuts": {
+        "sites": 2042,
+        "bytes": 4350,
+        "accuracy": 0.964367816091954,
+        "nll": 0.10415123403072357
+      },
+      "sequence_support": 249,
+      "sequence_accuracy": {
+        "correct": 0.3895582329317269,
+        "shifted_cuts": 0.3815261044176707
+      }
+    },
+    "block_ordinal_4_8": {
+      "correct": {
+        "sites": 4014,
+        "bytes": 2232,
+        "accuracy": 0.9520609318996416,
+        "nll": 0.13760964572429657
+      },
+      "shifted_cuts": {
+        "sites": 4014,
+        "bytes": 2232,
+        "accuracy": 0.9529569892473119,
+        "nll": 0.13496442139148712
+      },
+      "sequence_support": 144,
+      "sequence_accuracy": {
+        "correct": 0.2708333333333333,
+        "shifted_cuts": 0.2847222222222222
+      }
+    },
+    "block_ordinal_8_32": {
+      "correct": {
+        "sites": 1631,
+        "bytes": 315,
+        "accuracy": 0.9428571428571428,
+        "nll": 0.13907355070114136
+      },
+      "shifted_cuts": {
+        "sites": 1631,
+        "bytes": 315,
+        "accuracy": 0.9523809523809523,
+        "nll": 0.1290944665670395
+      },
+      "sequence_support": 33,
+      "sequence_accuracy": {
+        "correct": 0.18181818181818182,
+        "shifted_cuts": 0.18181818181818182
+      }
+    },
+    "nu_0.025_0.1": {
+      "correct": {
+        "sites": 2496,
+        "bytes": 2466,
+        "accuracy": 0.9898621248986212,
+        "nll": 0.031786128878593445
+      },
+      "shifted_cuts": {
+        "sites": 2496,
+        "bytes": 2466,
+        "accuracy": 0.9874290348742903,
+        "nll": 0.033205755054950714
+      },
+      "sequence_support": 78,
+      "sequence_accuracy": {
+        "correct": 0.7435897435897436,
+        "shifted_cuts": 0.6923076923076923
+      }
+    },
+    "nu_0.1_0.175": {
+      "correct": {
+        "sites": 2752,
+        "bytes": 2806,
+        "accuracy": 0.9746970776906628,
+        "nll": 0.0790519192814827
+      },
+      "shifted_cuts": {
+        "sites": 2752,
+        "bytes": 2806,
+        "accuracy": 0.9764789736279401,
+        "nll": 0.07730099558830261
+      },
+      "sequence_support": 86,
+      "sequence_accuracy": {
+        "correct": 0.47674418604651164,
+        "shifted_cuts": 0.5
+      }
+    },
+    "nu_0.175_0.250001": {
+      "correct": {
+        "sites": 2944,
+        "bytes": 3538,
+        "accuracy": 0.9075749010740531,
+        "nll": 0.27314886450767517
+      },
+      "shifted_cuts": {
+        "sites": 2944,
+        "bytes": 3538,
+        "accuracy": 0.9084228377614472,
+        "nll": 0.2658572793006897
+      },
+      "sequence_support": 92,
+      "sequence_accuracy": {
+        "correct": 0.03260869565217391,
+        "shifted_cuts": 0.03260869565217391
+      }
+    }
+  },
+  "ablations": {
+    "full": {
+      "example_mean_accuracy": 0.952051306143403,
+      "exact_sequence": 0.3984375,
+      "example_mean_nll": 0.1412898296257481,
+      "missing": 0.0,
+      "extra": 0.0
+    },
+    "direct_noisy_frozen_codec": {
+      "example_mean_accuracy": 0.9209913723170757,
+      "exact_sequence": 0.3125,
+      "example_mean_nll": 0.46487277233973145,
+      "missing": 0.0,
+      "extra": 0.0
+    },
+    "direct_clean_frozen_codec": {
+      "example_mean_accuracy": 0.9935103114694357,
+      "exact_sequence": 0.79296875,
+      "example_mean_nll": 0.02212525465802173,
+      "missing": 0.0,
+      "extra": 0.0
+    },
+    "residual_only": {
+      "example_mean_accuracy": 0.04686360328923911,
+      "exact_sequence": 0.0,
+      "example_mean_nll": 67.11000987887383,
+      "missing": 0.0,
+      "extra": 0.0
+    },
+    "delta_only": {
+      "example_mean_accuracy": 0.08869948901701719,
+      "exact_sequence": 0.0,
+      "example_mean_nll": 40.04360806941986,
+      "missing": 0.0,
+      "extra": 0.0
+    },
+    "decoder_carrier_reset": {
+      "example_mean_accuracy": 0.8486973661929369,
+      "exact_sequence": 0.0546875,
+      "example_mean_nll": 0.6349855167791247,
+      "missing": 0.0,
+      "extra": 0.0
+    },
+    "direct_noisy_codec_carrier_reset": {
+      "example_mean_accuracy": 0.8389645833522081,
+      "exact_sequence": 0.046875,
+      "example_mean_nll": 1.6842612996697426,
+      "missing": 0.0,
+      "extra": 0.0
+    },
+    "no_attention": {
+      "example_mean_accuracy": 0.9339604526758194,
+      "exact_sequence": 0.2578125,
+      "example_mean_nll": 0.23028212506324053,
+      "missing": 0.0,
+      "extra": 0.0
+    },
+    "zero_context": {
+      "example_mean_accuracy": 0.9521525036543608,
+      "exact_sequence": 0.3984375,
+      "example_mean_nll": 0.14083743351511657,
+      "missing": 0.0,
+      "extra": 0.0
+    }
+  },
+  "connectivity": {
+    "examples_changed": 248,
+    "emitting_sites": 2297,
+    "emitting_sites_losing_future_paths": 447,
+    "emitted_bytes_losing_future_paths": 1788,
+    "lost_edges": 693,
+    "gained_edges": 866,
+    "any_earlier_active_path_lost": false,
+    "all_query_sites_active": true,
+    "semantic_edges_changed": 1186,
+    "mechanical_edges_changed": 1186,
+    "identity_roundtrip": true
+  },
+  "rms_difference": {
+    "unpooled_rms_difference": 0.042380765080451965,
+    "h_hat_rms_difference": 0.022519757971167564,
+    "logits_rms_difference": 0.1324106603860855
+  },
+  "counterfactual": {
+    "paired_fixtures": 16,
+    "seed": 1101,
+    "query_indices": [
+      3,
+      1,
+      1,
+      5,
+      2,
+      4,
+      3,
+      5,
+      5,
+      3,
+      2,
+      1,
+      3,
+      4,
+      5,
+      1
+    ],
+    "encoder_prefix_max_difference": 0.0,
+    "encoder_later_rms_difference": 0.2510610818862915,
+    "input_prefix_max_difference": 0.0,
+    "rows": [
+      {
+        "correct": {
+          "sites": 16,
+          "bytes": 64,
+          "accuracy": 0.015625,
+          "nll": 7.129190444946289
+        },
+        "excluded_peer": {
+          "sites": 16,
+          "bytes": 64,
+          "accuracy": 0.015625,
+          "nll": 7.3338117599487305
+        },
+        "clean_codec": {
+          "example_mean_accuracy": 0.9976819753646851,
+          "exact_sequence": 0.875,
+          "example_mean_nll": 0.006477164104580879,
+          "missing": 0,
+          "extra": 0
+        }
+      },
+      {
+        "correct": {
+          "sites": 16,
+          "bytes": 64,
+          "accuracy": 0.046875,
+          "nll": 7.632498741149902
+        },
+        "excluded_peer": {
+          "sites": 16,
+          "bytes": 64,
+          "accuracy": 0.046875,
+          "nll": 7.858308792114258
+        },
+        "clean_codec": {
+          "example_mean_accuracy": 0.9954498410224915,
+          "exact_sequence": 0.8125,
+          "example_mean_nll": 0.01405327208340168,
+          "missing": 0,
+          "extra": 0
+        }
+      }
+    ],
+    "correct": {
+      "target_h_rms_counterfactual_change": 0.011876480653882027,
+      "target_logits_rms_counterfactual_change": 0.1298535317182541,
+      "target_peer_reachable": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "excluded_peer": {
+      "target_h_rms_counterfactual_change": 0.0,
+      "target_logits_rms_counterfactual_change": 0.0,
+      "target_peer_reachable": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    }
+  },
+  "raw_path": "results/runs/phase_g/g1/v1/diagnostics.npz",
+  "raw_sha256": "a4e1c5dede7b0f67219d06b695491e8c87aec285aa424fe48aab8a5f56c06e6e",
+  "historical_files_unchanged": 727,
+  "checkpoint_and_optimizer_file_unchanged": true,
+  "training_updates": 0
+}

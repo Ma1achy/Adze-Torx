@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "historical_artifacts_unchanged": 727,
+  "prior_preflight_evidence_files_unchanged": 25,
+  "whole_checkpoint_including_optimizer_unchanged": true,
+  "frozen_codec_unchanged": true,
+  "diagnostic_source_raw_and_protocol_hashes_verified": true,
+  "new_optimizer_updates": 0,
+  "production_source_diff": "empty against235ff5ba2be2579c848c988f6910513fd706123e"
+}

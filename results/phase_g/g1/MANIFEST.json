@@ -1,0 +1,23 @@
+{
+  "parent_commit": "235ff5ba2be2579c848c988f6910513fd706123e",
+  "diagnostic_label": "G1_TASK_BYPASS_CONFIRMED",
+  "original_row_ids": "row i =1024+i, i0..255",
+  "counterfactual_row_ids": "row i =2000+i, i0..15; payload variants A/B paired",
+  "status": "uncommitted isolated diagnostic additions; no production edits, training, merge or push",
+  "self_excluded": "MANIFEST.json",
+  "files": {
+    "results/phase_g/g1/GEOMETRY_FOLLOWUP.md": "83c47b80d43e0315cde9ae699ce5ca65f00b7ac11e01875c81c02c2bdeb2c3ae",
+    "results/phase_g/g1/G_STRUCTURAL_NECESSITY_DIAGNOSIS.md": "76bd376ea477009ea78b48f8aaecf437dd70971abe03530deace3c313c01a6af",
+    "results/phase_g/g1/PRESERVATION.json": "caf6342b0770c3c5dcba500d67dbfbe8d058de82024515acee4305a8acef018d",
+    "results/phase_g/g1/PROTOCOL.md": "5d10d80bddef08008c393b6a62834d2252a2bcb24ab02c434b5d9dc2b2c2faa4",
+    "results/phase_g/g1/VALIDATION.json": "7cba71f4e7cc65b720761aee37639476e326dfd900278dc11de2dc551a66b74c",
+    "results/phase_g/g1/diagnosis.json": "f91dc32ae956dcbb243a930784cde984cb976c12c3d14615536f7d137f72360b",
+    "results/phase_g/g1/geometry.json": "1e16b4ba13baaf65a97c7b658b5c3fa794114c50d9c36eadf58260ef95a9f95e",
+    "results/phase_g/g1/supplement.json": "b9b147fc89dab0c69b0536c52c5645700871a2118f6d236c92ec01ae8e2ad485",
+    "results/runs/phase_g/g1/v1/diagnostics.npz": "a4e1c5dede7b0f67219d06b695491e8c87aec285aa424fe48aab8a5f56c06e6e",
+    "scripts/analyze_phase_g1.py": "8af9927d6ca0a6489b3ebe6aa0c9208f64be396f1210448cbd9a8c53ffa57e18",
+    "scripts/analyze_phase_g1_geometry.py": "2c7d537e9721a0a9560e81c827d9f03117f5997384dcb6d39e2d111efd0f03de",
+    "scripts/run_phase_g1.py": "1280cd325529cc92b5b9ae7bff28a1be78d67aec3ae6797ceaa4a543420f27db",
+    "tests/test_phase_g1.py": "85c055baf613ab5f4c60ad459333ec3d3592b58b5fc706517c467944b63fbc36"
+  }
+}
