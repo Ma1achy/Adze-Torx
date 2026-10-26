@@ -1,0 +1,14 @@
+{
+  "schema": "PHASE_G0_DURABLE_ARTIFACT_COPIES_V1",
+  "source_directory": "/private/tmp/adze-phase-g/results/runs/phase_g/g0/v1",
+  "archive_directory": "/Users/malachy/src/Adze-Torx/results/runs/phase_g/g0/frozen_v1_archive",
+  "copy_policy": "independent copies; no overwrite; hashes recomputed at destination; no symlinks",
+  "tracked_main_unchanged": true,
+  "files_sha256": {
+    "codec_00000.pkl": "13b664bbfd118b9fcbea86a4ae31b4fc992295d7ac1d58d7cb408e3c88626419",
+    "codec_00100.pkl": "f5f311a99d4aab03a619b08874f85c09609e14f151051855d59c01aaadbc08ab",
+    "codec_00250.pkl": "a6ef46283ac0eada44b9725daacb3d218ba2419a9c3606051f03fc4f8f39619e",
+    "frozen_codec.pkl": "0f4a54e221729b14c6e75d30bed84bd566182a490f975c76d574e540f936adab",
+    "matched_g_initialization.pkl": "18298527d0604ead202f1b49ab17e6da8a0b6c4435dd93e411ba7c2e3242f071"
+  }
+}
