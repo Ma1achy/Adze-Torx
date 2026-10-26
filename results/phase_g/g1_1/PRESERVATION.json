@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "protected_historical_files_unchanged": 727,
+  "G1_manifest_files_unchanged": 13,
+  "G1_archive_files_verified": 14,
+  "frozen_G11_sources_and_raw_trace_match": true,
+  "new_optimizer_updates": 0,
+  "new_teacher_state_directory_exists": false,
+  "python": "3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:49:36) [Clang 16.0.6 ]",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "versions": {
+    "jax": "0.8.1",
+    "jaxlib": "0.8.1",
+    "numpy": "2.4.6",
+    "extro-torx": "0.0.1"
+  },
+  "torx_revision": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae"
+}

@@ -1,0 +1,63 @@
+{
+  "capture": "post-run, unchanged interpreter/environment; not claimed as a separate preregistration record",
+  "python_executable": "/opt/anaconda3/bin/python",
+  "python": "3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:49:36) [Clang 16.0.6 ]",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "jax": "0.8.1",
+  "backend": "cpu",
+  "jax_enable_x64": false,
+  "jax_default_prng_impl": "threefry2x32",
+  "configuration": {
+    "carrier": {
+      "C": 32,
+      "h_dim": 64,
+      "L_max": 4
+    },
+    "packing": {
+      "M_max": 32,
+      "K": 8
+    },
+    "model": {
+      "byte_vocab": 256,
+      "prompt_max_bytes": 128,
+      "target_max_bytes": 128,
+      "d_front": 64,
+      "d_ctx": 128,
+      "frontend_layers": 2,
+      "context_layers": 2,
+      "target_layers": 2,
+      "proposal_layers": 2,
+      "proposal_hidden_dim": 64,
+      "d_model": 128,
+      "heads": 4,
+      "head_dim": 32,
+      "ffn_hidden": 256,
+      "physical_blocks_L": 4,
+      "cycles_Q": 3,
+      "d_dec": 128,
+      "decoder_layers": 2,
+      "mamba_expand": 2,
+      "mamba_state_dim": 16,
+      "mamba_conv_kernel": 3,
+      "residual_gate_init": 0.1,
+      "effective_depth_conditioning": true
+    },
+    "training": {
+      "learning_rate": 0.0003,
+      "weight_decay": 0.01,
+      "grad_clip_norm": 1,
+      "batch_size": 32,
+      "h_weight": 1,
+      "boundary_weight": 1,
+      "extent_weight": 1,
+      "byte_weight": 1,
+      "proposal_weight": 0
+    }
+  },
+  "configuration_sha256": "9c3d9a6153700a1a16f6725dfc352e5b54c80c2d0f5d5e6925c51560020bc0c3",
+  "configuration_note": "Resolved model/reference defaults; future G11 erasure/loss overrides are explicitly versioned in BOUNDED_TEACHER_PROTOCOL.md, not retroactive changes to these defaults.",
+  "primary_execution_source": "f75e75d5d8f1883dc506315798c06f92414f9877",
+  "G1_evidence_commit": "404f2e208793a197a0c206c1febfea235a613375",
+  "initial_tree_sha256": "84ab204d1cea2a1833cbbdeadc7993879ad29a3c4c354d4960c221c951daaeeb",
+  "conditional_teacher_protocol_sha256": "35cbd1fed3b0490b73b83693c7246b01d5d41057295046b95d4022e514d8e29c"
+}

@@ -1,0 +1,395 @@
+{
+  "scores": {
+    "byte_accuracy": 0.9962021708488464,
+    "nll": 0.014303229749202728,
+    "exact_sequence": 0.8673245614035088,
+    "worst_length_accuracy": 0.9870689511299133,
+    "role_signature_recovery": 0.9934456928838952,
+    "extent_accuracy": 1.0,
+    "exact_total_length": 1.0,
+    "exact_extent_vector": 1.0,
+    "partial_extent_accuracy": 1.0,
+    "active_boundary_accuracy": 0.9970739700374532,
+    "exact_boundary_vector": 0.9725877192982456,
+    "composed_reader_query_payload_accuracy": 0.998172514619883,
+    "composed_reader_end_found": 1.0
+  },
+  "gates": {
+    "byte_accuracy": true,
+    "worst_length_accuracy": true,
+    "role_signature_recovery": true,
+    "extent_accuracy": true,
+    "exact_total_length": true,
+    "partial_extent_accuracy": true,
+    "active_boundary_accuracy": true,
+    "exact_boundary_vector": true,
+    "composed_reader_query_payload_accuracy": true
+  },
+  "length_buckets": {
+    "8": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.002261567860841751,
+      "exact": 1.0
+    },
+    "9": {
+      "examples": 16,
+      "accuracy": 0.9930555820465088,
+      "nll": 0.02945617027580738,
+      "exact": 0.9375
+    },
+    "10": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.013539792969822884,
+      "exact": 1.0
+    },
+    "11": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.020821230486035347,
+      "exact": 1.0
+    },
+    "12": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.0015137260779738426,
+      "exact": 1.0
+    },
+    "13": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.007435634732246399,
+      "exact": 1.0
+    },
+    "14": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.004163571633398533,
+      "exact": 1.0
+    },
+    "15": {
+      "examples": 16,
+      "accuracy": 0.9916666746139526,
+      "nll": 0.022589417174458504,
+      "exact": 0.875
+    },
+    "16": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.0031208908185362816,
+      "exact": 1.0
+    },
+    "17": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.013357341289520264,
+      "exact": 1.0
+    },
+    "18": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.006206817459315062,
+      "exact": 1.0
+    },
+    "19": {
+      "examples": 16,
+      "accuracy": 0.9934210777282715,
+      "nll": 0.012705566361546516,
+      "exact": 0.875
+    },
+    "20": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.0020647719502449036,
+      "exact": 1.0
+    },
+    "21": {
+      "examples": 16,
+      "accuracy": 0.9940476417541504,
+      "nll": 0.015497485175728798,
+      "exact": 0.875
+    },
+    "22": {
+      "examples": 16,
+      "accuracy": 0.9971591234207153,
+      "nll": 0.008631710894405842,
+      "exact": 0.9375
+    },
+    "23": {
+      "examples": 16,
+      "accuracy": 0.9945652484893799,
+      "nll": 0.012783480808138847,
+      "exact": 0.875
+    },
+    "24": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.002318737329915166,
+      "exact": 1.0
+    },
+    "25": {
+      "examples": 16,
+      "accuracy": 0.9925000071525574,
+      "nll": 0.026002217084169388,
+      "exact": 0.875
+    },
+    "26": {
+      "examples": 16,
+      "accuracy": 0.9927884340286255,
+      "nll": 0.020148780196905136,
+      "exact": 0.8125
+    },
+    "27": {
+      "examples": 16,
+      "accuracy": 0.9884259700775146,
+      "nll": 0.02721521630883217,
+      "exact": 0.75
+    },
+    "28": {
+      "examples": 16,
+      "accuracy": 0.9955357313156128,
+      "nll": 0.009451483376324177,
+      "exact": 0.875
+    },
+    "29": {
+      "examples": 16,
+      "accuracy": 0.9870689511299133,
+      "nll": 0.028077926486730576,
+      "exact": 0.6875
+    },
+    "30": {
+      "examples": 16,
+      "accuracy": 0.9958333373069763,
+      "nll": 0.016152815893292427,
+      "exact": 0.875
+    },
+    "31": {
+      "examples": 16,
+      "accuracy": 0.9959677457809448,
+      "nll": 0.010095683857798576,
+      "exact": 0.875
+    },
+    "32": {
+      "examples": 16,
+      "accuracy": 0.99609375,
+      "nll": 0.008948547765612602,
+      "exact": 0.875
+    },
+    "33": {
+      "examples": 16,
+      "accuracy": 0.998106062412262,
+      "nll": 0.01690809428691864,
+      "exact": 0.9375
+    },
+    "34": {
+      "examples": 16,
+      "accuracy": 0.9963235259056091,
+      "nll": 0.023333601653575897,
+      "exact": 0.875
+    },
+    "35": {
+      "examples": 16,
+      "accuracy": 0.9892857074737549,
+      "nll": 0.02264736033976078,
+      "exact": 0.625
+    },
+    "36": {
+      "examples": 16,
+      "accuracy": 0.9965277910232544,
+      "nll": 0.011868542060256004,
+      "exact": 0.875
+    },
+    "37": {
+      "examples": 16,
+      "accuracy": 0.9983108043670654,
+      "nll": 0.020026352256536484,
+      "exact": 0.9375
+    },
+    "38": {
+      "examples": 16,
+      "accuracy": 0.9967105388641357,
+      "nll": 0.027259426191449165,
+      "exact": 0.875
+    },
+    "39": {
+      "examples": 16,
+      "accuracy": 0.995192289352417,
+      "nll": 0.01655372977256775,
+      "exact": 0.8125
+    },
+    "40": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.0017053994815796614,
+      "exact": 1.0
+    },
+    "41": {
+      "examples": 16,
+      "accuracy": 0.9984756112098694,
+      "nll": 0.00662763137370348,
+      "exact": 0.9375
+    },
+    "42": {
+      "examples": 16,
+      "accuracy": 0.9970238208770752,
+      "nll": 0.008612552657723427,
+      "exact": 0.875
+    },
+    "43": {
+      "examples": 16,
+      "accuracy": 0.9956395626068115,
+      "nll": 0.01437525823712349,
+      "exact": 0.8125
+    },
+    "44": {
+      "examples": 16,
+      "accuracy": 0.9971591234207153,
+      "nll": 0.0040129018016159534,
+      "exact": 0.875
+    },
+    "45": {
+      "examples": 16,
+      "accuracy": 0.9958333373069763,
+      "nll": 0.010774148628115654,
+      "exact": 0.875
+    },
+    "46": {
+      "examples": 16,
+      "accuracy": 0.9959239363670349,
+      "nll": 0.016569815576076508,
+      "exact": 0.8125
+    },
+    "47": {
+      "examples": 16,
+      "accuracy": 0.9960106611251831,
+      "nll": 0.014567339792847633,
+      "exact": 0.8125
+    },
+    "48": {
+      "examples": 16,
+      "accuracy": 0.9947916865348816,
+      "nll": 0.013072969391942024,
+      "exact": 0.75
+    },
+    "49": {
+      "examples": 16,
+      "accuracy": 1.0,
+      "nll": 0.0032333084382116795,
+      "exact": 1.0
+    },
+    "50": {
+      "examples": 16,
+      "accuracy": 0.9975000023841858,
+      "nll": 0.013658344745635986,
+      "exact": 0.875
+    },
+    "51": {
+      "examples": 16,
+      "accuracy": 0.9975490570068359,
+      "nll": 0.010396931320428848,
+      "exact": 0.875
+    },
+    "52": {
+      "examples": 16,
+      "accuracy": 0.9939903616905212,
+      "nll": 0.014220092445611954,
+      "exact": 0.6875
+    },
+    "53": {
+      "examples": 16,
+      "accuracy": 0.9964622259140015,
+      "nll": 0.04441850632429123,
+      "exact": 0.8125
+    },
+    "54": {
+      "examples": 16,
+      "accuracy": 0.9965277910232544,
+      "nll": 0.013593709096312523,
+      "exact": 0.8125
+    },
+    "55": {
+      "examples": 16,
+      "accuracy": 0.9909090995788574,
+      "nll": 0.030407126992940903,
+      "exact": 0.6875
+    },
+    "56": {
+      "examples": 16,
+      "accuracy": 0.9955357313156128,
+      "nll": 0.009021629579365253,
+      "exact": 0.8125
+    },
+    "57": {
+      "examples": 16,
+      "accuracy": 0.9923245906829834,
+      "nll": 0.03361675888299942,
+      "exact": 0.625
+    },
+    "58": {
+      "examples": 16,
+      "accuracy": 0.9946120977401733,
+      "nll": 0.015102315694093704,
+      "exact": 0.75
+    },
+    "59": {
+      "examples": 16,
+      "accuracy": 0.9957627058029175,
+      "nll": 0.013592067174613476,
+      "exact": 0.8125
+    },
+    "60": {
+      "examples": 16,
+      "accuracy": 0.9979166984558105,
+      "nll": 0.004793645814061165,
+      "exact": 0.875
+    },
+    "61": {
+      "examples": 16,
+      "accuracy": 0.9979507923126221,
+      "nll": 0.014997516758739948,
+      "exact": 0.875
+    },
+    "62": {
+      "examples": 16,
+      "accuracy": 0.9939516186714172,
+      "nll": 0.015493325889110565,
+      "exact": 0.6875
+    },
+    "63": {
+      "examples": 16,
+      "accuracy": 0.995039701461792,
+      "nll": 0.01835627853870392,
+      "exact": 0.6875
+    },
+    "64": {
+      "examples": 16,
+      "accuracy": 0.998046875,
+      "nll": 0.006906786933541298,
+      "exact": 0.875
+    }
+  },
+  "extent_classes": {
+    "0": {
+      "sites": 20640,
+      "recall": 1.0
+    },
+    "1": {
+      "sites": 224,
+      "recall": 1.0
+    },
+    "2": {
+      "sites": 224,
+      "recall": 1.0
+    },
+    "3": {
+      "sites": 224,
+      "recall": 1.0
+    },
+    "4": {
+      "sites": 7872,
+      "recall": 1.0
+    }
+  },
+  "note": "composed reader uses predicted extents and decoded ENDs, never teacher peer/length; it is an observability oracle, not an Adze decoder replacement"
+}

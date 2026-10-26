@@ -1,0 +1,24 @@
+{
+  "version": "PHASE_G11_FUTURE_PEER_OBSERVATION_LATENT_V0",
+  "ordered_sha256": {
+    "train": "f439ec73d08a803115621d2f0dc831affc376c8e2491ae4fa510b047189a2205",
+    "validation": "b3f442b077dd38ce45906a91808686a0a5f1fa9560a3dfa736e7ca59ca1afedf",
+    "protected_test": "734c261c182c6818347a27b975f0f453d3b6d2911b1cedab60e0a3bf92f6286e"
+  },
+  "counts": {
+    "train": 1824,
+    "validation": 912,
+    "protected_test": 912
+  },
+  "overlap": {
+    "train_validation": 0,
+    "train_protected_test": 0,
+    "validation_protected_test": 0
+  },
+  "symbolic_identifiability": {
+    "train": true,
+    "validation": true,
+    "protected_test": true
+  },
+  "protected_test_metrics_exposed": false
+}

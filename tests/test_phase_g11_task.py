@@ -124,3 +124,12 @@ def test_invalid_capacity_skips_actual_model_eager_and_jit(monkeypatch):
     ):
         out = apply(p, h, jnp.asarray([[0xF1, 1]]), b, ell, cfg=cfg)
         assert not out["executed"] and not jnp.any(out["logits"])
+
+
+def test_independent_host_oracle_rejects_corrupted_peer_identity(data, monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[1] / "scripts"))
+    audit = importlib.import_module("check_phase_g11_data")
+    assert audit.independent_parse(data) == 57
+    changed = {**data, "peer": data["peer"].at[0].add(1)}
+    with pytest.raises(AssertionError, match="peer identity disagrees"):
+        audit.independent_parse(changed)

@@ -1,0 +1,14 @@
+{
+  "label": "G11_TASK_VALIDATED",
+  "flow_contract_passed": true,
+  "codec_and_readout_gates_passed": true,
+  "source_commit": "f75e75d5d8f1883dc506315798c06f92414f9877",
+  "validator_sha256": "5df0c2e398637e2078faadb4e127c3ab34c0f9e41cf51a6785c511d56d071e3d",
+  "task_source_sha256": "7c7bc8827ee7489ffc45f586e1f33dc723ffad89d39b407251d2928207416d2f",
+  "protocol_sha256": "39beecf7aac187f9ef027dea5ae5dd701d9e3a2fd3cf18472b18b1ce97b0a5a3",
+  "initial_tree": "84ab204d1cea2a1833cbbdeadc7993879ad29a3c4c354d4960c221c951daaeeb",
+  "historical_files_unchanged": 727,
+  "new_optimizer_updates": 0,
+  "test_metrics_exposed": false,
+  "bounded_teacher_training_executed": false
+}

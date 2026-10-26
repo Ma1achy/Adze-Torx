@@ -1,0 +1,105 @@
+{
+  "label": "G11_TASK_VALIDATED",
+  "scope": "task/representation/information-flow validation only; no neural training",
+  "G1": {
+    "commit": "404f2e208793a197a0c206c1febfea235a613375",
+    "manifest_files_verified": 13,
+    "archive_files_verified": 14,
+    "historical_artifacts_verified": 727,
+    "focused_tests": 5,
+    "seconds": 7.71,
+    "checks": "format, lint, type, public boundaries, explicit private-Torx scan all pass"
+  },
+  "prospective_source": "f75e75d5d8f1883dc506315798c06f92414f9877",
+  "main_command": {
+    "command": "PYTHONPATH=src python scripts/run_phase_g11_validation.py",
+    "exit_code": 0,
+    "model_states": [
+      "fresh_F1_G01",
+      "teacher100"
+    ],
+    "flow_examples": 64,
+    "payload_variants": 2,
+    "oracle_injection_examples": 8,
+    "alphabet_enumeration": "28 values on2 declared contexts,6 unavailable controls",
+    "codec_validation_examples": 912,
+    "all_flow_and_representation_gates_passed": true,
+    "new_optimizer_updates": 0
+  },
+  "postprocessing": [
+    {
+      "command": "PYTHONPATH=src python scripts/inspect_phase_g11_results.py",
+      "exit_code": 0,
+      "scope": "routing data export and counts-only prior baselines; no neural inference or fitting"
+    },
+    {
+      "command": "PYTHONPATH=src python scripts/check_phase_g11_data.py",
+      "exit_code": 0,
+      "independently_parsed_examples": 3648,
+      "shared_symbolic_target_helper_used": false,
+      "neural_inference": false
+    }
+  ],
+  "tests": {
+    "command": "PYTHONPATH=src pytest tests/test_phase_g1.py tests/test_phase_g11_task.py -ra",
+    "passed": 11,
+    "skipped": 0,
+    "seconds": 14.79,
+    "exit_code": 0
+  },
+  "static": {
+    "format_check": {
+      "command": "make format-check",
+      "files": 154,
+      "exit_code": 0
+    },
+    "lint": {
+      "command": "make lint",
+      "exit_code": 0
+    },
+    "typing": {
+      "command": "make typecheck",
+      "errors": 0,
+      "warnings": 0,
+      "exit_code": 0
+    },
+    "boundaries": {
+      "command": "make boundaries",
+      "exit_code": 0
+    },
+    "private_torx_scan": {
+      "command": "rg -n 'torx\\._|from torx import _|from torx\\._' src scripts tests",
+      "matches": 0
+    }
+  },
+  "corrected_before_affected_execution": [
+    "Validator unused local j removed before inference.",
+    "Test where-overload typing ambiguity replaced with boolean expression before inference.",
+    "Postprocessing unused Path imports removed before those scripts ran.",
+    "One dataset-only import audit initially omitted scripts from PYTHONPATH; corrected before audit execution, no model run involved."
+  ],
+  "not_run": [
+    {
+      "checks": "Whole-project regular and slow suites",
+      "reason": "Existing architecture/backend modules unchanged; focused regression plus actual native-model validation used. Prior258+30 passes remain historical only."
+    },
+    {
+      "checks": "G11 first gradient/prospective Adam update/teacher100",
+      "reason": "Explicitly forbidden neural training in this milestone; conditional protocol only."
+    },
+    {
+      "checks": "Protected test neural metrics",
+      "reason": "Not exposed; construction/hash and independent symbolic consistency only."
+    },
+    {
+      "checks": "Original G arms, argmax/sampled G training, H/I training, full G campaign, S4",
+      "reason": "Not authorized."
+    }
+  ],
+  "notes": [
+    "Trace/corpus coverage supplements are descriptive, not new outcome-selected gates.",
+    "Raw unavailable-control neural accuracy can be below1/28 due wrong-domain predictions; exact domain-restricted enumeration verifies the conditional chance reference.",
+    "No observed neural query-copy success is claimed.",
+    "New loss/threshold/erasure versions are prospective G11-only, not changes to historical G/F protocols."
+  ]
+}
