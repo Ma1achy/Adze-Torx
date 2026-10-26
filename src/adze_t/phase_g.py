@@ -16,6 +16,7 @@ from .generated_structure import (
     StructureEstimatorOwner,
     StructureKeyContext,
     commit_predicted_structure_core,
+    full_commit_masks,
     generated_routing_core,
     score_corrected_structure_loss,
 )
@@ -313,6 +314,7 @@ def generated_two_pass_objective(
     temperature: float | None = None,
     apply_score_correction: bool = True,
     inert_placeholder_value: int = 0,
+    dynamic_capacity: bool = False,
     config: ReferenceConfig = REFERENCE_SMALL_V0,
 ) -> tuple[jax.Array, dict[str, jax.Array]]:
     """Predict once, commit at the boundary, then replay the same S1 input."""
@@ -400,7 +402,11 @@ def generated_two_pass_objective(
         commit = commit_predicted_structure_core(
             neutral,
             predicted,
-            task_structure_commit_masks(neutral.c_b.shape[0], config),
+            (
+                full_commit_masks(neutral.c_b.shape)
+                if dynamic_capacity
+                else task_structure_commit_masks(neutral.c_b.shape[0], config)
+            ),
             policy=arm,
             max_extent=config.carrier.L_max,
             key_context=key_context,
@@ -417,14 +423,26 @@ def generated_two_pass_objective(
     commit_error = jnp.zeros_like(truth_error) if commit is None else commit.error_code
     upstream_valid = commit_valid & (truth_error == 0)
     upstream_error = jnp.where(commit_error != 0, commit_error, truth_error)
-    routing = generated_routing_core(
-        committed,
-        M_max=config.packing.M_max,
-        K=config.packing.K,
-        max_extent=config.carrier.L_max,
-        upstream_valid=upstream_valid,
-        upstream_error=upstream_error,
-    )
+    if dynamic_capacity:
+        from .phase_g0 import dynamic_capacity_routing
+
+        routing = dynamic_capacity_routing(
+            committed,
+            M_max=config.packing.M_max,
+            K=config.packing.K,
+            max_extent=config.carrier.L_max,
+            upstream_valid=upstream_valid,
+            upstream_error=upstream_error,
+        ).routing
+    else:
+        routing = generated_routing_core(
+            committed,
+            M_max=config.packing.M_max,
+            K=config.packing.K,
+            max_extent=config.carrier.L_max,
+            upstream_valid=upstream_valid,
+            upstream_error=upstream_error,
+        )
     replay = guarded_generated_replay(
         params, batch, carrier_input, forward_target, neutral, routing, ops, config=config
     )
