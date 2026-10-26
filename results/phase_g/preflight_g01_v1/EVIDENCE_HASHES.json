@@ -1,0 +1,31 @@
+{
+  "execution_source": "f571ab40659da872777f4deccbfcd05531c4c576",
+  "excluded_self": "EVIDENCE_HASHES.json",
+  "files": {
+    "ARTIFACT_AUDIT.json": "0e3e3c653a7158e20fdc8f3a426c5d41e55cd4db0df871a94a96ea286395fe26",
+    "ENVIRONMENT.json": "e2afc66c5e738d2d31668b99463ce33142ca88a4c8320f7256340e82c062f146",
+    "FINAL_PRESERVATION.json": "1836777ae19728f80a96a658bd4beaad4c996b29a06fcfaad02bd5fe1e5c4ad3",
+    "G_CODEC_COMPATIBILITY.md": "9773db20e5274562c71bf8842362b1f3f14c47bece324a2bd6de73e9d3cf8af4",
+    "G_GRADIENT_ORACLE.md": "ba4999d2bfd51e71815ea8e236b4a93bd3f1a9aaf4426bc83d7fa3042ee3797c",
+    "G_INTEGRATION_PREFLIGHT.md": "f332b4701bc190ebaaa7a21769cfb51d28054e78f6ba6d1a548628c3c8ce93a2",
+    "G_REMEDIATION_REPORT.md": "748cdea2a0ce506d533c3c9628682b693e6053a0e2e69d4197ef514cc034edfd",
+    "G_SCIENTIFIC_PROTOCOL_PROPOSAL.md": "4627b5dff41ef911e58f8763f993734526c6faf051cd10c358d056fc776dca6b",
+    "G_SMOKE_RESULTS.md": "e63b9619fca2cfd14d629365276e8f1ddfcd3faa02494e6a3aef99127c5b1f1a",
+    "G_STRUCTURE_INTERFACE.md": "1ff407556776d686fde06daab05ffe8127c0960bbda65fa92031f4c35f9ac9eb",
+    "PROTOCOL.md": "56616724622975e1eb27e2cb88d6ff60b28a7055d0fac8115de1f7327aac592f",
+    "VALIDATION.json": "55a42b49c9f2c6d06424ddbd9ff7b374993ee2c4ebeea5f7596255d290376dcd",
+    "f571ab40659d/fixture_import.json": "90a90124ae80649897223a2307dcc52f093b6355c2cbd5f7b88fc01be2421c31",
+    "f571ab40659d/focused_tests.json": "e29306e552f8c151b7ae84d35deb9aad3029a1d84a60c0e76c1e694fc0677a1d",
+    "f571ab40659d/full_model.json": "05931d5912e961592166d1a1e1cec0156ada25eb1c904668a25b82c8ca5cc532",
+    "f571ab40659d/historical_baseline.json": "5265d5d8497e594d323793d99f67ac5e0d387cb6eb7f0416c7e8662c1af54e82",
+    "f571ab40659d/historical_preservation.json": "e7a4fe113179ad203c3e6bccc2a4af3c2cebfa472300a3e68b834c33dbc748e5",
+    "f571ab40659d/necessity.json": "42f95c56122afcbd79dbdd2d919ad5fc5178fa798958ae0643d50db0bc1c286f",
+    "f571ab40659d/production_oracle.json": "8d431944f460b9191f50dfe5e97b66541a0525d4fa34dfb91da03b0316eee34e",
+    "f571ab40659d/provenance.json": "4f881bdac6489acfa781cec00f73b6dbee85fdace943575a68cf68a10c75d25b",
+    "f571ab40659d/teacher/update_000.json": "27a4b9dad0f44e2d3087525d6782e69597a083c8d3449982cd554da184a0f4f6",
+    "f571ab40659d/teacher/update_010.json": "0b9bab7970cacb365e1373f37d47c8c08a6ab45e6dc968b7cf27373f6c5591e3",
+    "f571ab40659d/teacher/update_025.json": "a0f0b67ebbcdcfc2d92eb91e196f76cac85138c19b1964592c94f91fe0a871e8",
+    "f571ab40659d/teacher/update_050.json": "86ca05af562480a135bdfb241f126cd7e99092f7be26c316d8cfc0e169d151e7",
+    "f571ab40659d/teacher/update_100.json": "3d69a9382a4b6aa91947abbe7cab1522d99ace6f974d434d446808c71ebe597a"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "execution_source": "f571ab40659da872777f4deccbfcd05531c4c576",
+  "protocol": "PHASE_G_G01_DYNAMIC_STRUCTURE_ENGINEERING_PREFLIGHT_V1",
+  "decisions": {
+    "engineering": "G_ENGINEERING_CHANGES_REQUIRED",
+    "integration": "G_INTEGRATION_BLOCKED",
+    "reason": "Mandatory post-teacher structural-necessity failure against shifted valid semantic cuts; not an estimator, codec or numerical failure."
+  },
+  "focused": {
+    "command": "PYTHONPATH=src python scripts/run_phase_g_amended.py --stage tests",
+    "underlying_command": "python -m pytest tests/test_phase_g_amended.py tests/test_phase_g_structure.py tests/test_phase_g0.py tests/test_phase_g_oracle.py -ra",
+    "passed": 88,
+    "skipped": 0,
+    "seconds": 176.83,
+    "exit_code": 0,
+    "evidence": "f571ab40659d/focused_tests.json"
+  },
+  "regular": {
+    "command": "PYTHONPATH=src PYTEST_ADDOPTS=-ra make test",
+    "exit_code": 0,
+    "passed": 258,
+    "deselected": 30,
+    "skipped": 0,
+    "seconds": 1846.04,
+    "summary": "258 passed, 30 deselected in 1846.04s (0:30:46)"
+  },
+  "slow": {
+    "command": "PYTHONPATH=src PYTEST_ADDOPTS=-ra make test-slow",
+    "exit_code": 0,
+    "passed": 30,
+    "deselected": 258,
+    "skipped": 0,
+    "seconds": 107.77,
+    "summary": "30 passed, 258 deselected in 107.77s (0:01:47)"
+  },
+  "unique_whole_project_tests": 288,
+  "static": {
+    "command": "make format-check && make lint && make typecheck && make boundaries && git diff --check",
+    "exit_code": 0,
+    "formatted_files": 145,
+    "lint": "All checks passed",
+    "typing": {
+      "errors": 0,
+      "warnings": 0,
+      "informations": 0
+    },
+    "boundaries": "Public dependency-boundary check passed",
+    "stdout": "ruff format --check .\n145 files already formatted\nruff check .\nAll checks passed!\npyright --pythonpath \"$(python -c 'import sys; print(sys.executable)')\"\n0 errors, 0 warnings, 0 informations\npython scripts/check_public_boundaries.py\nPublic dependency-boundary check passed.\n"
+  },
+  "private_torx_scan": {
+    "command": "rg -n 'torx\\._|from torx import _|from torx\\._' src scripts tests",
+    "matches": 0,
+    "wrapper_exit_code": 0,
+    "pinned_revision": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae"
+  },
+  "stage_commands": [
+    "PYTHONPATH=src python scripts/run_phase_g_amended.py --stage import-fixtures",
+    "PYTHONPATH=src python scripts/run_phase_g_amended.py --stage audit",
+    "PYTHONPATH=src python scripts/run_phase_g_amended.py --stage oracle",
+    "PYTHONPATH=src python scripts/run_phase_g_amended.py --stage tests",
+    "PYTHONPATH=src python scripts/run_phase_g_amended.py --stage full-model",
+    "PYTHONPATH=src python scripts/run_phase_g_amended.py --stage teacher",
+    "PYTHONPATH=src python scripts/run_phase_g_amended.py --stage necessity",
+    "PYTHONPATH=src python scripts/run_phase_g_amended.py --stage history"
+  ],
+  "stage_results": {
+    "import_fixtures": "pass",
+    "audit": "pass",
+    "oracle": "21/21 pass,16 roots x4096 samples",
+    "focused_tests": "88 pass",
+    "full_model": "pass",
+    "teacher": "completed100 updates exactly once",
+    "necessity": {
+      "passed": false,
+      "exit_code": 1,
+      "reason": "STRUCTURAL_NECESSITY_GATE_FAILED: no generated arms permitted",
+      "failed_control": "shifted_cuts",
+      "not_a_test_suite_failure": true
+    },
+    "history": "727 files unchanged"
+  },
+  "not_executed": [
+    {
+      "work": "Argmax Arm B and sampled Arm C training",
+      "reason": "Mandatory structural-necessity gate failed; both zero updates"
+    },
+    {
+      "work": "Main merge/push and post-merge integration suite",
+      "reason": "All-gates-pass condition not satisfied"
+    },
+    {
+      "work": "Full G campaign, H/I training, codec training, LM training, S4",
+      "reason": "Not authorized"
+    }
+  ],
+  "missing_fixture_skip": "Resolved via exact accepted COPY/REVERSE hash-verified no-overwrite copies; no regular or slow skips",
+  "notes": [
+    "Focused tests overlap whole-project tests and are not added to the unique count.",
+    "Environment capture is post-execution and explicitly labeled, not claimed as preregistration.",
+    "Runtime manifests refer to immutable execution source; later report-only commits do not change that identity.",
+    "No scientific G success/negative label is issued."
+  ],
+  "historical_final_check": "FINAL_PRESERVATION.json",
+  "artifact_audit": "ARTIFACT_AUDIT.json"
+}
