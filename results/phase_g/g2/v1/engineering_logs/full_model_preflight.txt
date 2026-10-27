@@ -1,0 +1,5 @@
+2026-10-27T08:12:38 cached train: 1824, source/target frozen separately
+2026-10-27T08:12:50 cached validation: 912, source/target frozen separately
+2026-10-27T08:13:19 new full-model gradient/trial A
+2026-10-27T08:17:09 new full-model gradient/trial B
+2026-10-27T08:19:16 new full-model gradient/trial C
