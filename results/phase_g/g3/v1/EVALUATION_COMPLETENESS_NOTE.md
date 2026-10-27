@@ -46,3 +46,25 @@ nice -n 10 env PYTHONPATH=src:scripts python scripts/complete_phase_g23_validati
 
 This is completion of predeclared validation evidence, NOT a new experiment,
 new oracle adjudication, adaptive root escalation or retrospective policy edit.
+
+## Temporal structure churn (derived existing evidence only)
+
+The frozen G2 reporting clause distinguishes temporal policy churn on fixed
+examples from neutral-to-commit changes. The kernel's `commit_change` is the
+latter. Complete the former with `scripts/summarize_phase_g23_churn.py` after
+frozen selection. It uses existing per-root validation action/routing arrays at
+0/100/250/500/1000, preserving original example order and identical root words.
+For sampled training compare each of the four COMMON checkpoint-validation roots
+before averaging disagreement rates; never average actions before measuring
+churn. Predicted versus committed changes, emission/activity changes, mechanical
+capacity cuts and packing coordinates are reported separately. Teacher commits
+may remain identical while their predicted heads change. A packing-coordinate
+change is not a loss of persistent carrier identity.
+
+The postprocessor verifies archive/checkpoint hashes, dataset/example identities,
+source/protocol binding and root coupling. It performs no inference, sampling,
+gradient, optimizer update or decision override. Seven lightweight exact/file
+oracles cover rootwise versus averaged-action changes, teacher prediction/commit
+separation, reactivation, empty support and stale checkpoint/example rejection.
+Those tests are not evidence of model trainability; real execution of the
+selected-validation driver and full scientific gates remain required.
