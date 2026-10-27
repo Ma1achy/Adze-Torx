@@ -1,0 +1,10 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "start_step": 0,
+  "end_step": 1000,
+  "declared_cap": 1000,
+  "wall_seconds": 7373.635428958107,
+  "model_applications_per_update": 2,
+  "physical_block_forward_applications_per_update": 24,
+  "resumed_without_optimizer_reset": true
+}
