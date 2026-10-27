@@ -1,0 +1,16 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "seed": 1,
+  "arm": "B",
+  "completed_optimizer_updates": 137,
+  "next_optimizer_update": 138,
+  "path": "results/runs/phase_g/g23/v1/resource_stops/20261027T170605/seed1_B_update00137.pkl",
+  "sha256": "f82269e87457c71f92117102ed6a7d0eb76a827476b9532f18f9dc32dda9af0d",
+  "copied_bitwise_from_verified_tip": true,
+  "fsync_completed": true,
+  "serialized_field_names_present": ["params", "moments", "step", "identity", "campaign_identity", "seed", "arm"],
+  "tensor_reexecution_performed": false,
+  "original_journal_untouched": true,
+  "optimizer_reset_permitted": false,
+  "binary_artifact_is_ignored_not_in_git": true
+}

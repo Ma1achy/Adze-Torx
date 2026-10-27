@@ -1,0 +1,23 @@
+{
+  "method": "Read-only SHA-256 verification of every manifest member; no tensor execution",
+  "checks": {
+    "V1_preservation_baseline": {"files": 731, "passed": true, "manifest_sha256": "2808ee906791fef356d88aadbe9dad2cc7cbe0143b1cbae01d41baccdecafdc7"},
+    "G1": {"files": 13, "passed": true},
+    "G11": {"files": 22, "passed": true},
+    "teacher100": {"files": 270, "passed": true},
+    "G23_V0": {"files": 37, "passed": true, "manifest_sha256": "33f12e56a236c426826257f2a72d20dde8ba012d39ebd743ac2e9265b0cd67dd"},
+    "G21": {"files": 254, "passed": true, "manifest_sha256": "0eb4e639db7c7ed3f5ab021b861a3ed0ce2c377bf8eff88e283873b67608544f"},
+    "G21_bound_original_files": {"files": 42, "passed": true}
+  },
+  "counts_overlap_and_are_not_unique_artifact_totals": true,
+  "original_G_FINAL_RESULTS_sha256": "982103e5f45879fd3d8f7650fd6e75aac76531851c7252fb68827f6edf18278d",
+  "main_HEAD": "2a0cab0c9c647832596013d56037c842ff3844ea",
+  "main_clean": true,
+  "H_HEAD": "a4de838b757e0ccd660898341e1feeb770d03dc4",
+  "H_clean": true,
+  "I_HEAD": "de91289284bb185fc6f5a66ed606efd9d9873747",
+  "I_clean": true,
+  "Thermo_worktree_not_accessed": true,
+  "protected_selection_exists": false,
+  "new_protected_test_shards": 0
+}
