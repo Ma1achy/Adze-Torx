@@ -1,0 +1,160 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "auditor_source_sha256": "29aa37afd0c5659b3f6e8fd7a6ef726daa6b48d90dde2fd5343fbdb5635cf956",
+  "free_bytes_before_audit": 18241306624,
+  "free_bytes_after_audit": 22579482624,
+  "whole_campaign_budget_bytes_including_guard": {
+    "remaining_checkpoints_rings_atomic_staging": 1073741824,
+    "evaluation_shards": 1610612736,
+    "reports_receipts_and_exports": 536870912,
+    "backup_and_integration_fixture_copies": 536870912,
+    "compiler_test_and_validation_temporary_reserve": 1073741824,
+    "additional_volatility_reserve": 536870912,
+    "unchanged_frozen_guard": 2147483648
+  },
+  "required_total_bytes": 7516192768,
+  "deleted_files": [],
+  "accepted_backup_sha256": "f82269e87457c71f92117102ed6a7d0eb76a827476b9532f18f9dc32dda9af0d",
+  "backup_and_live_state_bitwise_tree_equal": true,
+  "checkpoints": {
+    "seed0/A": {
+      "completed_updates": 1000,
+      "next_update": 1001,
+      "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed0/A/slot_0.pkl",
+      "payload_sha256": "6a82112b480840ffe2f759fd5180d8e733c6ee02e7cd89543e310babbde9b9d0",
+      "receipt_count": 1001,
+      "finite_recorded_metrics": true,
+      "frozen_state_receipts_verified": true,
+      "tensor_reexecution_performed": false,
+      "model_tree": "24e90f4d7df68905ecda08d4c228b647cc629a7e630d914312e40f2b53f62a03",
+      "optimizer_tree": "3f35f444f4e91b15a6970d1041a80569191ca90ef19f2d8c4d4250a0139f1d85",
+      "moment_structures_shapes_dtypes_finite_and_nonzero": true,
+      "second_moments_nonnegative": true,
+      "frozen_fingerprint": "41e16eceaf9905dd1c057caf6620ea132bc1350c3ef7b5940eec653d51f69d8b"
+    },
+    "seed0/B": {
+      "completed_updates": 1000,
+      "next_update": 1001,
+      "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed0/B/slot_0.pkl",
+      "payload_sha256": "ff344d72489c0923cc014e40b2d5b647f04c8c6e4af928713019838da07a6446",
+      "receipt_count": 1001,
+      "finite_recorded_metrics": true,
+      "frozen_state_receipts_verified": true,
+      "tensor_reexecution_performed": false,
+      "model_tree": "a3ef451d2842f4d7481f8c705d6754912ca187b1f2bbc63665baa85c7e55bd6c",
+      "optimizer_tree": "9f445e86ba2f73f98a89d5c68d3b96deceec75f5b929271b949cb0f3a3c36c75",
+      "moment_structures_shapes_dtypes_finite_and_nonzero": true,
+      "second_moments_nonnegative": true,
+      "frozen_fingerprint": "41e16eceaf9905dd1c057caf6620ea132bc1350c3ef7b5940eec653d51f69d8b"
+    },
+    "seed0/C": {
+      "completed_updates": 1000,
+      "next_update": 1001,
+      "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed0/C/slot_0.pkl",
+      "payload_sha256": "b4896a4d44bc74928c68824bd2be2c52f726eac1f0675a14f77b54d123a7abc8",
+      "receipt_count": 1001,
+      "finite_recorded_metrics": true,
+      "frozen_state_receipts_verified": true,
+      "tensor_reexecution_performed": false,
+      "model_tree": "20881b8be95af4d811fb2ce4531893409c4d6f2a2955269d53fa07d660e1384f",
+      "optimizer_tree": "974ffaad4b13b146d0d5a8f9f1c222fcb54bd354b7f5fadb469d1ada5bcb5268",
+      "moment_structures_shapes_dtypes_finite_and_nonzero": true,
+      "second_moments_nonnegative": true,
+      "frozen_fingerprint": "41e16eceaf9905dd1c057caf6620ea132bc1350c3ef7b5940eec653d51f69d8b"
+    },
+    "seed1/A": {
+      "completed_updates": 1000,
+      "next_update": 1001,
+      "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed1/A/slot_0.pkl",
+      "payload_sha256": "77de7dbdbb928bf6ea42035b5f54d8327275cbfb7f38c888f7f4f049ca328849",
+      "receipt_count": 1001,
+      "finite_recorded_metrics": true,
+      "frozen_state_receipts_verified": true,
+      "tensor_reexecution_performed": false,
+      "model_tree": "f41bc8f1f0bd79a2e5441a6c2970ab599c77642c4bbede5cc98306c5f27e2f67",
+      "optimizer_tree": "72e84cce631d7fb4258278720e0de8bbbc3038e150256a92d8a7bc278a887cb8",
+      "moment_structures_shapes_dtypes_finite_and_nonzero": true,
+      "second_moments_nonnegative": true,
+      "frozen_fingerprint": "41e16eceaf9905dd1c057caf6620ea132bc1350c3ef7b5940eec653d51f69d8b"
+    },
+    "seed1/B": {
+      "completed_updates": 137,
+      "next_update": 138,
+      "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed1/B/slot_1.pkl",
+      "payload_sha256": "f82269e87457c71f92117102ed6a7d0eb76a827476b9532f18f9dc32dda9af0d",
+      "receipt_count": 138,
+      "finite_recorded_metrics": true,
+      "frozen_state_receipts_verified": true,
+      "tensor_reexecution_performed": false,
+      "model_tree": "ed00a2129bf5d0fc0bbb16f88feaf7f841a56da703c96ffaf51a2004f40d93b3",
+      "optimizer_tree": "0b051a0055222c31994d654d269359a9e29ee7017810aff00aed27b6c6acbf76",
+      "moment_structures_shapes_dtypes_finite_and_nonzero": true,
+      "second_moments_nonnegative": true,
+      "frozen_fingerprint": "41e16eceaf9905dd1c057caf6620ea132bc1350c3ef7b5940eec653d51f69d8b"
+    }
+  },
+  "prior_counted_updates": 4137,
+  "next_seed": 1,
+  "next_arm": "B",
+  "next_optimizer_update": 138,
+  "next_batch_global_example_ids": [
+    381,
+    128,
+    375,
+    621,
+    532,
+    1024,
+    1375,
+    705,
+    63,
+    354,
+    1404,
+    64,
+    1789,
+    810,
+    1677,
+    709,
+    1336,
+    1100,
+    438,
+    1538,
+    967,
+    1645,
+    1304,
+    272,
+    1707,
+    105,
+    684,
+    239,
+    1434,
+    1256,
+    687,
+    1327
+  ],
+  "dataset_identities": {
+    "train": "f439ec73d08a803115621d2f0dc831affc376c8e2491ae4fa510b047189a2205",
+    "validation": "b3f442b077dd38ce45906a91808686a0a5f1fa9560a3dfa736e7ca59ca1afedf"
+  },
+  "seed1_namespace_root_words": {
+    "dataset_order": [
+      1584293328,
+      2943690757
+    ],
+    "training_structure": [
+      887303742,
+      2351179215
+    ],
+    "operator": [
+      31386953,
+      982766198
+    ],
+    "evaluation_structure": [
+      3550672293,
+      525375794
+    ]
+  },
+  "common_cap": 1000,
+  "extension_not_activated": true,
+  "no_protected_test_generation": true,
+  "no_model_forward_gradient_or_optimizer_update": true
+}
