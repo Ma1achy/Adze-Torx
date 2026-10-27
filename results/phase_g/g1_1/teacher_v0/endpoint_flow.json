@@ -1,0 +1,2759 @@
+{
+  "actual_model_tree": "94f4b7de78406336b6e6bb87416981330a98e9d74b9bfe7c4280529807184bd2",
+  "legacy_helper_alias": "fresh_F1_G01 (not a claim about trained weights)",
+  "selected_ids": [
+    10379,
+    10016,
+    10770,
+    10563,
+    10365,
+    10703,
+    10656,
+    10484,
+    10421,
+    10808,
+    10857,
+    10579,
+    10476,
+    10092,
+    10678,
+    10293,
+    10261,
+    10374,
+    10060,
+    10138,
+    10362,
+    10545,
+    10878,
+    10111,
+    10723,
+    10115,
+    10151,
+    10871,
+    10415,
+    10880,
+    10706,
+    10331,
+    10268,
+    10724,
+    10752,
+    10416,
+    10594,
+    10179,
+    10854,
+    10270,
+    10750,
+    10829,
+    10189,
+    10100,
+    10436,
+    10167,
+    10459,
+    10601,
+    10587,
+    10688,
+    10081,
+    10124,
+    10296,
+    10506,
+    10801,
+    10560,
+    10176,
+    10582,
+    10373,
+    10069,
+    10366,
+    10819,
+    10372,
+    10805
+  ],
+  "flow": {
+    "checks": {
+      "A_peer_reachable": true,
+      "B_peer_excluded": true,
+      "encoder_prefix_invariant": true,
+      "negative_invariance": true,
+      "oracle_positive_signal": true,
+      "oracle_blocked_invariance": true,
+      "eager_jit": true
+    },
+    "maximum_label_responses": {
+      "A": 40.071044921875,
+      "B": 0.0,
+      "C": 0.0,
+      "C_post": 0.0,
+      "D_outside": 40.071044921875,
+      "D_substitute": 0.0,
+      "no_attention": 0.0,
+      "E_codec": 0.0,
+      "E_model": 0.0
+    },
+    "rows": {
+      "A": [
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 23.556503295898438,
+            "rms": 2.644671678543091
+          },
+          "query_h_response": {
+            "maximum": 1.2667732238769531,
+            "rms": 0.3542931377887726
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.5416666865348816,
+            "nll": 1.445657730102539,
+            "exact": 0.125
+          },
+          "metrics_B": {
+            "accuracy": 0.4583333432674408,
+            "nll": 1.6806061267852783,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 23.704469680786133,
+            "rms": 2.9009761810302734
+          },
+          "query_h_response": {
+            "maximum": 1.0470069646835327,
+            "rms": 0.30733996629714966
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.625,
+            "nll": 1.2034008502960205,
+            "exact": 0.25
+          },
+          "metrics_B": {
+            "accuracy": 0.7083333730697632,
+            "nll": 1.0266751050949097,
+            "exact": 0.375
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 18.497356414794922,
+            "rms": 2.5657923221588135
+          },
+          "query_h_response": {
+            "maximum": 0.915661096572876,
+            "rms": 0.3031297028064728
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.625,
+            "nll": 1.2638455629348755,
+            "exact": 0.125
+          },
+          "metrics_B": {
+            "accuracy": 0.5416666865348816,
+            "nll": 1.3981902599334717,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 23.731477737426758,
+            "rms": 3.2886221408843994
+          },
+          "query_h_response": {
+            "maximum": 1.2104682922363281,
+            "rms": 0.34868744015693665
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.4583333432674408,
+            "nll": 1.4173673391342163,
+            "exact": 0.125
+          },
+          "metrics_B": {
+            "accuracy": 0.625,
+            "nll": 1.3040355443954468,
+            "exact": 0.25
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 40.071044921875,
+            "rms": 3.4242589473724365
+          },
+          "query_h_response": {
+            "maximum": 1.276658535003662,
+            "rms": 0.37883415818214417
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.5,
+            "nll": 1.3112244606018066,
+            "exact": 0.125
+          },
+          "metrics_B": {
+            "accuracy": 0.5416666865348816,
+            "nll": 1.5154274702072144,
+            "exact": 0.125
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 28.283931732177734,
+            "rms": 3.3133130073547363
+          },
+          "query_h_response": {
+            "maximum": 1.4884850978851318,
+            "rms": 0.34262311458587646
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.4583333432674408,
+            "nll": 1.8837823867797852,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.4166666865348816,
+            "nll": 1.5590600967407227,
+            "exact": 0.125
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 26.412776947021484,
+            "rms": 3.2523505687713623
+          },
+          "query_h_response": {
+            "maximum": 0.9948070049285889,
+            "rms": 0.33647245168685913
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.5833333730697632,
+            "nll": 1.2502751350402832,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.5833333730697632,
+            "nll": 1.2295712232589722,
+            "exact": 0.25
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 26.436992645263672,
+            "rms": 2.962148666381836
+          },
+          "query_h_response": {
+            "maximum": 1.1488142013549805,
+            "rms": 0.3281243145465851
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.5833333730697632,
+            "nll": 1.1554454565048218,
+            "exact": 0.125
+          },
+          "metrics_B": {
+            "accuracy": 0.5833333730697632,
+            "nll": 1.155508041381836,
+            "exact": 0.125
+          }
+        }
+      ],
+      "B": [
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 13.287239074707031,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 13.95694351196289,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "metrics_A": {
+            "accuracy": 0.0833333358168602,
+            "nll": 8.276055335998535,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 9.91086196899414,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "metrics_A": {
+            "accuracy": 0.125,
+            "nll": 10.61030387878418,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 11.861541748046875,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 12.586204528808594,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0833333358168602,
+            "nll": 10.0505952835083,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 13.367460250854492,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 10.754117965698242,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "metrics_A": {
+            "accuracy": 0.0833333358168602,
+            "nll": 9.761051177978516,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 10.175085067749023,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 9.766983032226562,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 11.064407348632812,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 12.305290222167969,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0833333358168602,
+            "nll": 11.742919921875,
+            "exact": 0.0
+          }
+        }
+      ],
+      "C": [
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 10.973429679870605,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 11.727754592895508,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 10.668825149536133,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 10.352485656738281,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 9.610414505004883,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 8.958871841430664,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 9.10452938079834,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0833333358168602,
+            "nll": 9.680917739868164,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 10.864485740661621,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 9.986387252807617,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 11.146594047546387,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 10.896990776062012,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 8.94559097290039,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 11.617727279663086,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 10.980669021606445,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 9.996113777160645,
+            "exact": 0.0
+          }
+        }
+      ],
+      "C_post": [
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 9.896533966064453,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 11.167896270751953,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0833333358168602,
+            "nll": 7.845658302307129,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0833333358168602,
+            "nll": 6.797872066497803,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0833333358168602,
+            "nll": 11.424713134765625,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 11.422719955444336,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 12.68545150756836,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 9.02017593383789,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 13.432218551635742,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0833333358168602,
+            "nll": 12.773290634155273,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.125,
+            "nll": 9.517364501953125,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 7.599000930786133,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 7.772456645965576,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 9.212993621826172,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 7.621087074279785,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 7.736836910247803,
+            "exact": 0.0
+          }
+        }
+      ],
+      "D_outside": [
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 30.242692947387695,
+            "rms": 2.731792688369751
+          },
+          "query_h_response": {
+            "maximum": 1.2568511962890625,
+            "rms": 0.3531563878059387
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.5416666865348816,
+            "nll": 1.665945053100586,
+            "exact": 0.125
+          },
+          "metrics_B": {
+            "accuracy": 0.5833333730697632,
+            "nll": 1.4232203960418701,
+            "exact": 0.125
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 25.388904571533203,
+            "rms": 2.8937251567840576
+          },
+          "query_h_response": {
+            "maximum": 1.0964637994766235,
+            "rms": 0.3050277829170227
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.6666666865348816,
+            "nll": 1.374046802520752,
+            "exact": 0.125
+          },
+          "metrics_B": {
+            "accuracy": 0.625,
+            "nll": 1.0132191181182861,
+            "exact": 0.25
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 19.06484603881836,
+            "rms": 2.717181444168091
+          },
+          "query_h_response": {
+            "maximum": 0.8823093175888062,
+            "rms": 0.3009771704673767
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.6666666865348816,
+            "nll": 1.2162419557571411,
+            "exact": 0.25
+          },
+          "metrics_B": {
+            "accuracy": 0.5,
+            "nll": 1.3184964656829834,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 24.65342903137207,
+            "rms": 3.3628604412078857
+          },
+          "query_h_response": {
+            "maximum": 1.2073839902877808,
+            "rms": 0.3518962562084198
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.5,
+            "nll": 1.4036777019500732,
+            "exact": 0.25
+          },
+          "metrics_B": {
+            "accuracy": 0.5833333730697632,
+            "nll": 1.1964237689971924,
+            "exact": 0.125
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 40.071044921875,
+            "rms": 3.5102641582489014
+          },
+          "query_h_response": {
+            "maximum": 1.2607256174087524,
+            "rms": 0.37958672642707825
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.5416666865348816,
+            "nll": 1.4600534439086914,
+            "exact": 0.125
+          },
+          "metrics_B": {
+            "accuracy": 0.4166666865348816,
+            "nll": 1.643629789352417,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 26.425804138183594,
+            "rms": 3.2700750827789307
+          },
+          "query_h_response": {
+            "maximum": 1.433260440826416,
+            "rms": 0.3412006199359894
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.4583333432674408,
+            "nll": 1.6901954412460327,
+            "exact": 0.125
+          },
+          "metrics_B": {
+            "accuracy": 0.5416666865348816,
+            "nll": 1.6092580556869507,
+            "exact": 0.125
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 22.86327362060547,
+            "rms": 3.2918455600738525
+          },
+          "query_h_response": {
+            "maximum": 1.0004651546478271,
+            "rms": 0.33824560046195984
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.5833333730697632,
+            "nll": 1.3949875831604004,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.625,
+            "nll": 1.0589230060577393,
+            "exact": 0.375
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 31.59870147705078,
+            "rms": 3.2188236713409424
+          },
+          "query_h_response": {
+            "maximum": 1.1488142013549805,
+            "rms": 0.32922089099884033
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.5416666865348816,
+            "nll": 1.234246015548706,
+            "exact": 0.125
+          },
+          "metrics_B": {
+            "accuracy": 0.7916666865348816,
+            "nll": 0.9327406883239746,
+            "exact": 0.5
+          }
+        }
+      ],
+      "D_substitute": [
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 9.482237815856934,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 10.722594261169434,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.125,
+            "nll": 10.456995964050293,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 10.439501762390137,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 10.256385803222656,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 9.488971710205078,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 9.771615982055664,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 8.91680908203125,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 11.721424102783203,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 10.343453407287598,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 10.916312217712402,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 12.668088912963867,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 8.313129425048828,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 8.933019638061523,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 10.173415184020996,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 8.544021606445312,
+            "exact": 0.0
+          }
+        }
+      ],
+      "no_attention": [
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 4.166614532470703,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 4.667450428009033,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 4.456481456756592,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 3.995837688446045,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0833333358168602,
+            "nll": 3.6905391216278076,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 3.7626590728759766,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 3.9653353691101074,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 3.934084415435791,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 4.041842460632324,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 3.7897448539733887,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 4.732236862182617,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 4.1124396324157715,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 4.00526237487793,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 4.04649543762207,
+            "exact": 0.0
+          }
+        },
+        {
+          "prefix_encoder_error": 0.0,
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "query_h_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "context_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "proposal_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "peer_reachable": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 3.994487762451172,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 3.8549747467041016,
+            "exact": 0.0
+          }
+        }
+      ],
+      "E_codec": [
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 55.59876251220703,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 64.02389526367188,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 73.53953552246094,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 68.62567138671875,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 65.18125915527344,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 54.197105407714844,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 51.86199188232422,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 48.96458435058594,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 64.18698120117188,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 63.559688568115234,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 61.74297332763672,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 69.91761779785156,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 51.42008972167969,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 55.86556625366211,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 51.12961959838867,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 61.349700927734375,
+            "exact": 0.0
+          }
+        }
+      ],
+      "E_model": [
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 11.554823875427246,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 14.0475492477417,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 13.817352294921875,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 13.242361068725586,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 13.104755401611328,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 10.015959739685059,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0416666679084301,
+            "nll": 11.194479942321777,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.125,
+            "nll": 9.77741813659668,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 12.64387321472168,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 13.593399047851562,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 12.641173362731934,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 13.10627555847168,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 10.962206840515137,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0416666679084301,
+            "nll": 13.084887504577637,
+            "exact": 0.0
+          }
+        },
+        {
+          "query_logits_response": {
+            "maximum": 0.0,
+            "rms": 0.0
+          },
+          "metrics_A": {
+            "accuracy": 0.0,
+            "nll": 10.13636589050293,
+            "exact": 0.0
+          },
+          "metrics_B": {
+            "accuracy": 0.0,
+            "nll": 11.72442626953125,
+            "exact": 0.0
+          }
+        }
+      ]
+    },
+    "oracle_injection": [
+      {
+        "case": "A",
+        "response": {
+          "maximum": 18.348651885986328,
+          "rms": 1.639412760734558
+        },
+        "per_example_logit_rms": [
+          2.624997138977051,
+          0.9385554790496826,
+          1.2321709394454956,
+          0.4910314381122589,
+          0.17412930727005005,
+          1.8187224864959717,
+          2.3192200660705566,
+          1.8037976026535034
+        ],
+        "h_response": {
+          "maximum": 0.5596023797988892,
+          "rms": 0.16895736753940582
+        }
+      },
+      {
+        "case": "B",
+        "response": {
+          "maximum": 0.0,
+          "rms": 0.0
+        },
+        "per_example_logit_rms": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "h_response": {
+          "maximum": 0.0,
+          "rms": 0.0
+        }
+      },
+      {
+        "case": "no_attention",
+        "response": {
+          "maximum": 0.0,
+          "rms": 0.0
+        },
+        "per_example_logit_rms": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "h_response": {
+          "maximum": 0.0,
+          "rms": 0.0
+        }
+      },
+      {
+        "case": "E_codec",
+        "response": {
+          "maximum": 0.0,
+          "rms": 0.0
+        },
+        "per_example_logit_rms": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "h_response": null
+      },
+      {
+        "case": "E_model",
+        "response": {
+          "maximum": 0.0,
+          "rms": 0.0
+        },
+        "per_example_logit_rms": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "h_response": null
+      }
+    ],
+    "eager_jit": [
+      {
+        "case": "A",
+        "error": 0.0
+      },
+      {
+        "case": "B",
+        "error": 0.0
+      },
+      {
+        "case": "C",
+        "error": 0.0
+      }
+    ]
+  },
+  "extended": {
+    "torx_parity_error": 0.0,
+    "forced_capacity_cuts": 19,
+    "alphabet_enumeration": [
+      {
+        "global_id": 10379,
+        "query": 3,
+        "peer": 4,
+        "distinct_peer_latents": true,
+        "controls": {
+          "B": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.03571428571428571
+          },
+          "C": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.03571428571428571
+          },
+          "C_post": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.03571428571428571
+          },
+          "D_substitute": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.03571428571428571
+          },
+          "E_codec": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.0
+          },
+          "E_model": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.03571428571428571
+          }
+        }
+      },
+      {
+        "global_id": 10545,
+        "query": 1,
+        "peer": 6,
+        "distinct_peer_latents": true,
+        "controls": {
+          "B": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.03571428571428571
+          },
+          "C": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.03571428571428571
+          },
+          "C_post": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.03571428571428571
+          },
+          "D_substitute": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.03571428571428571
+          },
+          "E_codec": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.0
+          },
+          "E_model": {
+            "max_logit_variation": 0.0,
+            "restricted_domain_accuracy": 0.03571428571428571,
+            "raw_full_vocab_accuracy": 0.03571428571428571
+          }
+        }
+      }
+    ],
+    "checks": {
+      "torx_parity": true,
+      "identity": true,
+      "capacity_eager_jit": true,
+      "capacity_separate": true,
+      "forced_cut_can_block_future": true,
+      "capacity_overflow_rejected": true,
+      "alphabet_enumeration": true
+    },
+    "passed": true
+  }
+}

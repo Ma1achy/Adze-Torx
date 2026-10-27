@@ -1,0 +1,1 @@
+Private Torx scan: zero matches in src, tests, scripts.

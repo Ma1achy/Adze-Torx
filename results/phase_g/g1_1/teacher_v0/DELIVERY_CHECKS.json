@@ -1,0 +1,23 @@
+{
+  "manifest_sha256": "8945667b233de8cb88ec714b18723ed6e0593a77c1b76f629e154efe818c4bbf",
+  "report_sha256": "0aea5dd0ea8c8fb27d360936a00dec7dfb910c42b48429e489db055c1c092dc3",
+  "manifest_entries_verified_in_worktree": 270,
+  "manifest_entries_verified_in_independent_archive": 270,
+  "evidence_directory_recursive_comparison": "pass",
+  "official_updates": 100,
+  "official_states": 101,
+  "bounded_teacher_criteria": "pass",
+  "regular_passed": 277,
+  "slow_passed": 30,
+  "focused_passed": 14,
+  "required_checks_skipped": 0,
+  "historical_artifacts_unchanged": 727,
+  "accepted_F1_G01_old_teacher100_hashes_rechecked": true,
+  "main_HEAD_unchanged": "2a0cab0c9c647832596013d56037c842ff3844ea",
+  "main_worktree_clean": true,
+  "H_I_worktrees_unchanged_and_clean": true,
+  "authorized_delivery": "Commit isolated phase-g-structure only; no merge or push to main",
+  "self_excluded_from_manifest": true,
+  "scientific_scope": "Bounded trained future-peer use with teacher commitment only; no learned/sampled-commit or full-G conclusion",
+  "stop": "No further training, H/I work, full G campaign or S4"
+}

@@ -1,0 +1,69 @@
+{
+  "scope": "Authorized G11 teacher100, fixed endpoint and unchanged frozen scientific criteria",
+  "regular": {
+    "command": "PYTHONPATH=src:scripts make test",
+    "passed": 277,
+    "deselected": 30,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 1517.45,
+    "log": "validation_logs/regular.txt"
+  },
+  "slow": {
+    "command": "PYTHONPATH=src:scripts make test-slow",
+    "passed": 30,
+    "deselected": 277,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 61.01,
+    "log": "validation_logs/slow.txt"
+  },
+  "focused_final": {
+    "command": "PYTHONPATH=src:scripts pytest tests/test_phase_g11_teacher.py tests/test_phase_g11_task.py -o addopts='' -q",
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 62.58,
+    "log": "validation_logs/focused_final.txt"
+  },
+  "static": {
+    "command": "PYTHONPATH=src:scripts make format-check lint typecheck boundaries",
+    "format_files": 160,
+    "ruff": "pass",
+    "pyright_errors": 0,
+    "pyright_warnings": 0,
+    "public_boundaries": "pass",
+    "log": "validation_logs/static_delivery.txt"
+  },
+  "private_Torx": {
+    "command": "rg -n 'torx\\._|from torx import _' src tests scripts",
+    "matches": 0,
+    "rg_exit": 1,
+    "interpretation": "No matches (pass); filesystem/search errors would not be accepted",
+    "log": "validation_logs/private_torx.txt"
+  },
+  "new_task_full_model_gates": {
+    "source_commit": "4689293a73f22a37dbb156cef658820ea03985fd",
+    "first_gradient": "finite, raw norm2201.71728515625",
+    "prospective_update": "finite, discarded, decoder changed, frozen leaves/moments unchanged",
+    "persistence": "full means/Adam m/v/step reloaded bitwise",
+    "fail_closed": "invalid full-model JIT attempt left params/Adam/step unchanged; eager/JIT regressions pass",
+    "label_invariance_and_reachability": "pass before update1 and at fixed endpoint100",
+    "eager_JIT_and_deterministic_public_Torx_parity": "pass",
+    "record": "preflight.json and endpoint_flow.json"
+  },
+  "development_failures": "Recorded in EXECUTION_NOTES.md; corrected before counted updates except the preserved endpoint loading failure",
+  "evaluation_retry": "ENDPOINT_ATTEMPT_1_FAILURE.json, then lossless conversion wrapper; no new update or scientific setting change",
+  "preservation": "completion_integrity.json verifies727 historical hashes, old manifests, all101 finite full states and frozen parameter/moment bits",
+  "required_checks_skipped": [],
+  "scientific_work_not_authorized_and_not_run": [
+    "protected-test evaluation",
+    "argmax structural training",
+    "sampled structural training",
+    "full G campaign",
+    "H/I scientific training",
+    "codec/language training",
+    "S4"
+  ],
+  "result": "All required validation checks pass; bounded teacher result only, not Phase-G completion"
+}

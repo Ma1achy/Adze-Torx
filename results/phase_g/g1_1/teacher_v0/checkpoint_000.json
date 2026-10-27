@@ -1,0 +1,11 @@
+{
+  "step": 0,
+  "protocol": "bd733883a39e307d920b4a81665a39eb0d370841424b0e0f3a05335386021153",
+  "parent": null,
+  "payload": "payloads/000_000.pkl",
+  "sha256": "a8a4cdded14e0f18fe12c8710f83f4f4b426aa2bfd0b1c440586aa32a96f5b2f",
+  "metrics": {
+    "initialization": true
+  },
+  "completed": true
+}
