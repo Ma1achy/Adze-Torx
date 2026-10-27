@@ -1,0 +1,16 @@
+{
+  "training_updates": 0,
+  "training_time_per_update": null,
+  "reason": "Preflight prerequisite failed before any counted training",
+  "preflight_launch_local_time": "2026-10-27T02:00:07",
+  "preflight_failure_local_time": "2026-10-27T02:00:25",
+  "note": "This interval includes launch, train/validation feature preprocessing and three new query-oracle fixtures; not a model training benchmark",
+  "scheduling": "nice priority reduction denied by sandbox; execution continued at normal priority without changing scientific settings",
+  "concurrency": "One JAX model/test job at a time; no new training runner launched",
+  "validation_host_observation_UTC": "2026-10-27T02:36",
+  "memory_pressure_free_percentage": 40,
+  "disk_available_GiB_approximate": 12,
+  "optional_ps_and_swap_sysctl": "Initial sandbox denied reads; subsequently approved read-only process check confirmed one regular pytest process, active at about 26% CPU and 759 MB resident, with no duplicate G23 runner. Swap sysctl remained unavailable. No processes were signaled and no resource state was changed",
+  "model_failure": "None demonstrated; stop was statistical oracle nonpass",
+  "accepted_optimizer_or_checkpoint_writes": false
+}

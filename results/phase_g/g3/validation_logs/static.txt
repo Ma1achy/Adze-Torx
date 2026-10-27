@@ -1,0 +1,13 @@
+ruff format --check .
+169 files already formatted
+ruff check .
+All checks passed!
+pyright --pythonpath "$(python -c 'import sys; print(sys.executable)')"
+/private/tmp/adze-phase-g/tests/test_phase_g11_teacher.py
+  /private/tmp/adze-phase-g/tests/test_phase_g11_teacher.py:154:10 - error: Import "run_phase_g11_validation" could not be resolved (reportMissingImports)
+/private/tmp/adze-phase-g/tests/test_phase_g23_statistics.py
+  /private/tmp/adze-phase-g/tests/test_phase_g23_statistics.py:6:6 - error: Import "science_phase_g23" could not be resolved (reportMissingImports)
+  /private/tmp/adze-phase-g/tests/test_phase_g23_statistics.py:7:6 - error: Import "run_phase_g23" could not be resolved (reportMissingImports)
+  /private/tmp/adze-phase-g/tests/test_phase_g23_statistics.py:67:12 - error: Import "run_phase_g23" could not be resolved (reportMissingImports)
+4 errors, 0 warnings, 0 informations
+make: *** [typecheck] Error 1

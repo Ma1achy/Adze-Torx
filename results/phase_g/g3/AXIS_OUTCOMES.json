@@ -1,0 +1,21 @@
+{
+  "identity": "1d8ee3e970c9b8c98de1f027baa1adc4d3f03a941526238d91dbc827ad55a784",
+  "axis1": "BLOCKED",
+  "axis2": "BLOCKED",
+  "axis3": "BLOCKED",
+  "overall": "PHASE_G_BLOCKED",
+  "engineering_preflight": "BLOCKED",
+  "trainability": "NOT_EVALUATED",
+  "cause": "Frozen G2 V0 new query-loss peaked MC component failed four-estimated-root-SE prerequisite",
+  "implementation_defect_demonstrated": false,
+  "original_gate_waived": false,
+  "counted_training_updates": 0,
+  "official_G2_G3_checkpoints": [],
+  "selected_G2_G3_checkpoints": [],
+  "new_teacher_argmax_sampled_performance": null,
+  "new_fixed_neutral_cut_performance": null,
+  "new_stratified_query_performance": null,
+  "protected_test_exposed": false,
+  "merge_authorized_by_completion_gates": false,
+  "Phase_H_scientific_prerequisite_satisfied": false
+}

@@ -1,0 +1,67 @@
+{
+  "scope": "G23 V0 blocked preflight implementation and evidence; repository passes are not scientific gate passes",
+  "regular": {
+    "command": "PYTHONPATH=src:scripts make test",
+    "passed": 287,
+    "failed": 0,
+    "skipped": 0,
+    "deselected": 30,
+    "seconds": 3594.75,
+    "exit_status": 0,
+    "log": "validation_logs/regular.txt"
+  },
+  "slow": {
+    "command": "PYTHONPATH=src:scripts make test-slow",
+    "passed": 30,
+    "failed": 0,
+    "skipped": 0,
+    "deselected": 287,
+    "seconds": 156.42,
+    "exit_status": 0,
+    "log": "validation_logs/slow.txt"
+  },
+  "focused": {
+    "command": "PYTHONPATH=src:scripts pytest -m 'not slow' tests/test_phase_g2.py tests/test_phase_g23_statistics.py tests/test_phase_g0.py",
+    "passed": 22,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 161.64,
+    "exit_status": 0,
+    "log": "validation_logs/focused.txt"
+  },
+  "static": {
+    "command": "PYTHONPATH=src:scripts make format-check lint typecheck boundaries",
+    "formatted_files": 169,
+    "ruff": "PASS",
+    "pyright_errors": 0,
+    "pyright_warnings": 0,
+    "boundary_check": "PASS",
+    "exit_status": 0,
+    "log": "validation_logs/static_with_pythonpath.txt",
+    "prior_invocation": "Without the explicit project import path, four script-import resolution errors; original log retained as validation_logs/static.txt. No check was disabled."
+  },
+  "private_Torx": {
+    "scan_roots": ["src", "scripts", "tests", "experiments"],
+    "matches": 0,
+    "status": "PASS",
+    "log": "validation_logs/private_torx_scan.txt"
+  },
+  "scientific_preflight": {
+    "status": "BLOCKED",
+    "failed": "New query-loss peaked MC component exceeds frozen four-estimated-root-SE criterion",
+    "waived": false,
+    "evidence": "../g2/PREFLIGHT_FAILURE.json",
+    "blocked_stages": "FAILURE_SKIP_LEDGER.json",
+    "note": "Full-reference new-task gradient/trial-update and later integration gates were not reached. Small-model behavioral tests do not substitute for them."
+  },
+  "missing_fixture_skips": 0,
+  "final_identity_and_preservation_audit": {
+    "status": "PASS",
+    "historical_baseline_entries": 731,
+    "accepted_manifests_all_children_verified": true,
+    "source_protocol_runtime_parent_codec_tree_verified": true,
+    "log": "validation_logs/final_identity_audit.txt"
+  },
+  "heavy_JAX_jobs_sequential": true,
+  "training_or_test_data_used_to_tune_checks": false
+}

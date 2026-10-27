@@ -1,0 +1,12 @@
+{
+  "identity": "1d8ee3e970c9b8c98de1f027baa1adc4d3f03a941526238d91dbc827ad55a784",
+  "stage": "preflight",
+  "source_head": "10aec599e4ce08244e297d752c19ee5a770179fd",
+  "command": [
+    "scripts/run_phase_g23.py",
+    "--stage",
+    "preflight"
+  ],
+  "time": "2026-10-27T02:00:07",
+  "counted_update_state_not_reset": true
+}

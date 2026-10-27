@@ -5,6 +5,7 @@ Does not rerun gradient MC, select a new seed, train a model or alter protocols.
 
 import json
 import math
+from typing import Literal, cast
 
 import jax
 import jax.numpy as jnp
@@ -180,7 +181,11 @@ def main():
         counts.append(np.bincount(ell[:, 0], minlength=3))
         allkeys.extend(
             [
-                np.asarray(jax.random.key_data(context.keys(kind, capacity))).reshape(-1, 2)
+                np.asarray(
+                    jax.random.key_data(
+                        context.keys(cast(Literal["boundary", "extent"], kind), capacity)
+                    )
+                ).reshape(-1, 2)
                 for kind, capacity in (("boundary", 2), ("extent", 3))
             ]
         )

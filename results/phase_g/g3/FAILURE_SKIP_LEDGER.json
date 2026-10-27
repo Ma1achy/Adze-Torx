@@ -1,0 +1,49 @@
+{
+  "version": "PHASE_G23_V0_BLOCKED",
+  "protocol_identity": "1d8ee3e970c9b8c98de1f027baa1adc4d3f03a941526238d91dbc827ad55a784",
+  "failed_gate": {
+    "name": "new query-length structural-gradient Monte Carlo oracle",
+    "fixture": "peaked",
+    "component": "extent logits: site 0, class 2",
+    "error_in_empirical_root_standard_errors": 4.450393401057709,
+    "frozen_limit": 4.0,
+    "waived": false,
+    "rerolled": false,
+    "extra_roots_or_samples": false,
+    "evidence": "../g2/query_oracle_peaked.json"
+  },
+  "diagnosis": {
+    "same_draw_only": true,
+    "implementation_defect_demonstrated": false,
+    "criterion_substituted": false,
+    "interpretation": "Rare-event undercount is consistent with an underestimated empirical root SE; exact production gradients agree. This explanation does not pass or replace the frozen MC gate.",
+    "evidence": "../g2/ORACLE_NONPASS_DIAGNOSIS.json"
+  },
+  "dependency_blocked": [
+    "Full-reference new-task parent gradient and prospective AdamW update",
+    "Full-reference new-task frozen-state and fail-closed optimizer persistence checks",
+    "Full-reference generated zero-emission, reactivation, parity and negative-label-invariance preflight",
+    "Official fresh-Adam arm initialization and counted updates for A/B/C",
+    "Seed 1/2 replication and conditional 2000-update extension",
+    "Validation-only scientific checkpoint selection",
+    "Protected-test construction, opening and all G3 intervention/stratified performance evaluations",
+    "Phase G functional completion and main integration"
+  ],
+  "not_substituted": [
+    "Small-model real-graph engineering regressions are not full-reference warm-start preflight",
+    "Historical teacher100 results are not generated-commitment evidence",
+    "Exact expectation agreement is not a waiver of the separate MC prerequisite",
+    "No smaller test set, favorable root, alternative baseline or revised uncertainty denominator was used"
+  ],
+  "development_corrections": [
+    "Before protocol freeze: focused-test fixture and static annotation issues corrected; final focused run passed",
+    "After diagnostic execution: Literal typing cast only in the standalone same-draw diagnostic; numerical algorithm unchanged"
+  ],
+  "runtime_deviations": [
+    "nice -n 10 was unsupported in the sandbox; preflight ran at normal scheduling priority. Scientific settings unchanged.",
+    "Final static checks without PYTHONPATH=src:scripts reported four unresolved script imports; rerun with that explicit existing project import path passed. Both logs retained.",
+    "Optional sandboxed ps inspection was denied; no process was signaled or managed. This does not affect scientific evidence."
+  ],
+  "historical_evidence": "Preserved; accepted teacher100 and earlier oracle results remain unchanged",
+  "scientific_interpretation": "BLOCKED, not measured; no architecture or estimator inferiority conclusion"
+}

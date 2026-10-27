@@ -1,0 +1,8 @@
+ruff format --check .
+169 files already formatted
+ruff check .
+All checks passed!
+pyright --pythonpath "$(python -c 'import sys; print(sys.executable)')"
+0 errors, 0 warnings, 0 informations
+python scripts/check_public_boundaries.py
+Public dependency-boundary check passed.

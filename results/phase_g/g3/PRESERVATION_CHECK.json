@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "historical_baseline_entries": 731,
+  "accepted_manifest_entries": {
+    "g1": 13,
+    "g1_1": 22,
+    "g1_1/teacher_v0": 270
+  },
+  "frozen_source_and_protocol_entries": 81,
+  "identity": "1d8ee3e970c9b8c98de1f027baa1adc4d3f03a941526238d91dbc827ad55a784",
+  "new_run_files": ["campaign.lock", "failure_000.json", "launch_000.json"],
+  "no_counted_updates": true,
+  "protected_test_opening_record_present": false,
+  "accepted_F1_sha256_in_main_and_G": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+  "method": "Read-only SHA-256 verification of preservation baseline, every child of all three accepted manifests, frozen source map and protocols; no model execution"
+}
