@@ -1,0 +1,8 @@
+pytest -m "not slow"
+........................................................................ [ 22%]
+.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/opt/anaconda3/lib/python3.11/site-packages/jax/_src/compiler.py:362: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+73 passed, 30 deselected in 600.57s (0:10:00)
+make: *** [test] Error 2

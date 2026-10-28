@@ -1,0 +1,13 @@
+{
+  "command": [
+    "make",
+    "format-check"
+  ],
+  "name": "format-check",
+  "returncode": 0,
+  "started": "2026-10-28T18:46:31+0000",
+  "ended": "2026-10-28T18:46:31+0000",
+  "wall_seconds": 0.07599354209378362,
+  "log": "results/phase_g/g3/v1/validation_branch/01_format-check.log",
+  "log_sha256": "58c59b700a725fec011d3b6c3658666d00f0ccb440b73847af5e01df9a75c365"
+}

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "source_sha256": "593bc12285175cfc4688b61dbff6ec8092da5a1dfc46ccd9f992cd6a597cd5df",
+  "checked": {
+    "train": 1824,
+    "validation": 912,
+    "protected_test_symbolic_only": 912
+  },
+  "total": 3648,
+  "shared_symbolic_helper_used": false,
+  "neural_model_executed": false
+}

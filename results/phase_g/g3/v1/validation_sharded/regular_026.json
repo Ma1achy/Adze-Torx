@@ -1,0 +1,75 @@
+{
+  "name": "regular_026",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_f_1.py::test_denoise_v0_generation_is_deterministic_constant_context_and_random_target",
+    "tests/test_phase_f_1.py::test_denoise_v1_changes_only_the_target_domain",
+    "tests/test_phase_f_1.py::test_validation_epsilon_is_paired_across_nu_and_training_occurrences_are_fresh",
+    "tests/test_phase_f_1.py::test_fixed_eight_byte_structure_and_pack_metadata_are_content_invariant",
+    "tests/test_phase_f_1.py::test_legacy_path_equals_explicit_proposal_state_and_zero_corruption_is_exact",
+    "tests/test_phase_f_1.py::test_explicit_state_matches_independent_faithful_heavy_core_reference",
+    "tests/test_phase_f_1.py::test_teacher_content_cannot_leak_when_carrier_and_structure_are_fixed",
+    "tests/test_phase_f_1.py::test_explicit_carrier_and_noise_conditioning_are_inference_visible"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_f_1.py::test_denoise_v0_generation_is_deterministic_constant_context_and_random_target",
+    "tests/test_phase_f_1.py::test_denoise_v1_changes_only_the_target_domain",
+    "tests/test_phase_f_1.py::test_validation_epsilon_is_paired_across_nu_and_training_occurrences_are_fresh",
+    "tests/test_phase_f_1.py::test_fixed_eight_byte_structure_and_pack_metadata_are_content_invariant",
+    "tests/test_phase_f_1.py::test_legacy_path_equals_explicit_proposal_state_and_zero_corruption_is_exact",
+    "tests/test_phase_f_1.py::test_explicit_state_matches_independent_faithful_heavy_core_reference",
+    "tests/test_phase_f_1.py::test_teacher_content_cannot_leak_when_carrier_and_structure_are_fixed",
+    "tests/test_phase_f_1.py::test_explicit_carrier_and_noise_conditioning_are_inference_visible",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_026.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_f_1",
+      "test_denoise_v0_generation_is_deterministic_constant_context_and_random_target"
+    ],
+    [
+      "tests.test_phase_f_1",
+      "test_denoise_v1_changes_only_the_target_domain"
+    ],
+    [
+      "tests.test_phase_f_1",
+      "test_validation_epsilon_is_paired_across_nu_and_training_occurrences_are_fresh"
+    ],
+    [
+      "tests.test_phase_f_1",
+      "test_fixed_eight_byte_structure_and_pack_metadata_are_content_invariant"
+    ],
+    [
+      "tests.test_phase_f_1",
+      "test_legacy_path_equals_explicit_proposal_state_and_zero_corruption_is_exact"
+    ],
+    [
+      "tests.test_phase_f_1",
+      "test_explicit_state_matches_independent_faithful_heavy_core_reference"
+    ],
+    [
+      "tests.test_phase_f_1",
+      "test_teacher_content_cannot_leak_when_carrier_and_structure_are_fixed"
+    ],
+    [
+      "tests.test_phase_f_1",
+      "test_explicit_carrier_and_noise_conditioning_are_inference_visible"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:15:18+0000",
+  "ended": "2026-10-28T19:15:34+0000",
+  "wall_seconds": 15.73425312479958,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "9fc65169932f201873cd9743e743c07c5ddbd518fdcf6c713bd9df471dbf750b"
+}

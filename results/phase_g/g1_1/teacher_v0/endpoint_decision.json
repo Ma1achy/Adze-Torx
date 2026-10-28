@@ -1,0 +1,52 @@
+{
+  "protocol": "bd733883a39e307d920b4a81665a39eb0d370841424b0e0f3a05335386021153",
+  "step": 100,
+  "model_tree": "94f4b7de78406336b6e6bb87416981330a98e9d74b9bfe7c4280529807184bd2",
+  "accuracy": {
+    "delta": 0.561403519490309,
+    "delta_ci95": [
+      0.5442251566307325,
+      0.5789565167422488
+    ],
+    "relative": 15.207920629199194,
+    "relative_ci95": [
+      12.694008122723217,
+      18.79524148601614
+    ],
+    "replicates": 2000,
+    "seed": 1161,
+    "control_code": 0
+  },
+  "nll": {
+    "delta": -9.919852183210631,
+    "delta_ci95": [
+      -10.22324804359763,
+      -9.592879803772922
+    ],
+    "relative": -0.8887091112219777,
+    "relative_ci95": [
+      -0.8939563330676666,
+      -0.8831219991960695
+    ],
+    "replicates": 2000,
+    "seed": 1162,
+    "control_code": 0
+  },
+  "nonquery_guard": {
+    "accuracy_pass": true,
+    "nll_pass": true,
+    "passed": true
+  },
+  "checks": {
+    "accuracy_effect": true,
+    "nll_effect": true,
+    "accuracy_ci": true,
+    "nll_ci": true,
+    "above_chance": true,
+    "nonquery_accuracy": true,
+    "nonquery_nll": true
+  },
+  "bounded_necessity_pass": true,
+  "interpretation": "bounded trained future-peer use under teacher structure only",
+  "protected_test_exposed": false
+}

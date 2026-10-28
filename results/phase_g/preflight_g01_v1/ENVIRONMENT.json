@@ -1,0 +1,35 @@
+{
+  "capture": "post-execution, same interpreter; not a retrospective preregistration claim",
+  "python_executable": "/opt/anaconda3/bin/python",
+  "python": "3.11.8 | packaged by conda-forge | (main, Feb 16 2024, 20:49:36) [Clang 16.0.6 ]",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "packages": {
+    "jax": "0.8.1",
+    "jaxlib": "0.8.1",
+    "numpy": "2.4.6",
+    "extro-torx": "0.0.1",
+    "pytest": "9.1.1",
+    "ruff": "0.15.17",
+    "pyright": "1.1.411"
+  },
+  "torx_direct_url": {
+    "url": "https://github.com/extropic-ai/torx.git",
+    "vcs_info": {
+      "commit_id": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+      "requested_revision": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+      "vcs": "git"
+    }
+  },
+  "environment": {
+    "JAX_PLATFORMS": null,
+    "JAX_PLATFORM_NAME": null,
+    "XLA_FLAGS": null,
+    "OMP_NUM_THREADS": null,
+    "PYTHONPATH": null
+  },
+  "execution_invocation_environment": {
+    "PYTHONPATH": "src",
+    "note": "explicit prefix on the recorded scientific and validation commands"
+  }
+}

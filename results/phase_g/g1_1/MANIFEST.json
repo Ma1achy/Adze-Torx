@@ -1,0 +1,32 @@
+{
+  "task": "PHASE_G11_FUTURE_PEER_OBSERVATION_LATENT_V0",
+  "verdict": "G11_TASK_VALIDATED",
+  "G1_commit": "404f2e208793a197a0c206c1febfea235a613375",
+  "primary_execution_commit": "f75e75d5d8f1883dc506315798c06f92414f9877",
+  "new_neural_training_updates": 0,
+  "excluded_self": "MANIFEST.json",
+  "files": {
+    "results/phase_g/g1_1/BOUNDED_TEACHER_PROTOCOL.md": "35cbd1fed3b0490b73b83693c7246b01d5d41057295046b95d4022e514d8e29c",
+    "results/phase_g/g1_1/G11_RESULTS.md": "e78c40c9cbe64a9343104fcf4b89ec0ba95228d4a4a62dca3b9176af583b2ce5",
+    "results/phase_g/g1_1/PRESERVATION.json": "37d46b85abc60682c74cab6bdd457026ac823f31a61a7ebc95858b972cb30eb4",
+    "results/phase_g/g1_1/PROVENANCE.json": "b7eccd33d29ceb24671b30bc342f5de39e1ee21c571a6782ff448440a1c2390d",
+    "results/phase_g/g1_1/TASK_COVERAGE.json": "5fdfbeb10f8a74d102f766769efd322cfde8441b84a5e188ca5e10aa96718866",
+    "results/phase_g/g1_1/VALIDATION.json": "c6920b4f277d83e5d9870215402ec47289e1ef0a3394b0cbb44a98bc0d109556",
+    "results/phase_g/g1_1/VALIDATION_PROTOCOL.md": "39beecf7aac187f9ef027dea5ae5dd701d9e3a2fd3cf18472b18b1ce97b0a5a3",
+    "results/phase_g/g1_1/VERDICT.json": "956ad39adff13263e834e77ca18b220cedd59db3d3a787892046488c335013f6",
+    "results/phase_g/g1_1/codec_identifiability.json": "cae7af5c772f830c98b26e46d7d527194c9473678360f65a5c36e3438503a605",
+    "results/phase_g/g1_1/dataset_identity.json": "9be1a388dbfef01cbd2bfa6ea9c2511492df4445568f7e2e591a4c6e2076c924",
+    "results/phase_g/g1_1/extended_checks.json": "30511d79e5c6032bc1944ba8958cf3d9be3ce6edd8cc0aeb62007b53391761eb",
+    "results/phase_g/g1_1/flow_fresh_F1_G01.json": "4554461f65a216bbc3cced0a94544c60607b4b684fdf7ecdb4ddcfcbd12d97a5",
+    "results/phase_g/g1_1/flow_selection.json": "44583aa3c424886247618d370b34cd06aa973689a6ee1ca43b7980b7377532bc",
+    "results/phase_g/g1_1/flow_teacher100.json": "2a8faa60b7b30a17cebf4b31bcea58c469042b06883e7cff98668932b16cf49f",
+    "results/phase_g/g1_1/independent_data_audit.json": "91d2052beac8a2dc20da923ec35606b1546186e78f813947b6ead8abbd769c38",
+    "results/phase_g/g1_1/routing_trace.json": "81d105930d67503c6821fe2bd4e1c8c147396a697f5c83872bc7aa3674163da1",
+    "results/runs/phase_g/g1_1/validation_v0/routing_trace.npz": "500c8645d540ff8b106aa811a3ded61ca0b725d011b5169729c0b7a3c8078740",
+    "scripts/check_phase_g11_data.py": "593bc12285175cfc4688b61dbff6ec8092da5a1dfc46ccd9f992cd6a597cd5df",
+    "scripts/inspect_phase_g11_results.py": "64aae0360845252d331157e8447470546d5661c6cde18f7f271a6cf9bea7c25f",
+    "scripts/run_phase_g11_validation.py": "5df0c2e398637e2078faadb4e127c3ab34c0f9e41cf51a6785c511d56d071e3d",
+    "src/adze_t/phase_g11_task.py": "7c7bc8827ee7489ffc45f586e1f33dc723ffad89d39b407251d2928207416d2f",
+    "tests/test_phase_g11_task.py": "5161163528815929e3dd97ff25530b20d38cc00b56fee5323b68b2011f78b9ff"
+  }
+}

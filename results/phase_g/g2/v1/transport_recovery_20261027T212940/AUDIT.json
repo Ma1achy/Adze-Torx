@@ -1,0 +1,39 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "current": {
+    "completed_updates": 270,
+    "next_update": 271,
+    "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed1/C/slot_0.pkl",
+    "payload_sha256": "51a912b43b0a8a13d35b4b85ad07034a41322b8a1920a88ae2cd0b4dfcabb2d8",
+    "receipt_count": 271,
+    "finite_recorded_metrics": true,
+    "frozen_state_receipts_verified": true,
+    "tensor_reexecution_performed": false
+  },
+  "counts": {
+    "seed0/A": 1000,
+    "seed0/B": 1000,
+    "seed0/C": 1000,
+    "seed1/A": 1000,
+    "seed1/B": 1000,
+    "seed1/C": 270
+  },
+  "total_counted_updates": 5270,
+  "next_update": 271,
+  "backup": "results/runs/phase_g/g23/v1/resource_stops/20261027T212940/seed1_C_update00270.pkl",
+  "backup_sha256": "51a912b43b0a8a13d35b4b85ad07034a41322b8a1920a88ae2cd0b4dfcabb2d8",
+  "model_tree": "557dabeeca7b9959436e53e182c2eba8c1d0e737590161220bcb34f0fd6c8550",
+  "optimizer_tree": "11620570b9fb630a333c636f03ff991dfa186b60a3aed45d370d3561a81d1605",
+  "frozen_fingerprint": "41e16eceaf9905dd1c057caf6620ea132bc1350c3ef7b5940eec653d51f69d8b",
+  "loaded_model_and_both_Adam_moments_finite_shapes_match_nonzero": true,
+  "second_moments_nonnegative": true,
+  "failure": {
+    "exception": "BrokenPipeError(32, 'Broken pipe')",
+    "traceback": "Traceback (most recent call last):\n  File \"/private/tmp/adze-phase-g/scripts/run_phase_g23_v1.py\", line 936, in <module>\n    main()\n  File \"/private/tmp/adze-phase-g/scripts/run_phase_g23_v1.py\", line 910, in main\n    train_arm(seed, arm, cap, train, val, initial, identity)\n  File \"/private/tmp/adze-phase-g/scripts/run_phase_g23_v1.py\", line 674, in train_arm\n    log(\n  File \"/private/tmp/adze-phase-g/scripts/run_phase_g23_v1.py\", line 99, in log\n    print(time.strftime(\"%Y-%m-%dT%H:%M:%S\"), s, flush=True)\nBrokenPipeError: [Errno 32] Broken pipe\n",
+    "time": "2026-10-27T21:29:40",
+    "no_reinitialization": true
+  },
+  "failure_sha256": "c4b792415b5c5b31d9507ef77a2584c8e80e83d3534f6707acb33d8437439337",
+  "old137_backup_unchanged": true,
+  "no_optimizer_or_model_forward_or_adjudication": true
+}

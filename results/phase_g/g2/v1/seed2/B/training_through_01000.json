@@ -1,0 +1,41 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "seed": 2,
+  "arm": "B",
+  "through": 1000,
+  "counted_updates": 1000,
+  "initial_record_counted": false,
+  "path": "results/phase_g/g2/v1/seed2/B/training_through_01000.jsonl",
+  "sha256": "78ae3615ddf75d6e49d472461bc896f0485013e70d398c3a1d4fb8b291266733",
+  "rows": 1001,
+  "snapshots": [
+    {
+      "step": 0,
+      "path": "results/runs/phase_g/g23/v1/seed2/B/snapshots/update_00000.pkl",
+      "sha256": "55f56636e6d8ff36a27fb87ef99bcb92cce14643471353bc87a844aced1c81ee"
+    },
+    {
+      "step": 100,
+      "path": "results/runs/phase_g/g23/v1/seed2/B/snapshots/update_00100.pkl",
+      "sha256": "ca9e9d5c1959b548ba5e18c56e28433217ea56699c75b15b83f6fef3d3446804"
+    },
+    {
+      "step": 250,
+      "path": "results/runs/phase_g/g23/v1/seed2/B/snapshots/update_00250.pkl",
+      "sha256": "5906a1f5959c1c10717e62a786a07042ee11dcb851173e81c6b63eec37c7370b"
+    },
+    {
+      "step": 500,
+      "path": "results/runs/phase_g/g23/v1/seed2/B/snapshots/update_00500.pkl",
+      "sha256": "3c78cd2d6b30e78822dda948739dd19c018c060f160edfc428f13b963d5654ef"
+    },
+    {
+      "step": 1000,
+      "path": "results/runs/phase_g/g23/v1/seed2/B/snapshots/update_01000.pkl",
+      "sha256": "3712c481c0b21fb49462fff3a2e1479a63da16086819024864794d5a9abaf4f3"
+    }
+  ],
+  "exporter_source_sha256": "23e2a8eaa54ff58adf326da4f1e7528ac2937b085992b7415ef64f72e6e8ea28",
+  "lossless_metrics": true,
+  "scientific_selection_or_decision": false
+}

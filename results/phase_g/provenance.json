@@ -1,0 +1,103 @@
+{
+  "manifest": {
+    "architecture": {
+      "C": 32,
+      "K": 8,
+      "L": 4,
+      "L_max": 4,
+      "M_max": 32,
+      "Q": 3,
+      "R": 0
+    },
+    "arms": [
+      "teacher",
+      "argmax",
+      "sample"
+    ],
+    "checkpoints": [
+      0,
+      10,
+      25,
+      50,
+      100
+    ],
+    "codec_sha256": "55f057f78f795f1585d7aac28fa7ff37846d4c1098507ede375e86b21c4f8ff6",
+    "config_batch_size": 32,
+    "data": {
+      "counts": {
+        "train": 1024,
+        "validation": 256
+      },
+      "domain": "iid bytes 1..32",
+      "global_id_ranges": {
+        "train": [
+          0,
+          1023
+        ],
+        "validation": [
+          1024,
+          1279
+        ]
+      },
+      "lengths": [
+        8,
+        64
+      ],
+      "nu": [
+        0.025,
+        0.25
+      ],
+      "seeds": [
+        950,
+        951,
+        952
+      ],
+      "stochastic_root_coordinates": {
+        "diffusion": 2,
+        "nu": 0,
+        "operator": 1,
+        "structure": 3
+      }
+    },
+    "implementation_git_sha": "1a96675cab9bdc2d7c9c377b4f732d03c3124f1d",
+    "interfaces": {
+      "generated_structure": "PHASE_G_GENERATED_STRUCTURE_INTERFACE_V1",
+      "score_estimator_owner": "local_score_bridge for sample; none otherwise",
+      "training": "PHASE_G_TRAINING_PROTOCOL_V0"
+    },
+    "lambda_op": 0.0,
+    "loss": {
+      "common": "boundary CE + extent CE + 0.5 predictor h-MSE",
+      "descendant": "0.5 replay h-MSE + global compacted length-aware byte loss"
+    },
+    "optimizer": {
+      "batch_size": 32,
+      "clip_norm": 1.0,
+      "fresh_moments": true,
+      "initial_step": 0,
+      "learning_rate": 0.0003,
+      "name": "AdamW",
+      "weight_decay": 0.01
+    },
+    "parent_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+    "protocol": "PHASE_G_GENERATED_STRUCTURE_SMOKE_V0",
+    "structure_task": {
+      "commit_ownership": "mandatory K edges and terminal fixed; all optional nonmandatory edges and all extent sites owned",
+      "content_cut": "active carrier first clean codec slot byte in 1..16",
+      "extent": "clean codec extent",
+      "mandatory_cut_period": 8,
+      "noisy_identifiability_nu": [
+        0.025,
+        0.1,
+        0.25
+      ],
+      "predictor_observation": "F1-corrupted clean teacher carrier",
+      "version": "PHASE_G_IDENTIFIABLE_CONTENT_CUTS_V0"
+    },
+    "temperature_sample": 1.0,
+    "torx_pin": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+    "two_pass": "predictor and committed replay share one corrupted S1 input; condition index zero"
+  },
+  "parent_optimizer_step_ignored_for_fresh_g_optimizer": 5000,
+  "status": "G_PROVENANCE_PASS"
+}

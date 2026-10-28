@@ -1,0 +1,33 @@
+{
+  "name": "slow_062",
+  "kind": "slow",
+  "nodes": [
+    "tests/test_phase_f_corruption.py::test_initial_and_recorruption_empirical_moments"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "slow",
+    "tests/test_phase_f_corruption.py::test_initial_and_recorruption_empirical_moments",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/slow_062.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_f_corruption",
+      "test_initial_and_recorruption_empirical_moments"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:30:07+0000",
+  "ended": "2026-10-28T19:30:08+0000",
+  "wall_seconds": 1.4543891670182347,
+  "log_sha256": "423b1d0e014eb1eab96f4420f7b344c2615be505dd574b756ac884826ca74f2d",
+  "junit_sha256": "852cd6243e950a00e292c46a72f15964420d2b4fdc0ff688429e947cd36e6c37"
+}

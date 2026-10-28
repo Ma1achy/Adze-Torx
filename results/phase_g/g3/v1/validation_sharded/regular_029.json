@@ -1,0 +1,75 @@
+{
+  "name": "regular_029",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_f_3.py::test_s2_objective_is_self_generated_native_conditioned_and_has_one_parameter_tree",
+    "tests/test_phase_f_3.py::test_s2_objective_rejects_nonfrozen_loss_weights",
+    "tests/test_phase_f_3.py::test_s2_update_freezes_rho_teacher_and_proposal_auxiliary",
+    "tests/test_phase_f_3.py::test_full_pathwise_credit_crosses_a_deterministic_recorruption_boundary",
+    "tests/test_phase_f_3.py::test_full_model_step1_gradient_differs_when_s2_boundary_is_detached",
+    "tests/test_phase_f_3.py::test_operator_keys_separate_absolute_step_global_id_and_actual_s",
+    "tests/test_phase_f_3.py::test_predeclared_effect_forgetting_extension_and_label_gates",
+    "tests/test_phase_f_3.py::test_unconverged_training_cannot_receive_a_terminal_scientific_label[benefit]"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_f_3.py::test_s2_objective_is_self_generated_native_conditioned_and_has_one_parameter_tree",
+    "tests/test_phase_f_3.py::test_s2_objective_rejects_nonfrozen_loss_weights",
+    "tests/test_phase_f_3.py::test_s2_update_freezes_rho_teacher_and_proposal_auxiliary",
+    "tests/test_phase_f_3.py::test_full_pathwise_credit_crosses_a_deterministic_recorruption_boundary",
+    "tests/test_phase_f_3.py::test_full_model_step1_gradient_differs_when_s2_boundary_is_detached",
+    "tests/test_phase_f_3.py::test_operator_keys_separate_absolute_step_global_id_and_actual_s",
+    "tests/test_phase_f_3.py::test_predeclared_effect_forgetting_extension_and_label_gates",
+    "tests/test_phase_f_3.py::test_unconverged_training_cannot_receive_a_terminal_scientific_label[benefit]",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_029.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_f_3",
+      "test_s2_objective_is_self_generated_native_conditioned_and_has_one_parameter_tree"
+    ],
+    [
+      "tests.test_phase_f_3",
+      "test_s2_objective_rejects_nonfrozen_loss_weights"
+    ],
+    [
+      "tests.test_phase_f_3",
+      "test_s2_update_freezes_rho_teacher_and_proposal_auxiliary"
+    ],
+    [
+      "tests.test_phase_f_3",
+      "test_full_pathwise_credit_crosses_a_deterministic_recorruption_boundary"
+    ],
+    [
+      "tests.test_phase_f_3",
+      "test_full_model_step1_gradient_differs_when_s2_boundary_is_detached"
+    ],
+    [
+      "tests.test_phase_f_3",
+      "test_operator_keys_separate_absolute_step_global_id_and_actual_s"
+    ],
+    [
+      "tests.test_phase_f_3",
+      "test_predeclared_effect_forgetting_extension_and_label_gates"
+    ],
+    [
+      "tests.test_phase_f_3",
+      "test_unconverged_training_cannot_receive_a_terminal_scientific_label[benefit]"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:17:14+0000",
+  "ended": "2026-10-28T19:22:00+0000",
+  "wall_seconds": 286.2764926669188,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "85421bd6c277d773d61cdf29aeab88b2b98a9d38f828046f58db0477af86f16d"
+}

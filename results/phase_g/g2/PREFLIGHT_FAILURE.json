@@ -1,0 +1,6 @@
+{
+  "exception": "RuntimeError('new-query exact/MC gradient oracle nonpass')",
+  "traceback": "Traceback (most recent call last):\n  File \"/private/tmp/adze-phase-g/scripts/run_phase_g23.py\", line 892, in <module>\n    main()\n  File \"/private/tmp/adze-phase-g/scripts/run_phase_g23.py\", line 834, in main\n    run(initial, codec, identity, train, val)\n  File \"/private/tmp/adze-phase-g/scripts/preflight_phase_g23.py\", line 244, in run\n    raise RuntimeError(\"new-query exact/MC gradient oracle nonpass\")\nRuntimeError: new-query exact/MC gradient oracle nonpass\n",
+  "time": "2026-10-27T02:00:25",
+  "no_reinitialization": true
+}

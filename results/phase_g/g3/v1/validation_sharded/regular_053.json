@@ -1,0 +1,69 @@
+{
+  "name": "regular_053",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[direct_dependencies-uniform]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[direct_dependencies-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[direct_dependencies-peaked]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[baseline-uniform]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[baseline-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[baseline-peaked]",
+    "tests/test_phase_g_oracle.py::test_omitted_and_duplicated_occurrence_mutations_fail_exact_oracle"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[direct_dependencies-uniform]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[direct_dependencies-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[direct_dependencies-peaked]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[baseline-uniform]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[baseline-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[baseline-peaked]",
+    "tests/test_phase_g_oracle.py::test_omitted_and_duplicated_occurrence_mutations_fail_exact_oracle",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_053.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[direct_dependencies-uniform]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[direct_dependencies-asymmetric]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[direct_dependencies-peaked]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[baseline-uniform]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[baseline-asymmetric]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[baseline-peaked]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_omitted_and_duplicated_occurrence_mutations_fail_exact_oracle"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:28:58+0000",
+  "ended": "2026-10-28T19:29:02+0000",
+  "wall_seconds": 3.399864041013643,
+  "log_sha256": "83a1593c5b5783693fe3006d1f6597bcb4f3a5968f23b59481ee09a0477f910a",
+  "junit_sha256": "1986f8c3360482880b47e1e09d64b2706a09026ecb68feef35a34344476bb604"
+}

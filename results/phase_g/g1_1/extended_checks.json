@@ -1,0 +1,92 @@
+{
+  "torx_parity_error": 0.0,
+  "forced_capacity_cuts": 19,
+  "alphabet_enumeration": [
+    {
+      "global_id": 10379,
+      "query": 3,
+      "peer": 4,
+      "distinct_peer_latents": true,
+      "controls": {
+        "B": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.0
+        },
+        "C": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.0
+        },
+        "C_post": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.0
+        },
+        "D_substitute": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.0
+        },
+        "E_codec": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.0
+        },
+        "E_model": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.0
+        }
+      }
+    },
+    {
+      "global_id": 10545,
+      "query": 1,
+      "peer": 6,
+      "distinct_peer_latents": true,
+      "controls": {
+        "B": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.0
+        },
+        "C": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.03571428571428571
+        },
+        "C_post": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.03571428571428571
+        },
+        "D_substitute": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.03571428571428571
+        },
+        "E_codec": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.0
+        },
+        "E_model": {
+          "max_logit_variation": 0.0,
+          "restricted_domain_accuracy": 0.03571428571428571,
+          "raw_full_vocab_accuracy": 0.0
+        }
+      }
+    }
+  ],
+  "checks": {
+    "torx_parity": true,
+    "identity": true,
+    "capacity_eager_jit": true,
+    "capacity_separate": true,
+    "forced_cut_can_block_future": true,
+    "capacity_overflow_rejected": true,
+    "alphabet_enumeration": true
+  },
+  "passed": true
+}

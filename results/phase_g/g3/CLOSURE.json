@@ -1,0 +1,39 @@
+{
+  "version": "PHASE_G23_V0_BLOCKING_OUTCOME",
+  "outcome": "PHASE_G_BLOCKED",
+  "scientific_functional_completion": false,
+  "status_record_method": "Manual evidence-backed blocking record after preflight aborted; campaign/science/close execution stages were not run",
+  "axis_outcomes": "AXIS_OUTCOMES.json",
+  "protocol_identity": "1d8ee3e970c9b8c98de1f027baa1adc4d3f03a941526238d91dbc827ad55a784",
+  "accepted_starting_G_commit": "7120e7de6e491e4028c92e8dabe31f3b92de7d70",
+  "prospective_source_and_protocol_commit": "6e68e0f688261ec954ba718f9c7e8da0fa59ef47",
+  "identity_commit_and_preflight_launch_HEAD": "10aec599e4ce08244e297d752c19ee5a770179fd",
+  "same_draw_diagnosis_execution_source_commit": "08b1299d5e75ebcdc788e420ba93b348f70e087c",
+  "diagnosis_post_execution_change": "Typing-only Literal cast; no numerical algorithm, sampling law or frozen protocol changed",
+  "accepted_parent": {
+    "path": "results/runs/phase_g/g1_1/teacher_v0/official/payloads/100_000.pkl",
+    "sha256": "fa798be7d9d6244054b1053bd86c340c4d2f3582290dc72a31e6877c24f81a93",
+    "parameter_tree": "94f4b7de78406336b6e6bb87416981330a98e9d74b9bfe7c4280529807184bd2"
+  },
+  "frozen_codec": {
+    "path": "results/runs/phase_g/g0_1/v1/frozen_codec.pkl",
+    "sha256": "213d71be58b4e3a0eb685330ff8f20ad0d2574184d59060890baa4a2eed586e7"
+  },
+  "new_training_updates": {"A": 0, "B": 0, "C": 0},
+  "selected_checkpoint": null,
+  "official_optimizer_state_created": false,
+  "protected_test_exposed": false,
+  "failed_gate": "../g2/query_oracle_peaked.json",
+  "failure_record": "../g2/PREFLIGHT_FAILURE.json",
+  "launch_record": "../g2/PREFLIGHT_LAUNCH.json",
+  "same_draw_diagnosis": "../g2/ORACLE_NONPASS_DIAGNOSIS.json",
+  "validation": "VALIDATION.json",
+  "artifact_manifest": "MANIFEST.json",
+  "skip_ledger": "FAILURE_SKIP_LEDGER.json",
+  "preservation": "PRESERVATION_CHECK.json",
+  "main_unchanged": "2a0cab0c9c647832596013d56037c842ff3844ea",
+  "merge_push": "Not performed: required scientific/preflight gates unsatisfied",
+  "H_integration_can_proceed": false,
+  "prohibited_work_started": false,
+  "remaining_blocker": "Unchanged frozen four-estimated-root-SE MC prerequisite fails one rare-category component. No criteria-preserving implementation defect has been identified; any amended uncertainty design must be prospective, separately versioned and preserve this nonpass."
+}

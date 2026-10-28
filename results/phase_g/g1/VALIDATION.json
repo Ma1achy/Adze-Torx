@@ -1,0 +1,81 @@
+{
+  "diagnostic_label": "G1_TASK_BYPASS_CONFIRMED",
+  "scope": "inference-only diagnosis; not a G scientific outcome",
+  "parent_commit": "235ff5ba2be2579c848c988f6910513fd706123e",
+  "script_sha256": "1280cd325529cc92b5b9ae7bff28a1be78d67aec3ae6797ceaa4a543420f27db",
+  "supplement_script_sha256": "8af9927d6ca0a6489b3ebe6aa0c9208f64be396f1210448cbd9a8c53ffa57e18",
+  "commands": [
+    {
+      "command": "PYTHONPATH=src python scripts/run_phase_g1.py",
+      "exit_code": 0,
+      "examples": 256,
+      "counterfactual_pairs": 16,
+      "optimizer_updates": 0
+    },
+    {
+      "command": "PYTHONPATH=src python scripts/analyze_phase_g1.py",
+      "exit_code": 0,
+      "scope": "saved-array analysis and frozen encoder/isolated decoder inference; no fitting"
+    },
+    {
+      "command": "PYTHONPATH=src python scripts/analyze_phase_g1_geometry.py",
+      "exit_code": 0,
+      "scope": "exploratory paired geometry/attention isolation,256 examples",
+      "both_zero_max_logit_error": 0
+    },
+    {
+      "command": "PYTHONPATH=src pytest tests/test_phase_g1.py -ra",
+      "exit_code": 0,
+      "passed": 5,
+      "seconds": 6.93,
+      "skips": 0
+    },
+    {
+      "command": "make format-check",
+      "exit_code": 0,
+      "files": 149
+    },
+    {
+      "command": "make lint",
+      "exit_code": 0
+    },
+    {
+      "command": "make typecheck",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    },
+    {
+      "command": "make boundaries",
+      "exit_code": 0
+    },
+    {
+      "command": "rg -n 'torx\\._|from torx import _|from torx\\._' src scripts tests",
+      "matches": 0
+    },
+    {
+      "command": "git diff --exit-code 235ff5ba2be2579c848c988f6910513fd706123e -- src",
+      "exit_code": 0
+    }
+  ],
+  "corrected_before_execution": [
+    "Two typing diagnostics in primary runner (optional length assertion and explicit NPZ allow_pickle argument) fixed before primary inference.",
+    "Unused Path import in supplementary script removed before supplementary inference."
+  ],
+  "production_architecture_changed": false,
+  "score_bridge_changed": false,
+  "training_rerun": false,
+  "teacher_updates_added": 0,
+  "generated_arms_started": false,
+  "whole_project_suite_rerun": false,
+  "whole_project_suite_skip_reason": "No production source changes; focused diagnostic regression and actual-model inference run instead. Prior 258 regular/30 slow passes remain historical, not claimed as new.",
+  "limitations": [
+    "Original task has no required clean-peer label; geometric future-peer loss is not a claim of required-peer loss.",
+    "Ablations are out-of-distribution and nonadditive.",
+    "Counterfactual matching statistic is exploratory descriptive analysis, not an acceptance gate.",
+    "Frozen query-copy accuracy remains chance-level despite measurable teacher-route NLL advantage.",
+    "Proposed marker-coded task not executed or fully codec-validated.",
+    "No new scientific training budget or criteria approved."
+  ],
+  "geometry_script_sha256": "2c7d537e9721a0a9560e81c827d9f03117f5997384dcb6d39e2d111efd0f03de"
+}

@@ -115,7 +115,8 @@ def make_sanitized_target_analysis(
     )
 
 
-def _as_model_target_analysis(value: SanitizedTargetAnalysis) -> dict[str, Any]:
+def as_sanitized_model_target_analysis(value: SanitizedTargetAnalysis) -> dict[str, Any]:
+    """Expose only the leakage-audited inert target object to forward callers."""
     return {
         "target_frontend": value.target_frontend,
         "target": {
@@ -125,6 +126,11 @@ def _as_model_target_analysis(value: SanitizedTargetAnalysis) -> dict[str, Any]:
             "teacher": value.teacher,
         },
     }
+
+
+# Preserve the historical private spelling for downstream tests/checkpoints;
+# Phase-G integration uses the public leakage-audited name above.
+_as_model_target_analysis = as_sanitized_model_target_analysis
 
 
 def _conditioning_index(mode: str, actual_s_index: int) -> int:
@@ -224,7 +230,7 @@ def apply_denoising_trajectory(
                 target.target_mask_placeholder,
                 config=config,
                 ops=ops,
-                target_analysis=_as_model_target_analysis(target),
+                target_analysis=as_sanitized_model_target_analysis(target),
                 carrier_h_input=state,
                 noise_level=schedule[actual_s_index][None],
                 actual_s_index=actual_s_index,

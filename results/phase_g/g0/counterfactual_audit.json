@@ -1,0 +1,1167 @@
+{
+  "codec_sha256": "0f4a54e221729b14c6e75d30bed84bd566182a490f975c76d574e540f936adab",
+  "interpretation": "noncollapsed counterfactuals establish local distinguishability, not global invertibility or robust recoverability",
+  "results": {
+    "PHASE_G0_VARIABLE_LENGTH_CODEC_V1": {
+      "by_length": [
+        {
+          "carrier": 1,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2728322744369507,
+          "length": 8,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.30476894974708557
+        },
+        {
+          "carrier": 2,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.5639166235923767,
+          "length": 9,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.8089509010314941
+        },
+        {
+          "carrier": 2,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.434527188539505,
+          "length": 10,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.24791592359542847
+        },
+        {
+          "carrier": 2,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.26281923055648804,
+          "length": 11,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.263308048248291
+        },
+        {
+          "carrier": 2,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.29616326093673706,
+          "length": 12,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2829766571521759
+        },
+        {
+          "carrier": 3,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.4227975010871887,
+          "length": 13,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.8271511793136597
+        },
+        {
+          "carrier": 3,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3069153428077698,
+          "length": 14,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3240130841732025
+        },
+        {
+          "carrier": 3,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2667075991630554,
+          "length": 15,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.33871427178382874
+        },
+        {
+          "carrier": 3,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2986845374107361,
+          "length": 16,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3487796187400818
+        },
+        {
+          "carrier": 4,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3707994520664215,
+          "length": 17,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.8371292352676392
+        },
+        {
+          "carrier": 4,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.34245750308036804,
+          "length": 18,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.364662230014801
+        },
+        {
+          "carrier": 4,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.38325026631355286,
+          "length": 19,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.23580290377140045
+        },
+        {
+          "carrier": 4,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.39029067754745483,
+          "length": 20,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.558252215385437
+        },
+        {
+          "carrier": 5,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3183603882789612,
+          "length": 21,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.9916889667510986
+        },
+        {
+          "carrier": 5,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.4654841423034668,
+          "length": 22,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.31859061121940613
+        },
+        {
+          "carrier": 5,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3418008089065552,
+          "length": 23,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2948167026042938
+        },
+        {
+          "carrier": 5,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2676001787185669,
+          "length": 24,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.5085349678993225
+        },
+        {
+          "carrier": 6,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.33031249046325684,
+          "length": 25,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.539397120475769
+        },
+        {
+          "carrier": 6,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2772558629512787,
+          "length": 26,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.27446725964546204
+        },
+        {
+          "carrier": 6,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2711716294288635,
+          "length": 27,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.33221903443336487
+        },
+        {
+          "carrier": 6,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3868289887905121,
+          "length": 28,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.5582042336463928
+        },
+        {
+          "carrier": 7,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3904661536216736,
+          "length": 29,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.9633853435516357
+        },
+        {
+          "carrier": 7,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.4220781624317169,
+          "length": 30,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3534824550151825
+        },
+        {
+          "carrier": 7,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3409309983253479,
+          "length": 31,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.22307322919368744
+        },
+        {
+          "carrier": 7,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3278076648712158,
+          "length": 32,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.4108363687992096
+        },
+        {
+          "carrier": 8,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3077329993247986,
+          "length": 33,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.469775527715683
+        },
+        {
+          "carrier": 8,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.4440501928329468,
+          "length": 34,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.41642090678215027
+        },
+        {
+          "carrier": 8,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2925341725349426,
+          "length": 35,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3436121344566345
+        },
+        {
+          "carrier": 8,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.29948723316192627,
+          "length": 36,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.40635013580322266
+        },
+        {
+          "carrier": 9,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.28173696994781494,
+          "length": 37,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.5742214918136597
+        },
+        {
+          "carrier": 9,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.4186403751373291,
+          "length": 38,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3253073990345001
+        },
+        {
+          "carrier": 9,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3391968309879303,
+          "length": 39,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.33402857184410095
+        },
+        {
+          "carrier": 9,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.33845940232276917,
+          "length": 40,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.4590020477771759
+        },
+        {
+          "carrier": 10,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.38905489444732666,
+          "length": 41,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.9249864816665649
+        },
+        {
+          "carrier": 10,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.34940868616104126,
+          "length": 42,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.34968048334121704
+        },
+        {
+          "carrier": 10,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3633069396018982,
+          "length": 43,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.37001150846481323
+        },
+        {
+          "carrier": 10,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3097938001155853,
+          "length": 44,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.30823904275894165
+        },
+        {
+          "carrier": 11,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3364962339401245,
+          "length": 45,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.5118094682693481
+        },
+        {
+          "carrier": 11,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2862851023674011,
+          "length": 46,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.28484857082366943
+        },
+        {
+          "carrier": 11,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.41020482778549194,
+          "length": 47,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.31505531072616577
+        },
+        {
+          "carrier": 11,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.24661685526371002,
+          "length": 48,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.4926742613315582
+        },
+        {
+          "carrier": 12,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.7063442468643188,
+          "length": 49,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.9720770120620728
+        },
+        {
+          "carrier": 12,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.34917521476745605,
+          "length": 50,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3428361117839813
+        },
+        {
+          "carrier": 12,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2644512951374054,
+          "length": 51,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.32968053221702576
+        },
+        {
+          "carrier": 12,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.34866631031036377,
+          "length": 52,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.4724915325641632
+        },
+        {
+          "carrier": 13,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3606562316417694,
+          "length": 53,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.6078158617019653
+        },
+        {
+          "carrier": 13,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3418999910354614,
+          "length": 54,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.33227217197418213
+        },
+        {
+          "carrier": 13,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.36037203669548035,
+          "length": 55,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.309501051902771
+        },
+        {
+          "carrier": 13,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2085658609867096,
+          "length": 56,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.30560314655303955
+        },
+        {
+          "carrier": 14,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.39841875433921814,
+          "length": 57,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.5111611485481262
+        },
+        {
+          "carrier": 14,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.37556156516075134,
+          "length": 58,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3060811758041382
+        },
+        {
+          "carrier": 14,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3663635849952698,
+          "length": 59,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.227386474609375
+        },
+        {
+          "carrier": 14,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2802754342556,
+          "length": 60,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.4239409267902374
+        },
+        {
+          "carrier": 15,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.38352784514427185,
+          "length": 61,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.9288637638092041
+        },
+        {
+          "carrier": 15,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2968769967556,
+          "length": 62,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2503564655780792
+        },
+        {
+          "carrier": 15,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2890922427177429,
+          "length": 63,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3439183235168457
+        },
+        {
+          "carrier": 15,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.37227487564086914,
+          "length": 64,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.4997899830341339
+        }
+      ],
+      "content_collisions": 0,
+      "extent_collisions": 0,
+      "masked_edit_failures": 0
+    },
+    "accepted_f1_codec": {
+      "by_length": [
+        {
+          "carrier": 1,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2835933566093445,
+          "length": 8,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.18735229969024658
+        },
+        {
+          "carrier": 2,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3289351761341095,
+          "length": 9,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.22794640064239502
+        },
+        {
+          "carrier": 2,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.41588133573532104,
+          "length": 10,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.23167400062084198
+        },
+        {
+          "carrier": 2,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.28954702615737915,
+          "length": 11,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2583310902118683
+        },
+        {
+          "carrier": 2,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2713907063007355,
+          "length": 12,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.20142585039138794
+        },
+        {
+          "carrier": 3,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.35247802734375,
+          "length": 13,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2951373755931854
+        },
+        {
+          "carrier": 3,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3320273756980896,
+          "length": 14,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2854622006416321
+        },
+        {
+          "carrier": 3,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.30740460753440857,
+          "length": 15,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3004836142063141
+        },
+        {
+          "carrier": 3,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3647538423538208,
+          "length": 16,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.26471519470214844
+        },
+        {
+          "carrier": 4,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.34809795022010803,
+          "length": 17,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.27119195461273193
+        },
+        {
+          "carrier": 4,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3117535412311554,
+          "length": 18,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.27560174465179443
+        },
+        {
+          "carrier": 4,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.38277480006217957,
+          "length": 19,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.224293053150177
+        },
+        {
+          "carrier": 4,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.42949673533439636,
+          "length": 20,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.33859217166900635
+        },
+        {
+          "carrier": 5,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.28891605138778687,
+          "length": 21,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2767922282218933
+        },
+        {
+          "carrier": 5,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.37982794642448425,
+          "length": 22,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2334473729133606
+        },
+        {
+          "carrier": 5,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.329595685005188,
+          "length": 23,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.24706503748893738
+        },
+        {
+          "carrier": 5,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.27167847752571106,
+          "length": 24,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.27351707220077515
+        },
+        {
+          "carrier": 6,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2854808568954468,
+          "length": 25,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.269100546836853
+        },
+        {
+          "carrier": 6,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.300625741481781,
+          "length": 26,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2578243613243103
+        },
+        {
+          "carrier": 6,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2894546389579773,
+          "length": 27,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2784896492958069
+        },
+        {
+          "carrier": 6,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.4297754764556885,
+          "length": 28,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.33853036165237427
+        },
+        {
+          "carrier": 7,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3757176101207733,
+          "length": 29,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2992325723171234
+        },
+        {
+          "carrier": 7,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3972046375274658,
+          "length": 30,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.24458928406238556
+        },
+        {
+          "carrier": 7,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3435033857822418,
+          "length": 31,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2711241543292999
+        },
+        {
+          "carrier": 7,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3665650486946106,
+          "length": 32,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2886250615119934
+        },
+        {
+          "carrier": 8,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2632894217967987,
+          "length": 33,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.25348398089408875
+        },
+        {
+          "carrier": 8,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.40998509526252747,
+          "length": 34,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.26612716913223267
+        },
+        {
+          "carrier": 8,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3218183219432831,
+          "length": 35,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2973443269729614
+        },
+        {
+          "carrier": 8,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.31152796745300293,
+          "length": 36,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.26975059509277344
+        },
+        {
+          "carrier": 9,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2649269998073578,
+          "length": 37,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3254876732826233
+        },
+        {
+          "carrier": 9,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3831917643547058,
+          "length": 38,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2383049726486206
+        },
+        {
+          "carrier": 9,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.34707343578338623,
+          "length": 39,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.30811214447021484
+        },
+        {
+          "carrier": 9,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3243866562843323,
+          "length": 40,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2550993263721466
+        },
+        {
+          "carrier": 10,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.38843202590942383,
+          "length": 41,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3100365400314331
+        },
+        {
+          "carrier": 10,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3220856487751007,
+          "length": 42,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.252829909324646
+        },
+        {
+          "carrier": 10,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.4025641977787018,
+          "length": 43,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3299538791179657
+        },
+        {
+          "carrier": 10,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3136070668697357,
+          "length": 44,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.20265378057956696
+        },
+        {
+          "carrier": 11,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.2718375325202942,
+          "length": 45,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2749960124492645
+        },
+        {
+          "carrier": 11,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.28206953406333923,
+          "length": 46,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2649194896221161
+        },
+        {
+          "carrier": 11,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.4357782304286957,
+          "length": 47,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2477414757013321
+        },
+        {
+          "carrier": 11,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.23446084558963776,
+          "length": 48,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.24984319508075714
+        },
+        {
+          "carrier": 12,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.40441977977752686,
+          "length": 49,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.25456464290618896
+        },
+        {
+          "carrier": 12,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3401402533054352,
+          "length": 50,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.25654441118240356
+        },
+        {
+          "carrier": 12,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.29290422797203064,
+          "length": 51,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.29124146699905396
+        },
+        {
+          "carrier": 12,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.36636537313461304,
+          "length": 52,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2518225610256195
+        },
+        {
+          "carrier": 13,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.36133283376693726,
+          "length": 53,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3019428253173828
+        },
+        {
+          "carrier": 13,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3474898040294647,
+          "length": 54,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2859247624874115
+        },
+        {
+          "carrier": 13,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.38993462920188904,
+          "length": 55,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.35498905181884766
+        },
+        {
+          "carrier": 13,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.27994224429130554,
+          "length": 56,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.21663442254066467
+        },
+        {
+          "carrier": 14,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.4000566601753235,
+          "length": 57,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2548922896385193
+        },
+        {
+          "carrier": 14,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3310781717300415,
+          "length": 58,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.24525946378707886
+        },
+        {
+          "carrier": 14,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.34695589542388916,
+          "length": 59,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.2057085484266281
+        },
+        {
+          "carrier": 14,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.3168538808822632,
+          "length": 60,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3183533251285553
+        },
+        {
+          "carrier": 15,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.4112089276313782,
+          "length": 61,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.33422955870628357
+        },
+        {
+          "carrier": 15,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.36011070013046265,
+          "length": 62,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.24413901567459106
+        },
+        {
+          "carrier": 15,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.33185893297195435,
+          "length": 63,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.3071294128894806
+        },
+        {
+          "carrier": 15,
+          "extent_edit_collapsed": false,
+          "last_byte_edit_collapsed": false,
+          "last_byte_edit_h0_rms": 0.36400794982910156,
+          "length": 64,
+          "masked_byte_edit_invariant": true,
+          "one_byte_shorter_h0_rms": 0.25249069929122925
+        }
+      ],
+      "content_collisions": 0,
+      "extent_collisions": 0,
+      "masked_edit_failures": 0
+    }
+  },
+  "verifier": {
+    "capacity_policy": "PHASE_G0_SEMANTIC_PUSHFORWARD_DYNAMIC_CAPACITY_V1",
+    "checkpoints": [
+      0,
+      100,
+      250,
+      500,
+      1000,
+      2000,
+      3000,
+      4000,
+      5000
+    ],
+    "configuration": {
+      "carrier": {
+        "C": 32,
+        "L_max": 4,
+        "h_dim": 64
+      },
+      "model": {
+        "byte_vocab": 256,
+        "context_layers": 2,
+        "cycles_Q": 3,
+        "d_ctx": 128,
+        "d_dec": 128,
+        "d_front": 64,
+        "d_model": 128,
+        "decoder_layers": 2,
+        "effective_depth_conditioning": true,
+        "ffn_hidden": 256,
+        "frontend_layers": 2,
+        "head_dim": 32,
+        "heads": 4,
+        "mamba_conv_kernel": 3,
+        "mamba_expand": 2,
+        "mamba_state_dim": 16,
+        "physical_blocks_L": 4,
+        "prompt_max_bytes": 128,
+        "proposal_hidden_dim": 64,
+        "proposal_layers": 2,
+        "residual_gate_init": 0.1,
+        "target_layers": 2,
+        "target_max_bytes": 128
+      },
+      "packing": {
+        "K": 8,
+        "M_max": 32
+      },
+      "training": {
+        "batch_size": 32,
+        "boundary_weight": 1.0,
+        "byte_weight": 1.0,
+        "extent_weight": 1.0,
+        "grad_clip_norm": 1.0,
+        "h_weight": 1.0,
+        "learning_rate": 0.0003,
+        "proposal_weight": 0.25,
+        "weight_decay": 0.01
+      }
+    },
+    "data": {
+      "byte_domain": [
+        1,
+        32
+      ],
+      "lengths": [
+        8,
+        64
+      ],
+      "probe_train_per_length": 64,
+      "seeds": [
+        960,
+        961,
+        962
+      ],
+      "test_per_length": 32,
+      "training_per_length": 256,
+      "training_seed": 963,
+      "validation_per_length": 16,
+      "width": 64
+    },
+    "f1_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+    "loss": {
+      "byte_ce": 1,
+      "content_boundary_ce": 1,
+      "extent_ce": 1
+    },
+    "max_updates": 5000,
+    "optimizer": {
+      "batch_size": 32,
+      "clip": 1.0,
+      "fresh_moments": true,
+      "lr": 0.0003,
+      "name": "AdamW",
+      "weight_decay": 0.01
+    },
+    "parent_codec_sha256": "55f057f78f795f1585d7aac28fa7ff37846d4c1098507ede375e86b21c4f8ff6",
+    "probe": {
+      "decision": "decoder_only only if every validation probe gate passes",
+      "family": "per-carrier ridge one-hot heads",
+      "inputs": "h0 and fixed carrier/slot identity only",
+      "ridge": 0.01
+    },
+    "runtime": {
+      "backend": "cpu",
+      "devices": [
+        "TFRT_CPU_0"
+      ],
+      "jax": "0.8.1",
+      "python": "3.11.8"
+    },
+    "selection": "first scheduled validation checkpoint passing all gates; test once",
+    "source_commit": "94a2416e4e6056d4a6421f178ca7e0f738bcb486",
+    "thresholds": {
+      "aggregate_byte": 0.99,
+      "every_length_byte": 0.98,
+      "numerical_capacity_failures": 0,
+      "signature": 0.99
+    },
+    "version": "PHASE_G0_VARIABLE_LENGTH_CODEC_V1"
+  }
+}

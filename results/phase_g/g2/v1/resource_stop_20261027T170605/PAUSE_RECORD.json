@@ -1,0 +1,67 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "failure": {
+    "exception": "RuntimeError('critical disk capacity; exact durable state preserved')",
+    "traceback": "Traceback (most recent call last):\n  File \"/private/tmp/adze-phase-g/scripts/run_phase_g23_v1.py\", line 936, in <module>\n    main()\n  File \"/private/tmp/adze-phase-g/scripts/run_phase_g23_v1.py\", line 910, in main\n    train_arm(seed, arm, cap, train, val, initial, identity)\n  File \"/private/tmp/adze-phase-g/scripts/run_phase_g23_v1.py\", line 650, in train_arm\n    raise RuntimeError(\"critical disk capacity; exact durable state preserved\")\nRuntimeError: critical disk capacity; exact durable state preserved\n",
+    "time": "2026-10-27T17:06:05",
+    "no_reinitialization": true
+  },
+  "failure_file_sha256": "697587fa1be030758c0b48d26e898189f48858e5a5943fe2ec3bed4d6c433f19",
+  "journals": {
+    "seed0/A": {
+      "completed_updates": 1000,
+      "next_update": 1001,
+      "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed0/A/slot_0.pkl",
+      "payload_sha256": "6a82112b480840ffe2f759fd5180d8e733c6ee02e7cd89543e310babbde9b9d0",
+      "receipt_count": 1001,
+      "finite_recorded_metrics": true,
+      "frozen_state_receipts_verified": true,
+      "tensor_reexecution_performed": false
+    },
+    "seed0/B": {
+      "completed_updates": 1000,
+      "next_update": 1001,
+      "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed0/B/slot_0.pkl",
+      "payload_sha256": "ff344d72489c0923cc014e40b2d5b647f04c8c6e4af928713019838da07a6446",
+      "receipt_count": 1001,
+      "finite_recorded_metrics": true,
+      "frozen_state_receipts_verified": true,
+      "tensor_reexecution_performed": false
+    },
+    "seed0/C": {
+      "completed_updates": 1000,
+      "next_update": 1001,
+      "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed0/C/slot_0.pkl",
+      "payload_sha256": "b4896a4d44bc74928c68824bd2be2c52f726eac1f0675a14f77b54d123a7abc8",
+      "receipt_count": 1001,
+      "finite_recorded_metrics": true,
+      "frozen_state_receipts_verified": true,
+      "tensor_reexecution_performed": false
+    },
+    "seed1/A": {
+      "completed_updates": 1000,
+      "next_update": 1001,
+      "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed1/A/slot_0.pkl",
+      "payload_sha256": "77de7dbdbb928bf6ea42035b5f54d8327275cbfb7f38c888f7f4f049ca328849",
+      "receipt_count": 1001,
+      "finite_recorded_metrics": true,
+      "frozen_state_receipts_verified": true,
+      "tensor_reexecution_performed": false
+    },
+    "seed1/B": {
+      "completed_updates": 137,
+      "next_update": 138,
+      "payload": "/private/tmp/adze-phase-g/results/runs/phase_g/g23/v1/seed1/B/slot_1.pkl",
+      "payload_sha256": "f82269e87457c71f92117102ed6a7d0eb76a827476b9532f18f9dc32dda9af0d",
+      "receipt_count": 138,
+      "finite_recorded_metrics": true,
+      "frozen_state_receipts_verified": true,
+      "tensor_reexecution_performed": false
+    }
+  },
+  "total_counted_updates": 4137,
+  "auditor_source_sha256": "fd00594e09df7bcc68a090423944a28a1f6fd0214e9f4f37f01b13bbe7243236",
+  "no_tensor_execution_or_optimizer_updates": true,
+  "scientific_closure": false,
+  "protected_selection_exists": false
+}

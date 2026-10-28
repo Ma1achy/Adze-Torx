@@ -1,0 +1,75 @@
+{
+  "name": "regular_033",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g0.py::test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[1]",
+    "tests/test_phase_g0.py::test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[2]",
+    "tests/test_phase_g0.py::test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[3]",
+    "tests/test_phase_g0.py::test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[8]",
+    "tests/test_phase_g0.py::test_capacity_does_not_repair_bad_semantics_and_count_overflow_fails_closed",
+    "tests/test_phase_g0.py::test_dynamic_capacity_scan_vmap_and_inactive_identity",
+    "tests/test_phase_g0.py::test_production_capacity_pushforward_exact_gradient_and_logp_ownership[uniform]",
+    "tests/test_phase_g0.py::test_production_capacity_pushforward_exact_gradient_and_logp_ownership[asymmetric]"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g0.py::test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[1]",
+    "tests/test_phase_g0.py::test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[2]",
+    "tests/test_phase_g0.py::test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[3]",
+    "tests/test_phase_g0.py::test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[8]",
+    "tests/test_phase_g0.py::test_capacity_does_not_repair_bad_semantics_and_count_overflow_fails_closed",
+    "tests/test_phase_g0.py::test_dynamic_capacity_scan_vmap_and_inactive_identity",
+    "tests/test_phase_g0.py::test_production_capacity_pushforward_exact_gradient_and_logp_ownership[uniform]",
+    "tests/test_phase_g0.py::test_production_capacity_pushforward_exact_gradient_and_logp_ownership[asymmetric]",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_033.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g0",
+      "test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[1]"
+    ],
+    [
+      "tests.test_phase_g0",
+      "test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[2]"
+    ],
+    [
+      "tests.test_phase_g0",
+      "test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[3]"
+    ],
+    [
+      "tests.test_phase_g0",
+      "test_dynamic_capacity_matches_independent_partition_oracle_eager_jit[8]"
+    ],
+    [
+      "tests.test_phase_g0",
+      "test_capacity_does_not_repair_bad_semantics_and_count_overflow_fails_closed"
+    ],
+    [
+      "tests.test_phase_g0",
+      "test_dynamic_capacity_scan_vmap_and_inactive_identity"
+    ],
+    [
+      "tests.test_phase_g0",
+      "test_production_capacity_pushforward_exact_gradient_and_logp_ownership[uniform]"
+    ],
+    [
+      "tests.test_phase_g0",
+      "test_production_capacity_pushforward_exact_gradient_and_logp_ownership[asymmetric]"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:22:04+0000",
+  "ended": "2026-10-28T19:22:13+0000",
+  "wall_seconds": 9.223175541032106,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "3264f6bfae75ae43d7a15809917bc44916b9067718f0d939699f21280d66c25f"
+}

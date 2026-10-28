@@ -1,0 +1,16 @@
+{
+  "protocol": "bd733883a39e307d920b4a81665a39eb0d370841424b0e0f3a05335386021153",
+  "checkpoint_model_tree": "94f4b7de78406336b6e6bb87416981330a98e9d74b9bfe7c4280529807184bd2",
+  "conversion": "NumPy to JAX; shape/dtype/bytes identical",
+  "driver_sha256": "a72d8a588bb3b7ededa5fd345ad782abbc3e516bece5cc7e3d0b01f996a5da00",
+  "original_source_unchanged": true,
+  "Torx_direct_url": {
+    "url": "https://github.com/extropic-ai/torx.git",
+    "vcs_info": {
+      "commit_id": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+      "requested_revision": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+      "vcs": "git"
+    }
+  },
+  "additional_updates": 0
+}

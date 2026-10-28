@@ -1,0 +1,20 @@
+{
+  "archive_root": "/Users/malachy/src/Adze-Torx/results/runs/phase_g/g1_1/teacher_v0_archive",
+  "run_copy": "run/",
+  "run_files": 213,
+  "run_directory_recursive_byte_comparison_passed": true,
+  "official_states": 101,
+  "counted_official_updates": 100,
+  "discarded_preflight_states": 4,
+  "frozen_training_source_entries_verified": 72,
+  "training_source_commit": "4689293a73f22a37dbb156cef658820ea03985fd",
+  "training_source_directory": "training_source/",
+  "evaluation_driver_commit": "cd2a416eefab78411ae8e35dae60455ad88baa28",
+  "evaluation_source_directory": "evaluation_source/",
+  "evaluation_driver_sha256": "a72d8a588bb3b7ededa5fd345ad782abbc3e516bece5cc7e3d0b01f996a5da00",
+  "postprocessing_directory": "postprocessing/",
+  "postprocessing_sha256": "181ce47dd59409ea393ccc7c346862297b04c26834939f935b977ae3c8fd009e",
+  "prior_archives_and_accepted_artifacts": "Unchanged; this is a distinct new directory, not a replacement or overwrite.",
+  "evidence_directory": "evidence/",
+  "evidence_copy_verification": "Final manifest and evidence are copied and recursively compared after validation logs close; see delivery checks and MANIFEST.json."
+}

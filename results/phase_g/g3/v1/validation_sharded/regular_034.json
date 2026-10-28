@@ -1,0 +1,51 @@
+{
+  "name": "regular_034",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g0.py::test_production_capacity_pushforward_exact_gradient_and_logp_ownership[peaked]",
+    "tests/test_phase_g0.py::test_full_site_sample_keeps_logp_for_capacity_hidden_semantic_actions",
+    "tests/test_phase_g0.py::test_candidate_update_and_overlay_preserve_noncodec_f1_state",
+    "tests/test_phase_g0.py::test_real_model_two_pass_accepts_full_site_dynamic_capacity_policy"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g0.py::test_production_capacity_pushforward_exact_gradient_and_logp_ownership[peaked]",
+    "tests/test_phase_g0.py::test_full_site_sample_keeps_logp_for_capacity_hidden_semantic_actions",
+    "tests/test_phase_g0.py::test_candidate_update_and_overlay_preserve_noncodec_f1_state",
+    "tests/test_phase_g0.py::test_real_model_two_pass_accepts_full_site_dynamic_capacity_policy",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_034.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g0",
+      "test_production_capacity_pushforward_exact_gradient_and_logp_ownership[peaked]"
+    ],
+    [
+      "tests.test_phase_g0",
+      "test_full_site_sample_keeps_logp_for_capacity_hidden_semantic_actions"
+    ],
+    [
+      "tests.test_phase_g0",
+      "test_candidate_update_and_overlay_preserve_noncodec_f1_state"
+    ],
+    [
+      "tests.test_phase_g0",
+      "test_real_model_two_pass_accepts_full_site_dynamic_capacity_policy"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:22:13+0000",
+  "ended": "2026-10-28T19:22:26+0000",
+  "wall_seconds": 12.5123872498516,
+  "log_sha256": "c4b808d34f4db00b333696dec1f3a43a2887d8bfe0cb7af07a3cb98ff43a7830",
+  "junit_sha256": "ae992f819f1e9c886ce54ce68466008a1a0d4c7201e29352b8007b7d1aebe13d"
+}

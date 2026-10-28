@@ -1,0 +1,45 @@
+{
+  "schema": "PHASE_G01_EVIDENCE_INDEX_V1",
+  "protocol_and_training_source": "c80920efd4eb8cdd8c15e684c341ab990370aa3f",
+  "protocol_file_sha256": "199524dd1dd58593776b13f7078527f9dc4e1dda15dbe09757f06fd2684c9cc3",
+  "postselection_audit_source": "c59581cdb749e5d4c1a90af152fe07286cdce220",
+  "per_site_audit_source": "26f2d0f707dcfcf5e91726b1611b05e4f2b34dce",
+  "parent_G0_codec_sha256": "0f4a54e221729b14c6e75d30bed84bd566182a490f975c76d574e540f936adab",
+  "accepted_F1_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+  "frozen_G01_codec_sha256": "213d71be58b4e3a0eb685330ff8f20ad0d2574184d59060890baa4a2eed586e7",
+  "selected_step": 100,
+  "selected_optimizer_checkpoint_sha256": "7a847f50fb47d1246601a7c6b960f5ccda11944020f6fc6752eaa30f472714e6",
+  "matched_G_initialization_tree_sha256": "84ab204d1cea2a1833cbbdeadc7993879ad29a3c4c354d4960c221c951daaeeb",
+  "durable_archive": "/Users/malachy/src/Adze-Torx/results/runs/phase_g/g0_1/frozen_v1_archive",
+  "independent_binary_archive_copies_verified": 13,
+  "evidence_sha256": {
+    "diagnosis.json": "aac89dba839953c2e920c1da8e5722636cee89269757873911fb5c43b7f410ed",
+    "frozen_codec.json": "b5ca99f66d8cc8ee4c0c76a5abb95f4b60a8198e534ec210924129d875e8a986",
+    "heldout.json": "2d1b1289288a967b75acd970133750cde678032d95d14299b744cd41bee94364",
+    "per_site_class_audit.json": "ee1ddfc4a0ef873c54be461f59aabdd09d79bf7d266ecc39ec5968627b15c94b",
+    "postselection_audit.json": "e8785ab97643910e5419956a49d0cc22aee35149f94d8765901fc030381d005f",
+    "selection.json": "c579942474079d35fcd2740d82f28996db1422351920df944ecf44e8d1b30525",
+    "validation_00000.json": "8fd49a536cee7c3b7845549cbaf27c644ac394198804a94bbca750530271c4c3",
+    "validation_00100.json": "649d06c6a1d216d34f06227ddee3b1ba468701ae571fbaea48618358ce657c65"
+  },
+  "validation": {
+    "focused_G_structure_G0_G01_and_oracle_tests": 84,
+    "seconds": 63.86,
+    "format_files": 143,
+    "lint": "pass",
+    "pyright": "0 errors",
+    "boundaries": "pass",
+    "private_torx_scan": "clean",
+    "full_project_suite_rerun": false,
+    "scope_explanation": "only added modules/scripts/tests/evidence; base full validation preserved, no existing engine or sampler edits"
+  },
+  "readiness": {
+    "codec_clean_structural_gate": true,
+    "corrupted_input_information_gate": true,
+    "unchanged_old_G_smoke_runner_ready": false,
+    "amended_G_preflight_may_resume_when_requested": true,
+    "original_full_model_gates_still_required": true,
+    "G_smoke_started": false,
+    "full_G_campaign_authorized": false
+  }
+}

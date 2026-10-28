@@ -1,0 +1,45 @@
+{
+  "name": "regular_050",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g_integration.py::test_full_model_invalid_batch_skips_loss_parameter_moments_and_step",
+    "tests/test_phase_g_integration.py::test_full_model_nonfinite_nu_raises_before_caller_state_mutation",
+    "tests/test_phase_g_integration.py::test_real_model_score_gradient_changes_when_sample_log_probability_is_detached"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g_integration.py::test_full_model_invalid_batch_skips_loss_parameter_moments_and_step",
+    "tests/test_phase_g_integration.py::test_full_model_nonfinite_nu_raises_before_caller_state_mutation",
+    "tests/test_phase_g_integration.py::test_real_model_score_gradient_changes_when_sample_log_probability_is_detached",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_050.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g_integration",
+      "test_full_model_invalid_batch_skips_loss_parameter_moments_and_step"
+    ],
+    [
+      "tests.test_phase_g_integration",
+      "test_full_model_nonfinite_nu_raises_before_caller_state_mutation"
+    ],
+    [
+      "tests.test_phase_g_integration",
+      "test_real_model_score_gradient_changes_when_sample_log_probability_is_detached"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:27:39+0000",
+  "ended": "2026-10-28T19:28:52+0000",
+  "wall_seconds": 73.11161862500012,
+  "log_sha256": "cf426ab35f3b06fccef8290fde5325d90af130a79da1d1752031518df77c4236",
+  "junit_sha256": "83b446dfaf00570e6a0e4cd6f096d6575d6008a60183a1b8f3263bf647b92578"
+}

@@ -1,0 +1,35 @@
+{
+  "scope": "descriptive metadata audit; not a new gate or neural run",
+  "validation_examples": 912,
+  "query_positions": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "gap_counts": {
+    "1": 425,
+    "2": 201,
+    "3": 126,
+    "4": 87,
+    "5": 73
+  },
+  "outside_emitting_competitor_present": 889,
+  "outside_full_signature_present": 816,
+  "no_outside_emitting_competitor": 23,
+  "fixed_neutral_K8_peer_reachable": 780,
+  "fixed_neutral_K8_peer_unreachable": 132,
+  "short_example_caveat": "At8 bytes only query and peer fit; these are length/capacity edge controls, not distractor-selection challenges. No claim that every example has an outside full signature.",
+  "reproduction": "make_examples(1141,16,id_offset=10000); semantic block IDs=cumsum(boundary before site); outside=active & block_id!=block_id[q]; fixed neutral reachability measured with dynamic_capacity_routing and draft_attention_mask, verified equal to q//8==peer//8"
+}

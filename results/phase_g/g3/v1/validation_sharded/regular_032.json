@@ -1,0 +1,69 @@
+{
+  "name": "regular_032",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_f_corruption.py::test_corruption_rejects_bad_carrier_shapes_and_dtypes",
+    "tests/test_phase_f_corruption.py::test_recorruption_eta_zero_is_exact_mean_and_eta_one_is_full_forward_kernel",
+    "tests/test_phase_f_corruption.py::test_diffusion_key_identity_and_namespace_contract",
+    "tests/test_phase_f_corruption.py::test_diffusion_prefix_randomness_does_not_depend_on_total_s",
+    "tests/test_phase_f_corruption.py::test_sampling_helpers_are_reproducible_and_expose_epsilon",
+    "tests/test_phase_f_corruption.py::test_schedule_is_frozen_monotone_and_strictly_prefix_compatible",
+    "tests/test_phase_f_corruption.py::test_fixed_epsilon_pathwise_gradients_match_independent_formulas"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_f_corruption.py::test_corruption_rejects_bad_carrier_shapes_and_dtypes",
+    "tests/test_phase_f_corruption.py::test_recorruption_eta_zero_is_exact_mean_and_eta_one_is_full_forward_kernel",
+    "tests/test_phase_f_corruption.py::test_diffusion_key_identity_and_namespace_contract",
+    "tests/test_phase_f_corruption.py::test_diffusion_prefix_randomness_does_not_depend_on_total_s",
+    "tests/test_phase_f_corruption.py::test_sampling_helpers_are_reproducible_and_expose_epsilon",
+    "tests/test_phase_f_corruption.py::test_schedule_is_frozen_monotone_and_strictly_prefix_compatible",
+    "tests/test_phase_f_corruption.py::test_fixed_epsilon_pathwise_gradients_match_independent_formulas",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_032.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_f_corruption",
+      "test_corruption_rejects_bad_carrier_shapes_and_dtypes"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_recorruption_eta_zero_is_exact_mean_and_eta_one_is_full_forward_kernel"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_diffusion_key_identity_and_namespace_contract"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_diffusion_prefix_randomness_does_not_depend_on_total_s"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_sampling_helpers_are_reproducible_and_expose_epsilon"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_schedule_is_frozen_monotone_and_strictly_prefix_compatible"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_fixed_epsilon_pathwise_gradients_match_independent_formulas"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:22:02+0000",
+  "ended": "2026-10-28T19:22:04+0000",
+  "wall_seconds": 1.7283243341371417,
+  "log_sha256": "83a1593c5b5783693fe3006d1f6597bcb4f3a5968f23b59481ee09a0477f910a",
+  "junit_sha256": "c5b69fcc28869a038674204a3ab58a5cb22b4a1a4497b4a8ea6aaffb0ad8eea6"
+}

@@ -1,0 +1,45 @@
+{
+  "name": "regular_010",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_b_reaudit.py::test_clean_target_loss_weights_and_byte_path_gradient",
+    "tests/test_phase_b_reaudit.py::test_full_first_step_gradient_coverage_including_clean_heads",
+    "tests/test_phase_b_reaudit.py::test_full_eager_jit_and_optimizer_update"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_b_reaudit.py::test_clean_target_loss_weights_and_byte_path_gradient",
+    "tests/test_phase_b_reaudit.py::test_full_first_step_gradient_coverage_including_clean_heads",
+    "tests/test_phase_b_reaudit.py::test_full_eager_jit_and_optimizer_update",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_010.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_b_reaudit",
+      "test_clean_target_loss_weights_and_byte_path_gradient"
+    ],
+    [
+      "tests.test_phase_b_reaudit",
+      "test_full_first_step_gradient_coverage_including_clean_heads"
+    ],
+    [
+      "tests.test_phase_b_reaudit",
+      "test_full_eager_jit_and_optimizer_update"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:03:53+0000",
+  "ended": "2026-10-28T19:04:13+0000",
+  "wall_seconds": 20.47227891604416,
+  "log_sha256": "cf426ab35f3b06fccef8290fde5325d90af130a79da1d1752031518df77c4236",
+  "junit_sha256": "662007a4eec573615c63057e7bbed16bc03da05b3618ef3fa3f2e032cc7b0a84"
+}

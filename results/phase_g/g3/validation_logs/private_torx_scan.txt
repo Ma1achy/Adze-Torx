@@ -1,0 +1,4 @@
+Command: rg -n '(from[[:space:]]+torx\._|import[[:space:]]+torx\._|\btorx\._[A-Za-z0-9_])' src scripts tests experiments
+rg exit status: 1 (no matches)
+PASS: no private Torx imports/access in src/scripts/tests/experiments.
+The repository boundary-check script also passed with PYTHONPATH=src:scripts.

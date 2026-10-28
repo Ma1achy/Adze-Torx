@@ -1,0 +1,163 @@
+{
+  "all_arm_initializations": {
+    "argmax": "84ab204d1cea2a1833cbbdeadc7993879ad29a3c4c354d4960c221c951daaeeb",
+    "sample": "84ab204d1cea2a1833cbbdeadc7993879ad29a3c4c354d4960c221c951daaeeb",
+    "teacher": "84ab204d1cea2a1833cbbdeadc7993879ad29a3c4c354d4960c221c951daaeeb"
+  },
+  "codec_reference_reconstruction": "G.0.1 known accuracy99.469%, NLL.019432; oracle exact83.169%; these are not G model metrics",
+  "complete_initialization": "84ab204d1cea2a1833cbbdeadc7993879ad29a3c4c354d4960c221c951daaeeb",
+  "fresh_moments": true,
+  "passed": true,
+  "protocol": {
+    "L": 4,
+    "Q": 3,
+    "R": 0,
+    "S": 1,
+    "arms": [
+      "teacher",
+      "argmax",
+      "sample"
+    ],
+    "capacity_policy": "PHASE_G0_SEMANTIC_PUSHFORWARD_DYNAMIC_CAPACITY_V1",
+    "checkpoints": [
+      0,
+      10,
+      25,
+      50,
+      100
+    ],
+    "codec_sha256": "213d71be58b4e3a0eb685330ff8f20ad0d2574184d59060890baa4a2eed586e7",
+    "commit": "all nonterminal semantic b; all ell; terminal forced; no fixed-position commitment masks",
+    "configuration": {
+      "carrier": {
+        "C": 32,
+        "L_max": 4,
+        "h_dim": 64
+      },
+      "model": {
+        "byte_vocab": 256,
+        "context_layers": 2,
+        "cycles_Q": 3,
+        "d_ctx": 128,
+        "d_dec": 128,
+        "d_front": 64,
+        "d_model": 128,
+        "decoder_layers": 2,
+        "effective_depth_conditioning": true,
+        "ffn_hidden": 256,
+        "frontend_layers": 2,
+        "head_dim": 32,
+        "heads": 4,
+        "mamba_conv_kernel": 3,
+        "mamba_expand": 2,
+        "mamba_state_dim": 16,
+        "physical_blocks_L": 4,
+        "prompt_max_bytes": 128,
+        "proposal_hidden_dim": 64,
+        "proposal_layers": 2,
+        "residual_gate_init": 0.1,
+        "target_layers": 2,
+        "target_max_bytes": 128
+      },
+      "packing": {
+        "K": 8,
+        "M_max": 32
+      },
+      "training": {
+        "batch_size": 32,
+        "boundary_weight": 1.0,
+        "byte_weight": 1.0,
+        "extent_weight": 1.0,
+        "grad_clip_norm": 1.0,
+        "h_weight": 1.0,
+        "learning_rate": 0.0003,
+        "proposal_weight": 0.0,
+        "weight_decay": 0.01
+      }
+    },
+    "data": {
+      "global_id_ranges": [
+        [
+          0,
+          1023
+        ],
+        [
+          1024,
+          1279
+        ]
+      ],
+      "nu": [
+        0.025,
+        0.25
+      ],
+      "stochastic_seed": 952,
+      "train": [
+        1024,
+        950
+      ],
+      "validation": [
+        256,
+        951
+      ]
+    },
+    "evaluation": "fixed nu vector, occurrence0, global IDs retained; paired chunk32; no parameter update",
+    "f1_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+    "gradient_variance": {
+      "fixed_batch": 32,
+      "root_base": 1100,
+      "scope": "diagnostic only; no loss/optimizer changes",
+      "structure_roots": 4
+    },
+    "implementation": "f571ab40659da872777f4deccbfcd05531c4c576",
+    "initial_tree_sha256": "84ab204d1cea2a1833cbbdeadc7993879ad29a3c4c354d4960c221c951daaeeb",
+    "lambda_op": 0.0,
+    "loss": {
+      "common": "boundary CE + extent CE + .5 predictor h-MSE",
+      "descendant": ".5 replay h-MSE + length-aware byte loss",
+      "proposal": 0,
+      "sample": "common + exactly-once local score-corrected descendant"
+    },
+    "necessity": {
+      "accuracy_delta": 0.01,
+      "accuracy_seeds": [
+        9600,
+        9601,
+        9602,
+        9603
+      ],
+      "controls": [
+        "shifted_cuts",
+        "permuted_extents",
+        "joint",
+        "fixed_neutral"
+      ],
+      "loss_seeds": [
+        9700,
+        9701,
+        9702,
+        9703
+      ],
+      "paired_bootstrap": 2000,
+      "percentiles": [
+        2.5,
+        97.5
+      ],
+      "relative_loss_reduction": 0.02
+    },
+    "occurrences": "two shared-parameter same-input applications, both actualS=0/condition=0; same nonstructure keys; NOT S2",
+    "optimizer": {
+      "batch": 32,
+      "clip": 1.0,
+      "fresh_moments": true,
+      "initial_absolute_step": 0,
+      "lr": 0.0003,
+      "name": "AdamW",
+      "parent_optimizer_step_ignored": 5000,
+      "weight_decay": 0.01
+    },
+    "protocol": "PHASE_G_G01_DYNAMIC_STRUCTURE_ENGINEERING_PREFLIGHT_V1",
+    "sample_temperature": 1.0
+  },
+  "train_ordered_sha256": "2e78f93e4794ac4a9bd97b093c45017cbb0c85e24ae095233e6b02d95c4c98a9",
+  "validation_ordered_sha256": "af374b4c96f0759b3fc1cd58d71cb2f4f2769ba5e3c35eb7acc79a00a5b5aa36"
+}

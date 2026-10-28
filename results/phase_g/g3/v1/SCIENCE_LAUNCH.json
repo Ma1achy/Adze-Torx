@@ -1,0 +1,43 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "launch": {
+    "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+    "stage": "science",
+    "attempt": "science_20261028",
+    "command": [
+      "nice",
+      "-n",
+      "10",
+      "/opt/anaconda3/bin/python",
+      "/private/tmp/adze-phase-g/scripts/run_phase_g23_v1.py",
+      "--stage",
+      "science"
+    ],
+    "source_head": "0652f818956739a2aaf2f04fca10bd3a44cd4d93",
+    "supervisor_source_sha256": "9a06c5befadc28771dfba40e310377c459c072cbb6407f38d242d748c8ea3466",
+    "worker_source_sha256": "6889dc24bfc20a83c635d0fa2e099c8bc6630c79515b4a672bceebc39d1ab3d1",
+    "supervisor_pid": 77035,
+    "time": "2026-10-28T11:41:34+0000",
+    "stdout_is_regular_project_file": true,
+    "child_new_session": true,
+    "PYTHONPATH": "src:scripts",
+    "optimizer_or_protocol_modifications": false,
+    "worker_pid": 77041
+  },
+  "launch_sha256": "b8943c6194399702f54a5e3224e271a71fd5d74244bebde9d9e42f4eb139c151",
+  "test_opening": {
+    "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+    "selection_sha256": "ee0df89871b3afa74c5243225270086c29a80b17c229abc9ef73f6b7314dd57c",
+    "selection_complete_before_generation": true,
+    "dataset_seed": 1142,
+    "global_id_offset": 20000
+  },
+  "test_opening_sha256": "7b4ba5cabe0d8dea6b41da714ef18b56fccc953ebbe405930280386e06d7f5cd",
+  "selection_commit": "47cb6b5eeff23f2ff3e9f64658ae03ae566c8d51",
+  "selected_validation16_committed_before_launch": true,
+  "selected_validation16_sha256": "25fe76d4932c394f0950562c97ed5d5a9804e7695e9983e5cbce94f21926013a",
+  "selected_validation16_execution_sha256": "a819249e3567e390aed37b3884c33a643bf8ad1c220f99f05f10a3b2f27e6bb8",
+  "training_completion_audit_sha256": "05406c377fbac718f8d3cac55d2f0cf7e1af50cfacada3b35cb5bea56795a9f2",
+  "no_training_or_reselection_in_science_stage": true,
+  "scientific_decisions_pending": true
+}

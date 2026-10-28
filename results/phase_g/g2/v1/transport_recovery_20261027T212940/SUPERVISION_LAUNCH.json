@@ -1,0 +1,24 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "stage": "campaign",
+  "attempt": "transport_212940",
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/opt/anaconda3/bin/python",
+    "/private/tmp/adze-phase-g/scripts/run_phase_g23_v1.py",
+    "--stage",
+    "campaign"
+  ],
+  "source_head": "368f94b9cf60f7f2b16b96a2d8cfda4a30324e83",
+  "supervisor_source_sha256": "9a06c5befadc28771dfba40e310377c459c072cbb6407f38d242d748c8ea3466",
+  "worker_source_sha256": "6889dc24bfc20a83c635d0fa2e099c8bc6630c79515b4a672bceebc39d1ab3d1",
+  "supervisor_pid": 21993,
+  "time": "2026-10-27T21:40:50+0000",
+  "stdout_is_regular_project_file": true,
+  "child_new_session": true,
+  "PYTHONPATH": "src:scripts",
+  "optimizer_or_protocol_modifications": false,
+  "worker_pid": 21995
+}

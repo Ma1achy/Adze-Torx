@@ -1,0 +1,46 @@
+{
+  "protocol": "bd733883a39e307d920b4a81665a39eb0d370841424b0e0f3a05335386021153",
+  "source_commit": "4689293a73f22a37dbb156cef658820ea03985fd",
+  "completed_updates": 100,
+  "absolute_optimizer_step": 100,
+  "verified_receipts": 101,
+  "duplicate_or_missing_updates": 0,
+  "all_parameter_and_Adam_states_finite": true,
+  "initial_Adam_moments_zero": true,
+  "frozen_parameter_and_moment_bits_unchanged_all_101_states": true,
+  "historical_artifacts_unchanged": 727,
+  "G1_G11_manifests_unchanged": true,
+  "frozen_execution_sources_unchanged": true,
+  "checkpoints": {
+    "0": {
+      "path": "results/runs/phase_g/g1_1/teacher_v0/official/payloads/000_000.pkl",
+      "sha256": "a8a4cdded14e0f18fe12c8710f83f4f4b426aa2bfd0b1c440586aa32a96f5b2f",
+      "model_tree": "84ab204d1cea2a1833cbbdeadc7993879ad29a3c4c354d4960c221c951daaeeb"
+    },
+    "10": {
+      "path": "results/runs/phase_g/g1_1/teacher_v0/official/payloads/010_000.pkl",
+      "sha256": "e296607f6377f080327eeb9404e2e9a740c05594da30fbfb1ea79465639e2609",
+      "model_tree": "dcebe9532486326012c7bc72e289c5957207376192e0004eba450c89b7450f2a"
+    },
+    "25": {
+      "path": "results/runs/phase_g/g1_1/teacher_v0/official/payloads/025_000.pkl",
+      "sha256": "570eb4b2a670e3e3f398777b21d924f464121bbd7d9c3f5839b299471cf56102",
+      "model_tree": "424a6a74b668dbde36d0297b33a2dc618b7db58a19e4b0b501c4582fac206f53"
+    },
+    "50": {
+      "path": "results/runs/phase_g/g1_1/teacher_v0/official/payloads/050_000.pkl",
+      "sha256": "225fdae1622f572660ab745748ce1047ab2d4f6c63479507da81c840242a6cca",
+      "model_tree": "9a9c3da265a7da67746307f3c69eeaad3599deff887f9fe35abbdd0178639eb0"
+    },
+    "100": {
+      "path": "results/runs/phase_g/g1_1/teacher_v0/official/payloads/100_000.pkl",
+      "sha256": "fa798be7d9d6244054b1053bd86c340c4d2f3582290dc72a31e6877c24f81a93",
+      "model_tree": "94f4b7de78406336b6e6bb87416981330a98e9d74b9bfe7c4280529807184bd2"
+    }
+  },
+  "gradient_norm_range": [
+    10.17209243774414,
+    2201.673583984375
+  ],
+  "reporter_sha256": "181ce47dd59409ea393ccc7c346862297b04c26834939f935b977ae3c8fd009e"
+}

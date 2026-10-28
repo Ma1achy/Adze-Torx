@@ -1,0 +1,45 @@
+{
+  "name": "regular_012",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_c_1_occurrences.py::test_shared_frontend_same_mean_distinct_reproducible_branch_occurrences",
+    "tests/test_phase_c_1_occurrences.py::test_q3_reuses_block_means_but_has_three_distinct_reproducible_keys",
+    "tests/test_phase_c_1_occurrences.py::test_zero_noise_scopes_preserve_factor_forward_and_key_rho_invariance"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_c_1_occurrences.py::test_shared_frontend_same_mean_distinct_reproducible_branch_occurrences",
+    "tests/test_phase_c_1_occurrences.py::test_q3_reuses_block_means_but_has_three_distinct_reproducible_keys",
+    "tests/test_phase_c_1_occurrences.py::test_zero_noise_scopes_preserve_factor_forward_and_key_rho_invariance",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_012.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_c_1_occurrences",
+      "test_shared_frontend_same_mean_distinct_reproducible_branch_occurrences"
+    ],
+    [
+      "tests.test_phase_c_1_occurrences",
+      "test_q3_reuses_block_means_but_has_three_distinct_reproducible_keys"
+    ],
+    [
+      "tests.test_phase_c_1_occurrences",
+      "test_zero_noise_scopes_preserve_factor_forward_and_key_rho_invariance"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:04:39+0000",
+  "ended": "2026-10-28T19:05:58+0000",
+  "wall_seconds": 78.64521999983117,
+  "log_sha256": "cf426ab35f3b06fccef8290fde5325d90af130a79da1d1752031518df77c4236",
+  "junit_sha256": "1d09b209c43997b483bd1455f0d38a436fd806283d9fe464bf894186fbbf63ab"
+}

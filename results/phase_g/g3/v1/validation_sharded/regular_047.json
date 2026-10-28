@@ -1,0 +1,39 @@
+{
+  "name": "regular_047",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g23_validation_completion.py::test_confirmation_is_fixed_sixteen_root_validation_not_test_or_training",
+    "tests/test_phase_g23_validation_completion.py::test_confirmation_records_selection_and_before_after_optimizer_identity"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g23_validation_completion.py::test_confirmation_is_fixed_sixteen_root_validation_not_test_or_training",
+    "tests/test_phase_g23_validation_completion.py::test_confirmation_records_selection_and_before_after_optimizer_identity",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_047.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g23_validation_completion",
+      "test_confirmation_is_fixed_sixteen_root_validation_not_test_or_training"
+    ],
+    [
+      "tests.test_phase_g23_validation_completion",
+      "test_confirmation_records_selection_and_before_after_optimizer_identity"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:24:36+0000",
+  "ended": "2026-10-28T19:24:36+0000",
+  "wall_seconds": 0.30090362508781254,
+  "log_sha256": "99db33d5c94c6f7da021687c7391181685cc33299c5435b1c861e2db3be3ec87",
+  "junit_sha256": "3fab5a986267b7b81266558118433b1c7d020d8dcbc758f6260ad56518539b0a"
+}

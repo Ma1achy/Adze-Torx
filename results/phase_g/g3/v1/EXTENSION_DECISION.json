@@ -1,0 +1,18 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "frontier": true,
+  "material": false,
+  "operands": {
+    "500": {
+      "accuracy": 0.9895833432674408,
+      "loss": 0.043537139892578125,
+      "guards": true
+    },
+    "1000": {
+      "accuracy": 0.9925073087215424,
+      "loss": 0.02867555245757103,
+      "guards": true
+    }
+  },
+  "cap": 1000
+}

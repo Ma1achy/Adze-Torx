@@ -1,0 +1,45 @@
+{
+  "name": "regular_046",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g23_v1.py::test_every_training_evaluation_selection_and_decision_function_unchanged",
+    "tests/test_phase_g23_v1.py::test_full_model_preflight_unchanged_except_adjudicated_oracle_gate",
+    "tests/test_phase_g23_v1.py::test_v1_requires_actual_immutable_adjudication_and_rejects_changed_manifest"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g23_v1.py::test_every_training_evaluation_selection_and_decision_function_unchanged",
+    "tests/test_phase_g23_v1.py::test_full_model_preflight_unchanged_except_adjudicated_oracle_gate",
+    "tests/test_phase_g23_v1.py::test_v1_requires_actual_immutable_adjudication_and_rejects_changed_manifest",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_046.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g23_v1",
+      "test_every_training_evaluation_selection_and_decision_function_unchanged"
+    ],
+    [
+      "tests.test_phase_g23_v1",
+      "test_full_model_preflight_unchanged_except_adjudicated_oracle_gate"
+    ],
+    [
+      "tests.test_phase_g23_v1",
+      "test_v1_requires_actual_immutable_adjudication_and_rejects_changed_manifest"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:24:35+0000",
+  "ended": "2026-10-28T19:24:36+0000",
+  "wall_seconds": 0.7989352908916771,
+  "log_sha256": "cf426ab35f3b06fccef8290fde5325d90af130a79da1d1752031518df77c4236",
+  "junit_sha256": "d3e338bd34a04a4dbbbd3c58d0922be757f16f7e7cab1739d163bf2be8b15190"
+}

@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "capture": "after both complete regular and slow suites",
+  "historical_files": 727,
+  "historical_paths_identical": true,
+  "historical_hashes_unchanged": true,
+  "archive_files": 20,
+  "archive_hashes_unchanged": true,
+  "execution_source": "f571ab40659da872777f4deccbfcd05531c4c576"
+}

@@ -1,0 +1,75 @@
+{
+  "name": "regular_013",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_c_torx.py::test_stable_occurrence_id_is_process_independent",
+    "tests/test_phase_c_torx.py::test_tied_mean_occurrences_receive_distinct_q_keys",
+    "tests/test_phase_c_torx.py::test_parameter_mapping_is_semantic_complete_and_round_trips",
+    "tests/test_phase_c_torx.py::test_affine_factor_zero_noise_forward_key_rho_and_gradient_parity[1-2]",
+    "tests/test_phase_c_torx.py::test_affine_factor_zero_noise_forward_key_rho_and_gradient_parity[12-999]",
+    "tests/test_phase_c_torx.py::test_embedding_depthwise_and_mean_parameter_primitive_parity",
+    "tests/test_phase_c_torx.py::test_c2a_mamba_stack_parity_for_masks[mask0]",
+    "tests/test_phase_c_torx.py::test_c2a_mamba_stack_parity_for_masks[mask1]"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_c_torx.py::test_stable_occurrence_id_is_process_independent",
+    "tests/test_phase_c_torx.py::test_tied_mean_occurrences_receive_distinct_q_keys",
+    "tests/test_phase_c_torx.py::test_parameter_mapping_is_semantic_complete_and_round_trips",
+    "tests/test_phase_c_torx.py::test_affine_factor_zero_noise_forward_key_rho_and_gradient_parity[1-2]",
+    "tests/test_phase_c_torx.py::test_affine_factor_zero_noise_forward_key_rho_and_gradient_parity[12-999]",
+    "tests/test_phase_c_torx.py::test_embedding_depthwise_and_mean_parameter_primitive_parity",
+    "tests/test_phase_c_torx.py::test_c2a_mamba_stack_parity_for_masks[mask0]",
+    "tests/test_phase_c_torx.py::test_c2a_mamba_stack_parity_for_masks[mask1]",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_013.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_c_torx",
+      "test_stable_occurrence_id_is_process_independent"
+    ],
+    [
+      "tests.test_phase_c_torx",
+      "test_tied_mean_occurrences_receive_distinct_q_keys"
+    ],
+    [
+      "tests.test_phase_c_torx",
+      "test_parameter_mapping_is_semantic_complete_and_round_trips"
+    ],
+    [
+      "tests.test_phase_c_torx",
+      "test_affine_factor_zero_noise_forward_key_rho_and_gradient_parity[1-2]"
+    ],
+    [
+      "tests.test_phase_c_torx",
+      "test_affine_factor_zero_noise_forward_key_rho_and_gradient_parity[12-999]"
+    ],
+    [
+      "tests.test_phase_c_torx",
+      "test_embedding_depthwise_and_mean_parameter_primitive_parity"
+    ],
+    [
+      "tests.test_phase_c_torx",
+      "test_c2a_mamba_stack_parity_for_masks[mask0]"
+    ],
+    [
+      "tests.test_phase_c_torx",
+      "test_c2a_mamba_stack_parity_for_masks[mask1]"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:05:58+0000",
+  "ended": "2026-10-28T19:06:10+0000",
+  "wall_seconds": 12.250879500061274,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "28e60ca96487f9612cb181a162c77b42c64a96143919d4db4c4ce4a707b8b4d3"
+}

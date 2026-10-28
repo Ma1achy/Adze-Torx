@@ -1,0 +1,25 @@
+{
+  "schema": "PHASE_G0_EVIDENCE_INDEX_V1",
+  "training_source": "085d2e1d5b1de7e02b47e84c892ca258c7f4e328",
+  "postfreeze_verifier_source": "289e00fd755856310e7ec481161101f5d7b4aced",
+  "counterfactual_and_full_suite_source": "94a2416e4e6056d4a6421f178ca7e0f738bcb486",
+  "torx_installed_commit": "f1fc858ed950ecd41935d15c06d0ec7c5e0674ae",
+  "pyproject_sha256": "5ffaf2aa4009b74b98206c86f7debb232306ec266a65fb9f1ce1cf43f5bc0301",
+  "accepted_f1_checkpoint_sha256": "520d3723d3a3187aa08ff3f467f434d43b579cdc4b0ce667727dfad96e83cf57",
+  "accepted_codec_sha256": "55f057f78f795f1585d7aac28fa7ff37846d4c1098507ede375e86b21c4f8ff6",
+  "historical_failed_g_gate_sha256": "c99ca707c3ad3b7e7df057bd4fab93e3f293a0446efbf076fea889680ded448b",
+  "new_frozen_codec_sha256": "0f4a54e221729b14c6e75d30bed84bd566182a490f975c76d574e540f936adab",
+  "matched_initialization_tree_sha256": "0f398f0d08d9d78bc0543cc65106e95f3b5981ecf144e3d88b0708a960390f05",
+  "evidence_sha256": {
+    "capacity_oracle.json": "05db226a6b0fb578e3b9dba4ee2ab13d18283a575d1e7643e395e6647554c998",
+    "counterfactual_audit.json": "f83ff8e49c07bec3fd04aa16de0efc24c46362edd5162b7290edd687c866fc2b",
+    "frozen_codec.json": "edb8f391987af066adcd9a26e0461ddfd74ebca06d9cc27de859344ee2e792b7",
+    "heldout_compatibility.json": "4514b290957463ec500e6af4092f679546d9505e1c7fc43268af6a3a436e681a",
+    "postfreeze_verification.json": "799b99c43ef88b0adda0664791730cef0c415cd2d3f928ff05ba19060d06c2b4",
+    "representation_audit.json": "e34ab853ad688196bbf6bc2ee460a9b66873af218cac8db7e0b5fc4dae2f4fb9",
+    "selection.json": "cd9b8fd4bdc02a893c3cd1e08b02eacbdc069c24d3bba8a7611cb7552792b23c",
+    "validation_00000.json": "8ceb67ff4af24208f1d195ce711efe92408538fceffe0c49946f7b6b5a1bfc37",
+    "validation_00100.json": "e819032a326530d188e963b998c3904564bdf16c60d9eac703be9f771432ef1d",
+    "validation_00250.json": "c75030d1c0c52e72208ee65a01bac06c5f8d1915160570be14e6c86e6b289e28"
+  }
+}

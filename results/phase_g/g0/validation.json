@@ -1,0 +1,41 @@
+{
+  "source_commit": "94a2416e4e6056d4a6421f178ca7e0f738bcb486",
+  "focused": {
+    "command": "PYTHONPATH=src pytest tests/test_phase_g_structure.py tests/test_phase_g_oracle.py tests/test_phase_g0.py -m 'not slow' -ra",
+    "passed": 59,
+    "deselected": 21,
+    "seconds": 26.23
+  },
+  "regular": {
+    "command": "PYTHONPATH=src make test",
+    "exit_code": 0,
+    "passed": 245,
+    "skipped": 1,
+    "deselected": 30,
+    "seconds": 1478.93,
+    "skip_reason": "existing Phase-D fixture guard: accepted Phase-B COPY/REVERSE checkpoints absent in isolated checkout"
+  },
+  "slow": {
+    "command": "PYTHONPATH=src make test-slow",
+    "exit_code": 0,
+    "passed": 30,
+    "deselected": 246,
+    "seconds": 60.21
+  },
+  "static": {
+    "format_check": "138 files already formatted",
+    "lint": "passed",
+    "pyright": "0 errors, 0 warnings, 0 informations",
+    "public_boundaries": "passed",
+    "private_torx_import_scan": "clean",
+    "diff_check": "passed"
+  },
+  "scientific_execution_limits": {
+    "g0_codec_updates": 250,
+    "g_policy_arms_started": false,
+    "full_g_campaign": false,
+    "h_training": false,
+    "language_training": false,
+    "s4": false
+  }
+}

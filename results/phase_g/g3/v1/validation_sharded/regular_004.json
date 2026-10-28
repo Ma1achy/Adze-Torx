@@ -1,0 +1,57 @@
+{
+  "name": "regular_004",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_pack_unpool.py::test_pack_unpool_roundtrip_carrier_ids",
+    "tests/test_pack_unpool.py::test_inactive_hole_is_not_dropped_from_identity_map",
+    "tests/test_pack_unpool.py::test_overflow_is_explicit_not_truncation",
+    "tests/test_pack_unpool.py::test_block_length_overflow_is_explicit",
+    "tests/test_pack_unpool.py::test_block_count_overflow_is_explicit"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_pack_unpool.py::test_pack_unpool_roundtrip_carrier_ids",
+    "tests/test_pack_unpool.py::test_inactive_hole_is_not_dropped_from_identity_map",
+    "tests/test_pack_unpool.py::test_overflow_is_explicit_not_truncation",
+    "tests/test_pack_unpool.py::test_block_length_overflow_is_explicit",
+    "tests/test_pack_unpool.py::test_block_count_overflow_is_explicit",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_004.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_pack_unpool",
+      "test_pack_unpool_roundtrip_carrier_ids"
+    ],
+    [
+      "tests.test_pack_unpool",
+      "test_inactive_hole_is_not_dropped_from_identity_map"
+    ],
+    [
+      "tests.test_pack_unpool",
+      "test_overflow_is_explicit_not_truncation"
+    ],
+    [
+      "tests.test_pack_unpool",
+      "test_block_length_overflow_is_explicit"
+    ],
+    [
+      "tests.test_pack_unpool",
+      "test_block_count_overflow_is_explicit"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:02:52+0000",
+  "ended": "2026-10-28T19:02:54+0000",
+  "wall_seconds": 1.9042014998849481,
+  "log_sha256": "4d2df7a96ce4a667da3ccf295f2d16c728a65ed0e861a3baa919f7bb469b02b5",
+  "junit_sha256": "4aac739f55557026e97971a9434f0f6f16887e11c630d22bfa797b7f7cafdf9e"
+}

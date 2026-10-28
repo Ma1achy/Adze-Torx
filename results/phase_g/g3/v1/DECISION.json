@@ -1,0 +1,4061 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "axis1": "BENEFIT",
+  "axis2": "BENEFIT",
+  "axis3": "UNRESOLVED",
+  "overall": "PHASE_G_GENERATED_STRUCTURE_FUNCTIONAL",
+  "functionality": {
+    "B:argmax": {
+      "outcome": "BENEFIT",
+      "functional": true,
+      "per_seed": [
+        {
+          "passed": true,
+          "checks": {
+            "boundary": true,
+            "length": true,
+            "valid": true,
+            "reach": true,
+            "accuracy": true,
+            "query_loss": true,
+            "nll": true,
+            "nll_support": true,
+            "uncertainty": true,
+            "competence": true,
+            "chance_margin": true
+          },
+          "summary": {
+            "b_accuracy": 1.0,
+            "b_ce": 0.00029126330628059804,
+            "b_fn": 0.0,
+            "b_fp": 0.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.9983444809913635,
+            "byte_exact": 0.9418859649122807,
+            "byte_loss": 0.0058849770575761795,
+            "byte_nll": 0.0058849770575761795,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.052257608622312546,
+            "ell_ce": 6.477672286564484e-05,
+            "emitted_length": 36.0,
+            "entropy": 0.06302236020565033,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.05311685800552368,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.05261365324258804,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9986213445663452,
+            "nonquery_loss": 0.004875254817306995,
+            "nonquery_nll": 0.004875254817306995,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 1.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.9937865138053894,
+            "query_exact": 0.981359649122807,
+            "query_loss": 0.019814204424619675,
+            "query_nll": 0.019814202561974525,
+            "query_nll_support": 3.0,
+            "structure_exact": 1.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "active_boundary_f1": 1.0,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "cut": {
+            "b_accuracy": 0.8592470288276672,
+            "b_ce": 0.00029126330628059804,
+            "b_fn": 0.0,
+            "b_fp": 1.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.8898084163665771,
+            "byte_exact": 0.0,
+            "byte_loss": 3.0501532554626465,
+            "byte_nll": 3.0501532554626465,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.052257608622312546,
+            "ell_ce": 6.477672286564484e-05,
+            "emitted_length": 36.0,
+            "entropy": 0.06302236020565033,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.060065362602472305,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.05261365324258804,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9988113045692444,
+            "nonquery_loss": 0.004933957941830158,
+            "nonquery_nll": 0.004933957941830158,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.034356724470853806,
+            "query_exact": 0.0,
+            "query_loss": 28.16611671447754,
+            "query_nll": 28.16611671447754,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "base_log_prob": 0.0,
+            "intervened": 1.0,
+            "active_boundary_f1": 0.9068437180796731,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "paired": {
+            "query_accuracy": {
+              "delta": 0.9594298005104065,
+              "ci95": [
+                0.9521198868751526,
+                0.9667397156357765
+              ],
+              "relative": 27.9255313873291,
+              "relative_ci95": [
+                23.052654266357422,
+                34.81710405349731
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_loss": {
+              "delta": -28.146299362182617,
+              "ci95": [
+                -28.8464026927948,
+                -27.482314586639404
+              ],
+              "relative": -0.9992965459823608,
+              "relative_ci95": [
+                -0.9995988145470619,
+                -0.9989433079957962
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_nll": {
+              "delta": -28.146299362182617,
+              "ci95": [
+                -28.845380878448488,
+                -27.45400857925415
+              ],
+              "relative": -0.9992965459823608,
+              "relative_ci95": [
+                -0.9995962396264076,
+                -0.9989393800497055
+              ],
+              "support": 912,
+              "replicates": 2000
+            }
+          }
+        },
+        {
+          "passed": true,
+          "checks": {
+            "boundary": true,
+            "length": true,
+            "valid": true,
+            "reach": true,
+            "accuracy": true,
+            "query_loss": true,
+            "nll": true,
+            "nll_support": true,
+            "uncertainty": true,
+            "competence": true,
+            "chance_margin": true
+          },
+          "summary": {
+            "b_accuracy": 1.0,
+            "b_ce": 0.0005352891166694462,
+            "b_fn": 0.0,
+            "b_fp": 0.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.9979026317596436,
+            "byte_exact": 0.9177631578947368,
+            "byte_loss": 0.006520336959511042,
+            "byte_nll": 0.006520336959511042,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.07144805788993835,
+            "ell_ce": 0.0003040720184799284,
+            "emitted_length": 36.0,
+            "entropy": 0.14777281880378723,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.10214367508888245,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.0722874104976654,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9980218410491943,
+            "nonquery_loss": 0.0061793252825737,
+            "nonquery_nll": 0.0061793252825737,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 1.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.9948830604553223,
+            "query_exact": 0.9857456140350878,
+            "query_loss": 0.013855875469744205,
+            "query_nll": 0.013855875469744205,
+            "query_nll_support": 3.0,
+            "structure_exact": 1.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "active_boundary_f1": 1.0,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "cut": {
+            "b_accuracy": 0.8592470288276672,
+            "b_ce": 0.0005352891166694462,
+            "b_fn": 0.0,
+            "b_fp": 1.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.8890717029571533,
+            "byte_exact": 0.0,
+            "byte_loss": 2.4637815952301025,
+            "byte_nll": 2.4637815952301025,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.07144805788993835,
+            "ell_ce": 0.0003040720184799284,
+            "emitted_length": 36.0,
+            "entropy": 0.14777281880378723,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.10851036757230759,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.0722874104976654,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9977624416351318,
+            "nonquery_loss": 0.006524793338030577,
+            "nonquery_nll": 0.006524793338030577,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.0347222238779068,
+            "query_exact": 0.0,
+            "query_loss": 22.331024169921875,
+            "query_nll": 22.331024169921875,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "base_log_prob": 0.0,
+            "intervened": 1.0,
+            "active_boundary_f1": 0.9068437180796731,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "paired": {
+            "query_accuracy": {
+              "delta": 0.9601607918739319,
+              "ci95": [
+                0.952850878238678,
+                0.9671052694320679
+              ],
+              "relative": 27.652629852294922,
+              "relative_ci95": [
+                22.89451789855957,
+                34.31168746948242
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_loss": {
+              "delta": -22.317169189453125,
+              "ci95": [
+                -22.82932162284851,
+                -21.776265335083007
+              ],
+              "relative": -0.9993795156478882,
+              "relative_ci95": [
+                -0.9995936319231987,
+                -0.9990856498479843
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_nll": {
+              "delta": -22.317169189453125,
+              "ci95": [
+                -22.821688079833983,
+                -21.81474452018738
+              ],
+              "relative": -0.9993795156478882,
+              "relative_ci95": [
+                -0.9995977386832238,
+                -0.9991021782159806
+              ],
+              "support": 912,
+              "replicates": 2000
+            }
+          }
+        },
+        {
+          "passed": true,
+          "checks": {
+            "boundary": true,
+            "length": true,
+            "valid": true,
+            "reach": true,
+            "accuracy": true,
+            "query_loss": true,
+            "nll": true,
+            "nll_support": true,
+            "uncertainty": true,
+            "competence": true,
+            "chance_margin": true
+          },
+          "summary": {
+            "b_accuracy": 1.0,
+            "b_ce": 0.00020560230768751353,
+            "b_fn": 0.0,
+            "b_fp": 0.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.9974523186683655,
+            "byte_exact": 0.9057017543859649,
+            "byte_loss": 0.008316878229379654,
+            "byte_nll": 0.008316878229379654,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.07836544513702393,
+            "ell_ce": 6.7166518419981e-05,
+            "emitted_length": 36.0,
+            "entropy": 0.05385429784655571,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.07131113111972809,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.07863821089267731,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9981372356414795,
+            "nonquery_loss": 0.006005427334457636,
+            "nonquery_nll": 0.006005427334457636,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 1.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.9897661209106445,
+            "query_exact": 0.9703947368421053,
+            "query_loss": 0.03439299389719963,
+            "query_nll": 0.03439299017190933,
+            "query_nll_support": 3.0,
+            "structure_exact": 1.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "active_boundary_f1": 1.0,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "cut": {
+            "b_accuracy": 0.8592470288276672,
+            "b_ce": 0.00020560230768751353,
+            "b_fn": 0.0,
+            "b_fp": 1.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.8884201645851135,
+            "byte_exact": 0.0,
+            "byte_loss": 3.182875156402588,
+            "byte_nll": 3.182875156402588,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.07836544513702393,
+            "ell_ce": 6.7166518419981e-05,
+            "emitted_length": 36.0,
+            "entropy": 0.05385429784655571,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.07962915301322937,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.07863821089267731,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9981902241706848,
+            "nonquery_loss": 0.005957881920039654,
+            "nonquery_nll": 0.005957881920039654,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.03179824724793434,
+            "query_exact": 0.0,
+            "query_loss": 27.822328567504883,
+            "query_nll": 27.822328567504883,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "base_log_prob": 0.0,
+            "intervened": 1.0,
+            "active_boundary_f1": 0.9068437180796731,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "paired": {
+            "query_accuracy": {
+              "delta": 0.9579678177833557,
+              "ci95": [
+                0.9499269723892212,
+                0.9652777314186096
+              ],
+              "relative": 30.126436233520508,
+              "relative_ci95": [
+                24.74261884689331,
+                37.657495975494385
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_loss": {
+              "delta": -27.787935256958008,
+              "ci95": [
+                -28.481523036956787,
+                -27.078532695770264
+              ],
+              "relative": -0.9987638592720032,
+              "relative_ci95": [
+                -0.9991709068417549,
+                -0.9982992008328437
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_nll": {
+              "delta": -27.787935256958008,
+              "ci95": [
+                -28.468638229370118,
+                -27.138393545150755
+              ],
+              "relative": -0.9987638592720032,
+              "relative_ci95": [
+                -0.9991631597280503,
+                -0.9982830241322518
+              ],
+              "support": 912,
+              "replicates": 2000
+            }
+          }
+        }
+      ],
+      "aggregate": {
+        "passed": true,
+        "checks": {
+          "boundary": true,
+          "length": true,
+          "valid": true,
+          "reach": true,
+          "accuracy": true,
+          "query_loss": true,
+          "nll": true,
+          "nll_support": true,
+          "uncertainty": true,
+          "competence": true,
+          "chance_margin": true
+        },
+        "summary": {
+          "b_accuracy": 1.0,
+          "b_ce": 0.000344051601132378,
+          "b_fn": 0.0,
+          "b_fp": 0.0,
+          "b_support": 9.368421052631579,
+          "b_tp": 4.8673245614035086,
+          "byte_accuracy": 0.9978997707366943,
+          "byte_exact": 0.9217836257309941,
+          "byte_loss": 0.006907397881150246,
+          "byte_nll": 0.006907397812196527,
+          "byte_nll_support": 36.0,
+          "commit_change": 0.8583813309669495,
+          "descendant": 0.06735703349113464,
+          "ell_ce": 0.0001453384174965322,
+          "emitted_length": 36.0,
+          "entropy": 0.08821649849414825,
+          "extent_accuracy": 1.0,
+          "extent_exact": 1.0,
+          "extra": 0.0,
+          "h_mse": 0.07552389800548553,
+          "length_accuracy": 1.0,
+          "log_prob": 0.0,
+          "loss_per_example": 0.06784642487764359,
+          "missing": 0.0,
+          "missing_query": 0.0,
+          "nonquery_accuracy": 0.9982601404190063,
+          "nonquery_loss": 0.005686669144779444,
+          "nonquery_nll": 0.005686669286436016,
+          "nonquery_nll_support": 32.0,
+          "partial_correct": 0.7368421052631579,
+          "partial_support": 0.7368421052631579,
+          "peer_reach": 1.0,
+          "prediction_b_accuracy": 1.0,
+          "prediction_extent_accuracy": 1.0,
+          "prediction_extent_exact": 1.0,
+          "query_accuracy": 0.992811918258667,
+          "query_exact": 0.9791666666666666,
+          "query_loss": 0.02268769033253193,
+          "query_nll": 0.02268769021789012,
+          "query_nll_support": 3.0,
+          "structure_exact": 1.0,
+          "true_length": 36.0,
+          "valid": 1.0,
+          "active_boundary_f1": 1.0,
+          "extent_class_support": [
+            20640.0,
+            224.0,
+            224.0,
+            224.0,
+            7872.0
+          ],
+          "extent_class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "partial_extent_accuracy": 1.0
+        },
+        "cut": {
+          "b_accuracy": 0.8592470288276672,
+          "b_ce": 0.000344051601132378,
+          "b_fn": 0.0,
+          "b_fp": 1.0,
+          "b_support": 9.368421052631579,
+          "b_tp": 4.8673245614035086,
+          "byte_accuracy": 0.8891000747680664,
+          "byte_exact": 0.0,
+          "byte_loss": 2.8989365100860596,
+          "byte_nll": 2.898936658547592,
+          "byte_nll_support": 36.0,
+          "commit_change": 0.8583813309669495,
+          "descendant": 0.06735703349113464,
+          "ell_ce": 0.0001453384174965322,
+          "emitted_length": 36.0,
+          "entropy": 0.08821649849414825,
+          "extent_accuracy": 1.0,
+          "extent_exact": 1.0,
+          "extra": 0.0,
+          "h_mse": 0.08273496478796005,
+          "length_accuracy": 1.0,
+          "log_prob": 0.0,
+          "loss_per_example": 0.06784642487764359,
+          "missing": 0.0,
+          "missing_query": 0.0,
+          "nonquery_accuracy": 0.9982545971870422,
+          "nonquery_loss": 0.005805544555187225,
+          "nonquery_nll": 0.005805544693399236,
+          "nonquery_nll_support": 32.0,
+          "partial_correct": 0.7368421052631579,
+          "partial_support": 0.7368421052631579,
+          "peer_reach": 0.0,
+          "prediction_b_accuracy": 1.0,
+          "prediction_extent_accuracy": 1.0,
+          "prediction_extent_exact": 1.0,
+          "query_accuracy": 0.033625733107328415,
+          "query_exact": 0.0,
+          "query_loss": 26.106487274169922,
+          "query_nll": 26.10648897529868,
+          "query_nll_support": 3.0,
+          "structure_exact": 0.0,
+          "true_length": 36.0,
+          "valid": 1.0,
+          "base_log_prob": 0.0,
+          "intervened": 1.0,
+          "active_boundary_f1": 0.9068437180796731,
+          "extent_class_support": [
+            20640.0,
+            224.0,
+            224.0,
+            224.0,
+            7872.0
+          ],
+          "extent_class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "partial_extent_accuracy": 1.0
+        },
+        "paired": {
+          "query_accuracy": {
+            "delta": 0.9591861963272095,
+            "ci95": [
+              0.9529696062207222,
+              0.9649122953414917
+            ],
+            "relative": 28.525362014770508,
+            "relative_ci95": [
+              24.123073053359985,
+              34.09547605514526
+            ],
+            "support": 912,
+            "replicates": 2000
+          },
+          "query_loss": {
+            "delta": -26.083803176879883,
+            "ci95": [
+              -26.65437035560608,
+              -25.53169560432434
+            ],
+            "relative": -0.9991309642791748,
+            "relative_ci95": [
+              -0.9993294522166252,
+              -0.9989160150289536
+            ],
+            "support": 912,
+            "replicates": 2000
+          },
+          "query_nll": {
+            "delta": -26.083801285080792,
+            "ci95": [
+              -26.610306473335907,
+              -25.539973904262517
+            ],
+            "relative": -0.9991309558999161,
+            "relative_ci95": [
+              -0.9993328256113964,
+              -0.9989163214759935
+            ],
+            "support": 912,
+            "replicates": 2000
+          }
+        }
+      },
+      "training_seed_accuracy": {
+        "mean": 0.9591861367225647,
+        "sd": 0.0011166077519046947,
+        "range": [
+          0.9579678177833557,
+          0.9601607918739319
+        ],
+        "ci95": [
+          0.9564123292967212,
+          0.9619599441484082
+        ],
+        "n_training_seeds": 3,
+        "df": 2
+      },
+      "training_seed_query_loss": {
+        "mean": -26.08380126953125,
+        "sd": 3.266916608666895,
+        "range": [
+          -28.146299362182617,
+          -22.317169189453125
+        ],
+        "ci95": [
+          -34.19927201856938,
+          -17.96833052049312
+        ],
+        "n_training_seeds": 3,
+        "df": 2
+      }
+    },
+    "C:argmax": {
+      "outcome": "BENEFIT",
+      "functional": true,
+      "per_seed": [
+        {
+          "passed": true,
+          "checks": {
+            "boundary": true,
+            "length": true,
+            "valid": true,
+            "reach": true,
+            "accuracy": true,
+            "query_loss": true,
+            "nll": true,
+            "nll_support": true,
+            "uncertainty": true,
+            "competence": true,
+            "chance_margin": true
+          },
+          "summary": {
+            "b_accuracy": 1.0,
+            "b_ce": 0.00020704363123513758,
+            "b_fn": 0.0,
+            "b_fp": 0.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.9980905055999756,
+            "byte_exact": 0.9177631578947368,
+            "byte_loss": 0.006030383985489607,
+            "byte_nll": 0.006030383985489607,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.06819859147071838,
+            "ell_ce": 5.365522520150989e-05,
+            "emitted_length": 36.0,
+            "entropy": 0.04347100108861923,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.06545126438140869,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.06845928728580475,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9986114501953125,
+            "nonquery_loss": 0.004547826945781708,
+            "nonquery_nll": 0.004547826945781708,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 1.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.9904971122741699,
+            "query_exact": 0.9714912280701754,
+            "query_loss": 0.029442572966217995,
+            "query_nll": 0.029442569240927696,
+            "query_nll_support": 3.0,
+            "structure_exact": 1.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "active_boundary_f1": 1.0,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "cut": {
+            "b_accuracy": 0.8592470288276672,
+            "b_ce": 0.00020704363123513758,
+            "b_fn": 0.0,
+            "b_fp": 1.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.888930082321167,
+            "byte_exact": 0.0,
+            "byte_loss": 4.206850051879883,
+            "byte_nll": 4.206850051879883,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.06819859147071838,
+            "ell_ce": 5.365522520150989e-05,
+            "emitted_length": 36.0,
+            "entropy": 0.04347100108861923,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.07344876974821091,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.06845928728580475,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.998704195022583,
+            "nonquery_loss": 0.0045423624105751514,
+            "nonquery_nll": 0.0045423624105751514,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.030336258932948112,
+            "query_exact": 0.0,
+            "query_loss": 39.12647247314453,
+            "query_nll": 39.12647247314453,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "base_log_prob": 0.0,
+            "intervened": 1.0,
+            "active_boundary_f1": 0.9068437180796731,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "paired": {
+            "query_accuracy": {
+              "delta": 0.9601608514785767,
+              "ci95": [
+                0.9528417408466339,
+                0.9667489111423492
+              ],
+              "relative": 31.65060043334961,
+              "relative_ci95": [
+                26.029748821258544,
+                39.46305770874023
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_loss": {
+              "delta": -39.09703063964844,
+              "ci95": [
+                -40.13509092330933,
+                -38.09932489395142
+              ],
+              "relative": -0.9992474913597107,
+              "relative_ci95": [
+                -0.9995296716690063,
+                -0.9989127963781357
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_nll": {
+              "delta": -39.09703063964844,
+              "ci95": [
+                -40.09271821975708,
+                -38.0986065864563
+              ],
+              "relative": -0.9992474913597107,
+              "relative_ci95": [
+                -0.99954574406147,
+                -0.9989333748817444
+              ],
+              "support": 912,
+              "replicates": 2000
+            }
+          }
+        },
+        {
+          "passed": true,
+          "checks": {
+            "boundary": true,
+            "length": true,
+            "valid": true,
+            "reach": true,
+            "accuracy": true,
+            "query_loss": true,
+            "nll": true,
+            "nll_support": true,
+            "uncertainty": true,
+            "competence": true,
+            "chance_margin": true
+          },
+          "summary": {
+            "b_accuracy": 1.0,
+            "b_ce": 7.440155604854226e-05,
+            "b_fn": 0.0,
+            "b_fp": 0.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.9952533841133118,
+            "byte_exact": 0.8541666666666666,
+            "byte_loss": 0.020182400941848755,
+            "byte_nll": 0.020182400941848755,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.11559953540563583,
+            "ell_ce": 9.915064583765343e-05,
+            "emitted_length": 36.0,
+            "entropy": 0.03565549850463867,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.06546308100223541,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.11577308177947998,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9966666102409363,
+            "nonquery_loss": 0.013747558929026127,
+            "nonquery_nll": 0.013747558929026127,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 1.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.9864765405654907,
+            "query_exact": 0.9605263157894737,
+            "query_loss": 0.06268558651208878,
+            "query_nll": 0.06268558651208878,
+            "query_nll_support": 3.0,
+            "structure_exact": 1.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "active_boundary_f1": 1.0,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "cut": {
+            "b_accuracy": 0.8592470288276672,
+            "b_ce": 7.440155604854226e-05,
+            "b_fn": 0.0,
+            "b_fp": 1.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.8873356580734253,
+            "byte_exact": 0.0,
+            "byte_loss": 4.31650972366333,
+            "byte_nll": 4.31650972366333,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.11559953540563583,
+            "ell_ce": 9.915064583765343e-05,
+            "emitted_length": 36.0,
+            "entropy": 0.03565549850463867,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.07190130650997162,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.11577308177947998,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9964315891265869,
+            "nonquery_loss": 0.014613903127610683,
+            "nonquery_nll": 0.014613903127610683,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.03252924233675003,
+            "query_exact": 0.0,
+            "query_loss": 39.98141860961914,
+            "query_nll": 39.981414794921875,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "base_log_prob": 0.0,
+            "intervened": 1.0,
+            "active_boundary_f1": 0.9068437180796731,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "paired": {
+            "query_accuracy": {
+              "delta": 0.9539473652839661,
+              "ci95": [
+                0.945906400680542,
+                0.9616228342056274
+              ],
+              "relative": 29.325838088989258,
+              "relative_ci95": [
+                24.224063014984132,
+                36.50138883590697
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_loss": {
+              "delta": -39.918731689453125,
+              "ci95": [
+                -40.901252365112306,
+                -38.945874977111814
+              ],
+              "relative": -0.9984321594238281,
+              "relative_ci95": [
+                -0.9989855319261551,
+                -0.9978374734520912
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_nll": {
+              "delta": -39.918731689453125,
+              "ci95": [
+                -41.0065260887146,
+                -38.928346157073975
+              ],
+              "relative": -0.9984321594238281,
+              "relative_ci95": [
+                -0.9990033745765686,
+                -0.9978032067418099
+              ],
+              "support": 912,
+              "replicates": 2000
+            }
+          }
+        },
+        {
+          "passed": true,
+          "checks": {
+            "boundary": true,
+            "length": true,
+            "valid": true,
+            "reach": true,
+            "accuracy": true,
+            "query_loss": true,
+            "nll": true,
+            "nll_support": true,
+            "uncertainty": true,
+            "competence": true,
+            "chance_margin": true
+          },
+          "summary": {
+            "b_accuracy": 1.0,
+            "b_ce": 5.142503505339846e-05,
+            "b_fn": 0.0,
+            "b_fp": 0.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.9967831969261169,
+            "byte_exact": 0.8859649122807017,
+            "byte_loss": 0.010190265253186226,
+            "byte_nll": 0.010190265253186226,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.0732748955488205,
+            "ell_ce": 0.0001458821352571249,
+            "emitted_length": 36.0,
+            "entropy": 0.03749619796872139,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.07563422620296478,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.07347220927476883,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9973244667053223,
+            "nonquery_loss": 0.008628487586975098,
+            "nonquery_nll": 0.008628487586975098,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 1.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.9923245906829834,
+            "query_exact": 0.9769736842105263,
+            "query_loss": 0.02526751719415188,
+            "query_nll": 0.02526751533150673,
+            "query_nll_support": 3.0,
+            "structure_exact": 1.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "active_boundary_f1": 1.0,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "cut": {
+            "b_accuracy": 0.8592470288276672,
+            "b_ce": 5.142503505339846e-05,
+            "b_fn": 0.0,
+            "b_fp": 1.0,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8673245614035086,
+            "byte_accuracy": 0.8893067836761475,
+            "byte_exact": 0.0,
+            "byte_loss": 2.362694263458252,
+            "byte_nll": 2.362694263458252,
+            "byte_nll_support": 36.0,
+            "commit_change": 0.8583813309669495,
+            "descendant": 0.0732748955488205,
+            "ell_ce": 0.0001458821352571249,
+            "emitted_length": 36.0,
+            "entropy": 0.03749619796872139,
+            "extent_accuracy": 1.0,
+            "extent_exact": 1.0,
+            "extra": 0.0,
+            "h_mse": 0.08293973654508591,
+            "length_accuracy": 1.0,
+            "log_prob": 0.0,
+            "loss_per_example": 0.07347220927476883,
+            "missing": 0.0,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9975969791412354,
+            "nonquery_loss": 0.008164423517882824,
+            "nonquery_nll": 0.008164423517882824,
+            "nonquery_nll_support": 32.0,
+            "partial_correct": 0.7368421052631579,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.03801169618964195,
+            "query_exact": 0.0,
+            "query_loss": 21.84693145751953,
+            "query_nll": 21.84693145751953,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "base_log_prob": 0.0,
+            "intervened": 1.0,
+            "active_boundary_f1": 0.9068437180796731,
+            "extent_class_support": [
+              20640,
+              224,
+              224,
+              224,
+              7872
+            ],
+            "extent_class_recall": [
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "partial_extent_accuracy": 1.0
+          },
+          "paired": {
+            "query_accuracy": {
+              "delta": 0.9543128609657288,
+              "ci95": [
+                0.9466373920440674,
+                0.9616228342056274
+              ],
+              "relative": 25.105770111083984,
+              "relative_ci95": [
+                21.04878044128418,
+                30.906174182891846
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_loss": {
+              "delta": -21.82166290283203,
+              "ci95": [
+                -22.394515562057496,
+                -21.246278381347658
+              ],
+              "relative": -0.9988434314727783,
+              "relative_ci95": [
+                -0.9992238819599152,
+                -0.9983921110630035
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_nll": {
+              "delta": -21.82166290283203,
+              "ci95": [
+                -22.38793263435364,
+                -21.253280544281004
+              ],
+              "relative": -0.9988434314727783,
+              "relative_ci95": [
+                -0.9992210909724235,
+                -0.998398308455944
+              ],
+              "support": 912,
+              "replicates": 2000
+            }
+          }
+        }
+      ],
+      "aggregate": {
+        "passed": true,
+        "checks": {
+          "boundary": true,
+          "length": true,
+          "valid": true,
+          "reach": true,
+          "accuracy": true,
+          "query_loss": true,
+          "nll": true,
+          "nll_support": true,
+          "uncertainty": true,
+          "competence": true,
+          "chance_margin": true
+        },
+        "summary": {
+          "b_accuracy": 1.0,
+          "b_ce": 0.00011095673107774928,
+          "b_fn": 0.0,
+          "b_fp": 0.0,
+          "b_support": 9.368421052631579,
+          "b_tp": 4.8673245614035086,
+          "byte_accuracy": 0.9967090487480164,
+          "byte_exact": 0.8859649122807016,
+          "byte_loss": 0.012134348973631859,
+          "byte_nll": 0.012134350315718112,
+          "byte_nll_support": 36.0,
+          "commit_change": 0.8583813309669495,
+          "descendant": 0.08569099754095078,
+          "ell_ce": 9.956266876542941e-05,
+          "emitted_length": 36.0,
+          "entropy": 0.03887423872947693,
+          "extent_accuracy": 1.0,
+          "extent_exact": 1.0,
+          "extra": 0.0,
+          "h_mse": 0.06884951889514923,
+          "length_accuracy": 1.0,
+          "log_prob": 0.0,
+          "loss_per_example": 0.08590152114629745,
+          "missing": 0.0,
+          "missing_query": 0.0,
+          "nonquery_accuracy": 0.9975341558456421,
+          "nonquery_loss": 0.00897462572902441,
+          "nonquery_nll": 0.00897462478550399,
+          "nonquery_nll_support": 32.0,
+          "partial_correct": 0.7368421052631579,
+          "partial_support": 0.7368421052631579,
+          "peer_reach": 1.0,
+          "prediction_b_accuracy": 1.0,
+          "prediction_extent_accuracy": 1.0,
+          "prediction_extent_exact": 1.0,
+          "query_accuracy": 0.9897661209106445,
+          "query_exact": 0.9696637426900585,
+          "query_loss": 0.03913189098238945,
+          "query_nll": 0.03913189259289085,
+          "query_nll_support": 3.0,
+          "structure_exact": 1.0,
+          "true_length": 36.0,
+          "valid": 1.0,
+          "active_boundary_f1": 1.0,
+          "extent_class_support": [
+            20640.0,
+            224.0,
+            224.0,
+            224.0,
+            7872.0
+          ],
+          "extent_class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "partial_extent_accuracy": 1.0
+        },
+        "cut": {
+          "b_accuracy": 0.8592470288276672,
+          "b_ce": 0.00011095673107774928,
+          "b_fn": 0.0,
+          "b_fp": 1.0,
+          "b_support": 9.368421052631579,
+          "b_tp": 4.8673245614035086,
+          "byte_accuracy": 0.8885241746902466,
+          "byte_exact": 0.0,
+          "byte_loss": 3.6286845207214355,
+          "byte_nll": 3.6286845517110575,
+          "byte_nll_support": 36.0,
+          "commit_change": 0.8583813309669495,
+          "descendant": 0.08569099754095078,
+          "ell_ce": 9.956266876542941e-05,
+          "emitted_length": 36.0,
+          "entropy": 0.03887423872947693,
+          "extent_accuracy": 1.0,
+          "extent_exact": 1.0,
+          "extra": 0.0,
+          "h_mse": 0.07609660178422928,
+          "length_accuracy": 1.0,
+          "log_prob": 0.0,
+          "loss_per_example": 0.08590152114629745,
+          "missing": 0.0,
+          "missing_query": 0.0,
+          "nonquery_accuracy": 0.9975776076316833,
+          "nonquery_loss": 0.009106896817684174,
+          "nonquery_nll": 0.009106896387417237,
+          "nonquery_nll_support": 32.0,
+          "partial_correct": 0.7368421052631579,
+          "partial_support": 0.7368421052631579,
+          "peer_reach": 0.0,
+          "prediction_b_accuracy": 1.0,
+          "prediction_extent_accuracy": 1.0,
+          "prediction_extent_exact": 1.0,
+          "query_accuracy": 0.033625733107328415,
+          "query_exact": 0.0,
+          "query_loss": 33.651607513427734,
+          "query_nll": 33.65160690553007,
+          "query_nll_support": 3.0,
+          "structure_exact": 0.0,
+          "true_length": 36.0,
+          "valid": 1.0,
+          "base_log_prob": 0.0,
+          "intervened": 1.0,
+          "active_boundary_f1": 0.9068437180796731,
+          "extent_class_support": [
+            20640.0,
+            224.0,
+            224.0,
+            224.0,
+            7872.0
+          ],
+          "extent_class_recall": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "partial_extent_accuracy": 1.0
+        },
+        "paired": {
+          "query_accuracy": {
+            "delta": 0.9561403393745422,
+            "ci95": [
+              0.9500457003712655,
+              0.9617446660995483
+            ],
+            "relative": 28.434782028198242,
+            "relative_ci95": [
+              24.320875120162963,
+              33.561919116973876
+            ],
+            "support": 912,
+            "replicates": 2000
+          },
+          "query_loss": {
+            "delta": -33.61247634887695,
+            "ci95": [
+              -34.38732757568359,
+              -32.81378927230835
+            ],
+            "relative": -0.9988371729850769,
+            "relative_ci95": [
+              -0.9991004392504692,
+              -0.9985301122069359
+            ],
+            "support": 912,
+            "replicates": 2000
+          },
+          "query_nll": {
+            "delta": -33.61247501293718,
+            "ci95": [
+              -34.40878781533137,
+              -32.8368715703965
+            ],
+            "relative": -0.998837146389391,
+            "relative_ci95": [
+              -0.999106856139193,
+              -0.9985375288842127
+            ],
+            "support": 912,
+            "replicates": 2000
+          }
+        }
+      },
+      "training_seed_accuracy": {
+        "mean": 0.9561403592427572,
+        "sd": 0.003486640953275867,
+        "range": [
+          0.9539473652839661,
+          0.9601608514785767
+        ],
+        "ci95": [
+          0.9474790629630657,
+          0.9648016555224487
+        ],
+        "n_training_seeds": 3,
+        "df": 2
+      },
+      "training_seed_query_loss": {
+        "mean": -33.612475077311196,
+        "sd": 10.219404921725978,
+        "range": [
+          -39.918731689453125,
+          -21.82166290283203
+        ],
+        "ci95": [
+          -58.998884235972355,
+          -8.22606591865004
+        ],
+        "n_training_seeds": 3,
+        "df": 2
+      }
+    },
+    "C:sample": {
+      "outcome": "BENEFIT",
+      "functional": true,
+      "per_seed": [
+        {
+          "passed": true,
+          "checks": {
+            "boundary": true,
+            "length": true,
+            "valid": true,
+            "reach": true,
+            "accuracy": true,
+            "query_loss": true,
+            "nll": true,
+            "nll_support": true,
+            "uncertainty": true,
+            "competence": true,
+            "chance_margin": true
+          },
+          "summary": {
+            "b_accuracy": 0.9993131160736084,
+            "b_ce": 0.00020704361668322235,
+            "b_fn": 0.006716008771929825,
+            "b_fp": 0.0003426535087719298,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.860608552631579,
+            "byte_accuracy": 0.9979541301727295,
+            "byte_exact": 0.9150904605263158,
+            "byte_loss": 0.00869958009570837,
+            "byte_nll": 0.008313024755330422,
+            "byte_nll_support": 35.99958881578947,
+            "commit_change": 0.8581821322441101,
+            "descendant": 0.09548652917146683,
+            "ell_ce": 5.365522520150989e-05,
+            "emitted_length": 36.00095942982456,
+            "entropy": 0.04347100108861923,
+            "extent_accuracy": 0.9999507665634155,
+            "extent_exact": 0.9984237938596491,
+            "extra": 0.0013706140350877192,
+            "h_mse": 0.06545223295688629,
+            "length_accuracy": 0.9984237938596491,
+            "log_prob": -0.04558773338794708,
+            "loss_per_example": 0.09574723988771439,
+            "missing": 0.00041118421052631577,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9985164403915405,
+            "nonquery_loss": 0.005105958785861731,
+            "nonquery_nll": 0.00458620644832832,
+            "nonquery_nll_support": 31.999588815789473,
+            "partial_correct": 0.735265899122807,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.9997258771929824,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.9898118376731873,
+            "query_exact": 0.9707373903508771,
+            "query_loss": 0.05406083166599274,
+            "query_nll": 0.05406083353481332,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.9912280701754386,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "active_boundary_f1": 0.9992744179493501,
+            "extent_class_support": [
+              20640.0,
+              224.0,
+              224.0,
+              224.0,
+              7872.0
+            ],
+            "extent_class_recall": [
+              1.0,
+              0.9949776785714286,
+              1.0,
+              0.9986049107142857,
+              1.0
+            ],
+            "partial_extent_accuracy": 0.9978608630952381
+          },
+          "cut": {
+            "b_accuracy": 0.8586932420730591,
+            "b_ce": 0.00020704361668322235,
+            "b_fn": 0.005756578947368421,
+            "b_fp": 1.0000685307017543,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.86156798245614,
+            "byte_accuracy": 0.8888589143753052,
+            "byte_exact": 0.0,
+            "byte_loss": 4.207047939300537,
+            "byte_nll": 4.206747393509154,
+            "byte_nll_support": 35.99958881578947,
+            "commit_change": 0.8581821322441101,
+            "descendant": 0.09548652917146683,
+            "ell_ce": 5.365522520150989e-05,
+            "emitted_length": 36.00095942982456,
+            "entropy": 0.04347100108861923,
+            "extent_accuracy": 0.9999507665634155,
+            "extent_exact": 0.9984237938596491,
+            "extra": 0.0013706140350877192,
+            "h_mse": 0.07344314455986023,
+            "length_accuracy": 0.9984237938596491,
+            "log_prob": 0.0,
+            "loss_per_example": 0.09574723988771439,
+            "missing": 0.00041118421052631577,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9986052513122559,
+            "nonquery_loss": 0.005093483254313469,
+            "nonquery_nll": 0.004573731173796108,
+            "nonquery_nll_support": 31.999588815789473,
+            "partial_correct": 0.735265899122807,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.030336258932948112,
+            "query_exact": 0.0,
+            "query_loss": 39.124595642089844,
+            "query_nll": 39.124593988322374,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "base_log_prob": -0.04558773338794708,
+            "intervened": 1.0,
+            "active_boundary_f1": 0.906251397254674,
+            "extent_class_support": [
+              20640.0,
+              224.0,
+              224.0,
+              224.0,
+              7872.0
+            ],
+            "extent_class_recall": [
+              1.0,
+              0.9949776785714286,
+              1.0,
+              0.9986049107142857,
+              1.0
+            ],
+            "partial_extent_accuracy": 0.9978608630952381
+          },
+          "paired": {
+            "query_accuracy": {
+              "delta": 0.9594754576683044,
+              "ci95": [
+                0.9526910156011581,
+                0.9668768063187599
+              ],
+              "relative": 31.628013610839844,
+              "relative_ci95": [
+                26.383775520324708,
+                40.0824333190918
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_loss": {
+              "delta": -39.070533752441406,
+              "ci95": [
+                -40.081835174560545,
+                -38.07027616500854
+              ],
+              "relative": -0.9986182451248169,
+              "relative_ci95": [
+                -0.9991650119423866,
+                -0.9979810401797294
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_nll": {
+              "delta": -39.07053315478756,
+              "ci95": [
+                -40.088509410993396,
+                -38.02881957061114
+              ],
+              "relative": -0.9986182391170385,
+              "relative_ci95": [
+                -0.9991310436093797,
+                -0.9979827925044648
+              ],
+              "support": 912,
+              "replicates": 2000
+            }
+          }
+        },
+        {
+          "passed": true,
+          "checks": {
+            "boundary": true,
+            "length": true,
+            "valid": true,
+            "reach": true,
+            "accuracy": true,
+            "query_loss": true,
+            "nll": true,
+            "nll_support": true,
+            "uncertainty": true,
+            "competence": true,
+            "chance_margin": true
+          },
+          "summary": {
+            "b_accuracy": 0.9998286962509155,
+            "b_ce": 7.440156332449988e-05,
+            "b_fn": 0.0013020833333333333,
+            "b_fp": 0.00027412280701754384,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.8660224780701755,
+            "byte_accuracy": 0.9950956106185913,
+            "byte_exact": 0.8514254385964912,
+            "byte_loss": 0.022031143307685852,
+            "byte_nll": 0.02133989616563848,
+            "byte_nll_support": 35.99876644736842,
+            "commit_change": 0.8583492040634155,
+            "descendant": 0.12691718339920044,
+            "ell_ce": 9.915064583765343e-05,
+            "emitted_length": 36.00095942982456,
+            "entropy": 0.03565549850463867,
+            "extent_accuracy": 0.9999036192893982,
+            "extent_exact": 0.9969161184210527,
+            "extra": 0.0021929824561403508,
+            "h_mse": 0.06546882539987564,
+            "length_accuracy": 0.9969161184210527,
+            "log_prob": -0.03232229873538017,
+            "loss_per_example": 0.12709073722362518,
+            "missing": 0.0012335526315789473,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9965119361877441,
+            "nonquery_loss": 0.014687439426779747,
+            "nonquery_nll": 0.013765329523736625,
+            "nonquery_nll_support": 31.99876644736842,
+            "partial_correct": 0.7339638157894737,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.9997944078947368,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.9861568212509155,
+            "query_exact": 0.9602521929824561,
+            "query_loss": 0.07215161621570587,
+            "query_nll": 0.07215162003052139,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.9953399122807017,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "active_boundary_f1": 0.9998380658016095,
+            "extent_class_support": [
+              20640.0,
+              224.0,
+              224.0,
+              224.0,
+              7872.0
+            ],
+            "extent_class_recall": [
+              0.9999909156976744,
+              0.9977678571428571,
+              0.9935825892857143,
+              0.9969308035714286,
+              1.0
+            ],
+            "partial_extent_accuracy": 0.99609375
+          },
+          "cut": {
+            "b_accuracy": 0.859140157699585,
+            "b_ce": 7.440156332449988e-05,
+            "b_fn": 0.0009594298245614035,
+            "b_fp": 1.0001370614035088,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.866365131578948,
+            "byte_accuracy": 0.8872281908988953,
+            "byte_exact": 0.0,
+            "byte_loss": 4.317284107208252,
+            "byte_nll": 4.316763029707261,
+            "byte_nll_support": 35.99876644736842,
+            "commit_change": 0.8583492040634155,
+            "descendant": 0.12691718339920044,
+            "ell_ce": 9.915064583765343e-05,
+            "emitted_length": 36.00095942982456,
+            "entropy": 0.03565549850463867,
+            "extent_accuracy": 0.9999036192893982,
+            "extent_exact": 0.9969161184210527,
+            "extra": 0.0021929824561403508,
+            "h_mse": 0.07190543413162231,
+            "length_accuracy": 0.9969161184210527,
+            "log_prob": 0.0,
+            "loss_per_example": 0.12709073722362518,
+            "missing": 0.0012335526315789473,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9962741136550903,
+            "nonquery_loss": 0.015555649064481258,
+            "nonquery_nll": 0.014633542594471251,
+            "nonquery_nll_support": 31.99876644736842,
+            "partial_correct": 0.7339638157894737,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.0325520858168602,
+            "query_exact": 0.0,
+            "query_loss": 39.98189926147461,
+            "query_nll": 39.98190124123766,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "base_log_prob": -0.03232229873538017,
+            "intervened": 1.0,
+            "active_boundary_f1": 0.9067344280716092,
+            "extent_class_support": [
+              20640.0,
+              224.0,
+              224.0,
+              224.0,
+              7872.0
+            ],
+            "extent_class_recall": [
+              0.9999909156976744,
+              0.9977678571428571,
+              0.9935825892857143,
+              0.9969308035714286,
+              1.0
+            ],
+            "partial_extent_accuracy": 0.99609375
+          },
+          "paired": {
+            "query_accuracy": {
+              "delta": 0.9536046981811523,
+              "ci95": [
+                0.9463176116347313,
+                0.96125727891922
+              ],
+              "relative": 29.294734954833984,
+              "relative_ci95": [
+                24.32445764541626,
+                36.499520969390865
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_loss": {
+              "delta": -39.90974807739258,
+              "ci95": [
+                -40.972963428497316,
+                -38.908805751800536
+              ],
+              "relative": -0.9981954097747803,
+              "relative_ci95": [
+                -0.9988152623176575,
+                -0.9975423365831375
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_nll": {
+              "delta": -39.90974962120713,
+              "ci95": [
+                -40.93803431640915,
+                -38.87916757722833
+              ],
+              "relative": -0.9981953929705548,
+              "relative_ci95": [
+                -0.9988216252072614,
+                -0.9975843914327639
+              ],
+              "support": 912,
+              "replicates": 2000
+            }
+          }
+        },
+        {
+          "passed": true,
+          "checks": {
+            "boundary": true,
+            "length": true,
+            "valid": true,
+            "reach": true,
+            "accuracy": true,
+            "query_loss": true,
+            "nll": true,
+            "nll_support": true,
+            "uncertainty": true,
+            "competence": true,
+            "chance_margin": true
+          },
+          "summary": {
+            "b_accuracy": 0.9998408555984497,
+            "b_ce": 5.142503505339846e-05,
+            "b_fn": 0.0009594298245614035,
+            "b_fp": 0.0005482456140350877,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.866365131578948,
+            "byte_accuracy": 0.99595707654953,
+            "byte_exact": 0.8817160087719298,
+            "byte_loss": 0.0357997827231884,
+            "byte_nll": 0.034938734628299224,
+            "byte_nll_support": 35.99492872807018,
+            "commit_change": 0.858368456363678,
+            "descendant": 0.1419173926115036,
+            "ell_ce": 0.00014588214980904013,
+            "emitted_length": 35.9953399122807,
+            "entropy": 0.03749619796872139,
+            "extent_accuracy": 0.9998415112495422,
+            "extent_exact": 0.9949287280701754,
+            "extra": 0.00041118421052631577,
+            "h_mse": 0.07563892751932144,
+            "length_accuracy": 0.9949287280701754,
+            "log_prob": -0.03966936469078064,
+            "loss_per_example": 0.14211469888687134,
+            "missing": 0.0050712719298245616,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9964807033538818,
+            "nonquery_loss": 0.0333758145570755,
+            "nonquery_nll": 0.03230852916256483,
+            "nonquery_nll_support": 31.994928728070175,
+            "partial_correct": 0.7353344298245614,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.9998629385964912,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.9910910129547119,
+            "query_exact": 0.9757401315789473,
+            "query_loss": 0.06829814612865448,
+            "query_nll": 0.0682981437058788,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.9933525219298246,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "active_boundary_f1": 0.9998451162332268,
+            "extent_class_support": [
+              20640.0,
+              224.0,
+              224.0,
+              224.0,
+              7872.0
+            ],
+            "extent_class_recall": [
+              0.9999939437984496,
+              0.9994419642857143,
+              0.998046875,
+              0.9963727678571429,
+              0.9996030233739838
+            ],
+            "partial_extent_accuracy": 0.9979538690476191
+          },
+          "cut": {
+            "b_accuracy": 0.8591170907020569,
+            "b_ce": 5.142503505339846e-05,
+            "b_fn": 0.0008223684210526315,
+            "b_fp": 1.0004111842105263,
+            "b_support": 9.368421052631579,
+            "b_tp": 4.866502192982456,
+            "byte_accuracy": 0.8885476589202881,
+            "byte_exact": 0.0,
+            "byte_loss": 2.386319160461426,
+            "byte_nll": 2.3857797894545167,
+            "byte_nll_support": 35.99492872807018,
+            "commit_change": 0.858368456363678,
+            "descendant": 0.1419173926115036,
+            "ell_ce": 0.00014588214980904013,
+            "emitted_length": 35.9953399122807,
+            "entropy": 0.03749619796872139,
+            "extent_accuracy": 0.9998415112495422,
+            "extent_exact": 0.9949287280701754,
+            "extra": 0.00041118421052631577,
+            "h_mse": 0.08294271677732468,
+            "length_accuracy": 0.9949287280701754,
+            "log_prob": 0.0,
+            "loss_per_example": 0.14211469888687134,
+            "missing": 0.0050712719298245616,
+            "missing_query": 0.0,
+            "nonquery_accuracy": 0.9967532157897949,
+            "nonquery_loss": 0.032973483204841614,
+            "nonquery_nll": 0.03190591044881304,
+            "nonquery_nll_support": 31.994928728070175,
+            "partial_correct": 0.7353344298245614,
+            "partial_support": 0.7368421052631579,
+            "peer_reach": 0.0,
+            "prediction_b_accuracy": 1.0,
+            "prediction_extent_accuracy": 1.0,
+            "prediction_extent_exact": 1.0,
+            "query_accuracy": 0.037966009229421616,
+            "query_exact": 0.0,
+            "query_loss": 21.861642837524414,
+            "query_nll": 21.861641772254778,
+            "query_nll_support": 3.0,
+            "structure_exact": 0.0,
+            "true_length": 36.0,
+            "valid": 1.0,
+            "base_log_prob": -0.03966936469078064,
+            "intervened": 1.0,
+            "active_boundary_f1": 0.9067252320696656,
+            "extent_class_support": [
+              20640.0,
+              224.0,
+              224.0,
+              224.0,
+              7872.0
+            ],
+            "extent_class_recall": [
+              0.9999939437984496,
+              0.9994419642857143,
+              0.998046875,
+              0.9963727678571429,
+              0.9996030233739838
+            ],
+            "partial_extent_accuracy": 0.9979538690476191
+          },
+          "paired": {
+            "query_accuracy": {
+              "delta": 0.953125,
+              "ci95": [
+                0.9451292395591736,
+                0.9608255222439765
+              ],
+              "relative": 25.104692459106445,
+              "relative_ci95": [
+                21.03284058570862,
+                30.81992111206053
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_loss": {
+              "delta": -21.793346405029297,
+              "ci95": [
+                -22.397202348709108,
+                -21.207133865356447
+              ],
+              "relative": -0.9968758821487427,
+              "relative_ci95": [
+                -0.9982595667243004,
+                -0.9949893891811371
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "query_nll": {
+              "delta": -21.793343628548897,
+              "ci95": [
+                -22.349275077666945,
+                -21.213665046260846
+              ],
+              "relative": -0.996875891370951,
+              "relative_ci95": [
+                -0.9982594236062269,
+                -0.9948800945272644
+              ],
+              "support": 912,
+              "replicates": 2000
+            }
+          }
+        }
+      ],
+      "aggregate": {
+        "passed": true,
+        "checks": {
+          "boundary": true,
+          "length": true,
+          "valid": true,
+          "reach": true,
+          "accuracy": true,
+          "query_loss": true,
+          "nll": true,
+          "nll_support": true,
+          "uncertainty": true,
+          "competence": true,
+          "chance_margin": true
+        },
+        "summary": {
+          "b_accuracy": 0.999660849571228,
+          "b_ce": 0.00011095673107774928,
+          "b_fn": 0.0029925073099415205,
+          "b_fp": 0.0003883406432748538,
+          "b_support": 9.368421052631579,
+          "b_tp": 4.864332054093568,
+          "byte_accuracy": 0.9963356256484985,
+          "byte_exact": 0.8827439692982456,
+          "byte_loss": 0.02217683754861355,
+          "byte_nll": 0.021512180488936647,
+          "byte_nll_support": 35.99776133040936,
+          "commit_change": 0.8582999110221863,
+          "descendant": 0.12144036591053009,
+          "ell_ce": 9.956266876542941e-05,
+          "emitted_length": 35.99908625730994,
+          "entropy": 0.03887423127889633,
+          "extent_accuracy": 0.9998986721038818,
+          "extent_exact": 0.9967562134502925,
+          "extra": 0.0013249269005847952,
+          "h_mse": 0.06885333359241486,
+          "length_accuracy": 0.9967562134502925,
+          "log_prob": -0.039193131029605865,
+          "loss_per_example": 0.12165088951587677,
+          "missing": 0.0022386695906432747,
+          "missing_query": 0.0,
+          "nonquery_accuracy": 0.9971696138381958,
+          "nonquery_loss": 0.017723070457577705,
+          "nonquery_nll": 0.016867233153896925,
+          "nonquery_nll_support": 31.997761330409354,
+          "partial_correct": 0.7348547149122807,
+          "partial_support": 0.7368421052631579,
+          "peer_reach": 0.9997944078947368,
+          "prediction_b_accuracy": 1.0,
+          "prediction_extent_accuracy": 1.0,
+          "prediction_extent_exact": 1.0,
+          "query_accuracy": 0.9890198707580566,
+          "query_exact": 0.9689099049707601,
+          "query_loss": 0.06483686715364456,
+          "query_nll": 0.06483686575707118,
+          "query_nll_support": 3.0,
+          "structure_exact": 0.9933068347953216,
+          "true_length": 36.0,
+          "valid": 1.0,
+          "active_boundary_f1": 0.9996526066239468,
+          "extent_class_support": [
+            20640.0,
+            224.0,
+            224.0,
+            224.0,
+            7872.0
+          ],
+          "extent_class_recall": [
+            0.9999949531653748,
+            0.9973958333333331,
+            0.9972098214285712,
+            0.997302827380952,
+            0.999867674457995
+          ],
+          "partial_extent_accuracy": 0.9973028273809523
+        },
+        "cut": {
+          "b_accuracy": 0.8589835166931152,
+          "b_ce": 0.00011095673107774928,
+          "b_fn": 0.0025127923976608186,
+          "b_fp": 1.000205592105263,
+          "b_support": 9.368421052631579,
+          "b_tp": 4.864811769005849,
+          "byte_accuracy": 0.8882116079330444,
+          "byte_exact": 0.0,
+          "byte_loss": 3.6368837356567383,
+          "byte_nll": 3.636466292131735,
+          "byte_nll_support": 35.99776133040936,
+          "commit_change": 0.8582999110221863,
+          "descendant": 0.12144036591053009,
+          "ell_ce": 9.956266876542941e-05,
+          "emitted_length": 35.99908625730994,
+          "entropy": 0.03887423127889633,
+          "extent_accuracy": 0.9998986721038818,
+          "extent_exact": 0.9967562134502925,
+          "extra": 0.0013249269005847952,
+          "h_mse": 0.07609710097312927,
+          "length_accuracy": 0.9967562134502925,
+          "log_prob": 0.0,
+          "loss_per_example": 0.12165088951587677,
+          "missing": 0.0022386695906432747,
+          "missing_query": 0.0,
+          "nonquery_accuracy": 0.9972108602523804,
+          "nonquery_loss": 0.017874205484986305,
+          "nonquery_nll": 0.017018354951189918,
+          "nonquery_nll_support": 31.997761330409354,
+          "partial_correct": 0.7348547149122807,
+          "partial_support": 0.7368421052631579,
+          "peer_reach": 0.0,
+          "prediction_b_accuracy": 1.0,
+          "prediction_extent_accuracy": 1.0,
+          "prediction_extent_exact": 1.0,
+          "query_accuracy": 0.03361811861395836,
+          "query_exact": 0.0,
+          "query_loss": 33.65604782104492,
+          "query_nll": 33.656045667271606,
+          "query_nll_support": 3.0,
+          "structure_exact": 0.0,
+          "true_length": 36.0,
+          "valid": 1.0,
+          "base_log_prob": -0.039193131029605865,
+          "intervened": 1.0,
+          "active_boundary_f1": 0.9065704026444227,
+          "extent_class_support": [
+            20640.0,
+            224.0,
+            224.0,
+            224.0,
+            7872.0
+          ],
+          "extent_class_recall": [
+            0.9999949531653748,
+            0.9973958333333331,
+            0.9972098214285712,
+            0.997302827380952,
+            0.999867674457995
+          ],
+          "partial_extent_accuracy": 0.9973028273809523
+        },
+        "paired": {
+          "query_accuracy": {
+            "delta": 0.9554017782211304,
+            "ci95": [
+              0.9491877213120461,
+              0.9612202033400535
+            ],
+            "relative": 28.41925048828125,
+            "relative_ci95": [
+              24.199876689910887,
+              34.03066959381101
+            ],
+            "support": 912,
+            "replicates": 2000
+          },
+          "query_loss": {
+            "delta": -33.591209411621094,
+            "ci95": [
+              -34.38808040618896,
+              -32.82819709777832
+            ],
+            "relative": -0.9980735182762146,
+            "relative_ci95": [
+              -0.9985451966524124,
+              -0.9975655913352967
+            ],
+            "support": 912,
+            "replicates": 2000
+          },
+          "query_nll": {
+            "delta": -33.591208801514526,
+            "ci95": [
+              -34.40130268911367,
+              -32.79573071701763
+            ],
+            "relative": -0.9980735447533541,
+            "relative_ci95": [
+              -0.998526145803957,
+              -0.9975209431217544
+            ],
+            "support": 912,
+            "replicates": 2000
+          }
+        }
+      },
+      "training_seed_accuracy": {
+        "mean": 0.9554017186164856,
+        "sd": 0.0035361051996491365,
+        "range": [
+          0.953125,
+          0.9594754576683044
+        ],
+        "ci95": [
+          0.9466175463369904,
+          0.9641858908959808
+        ],
+        "n_training_seeds": 3,
+        "df": 2
+      },
+      "training_seed_query_loss": {
+        "mean": -33.591209411621094,
+        "sd": 10.225861763809016,
+        "range": [
+          -39.90974807739258,
+          -21.793346405029297
+        ],
+        "ci95": [
+          -58.993658255200145,
+          -8.188760568042042
+        ],
+        "n_training_seeds": 3,
+        "df": 2
+      }
+    }
+  },
+  "semantic": {
+    "neutral": {
+      "overall": {
+        "outcome": "BENEFIT",
+        "support": 912,
+        "metrics": {
+          "query_accuracy": {
+            "example_bootstrap": {
+              "delta": 0.5168128609657288,
+              "ci95": [
+                0.49159049466252325,
+                0.542397677898407
+              ],
+              "relative": 1.0857436656951904,
+              "relative_ci95": [
+                0.9812740176916123,
+                1.2026635527610778
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": 0.5168128609657288,
+              "sd": 0.009004911407828331,
+              "range": [
+                0.5073099136352539,
+                0.5252193212509155
+              ],
+              "ci95": [
+                0.49444341993102486,
+                0.5391823020004327
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": 1.0860811471939087,
+              "sd": 0.03469550609588623,
+              "range": [
+                1.0515151023864746,
+                1.1209046840667725
+              ],
+              "ci95": [
+                0.9998927265004234,
+                1.172269567887394
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              0.5252193212509155,
+              0.5179093480110168,
+              0.5073099136352539
+            ],
+            "seed_relative": [
+              1.1209046840667725,
+              1.0858237743377686,
+              1.0515151023864746
+            ]
+          },
+          "query_loss": {
+            "example_bootstrap": {
+              "delta": -9.120074272155762,
+              "ci95": [
+                -9.737685132026673,
+                -8.52404911518097
+              ],
+              "relative": -0.9975184798240662,
+              "relative_ci95": [
+                -0.9980832114815712,
+                -0.9968286454677582
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -9.120074272155762,
+              "sd": 1.3125593662261963,
+              "range": [
+                -10.372367858886719,
+                -7.754581451416016
+              ],
+              "ci95": [
+                -12.380652506272675,
+                -5.859496038038849
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9975329041481018,
+              "sd": 0.00107904605101794,
+              "range": [
+                -0.9982163906097412,
+                -0.9962889552116394
+              ],
+              "ci95": [
+                -1.0002134031039143,
+                -0.9948524051922893
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -10.372367858886719,
+              -7.754581451416016,
+              -9.233274459838867
+            ],
+            "seed_relative": [
+              -0.9980933666229248,
+              -0.9982163906097412,
+              -0.9962889552116394
+            ]
+          },
+          "query_nll": {
+            "example_bootstrap": {
+              "delta": -9.120074272155762,
+              "ci95": [
+                -9.748866820335389,
+                -8.503716063499452
+              ],
+              "relative": -0.9975184798240662,
+              "relative_ci95": [
+                -0.9981224775314331,
+                -0.9968492373824119
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -9.120074272155762,
+              "sd": 1.3125596046447754,
+              "range": [
+                -10.372367858886719,
+                -7.754580974578857
+              ],
+              "ci95": [
+                -12.380653056876797,
+                -5.859495487434726
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9975329041481018,
+              "sd": 0.00107904605101794,
+              "range": [
+                -0.9982163906097412,
+                -0.9962889552116394
+              ],
+              "ci95": [
+                -1.0002134031039143,
+                -0.9948524051922893
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -10.372367858886719,
+              -7.754580974578857,
+              -9.233274459838867
+            ],
+            "seed_relative": [
+              -0.9980933666229248,
+              -0.9982163906097412,
+              -0.9962889552116394
+            ]
+          }
+        }
+      },
+      "neutral_discordant": {
+        "outcome": "BENEFIT",
+        "support": 123,
+        "metrics": {
+          "query_accuracy": {
+            "example_bootstrap": {
+              "delta": 0.9647696018218994,
+              "ci95": [
+                0.9512194991111755,
+                0.9783198237419128
+              ],
+              "relative": 42.71999740600586,
+              "relative_ci95": [
+                28.458779907226564,
+                82.92500343322753
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": 0.9647696018218994,
+              "sd": 0.011812740936875343,
+              "range": [
+                0.9566395282745361,
+                0.9783197641372681
+              ],
+              "ci95": [
+                0.9354251249596558,
+                0.994114078684143
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": 44.74458312988281,
+              "sd": 10.969809532165527,
+              "range": [
+                32.090904235839844,
+                51.57142639160156
+              ],
+              "ci95": [
+                17.494064037949894,
+                71.99510222181573
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              0.9566395282745361,
+              0.9783197641372681,
+              0.9593495726585388
+            ],
+            "seed_relative": [
+              32.090904235839844,
+              51.57142639160156,
+              50.5714225769043
+            ]
+          },
+          "query_loss": {
+            "example_bootstrap": {
+              "delta": -19.886098861694336,
+              "ci95": [
+                -20.904402208328246,
+                -18.881706190109252
+              ],
+              "relative": -0.9977549910545349,
+              "relative_ci95": [
+                -0.9987221002578736,
+                -0.9967162743210792
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -19.886098861694336,
+              "sd": 2.424603223800659,
+              "range": [
+                -21.754505157470703,
+                -17.146211624145508
+              ],
+              "ci95": [
+                -25.909147455559225,
+                -13.863050267829447
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9978539943695068,
+              "sd": 0.0016395094571635127,
+              "range": [
+                -0.9994726777076721,
+                -0.9961944222450256
+              ],
+              "ci95": [
+                -1.0019267617192433,
+                -0.9937812270197703
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -21.754505157470703,
+              -17.146211624145508,
+              -20.757579803466797
+            ],
+            "seed_relative": [
+              -0.997894823551178,
+              -0.9994726777076721,
+              -0.9961944222450256
+            ]
+          },
+          "query_nll": {
+            "example_bootstrap": {
+              "delta": -19.886098861694336,
+              "ci95": [
+                -20.897492170333862,
+                -18.89350199699402
+              ],
+              "relative": -0.9977549910545349,
+              "relative_ci95": [
+                -0.9988028943538666,
+                -0.9966446101665497
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -19.886098861694336,
+              "sd": 2.424603223800659,
+              "range": [
+                -21.754505157470703,
+                -17.146211624145508
+              ],
+              "ci95": [
+                -25.909147455559225,
+                -13.863050267829447
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9978539943695068,
+              "sd": 0.0016395094571635127,
+              "range": [
+                -0.9994726777076721,
+                -0.9961944222450256
+              ],
+              "ci95": [
+                -1.0019267617192433,
+                -0.9937812270197703
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -21.754505157470703,
+              -17.146211624145508,
+              -20.757579803466797
+            ],
+            "seed_relative": [
+              -0.997894823551178,
+              -0.9994726777076721,
+              -0.9961944222450256
+            ]
+          }
+        }
+      }
+    },
+    "shifted": {
+      "overall": {
+        "outcome": "BENEFIT",
+        "support": 912,
+        "metrics": {
+          "query_accuracy": {
+            "example_bootstrap": {
+              "delta": 0.819688081741333,
+              "ci95": [
+                0.8026285126805306,
+                0.8375974893569946
+              ],
+              "relative": 4.734694004058838,
+              "relative_ci95": [
+                4.217164874076843,
+                5.396925687789917
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": 0.8196881413459778,
+              "sd": 0.00442137336358428,
+              "range": [
+                0.8146929740905762,
+                0.8230994343757629
+              ],
+              "ci95": [
+                0.8087048408502765,
+                0.8306714418416791
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": 4.735413551330566,
+              "sd": 0.08451840281486511,
+              "range": [
+                4.653445243835449,
+                4.822269916534424
+              ],
+              "ci95": [
+                4.525458202211543,
+                4.94536890044959
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              0.8230994343757629,
+              0.8212719559669495,
+              0.8146929740905762
+            ],
+            "seed_relative": [
+              4.822269916534424,
+              4.730525970458984,
+              4.653445243835449
+            ]
+          },
+          "query_loss": {
+            "example_bootstrap": {
+              "delta": -22.017911911010742,
+              "ci95": [
+                -22.710754776000975,
+                -21.297288560867308
+              ],
+              "relative": -0.998970627784729,
+              "relative_ci95": [
+                -0.9992104098200798,
+                -0.9987214714288711
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -22.017911911010742,
+              "sd": 2.9935030937194824,
+              "range": [
+                -24.673322677612305,
+                -18.773788452148438
+              ],
+              "ci95": [
+                -29.45418619726623,
+                -14.58163762475525
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9989803433418274,
+              "sd": 0.00043373266817070544,
+              "range": [
+                -0.9992625117301941,
+                -0.9984809160232544
+              ],
+              "ci95": [
+                -1.00005779502343,
+                -0.9979028916602248
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -24.673322677612305,
+              -18.773788452148438,
+              -22.60662269592285
+            ],
+            "seed_relative": [
+              -0.9991976022720337,
+              -0.9992625117301941,
+              -0.9984809160232544
+            ]
+          },
+          "query_nll": {
+            "example_bootstrap": {
+              "delta": -22.017911911010742,
+              "ci95": [
+                -22.77260789871216,
+                -21.30483183860779
+              ],
+              "relative": -0.998970627784729,
+              "relative_ci95": [
+                -0.9992193207144737,
+                -0.998704518377781
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -22.017911911010742,
+              "sd": 2.993502378463745,
+              "range": [
+                -24.673320770263672,
+                -18.773788452148438
+              ],
+              "ci95": [
+                -29.454183994849743,
+                -14.581639827171744
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9989803433418274,
+              "sd": 0.00043373266817070544,
+              "range": [
+                -0.9992625117301941,
+                -0.9984809160232544
+              ],
+              "ci95": [
+                -1.00005779502343,
+                -0.9979028916602248
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -24.673320770263672,
+              -18.773788452148438,
+              -22.60662269592285
+            ],
+            "seed_relative": [
+              -0.9991976022720337,
+              -0.9992625117301941,
+              -0.9984809160232544
+            ]
+          }
+        }
+      },
+      "neutral_discordant": {
+        "outcome": "BENEFIT",
+        "support": 123,
+        "metrics": {
+          "query_accuracy": {
+            "example_bootstrap": {
+              "delta": 0.9584462642669678,
+              "ci95": [
+                0.9430894255638123,
+                0.9728997945785522
+              ],
+              "relative": 33.156246185302734,
+              "relative_ci95": [
+                22.212766647338867,
+                56.79078655242919
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": 0.958446204662323,
+              "sd": 0.011282714083790779,
+              "range": [
+                0.9457994699478149,
+                0.9674796462059021
+              ],
+              "ci95": [
+                0.9304183878702775,
+                0.9864740214543685
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": 33.66077423095703,
+              "sd": 5.284828186035156,
+              "range": [
+                29.08333396911621,
+                39.4444465637207
+              ],
+              "ci95": [
+                20.532532913799503,
+                46.78901554811456
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              0.9620595574378967,
+              0.9674796462059021,
+              0.9457994699478149
+            ],
+            "seed_relative": [
+              39.4444465637207,
+              32.45454406738281,
+              29.08333396911621
+            ]
+          },
+          "query_loss": {
+            "example_bootstrap": {
+              "delta": -25.883419036865234,
+              "ci95": [
+                -27.23077874183655,
+                -24.615001821517943
+              ],
+              "relative": -0.9982742667198181,
+              "relative_ci95": [
+                -0.9990305826067924,
+                -0.9974248424172402
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -25.8834171295166,
+              "sd": 3.1170337200164795,
+              "range": [
+                -28.91162109375,
+                -22.6845645904541
+              ],
+              "ci95": [
+                -33.62655851060062,
+                -18.140275748432586
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9983274340629578,
+              "sd": 0.0013200165703892708,
+              "range": [
+                -0.9996013641357422,
+                -0.9969657063484192
+              ],
+              "ci95": [
+                -1.0016065370243739,
+                -0.9950483311015417
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -28.91162109375,
+              -22.6845645904541,
+              -26.054067611694336
+            ],
+            "seed_relative": [
+              -0.9984151124954224,
+              -0.9996013641357422,
+              -0.9969657063484192
+            ]
+          },
+          "query_nll": {
+            "example_bootstrap": {
+              "delta": -25.8834171295166,
+              "ci95": [
+                -27.30090489387512,
+                -24.54301404953003
+              ],
+              "relative": -0.9982742667198181,
+              "relative_ci95": [
+                -0.9990643501281739,
+                -0.9974591478705406
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -25.8834171295166,
+              "sd": 3.117032766342163,
+              "range": [
+                -28.911619186401367,
+                -22.6845645904541
+              ],
+              "ci95": [
+                -33.62655575758,
+                -18.140278501453203
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9983274340629578,
+              "sd": 0.0013200165703892708,
+              "range": [
+                -0.9996013641357422,
+                -0.9969657063484192
+              ],
+              "ci95": [
+                -1.0016065370243739,
+                -0.9950483311015417
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -28.911619186401367,
+              -22.6845645904541,
+              -26.054067611694336
+            ],
+            "seed_relative": [
+              -0.9984151124954224,
+              -0.9996013641357422,
+              -0.9969657063484192
+            ]
+          }
+        }
+      }
+    },
+    "cut": {
+      "overall": {
+        "outcome": "BENEFIT",
+        "support": 912,
+        "metrics": {
+          "query_accuracy": {
+            "example_bootstrap": {
+              "delta": 0.9591861963272095,
+              "ci95": [
+                0.9533382058143616,
+                0.9650340676307678
+              ],
+              "relative": 28.525362014770508,
+              "relative_ci95": [
+                24.3612922668457,
+                34.20800228118896
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": 0.9591861367225647,
+              "sd": 0.001116607803851366,
+              "range": [
+                0.9579678177833557,
+                0.9601607918739319
+              ],
+              "ci95": [
+                0.9564123291873303,
+                0.9619599442577991
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": 28.568199157714844,
+              "sd": 1.3563538789749146,
+              "range": [
+                27.652629852294922,
+                30.126436233520508
+              ],
+              "ci95": [
+                25.198829257292292,
+                31.937569058137395
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              0.9594298005104065,
+              0.9601607918739319,
+              0.9579678177833557
+            ],
+            "seed_relative": [
+              27.9255313873291,
+              27.652629852294922,
+              30.126436233520508
+            ]
+          },
+          "query_loss": {
+            "example_bootstrap": {
+              "delta": -26.083803176879883,
+              "ci95": [
+                -26.676205015182497,
+                -25.533128643035887
+              ],
+              "relative": -0.9991309642791748,
+              "relative_ci95": [
+                -0.999338187277317,
+                -0.9989148378372192
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -26.08380126953125,
+              "sd": 3.2669167518615723,
+              "range": [
+                -28.146299362182617,
+                -22.317169189453125
+              ],
+              "ci95": [
+                -34.19927272147487,
+                -17.96832981758763
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9991466403007507,
+              "sd": 0.0003340838011354208,
+              "range": [
+                -0.9993795156478882,
+                -0.9987638592720032
+              ],
+              "ci95": [
+                -0.9999765504638244,
+                -0.9983167301376771
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -28.146299362182617,
+              -22.317169189453125,
+              -27.787935256958008
+            ],
+            "seed_relative": [
+              -0.9992965459823608,
+              -0.9993795156478882,
+              -0.9987638592720032
+            ]
+          },
+          "query_nll": {
+            "example_bootstrap": {
+              "delta": -26.083803176879883,
+              "ci95": [
+                -26.6823522567749,
+                -25.53943181037903
+              ],
+              "relative": -0.9991309642791748,
+              "relative_ci95": [
+                -0.9993367806077004,
+                -0.9989085763692855
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -26.08380126953125,
+              "sd": 3.2669167518615723,
+              "range": [
+                -28.146299362182617,
+                -22.317169189453125
+              ],
+              "ci95": [
+                -34.19927272147487,
+                -17.96832981758763
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9991466403007507,
+              "sd": 0.0003340838011354208,
+              "range": [
+                -0.9993795156478882,
+                -0.9987638592720032
+              ],
+              "ci95": [
+                -0.9999765504638244,
+                -0.9983167301376771
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -28.146299362182617,
+              -22.317169189453125,
+              -27.787935256958008
+            ],
+            "seed_relative": [
+              -0.9992965459823608,
+              -0.9993795156478882,
+              -0.9987638592720032
+            ]
+          }
+        }
+      },
+      "neutral_discordant": {
+        "outcome": "BENEFIT",
+        "support": 123,
+        "metrics": {
+          "query_accuracy": {
+            "example_bootstrap": {
+              "delta": 0.9557362198829651,
+              "ci95": [
+                0.9394760727882385,
+                0.9692864418029785
+              ],
+              "relative": 30.22856903076172,
+              "relative_ci95": [
+                20.760000228881836,
+                51.04761505126953
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": 0.9557362198829651,
+              "sd": 0.012220176868140697,
+              "range": [
+                0.9430894255638123,
+                0.9674796462059021
+              ],
+              "ci95": [
+                0.9253796164990454,
+                0.9860928232668847
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": 30.4382266998291,
+              "sd": 3.1826415061950684,
+              "range": [
+                26.769229888916016,
+                32.45454406738281
+              ],
+              "ci95": [
+                22.532106498249355,
+                38.34434690140885
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              0.9566395282745361,
+              0.9674796462059021,
+              0.9430894255638123
+            ],
+            "seed_relative": [
+              32.090904235839844,
+              32.45454406738281,
+              26.769229888916016
+            ]
+          },
+          "query_loss": {
+            "example_bootstrap": {
+              "delta": -25.995561599731445,
+              "ci95": [
+                -27.37838234901428,
+                -24.736244583129885
+              ],
+              "relative": -0.9982816576957703,
+              "relative_ci95": [
+                -0.9990694686770439,
+                -0.9974405154585838
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -25.995561599731445,
+              "sd": 3.173689842224121,
+              "range": [
+                -29.160966873168945,
+                -22.81365203857422
+              ],
+              "ci95": [
+                -33.87944455258362,
+                -18.11167864687927
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9983310699462891,
+              "sd": 0.0013241063570603728,
+              "range": [
+                -0.9996036291122437,
+                -0.9969608187675476
+              ],
+              "ci95": [
+                -1.0016203324678687,
+                -0.9950418074247093
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -29.160966873168945,
+              -22.81365203857422,
+              -26.01207160949707
+            ],
+            "seed_relative": [
+              -0.9984286427497864,
+              -0.9996036291122437,
+              -0.9969608187675476
+            ]
+          },
+          "query_nll": {
+            "example_bootstrap": {
+              "delta": -25.995559692382812,
+              "ci95": [
+                -27.328665924072265,
+                -24.745815372467042
+              ],
+              "relative": -0.9982816576957703,
+              "relative_ci95": [
+                -0.999046590924263,
+                -0.9974448531866074
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -25.995561599731445,
+              "sd": 3.173689603805542,
+              "range": [
+                -29.160964965820312,
+                -22.813650131225586
+              ],
+              "ci95": [
+                -33.87944400197949,
+                -18.111679197483394
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9983310699462891,
+              "sd": 0.0013241063570603728,
+              "range": [
+                -0.9996036291122437,
+                -0.9969608187675476
+              ],
+              "ci95": [
+                -1.0016203324678687,
+                -0.9950418074247093
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -29.160964965820312,
+              -22.813650131225586,
+              -26.012069702148438
+            ],
+            "seed_relative": [
+              -0.9984286427497864,
+              -0.9996036291122437,
+              -0.9969608187675476
+            ]
+          }
+        }
+      }
+    },
+    "overconnected": {
+      "overall": {
+        "outcome": "BENEFIT",
+        "support": 912,
+        "metrics": {
+          "query_accuracy": {
+            "example_bootstrap": {
+              "delta": 0.5248537659645081,
+              "ci95": [
+                0.5003624498844147,
+                0.5476394951343536
+              ],
+              "relative": 1.1215827465057373,
+              "relative_ci95": [
+                1.0173042178153993,
+                1.2303877472877502
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": 0.5248537659645081,
+              "sd": 0.015977727249264717,
+              "range": [
+                0.5080409049987793,
+                0.5398392081260681
+              ],
+              "ci95": [
+                0.4851628913229969,
+                0.5645446406060193
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": 1.1229139566421509,
+              "sd": 0.0673132985830307,
+              "range": [
+                1.0546283721923828,
+                1.1892108917236328
+              ],
+              "ci95": [
+                0.9556984438942028,
+                1.290129469390099
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              0.5398392081260681,
+              0.5266812443733215,
+              0.5080409049987793
+            ],
+            "seed_relative": [
+              1.1892108917236328,
+              1.1249024868011475,
+              1.0546283721923828
+            ]
+          },
+          "query_loss": {
+            "example_bootstrap": {
+              "delta": -8.498127937316895,
+              "ci95": [
+                -9.077145886421203,
+                -7.926512289047241
+              ],
+              "relative": -0.9973374009132385,
+              "relative_ci95": [
+                -0.9979670062661171,
+                -0.9966298580169678
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -8.498127937316895,
+              "sd": 1.4391207695007324,
+              "range": [
+                -9.941202163696289,
+                -7.06299352645874
+              ],
+              "ci95": [
+                -12.073102227044286,
+                -4.923153647589503
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9973394870758057,
+              "sd": 0.0011900444515049458,
+              "range": [
+                -0.998042106628418,
+                -0.9959654211997986
+              ],
+              "ci95": [
+                -1.0002957214789336,
+                -0.9943832526726776
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -9.941202163696289,
+              -7.06299352645874,
+              -8.49018669128418
+            ],
+            "seed_relative": [
+              -0.9980108141899109,
+              -0.998042106628418,
+              -0.9959654211997986
+            ]
+          },
+          "query_nll": {
+            "example_bootstrap": {
+              "delta": -8.498126983642578,
+              "ci95": [
+                -9.071897625923157,
+                -7.92948477268219
+              ],
+              "relative": -0.9973374009132385,
+              "relative_ci95": [
+                -0.99799292832613,
+                -0.9966305762529373
+              ],
+              "support": 912,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -8.498126983642578,
+              "sd": 1.4391196966171265,
+              "range": [
+                -9.941200256347656,
+                -7.06299352645874
+              ],
+              "ci95": [
+                -12.073098520349355,
+                -4.9231554469358025
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9973394870758057,
+              "sd": 0.0011900444515049458,
+              "range": [
+                -0.998042106628418,
+                -0.9959654211997986
+              ],
+              "ci95": [
+                -1.0002957214789336,
+                -0.9943832526726776
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -9.941200256347656,
+              -7.06299352645874,
+              -8.490185737609863
+            ],
+            "seed_relative": [
+              -0.9980108141899109,
+              -0.998042106628418,
+              -0.9959654211997986
+            ]
+          }
+        }
+      },
+      "neutral_discordant": {
+        "outcome": "BENEFIT",
+        "support": 123,
+        "metrics": {
+          "query_accuracy": {
+            "example_bootstrap": {
+              "delta": 0.4742547571659088,
+              "ci95": [
+                0.4218609035015106,
+                0.5239385366439819
+              ],
+              "relative": 0.9242956638336182,
+              "relative_ci95": [
+                0.7443884819746017,
+                1.1325600504875182
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": 0.4742547571659088,
+              "sd": 0.030177608132362366,
+              "range": [
+                0.4417344033718109,
+                0.5013550519943237
+              ],
+              "ci95": [
+                0.39928942076222557,
+                0.5492200935695921
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": 0.9268950819969177,
+              "sd": 0.09537559002637863,
+              "range": [
+                0.8232321739196777,
+                1.0109291076660156
+              ],
+              "ci95": [
+                0.6899689749151019,
+                1.1638211890787336
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              0.4796747863292694,
+              0.5013550519943237,
+              0.4417344033718109
+            ],
+            "seed_relative": [
+              0.946523904800415,
+              1.0109291076660156,
+              0.8232321739196777
+            ]
+          },
+          "query_loss": {
+            "example_bootstrap": {
+              "delta": -6.1162567138671875,
+              "ci95": [
+                -7.178645849227905,
+                -5.11821005344391
+              ],
+              "relative": -0.9927372932434082,
+              "relative_ci95": [
+                -0.9960408762097359,
+                -0.9890526548027992
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -6.116256237030029,
+              "sd": 1.1132993698120117,
+              "range": [
+                -7.042555332183838,
+                -4.881152629852295
+              ],
+              "ci95": [
+                -8.881845218532359,
+                -3.3506672555277004
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9931614398956299,
+              "sd": 0.005180335137993097,
+              "range": [
+                -0.9981501698493958,
+                -0.9878087043762207
+              ],
+              "ci95": [
+                -1.0060301056953789,
+                -0.9802927740958808
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -7.042555332183838,
+              -4.881152629852295,
+              -6.425060272216797
+            ],
+            "seed_relative": [
+              -0.993525505065918,
+              -0.9981501698493958,
+              -0.9878087043762207
+            ]
+          },
+          "query_nll": {
+            "example_bootstrap": {
+              "delta": -6.1162567138671875,
+              "ci95": [
+                -7.132873833179474,
+                -5.132402002811433
+              ],
+              "relative": -0.9927372932434082,
+              "relative_ci95": [
+                -0.9959990233182907,
+                -0.9889065384864807
+              ],
+              "support": 123,
+              "replicates": 2000
+            },
+            "training_seed_absolute": {
+              "mean": -6.116256237030029,
+              "sd": 1.1132993698120117,
+              "range": [
+                -7.042555332183838,
+                -4.881152629852295
+              ],
+              "ci95": [
+                -8.881845218532359,
+                -3.3506672555277004
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "training_seed_relative": {
+              "mean": -0.9931614398956299,
+              "sd": 0.005180335137993097,
+              "range": [
+                -0.9981501698493958,
+                -0.9878087043762207
+              ],
+              "ci95": [
+                -1.0060301056953789,
+                -0.9802927740958808
+              ],
+              "n_training_seeds": 3,
+              "df": 2
+            },
+            "seed_deltas": [
+              -7.042555332183838,
+              -4.881152629852295,
+              -6.425060272216797
+            ],
+            "seed_relative": [
+              -0.993525505065918,
+              -0.9981501698493958,
+              -0.9878087043762207
+            ]
+          }
+        }
+      }
+    }
+  },
+  "sampling_training": {
+    "outcome": "UNRESOLVED",
+    "support": 912,
+    "metrics": {
+      "query_accuracy": {
+        "example_bootstrap": {
+          "delta": -0.0030458085238933563,
+          "ci95": [
+            -0.0058479527942836285,
+            -0.0003654967280454002
+          ],
+          "relative": -0.0030678510665893555,
+          "relative_ci95": [
+            -0.005884724855422974,
+            -0.0003682896494865418
+          ],
+          "support": 912,
+          "replicates": 2000
+        },
+        "training_seed_absolute": {
+          "mean": -0.003045808756724,
+          "sd": 0.005486514884978533,
+          "range": [
+            -0.008406432345509529,
+            0.0025584790855646133
+          ],
+          "ci95": [
+            -0.01667506747808899,
+            0.01058344996464099
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "training_seed_relative": {
+          "mean": -0.0030582547187805176,
+          "sd": 0.005521638318896294,
+          "range": [
+            -0.008449733257293701,
+            0.0025849342346191406
+          ],
+          "ci95": [
+            -0.016774764836511774,
+            0.01065825539895074
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "seed_deltas": [
+          -0.0032894734758883715,
+          -0.008406432345509529,
+          0.0025584790855646133
+        ],
+        "seed_relative": [
+          -0.003309965133666992,
+          -0.008449733257293701,
+          0.0025849342346191406
+        ]
+      },
+      "query_loss": {
+        "example_bootstrap": {
+          "delta": 0.01644420251250267,
+          "ci95": [
+            0.0062050229520536964,
+            0.02697939849458635
+          ],
+          "relative": 0.7248071432113647,
+          "relative_ci95": [
+            0.24356539249420167,
+            1.3959236860275266
+          ],
+          "support": 912,
+          "replicates": 2000
+        },
+        "training_seed_absolute": {
+          "mean": 0.01644420251250267,
+          "sd": 0.02957266941666603,
+          "range": [
+            -0.009125474840402603,
+            0.04882971569895744
+          ],
+          "ci95": [
+            -0.05701838038129507,
+            0.08990678540630041
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "training_seed_relative": {
+          "mean": 1.2482397556304932,
+          "sd": 2.006441593170166,
+          "range": [
+            -0.2653295397758484,
+            3.524116039276123
+          ],
+          "ci95": [
+            -3.736037447411075,
+            6.232516958672061
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "seed_deltas": [
+          0.009628367610275745,
+          0.04882971569895744,
+          -0.009125474840402603
+        ],
+        "seed_relative": [
+          0.4859325885772705,
+          3.524116039276123,
+          -0.2653295397758484
+        ]
+      },
+      "query_nll": {
+        "example_bootstrap": {
+          "delta": 0.01644420251250267,
+          "ci95": [
+            0.006605230690911412,
+            0.02750831013545393
+          ],
+          "relative": 0.7248071432113647,
+          "relative_ci95": [
+            0.25813952684402464,
+            1.4005694866180414
+          ],
+          "support": 912,
+          "replicates": 2000
+        },
+        "training_seed_absolute": {
+          "mean": 0.01644420251250267,
+          "sd": 0.02957266941666603,
+          "range": [
+            -0.009125474840402603,
+            0.04882971569895744
+          ],
+          "ci95": [
+            -0.05701838038129507,
+            0.08990678540630041
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "training_seed_relative": {
+          "mean": 1.2482398748397827,
+          "sd": 2.006441593170166,
+          "range": [
+            -0.2653294801712036,
+            3.524116039276123
+          ],
+          "ci95": [
+            -3.7360373282017854,
+            6.232517077881351
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "seed_deltas": [
+          0.009628367610275745,
+          0.04882971569895744,
+          -0.009125474840402603
+        ],
+        "seed_relative": [
+          0.4859325885772705,
+          3.524116039276123,
+          -0.2653294801712036
+        ]
+      }
+    }
+  },
+  "test_neutral_discordant_support": 123,
+  "models": {
+    "seed0:A": {
+      "model_tree": "24e90f4d7df68905ecda08d4c228b647cc629a7e630d914312e40f2b53f62a03",
+      "optimizer_step": 1000,
+      "payload_sha256": "6a82112b480840ffe2f759fd5180d8e733c6ee02e7cd89543e310babbde9b9d0"
+    },
+    "seed0:B": {
+      "model_tree": "a3ef451d2842f4d7481f8c705d6754912ca187b1f2bbc63665baa85c7e55bd6c",
+      "optimizer_step": 1000,
+      "payload_sha256": "ff344d72489c0923cc014e40b2d5b647f04c8c6e4af928713019838da07a6446"
+    },
+    "seed0:C": {
+      "model_tree": "20881b8be95af4d811fb2ce4531893409c4d6f2a2955269d53fa07d660e1384f",
+      "optimizer_step": 1000,
+      "payload_sha256": "b4896a4d44bc74928c68824bd2be2c52f726eac1f0675a14f77b54d123a7abc8"
+    },
+    "seed1:A": {
+      "model_tree": "f41bc8f1f0bd79a2e5441a6c2970ab599c77642c4bbede5cc98306c5f27e2f67",
+      "optimizer_step": 1000,
+      "payload_sha256": "77de7dbdbb928bf6ea42035b5f54d8327275cbfb7f38c888f7f4f049ca328849"
+    },
+    "seed1:B": {
+      "model_tree": "865badbfe3ef0df782f82f4a68d43e0a416ebb14bbfb6625d68ae99ff6dcf844",
+      "optimizer_step": 500,
+      "payload_sha256": "35616b83627a4a4f487ea2635dadf8a373418bb9928af65a2714c4051f0da4f4"
+    },
+    "seed1:C": {
+      "model_tree": "2d061b601dff8cbc1cb491a7aef835be6e6c1f1e2ad1ce7dfb0a0075886732cc",
+      "optimizer_step": 1000,
+      "payload_sha256": "ff8a31b6f8d2b4b35a4e7f31db1c5937e4e3d6c75dd7ef93cf85eb2ffaa89be3"
+    },
+    "seed2:A": {
+      "model_tree": "6585469d88fa2218932ba249509569ca5d3748c9fd270fbb96f1feb75b694589",
+      "optimizer_step": 1000,
+      "payload_sha256": "b8932d3a3a1e6a9f0e86c99fa15915fe9c1b3cfc1ba1caa17640a8ab2f1820d3"
+    },
+    "seed2:B": {
+      "model_tree": "ed0369eccef770a8d4508168ba028deac095c02811ea59ec5d5910cc618c2333",
+      "optimizer_step": 1000,
+      "payload_sha256": "3712c481c0b21fb49462fff3a2e1479a63da16086819024864794d5a9abaf4f3"
+    },
+    "seed2:C": {
+      "model_tree": "fe0113757e71028ba4af26c01f859007c742d0e6efb93be18d1ff38e8ee05ef2",
+      "optimizer_step": 1000,
+      "payload_sha256": "1a3208e4c7a1942c4c1306c744c93968a52918eaab10182dec09dbdc244fd8e3"
+    }
+  },
+  "selected_validation_neutral_discordant": {
+    "outcome": "BENEFIT",
+    "support": 132,
+    "metrics": {
+      "query_accuracy": {
+        "example_bootstrap": {
+          "delta": 0.9587542414665222,
+          "ci95": [
+            0.947811484336853,
+            0.9696969985961914
+          ],
+          "relative": 36.7419319152832,
+          "relative_ci95": [
+            26.279071807861328,
+            57.65250520706175
+          ],
+          "support": 132,
+          "replicates": 2000
+        },
+        "training_seed_absolute": {
+          "mean": 0.9587542414665222,
+          "sd": 0.0038573616184294224,
+          "range": [
+            0.9545454382896423,
+            0.9621211290359497
+          ],
+          "ci95": [
+            0.9491720241388614,
+            0.9683364587941831
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "training_seed_relative": {
+          "mean": 38.94907760620117,
+          "sd": 10.694987297058105,
+          "range": [
+            27.0,
+            47.624996185302734
+          ],
+          "ci95": [
+            12.38125476915993,
+            65.5169004432424
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "seed_deltas": [
+          0.9545454382896423,
+          0.9595959782600403,
+          0.9621211290359497
+        ],
+        "seed_relative": [
+          27.0,
+          42.222225189208984,
+          47.624996185302734
+        ]
+      },
+      "query_loss": {
+        "example_bootstrap": {
+          "delta": -20.90078353881836,
+          "ci95": [
+            -22.06015725135803,
+            -19.733774614334106
+          ],
+          "relative": -0.9981963038444519,
+          "relative_ci95": [
+            -0.9988900482654571,
+            -0.9974634751677514
+          ],
+          "support": 132,
+          "replicates": 2000
+        },
+        "training_seed_absolute": {
+          "mean": -20.900785446166992,
+          "sd": 2.717785120010376,
+          "range": [
+            -22.530439376831055,
+            -17.76334571838379
+          ],
+          "ci95": [
+            -27.652137935664445,
+            -14.14943295666954
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "training_seed_relative": {
+          "mean": -0.9981773495674133,
+          "sd": 0.0007825334905646741,
+          "range": [
+            -0.9990515112876892,
+            -0.997542142868042
+          ],
+          "ci95": [
+            -1.000121270598345,
+            -0.9962334285364817
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "seed_deltas": [
+          -22.530439376831055,
+          -17.76334571838379,
+          -22.4085693359375
+        ],
+        "seed_relative": [
+          -0.9990515112876892,
+          -0.9979384541511536,
+          -0.997542142868042
+        ]
+      },
+      "query_nll": {
+        "example_bootstrap": {
+          "delta": -20.90078353881836,
+          "ci95": [
+            -22.032412338256837,
+            -19.71245050430298
+          ],
+          "relative": -0.9981963038444519,
+          "relative_ci95": [
+            -0.9988557308912277,
+            -0.9974672675132752
+          ],
+          "support": 132,
+          "replicates": 2000
+        },
+        "training_seed_absolute": {
+          "mean": -20.900785446166992,
+          "sd": 2.7177844047546387,
+          "range": [
+            -22.530437469482422,
+            -17.76334571838379
+          ],
+          "ci95": [
+            -27.652136283852073,
+            -14.149434608481911
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "training_seed_relative": {
+          "mean": -0.9981773495674133,
+          "sd": 0.0007825334905646741,
+          "range": [
+            -0.9990515112876892,
+            -0.997542142868042
+          ],
+          "ci95": [
+            -1.000121270598345,
+            -0.9962334285364817
+          ],
+          "n_training_seeds": 3,
+          "df": 2
+        },
+        "seed_deltas": [
+          -22.530437469482422,
+          -17.76334571838379,
+          -22.4085693359375
+        ],
+        "seed_relative": [
+          -0.9990515112876892,
+          -0.9979384541511536,
+          -0.997542142868042
+        ]
+      }
+    }
+  },
+  "selected_validation_intervals_are_descriptive": true,
+  "protected_selection_sha256": "ee0df89871b3afa74c5243225270086c29a80b17c229abc9ef73f6b7314dd57c",
+  "scientific_scope": "reference-scale warm-start, fixed approved budget; not scratch, LM, H/I or general-scale superiority",
+  "protected_test_evaluated": true
+}

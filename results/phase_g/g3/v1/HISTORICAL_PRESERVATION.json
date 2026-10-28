@@ -1,0 +1,44 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "time": "2026-10-28T18:44:22+0000",
+  "frozen_baseline_sha256": "2808ee906791fef356d88aadbe9dad2cc7cbe0143b1cbae01d41baccdecafdc7",
+  "baseline_entries_verified": 731,
+  "manifests": {
+    "g1": {
+      "manifest_sha256": "b8130fe6d2759f9e9ec14e5f59c2b3c41623c6558cf08bf0f4c2682ee7cb3468",
+      "verified_files": 13,
+      "verified_ignored_run_files": 0
+    },
+    "g1_1": {
+      "manifest_sha256": "2f9401916ca52e5ea7ee29766e49ad45390149f0680e926c26b99a041318eb57",
+      "verified_files": 22,
+      "verified_ignored_run_files": 0
+    },
+    "g1_1/teacher_v0": {
+      "manifest_sha256": "8945667b233de8cb88ec714b18723ed6e0593a77c1b76f629e154efe818c4bbf",
+      "verified_files": 270,
+      "verified_ignored_run_files": 0
+    },
+    "g2_1": {
+      "manifest_sha256": "0eb4e639db7c7ed3f5ab021b861a3ed0ce2c377bf8eff88e283873b67608544f",
+      "verified_files": 254,
+      "verified_ignored_run_files": 0
+    },
+    "g3": {
+      "manifest_sha256": "33f12e56a236c426826257f2a72d20dde8ba012d39ebd743ac2e9265b0cd67dd",
+      "verified_files": 37,
+      "verified_ignored_run_files": 3
+    }
+  },
+  "additional_immutable_checkpoints_verified": {
+    "results/runs/phase_g/g23/v1/resource_stops/20261027T170605/seed1_B_update00137.pkl": "f82269e87457c71f92117102ed6a7d0eb76a827476b9532f18f9dc32dda9af0d",
+    "results/runs/phase_g/g23/v1/resource_stops/20261027T212940/seed1_C_update00270.pkl": "51a912b43b0a8a13d35b4b85ad07034a41322b8a1920a88ae2cd0b4dfcabb2d8",
+    "results/runs/phase_g/g1_1/teacher_v0/official/payloads/100_000.pkl": "fa798be7d9d6244054b1053bd86c340c4d2f3582290dc72a31e6877c24f81a93",
+    "results/runs/phase_g/g0_1/v1/frozen_codec.pkl": "213d71be58b4e3a0eb685330ff8f20ad0d2574184d59060890baa4a2eed586e7"
+  },
+  "all_passed": true,
+  "old_V0_blocked_record_unchanged": true,
+  "G21_evidence_verified_not_reexecuted": true,
+  "F1_F3_G0_G01_historical_files_not_modified_by_this_work": true,
+  "no_unrelated_files_scanned_or_deleted": true
+}

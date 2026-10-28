@@ -1,0 +1,75 @@
+{
+  "name": "regular_054",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g_structure.py::test_prediction_only_preserves_explicit_committed_state_exactly",
+    "tests/test_phase_g_structure.py::test_argmax_commit_separates_predictions_and_commit_and_forces_terminal",
+    "tests/test_phase_g_structure.py::test_closed_masks_preserve_both_exterior_edges_and_terminal",
+    "tests/test_phase_g_structure.py::test_task_commit_ownership_fixes_mandatory_scaffold_and_scores_only_optional_edges",
+    "tests/test_phase_g_structure.py::test_reactivation_policy_has_distinct_fail_closed_code",
+    "tests/test_phase_g_structure.py::test_committed_dtypes_fail_closed_in_core_and_eager_wrapper",
+    "tests/test_phase_g_structure.py::test_sample_temperature_and_structural_logit_dtypes_are_validated",
+    "tests/test_phase_g_structure.py::test_compiled_commit_invalid_numerics_fail_before_generated_scatter"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g_structure.py::test_prediction_only_preserves_explicit_committed_state_exactly",
+    "tests/test_phase_g_structure.py::test_argmax_commit_separates_predictions_and_commit_and_forces_terminal",
+    "tests/test_phase_g_structure.py::test_closed_masks_preserve_both_exterior_edges_and_terminal",
+    "tests/test_phase_g_structure.py::test_task_commit_ownership_fixes_mandatory_scaffold_and_scores_only_optional_edges",
+    "tests/test_phase_g_structure.py::test_reactivation_policy_has_distinct_fail_closed_code",
+    "tests/test_phase_g_structure.py::test_committed_dtypes_fail_closed_in_core_and_eager_wrapper",
+    "tests/test_phase_g_structure.py::test_sample_temperature_and_structural_logit_dtypes_are_validated",
+    "tests/test_phase_g_structure.py::test_compiled_commit_invalid_numerics_fail_before_generated_scatter",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_054.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g_structure",
+      "test_prediction_only_preserves_explicit_committed_state_exactly"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_argmax_commit_separates_predictions_and_commit_and_forces_terminal"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_closed_masks_preserve_both_exterior_edges_and_terminal"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_task_commit_ownership_fixes_mandatory_scaffold_and_scores_only_optional_edges"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_reactivation_policy_has_distinct_fail_closed_code"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_committed_dtypes_fail_closed_in_core_and_eager_wrapper"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_sample_temperature_and_structural_logit_dtypes_are_validated"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_compiled_commit_invalid_numerics_fail_before_generated_scatter"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:29:02+0000",
+  "ended": "2026-10-28T19:29:06+0000",
+  "wall_seconds": 4.31204408290796,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "a3f74d4b5a49ffa308896a09fe599c1a874625948dea267f22a6d978a509c239"
+}

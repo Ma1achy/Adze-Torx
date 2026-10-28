@@ -1,0 +1,45 @@
+{
+  "name": "regular_003",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_masks.py::test_draft_block_causal_mask",
+    "tests/test_masks.py::test_refine_is_global_over_active_kv",
+    "tests/test_masks.py::test_invalid_query_has_no_attention"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_masks.py::test_draft_block_causal_mask",
+    "tests/test_masks.py::test_refine_is_global_over_active_kv",
+    "tests/test_masks.py::test_invalid_query_has_no_attention",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_003.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_masks",
+      "test_draft_block_causal_mask"
+    ],
+    [
+      "tests.test_masks",
+      "test_refine_is_global_over_active_kv"
+    ],
+    [
+      "tests.test_masks",
+      "test_invalid_query_has_no_attention"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:02:51+0000",
+  "ended": "2026-10-28T19:02:52+0000",
+  "wall_seconds": 0.7918989169411361,
+  "log_sha256": "cf426ab35f3b06fccef8290fde5325d90af130a79da1d1752031518df77c4236",
+  "junit_sha256": "9cd0b7a5161b4c286cd608f4007fbd59a23983c47e67bbb9038f79af7476d4cc"
+}

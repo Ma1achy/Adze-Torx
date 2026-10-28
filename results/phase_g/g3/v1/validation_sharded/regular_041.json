@@ -1,0 +1,69 @@
+{
+  "name": "regular_041",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g23_churn.py::test_rootwise_change_is_not_change_of_averaged_actions",
+    "tests/test_phase_g23_churn.py::test_teacher_commit_preserved_despite_prediction_change",
+    "tests/test_phase_g23_churn.py::test_wrong_identity_and_invalid_actions_are_rejected",
+    "tests/test_phase_g23_churn.py::test_empty_support_is_not_reported_as_meaningful_zero",
+    "tests/test_phase_g23_churn.py::test_saved_shard_checkpoint_and_actual_ids_are_verified[none]",
+    "tests/test_phase_g23_churn.py::test_saved_shard_checkpoint_and_actual_ids_are_verified[checkpoint]",
+    "tests/test_phase_g23_churn.py::test_saved_shard_checkpoint_and_actual_ids_are_verified[example]"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g23_churn.py::test_rootwise_change_is_not_change_of_averaged_actions",
+    "tests/test_phase_g23_churn.py::test_teacher_commit_preserved_despite_prediction_change",
+    "tests/test_phase_g23_churn.py::test_wrong_identity_and_invalid_actions_are_rejected",
+    "tests/test_phase_g23_churn.py::test_empty_support_is_not_reported_as_meaningful_zero",
+    "tests/test_phase_g23_churn.py::test_saved_shard_checkpoint_and_actual_ids_are_verified[none]",
+    "tests/test_phase_g23_churn.py::test_saved_shard_checkpoint_and_actual_ids_are_verified[checkpoint]",
+    "tests/test_phase_g23_churn.py::test_saved_shard_checkpoint_and_actual_ids_are_verified[example]",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_041.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g23_churn",
+      "test_rootwise_change_is_not_change_of_averaged_actions"
+    ],
+    [
+      "tests.test_phase_g23_churn",
+      "test_teacher_commit_preserved_despite_prediction_change"
+    ],
+    [
+      "tests.test_phase_g23_churn",
+      "test_wrong_identity_and_invalid_actions_are_rejected"
+    ],
+    [
+      "tests.test_phase_g23_churn",
+      "test_empty_support_is_not_reported_as_meaningful_zero"
+    ],
+    [
+      "tests.test_phase_g23_churn",
+      "test_saved_shard_checkpoint_and_actual_ids_are_verified[none]"
+    ],
+    [
+      "tests.test_phase_g23_churn",
+      "test_saved_shard_checkpoint_and_actual_ids_are_verified[checkpoint]"
+    ],
+    [
+      "tests.test_phase_g23_churn",
+      "test_saved_shard_checkpoint_and_actual_ids_are_verified[example]"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:24:32+0000",
+  "ended": "2026-10-28T19:24:33+0000",
+  "wall_seconds": 0.3063390830066055,
+  "log_sha256": "83a1593c5b5783693fe3006d1f6597bcb4f3a5968f23b59481ee09a0477f910a",
+  "junit_sha256": "ecf2cbdf380fafbe5f6d015b4749faf63fe243694b1f224be9b7d0a975257d47"
+}
