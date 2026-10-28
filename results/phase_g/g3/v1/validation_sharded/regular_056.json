@@ -1,0 +1,75 @@
+{
+  "name": "regular_056",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g_structure.py::test_both_overflow_modes_return_nonconsumable_empty_metadata_and_eager_rejects",
+    "tests/test_phase_g_structure.py::test_routing_records_execute_under_jit_and_scan",
+    "tests/test_phase_g_structure.py::test_ell_zero_nonemitting_reactivation_and_pack_unpool_identity_batch_gt_one",
+    "tests/test_phase_g_structure.py::test_changed_boundaries_repack_and_unpool_the_same_carrier_identities",
+    "tests/test_phase_g_structure.py::test_score_bridge_has_zero_primal_and_rejects_nonlocal_or_nonsampled_ownership",
+    "tests/test_phase_g_structure.py::test_extreme_calibration_nll_uses_log_softmax_without_probability_floor",
+    "tests/test_phase_g_structure.py::test_generated_length_loss_compacts_globally_and_penalizes_missing_extra",
+    "tests/test_phase_g_structure.py::test_churn_reports_separate_transition_classes_and_neutral_structure_contract"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g_structure.py::test_both_overflow_modes_return_nonconsumable_empty_metadata_and_eager_rejects",
+    "tests/test_phase_g_structure.py::test_routing_records_execute_under_jit_and_scan",
+    "tests/test_phase_g_structure.py::test_ell_zero_nonemitting_reactivation_and_pack_unpool_identity_batch_gt_one",
+    "tests/test_phase_g_structure.py::test_changed_boundaries_repack_and_unpool_the_same_carrier_identities",
+    "tests/test_phase_g_structure.py::test_score_bridge_has_zero_primal_and_rejects_nonlocal_or_nonsampled_ownership",
+    "tests/test_phase_g_structure.py::test_extreme_calibration_nll_uses_log_softmax_without_probability_floor",
+    "tests/test_phase_g_structure.py::test_generated_length_loss_compacts_globally_and_penalizes_missing_extra",
+    "tests/test_phase_g_structure.py::test_churn_reports_separate_transition_classes_and_neutral_structure_contract",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_056.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g_structure",
+      "test_both_overflow_modes_return_nonconsumable_empty_metadata_and_eager_rejects"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_routing_records_execute_under_jit_and_scan"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_ell_zero_nonemitting_reactivation_and_pack_unpool_identity_batch_gt_one"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_changed_boundaries_repack_and_unpool_the_same_carrier_identities"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_score_bridge_has_zero_primal_and_rejects_nonlocal_or_nonsampled_ownership"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_extreme_calibration_nll_uses_log_softmax_without_probability_floor"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_generated_length_loss_compacts_globally_and_penalizes_missing_extra"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_churn_reports_separate_transition_classes_and_neutral_structure_contract"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:29:09+0000",
+  "ended": "2026-10-28T19:29:13+0000",
+  "wall_seconds": 4.687676375033334,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "038ff07c411ba3e033215adefda6993d1d3ec10b2a8cb7dac69f9d23c6644e27"
+}

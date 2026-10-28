@@ -1,0 +1,63 @@
+{
+  "name": "regular_016",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_d_evaluation.py::test_mc_roots_are_nested_reproducible_and_distinct",
+    "tests/test_phase_d_evaluation.py::test_student_t_summary_and_stage_manifest_are_frozen",
+    "tests/test_phase_d_evaluation.py::test_mc_evaluation_is_chunking_invariant_and_lambda_zero_matches_dataset_metrics",
+    "tests/test_phase_d_evaluation.py::test_global_example_identity_is_stable_and_distinct",
+    "tests/test_phase_d_evaluation.py::test_d3_aggregate_requires_every_present_stochastic_training_seed",
+    "tests/test_phase_d_evaluation.py::test_gradient_evidence_aggregation_rejects_a_non_worst_failure"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_d_evaluation.py::test_mc_roots_are_nested_reproducible_and_distinct",
+    "tests/test_phase_d_evaluation.py::test_student_t_summary_and_stage_manifest_are_frozen",
+    "tests/test_phase_d_evaluation.py::test_mc_evaluation_is_chunking_invariant_and_lambda_zero_matches_dataset_metrics",
+    "tests/test_phase_d_evaluation.py::test_global_example_identity_is_stable_and_distinct",
+    "tests/test_phase_d_evaluation.py::test_d3_aggregate_requires_every_present_stochastic_training_seed",
+    "tests/test_phase_d_evaluation.py::test_gradient_evidence_aggregation_rejects_a_non_worst_failure",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_016.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_d_evaluation",
+      "test_mc_roots_are_nested_reproducible_and_distinct"
+    ],
+    [
+      "tests.test_phase_d_evaluation",
+      "test_student_t_summary_and_stage_manifest_are_frozen"
+    ],
+    [
+      "tests.test_phase_d_evaluation",
+      "test_mc_evaluation_is_chunking_invariant_and_lambda_zero_matches_dataset_metrics"
+    ],
+    [
+      "tests.test_phase_d_evaluation",
+      "test_global_example_identity_is_stable_and_distinct"
+    ],
+    [
+      "tests.test_phase_d_evaluation",
+      "test_d3_aggregate_requires_every_present_stochastic_training_seed"
+    ],
+    [
+      "tests.test_phase_d_evaluation",
+      "test_gradient_evidence_aggregation_rejects_a_non_worst_failure"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:09:05+0000",
+  "ended": "2026-10-28T19:12:46+0000",
+  "wall_seconds": 220.26916595897637,
+  "log_sha256": "700bc0322b00f8e8db3ce495047983b54ab27ab59ed1fedac05f3aeba47dae24",
+  "junit_sha256": "a0e3e1fa341673f1a726464380e5dc80e9ff44ea8c0b2c29db04564388c9d5d7"
+}

@@ -1,0 +1,75 @@
+{
+  "name": "regular_049",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g_integration.py::test_accepted_torx_checkpoint_codec_and_guarded_replay_are_repeatable",
+    "tests/test_phase_g_integration.py::test_fail_closed_optimizer_preserves_params_moments_and_step_exactly",
+    "tests/test_phase_g_integration.py::test_invalid_generated_route_returns_nonexecuted_zero_replay",
+    "tests/test_phase_g_integration.py::test_guarded_replay_is_independent_of_real_and_placeholder_target_content",
+    "tests/test_phase_g_integration.py::test_task_structure_is_deterministic_from_observable_codec_slots",
+    "tests/test_phase_g_integration.py::test_teacher_two_pass_is_finite_and_uses_explicit_variable_structure_truth",
+    "tests/test_phase_g_integration.py::test_predictor_and_replay_ignore_sanitized_placeholder_values",
+    "tests/test_phase_g_integration.py::test_full_model_prospective_update_is_finite_and_preserves_frozen_leaves"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g_integration.py::test_accepted_torx_checkpoint_codec_and_guarded_replay_are_repeatable",
+    "tests/test_phase_g_integration.py::test_fail_closed_optimizer_preserves_params_moments_and_step_exactly",
+    "tests/test_phase_g_integration.py::test_invalid_generated_route_returns_nonexecuted_zero_replay",
+    "tests/test_phase_g_integration.py::test_guarded_replay_is_independent_of_real_and_placeholder_target_content",
+    "tests/test_phase_g_integration.py::test_task_structure_is_deterministic_from_observable_codec_slots",
+    "tests/test_phase_g_integration.py::test_teacher_two_pass_is_finite_and_uses_explicit_variable_structure_truth",
+    "tests/test_phase_g_integration.py::test_predictor_and_replay_ignore_sanitized_placeholder_values",
+    "tests/test_phase_g_integration.py::test_full_model_prospective_update_is_finite_and_preserves_frozen_leaves",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_049.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g_integration",
+      "test_accepted_torx_checkpoint_codec_and_guarded_replay_are_repeatable"
+    ],
+    [
+      "tests.test_phase_g_integration",
+      "test_fail_closed_optimizer_preserves_params_moments_and_step_exactly"
+    ],
+    [
+      "tests.test_phase_g_integration",
+      "test_invalid_generated_route_returns_nonexecuted_zero_replay"
+    ],
+    [
+      "tests.test_phase_g_integration",
+      "test_guarded_replay_is_independent_of_real_and_placeholder_target_content"
+    ],
+    [
+      "tests.test_phase_g_integration",
+      "test_task_structure_is_deterministic_from_observable_codec_slots"
+    ],
+    [
+      "tests.test_phase_g_integration",
+      "test_teacher_two_pass_is_finite_and_uses_explicit_variable_structure_truth"
+    ],
+    [
+      "tests.test_phase_g_integration",
+      "test_predictor_and_replay_ignore_sanitized_placeholder_values"
+    ],
+    [
+      "tests.test_phase_g_integration",
+      "test_full_model_prospective_update_is_finite_and_preserves_frozen_leaves"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:26:18+0000",
+  "ended": "2026-10-28T19:27:39+0000",
+  "wall_seconds": 80.4571127910167,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "f1be30fe9ecd5a610088586c83d0213d672cddeefa2c2bba9a799b0d8868396a"
+}

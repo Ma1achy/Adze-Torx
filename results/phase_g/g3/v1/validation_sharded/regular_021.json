@@ -1,0 +1,57 @@
+{
+  "name": "regular_021",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_d_training.py::test_clean_target_mean_teacher_uses_same_parameter_tree_without_noise_leakage",
+    "tests/test_phase_d_training.py::test_stochastic_mask_retains_phase_b_mask_and_disables_all_rho",
+    "tests/test_phase_d_training.py::test_finite_stochastic_training_step_freezes_rho_codec_and_moments",
+    "tests/test_phase_d_training.py::test_d3_initialization_freshens_noncodec_and_restores_exact_codec",
+    "tests/test_phase_d_training.py::test_accepted_phase_b_checkpoints_map_to_torx_means_exactly"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_d_training.py::test_clean_target_mean_teacher_uses_same_parameter_tree_without_noise_leakage",
+    "tests/test_phase_d_training.py::test_stochastic_mask_retains_phase_b_mask_and_disables_all_rho",
+    "tests/test_phase_d_training.py::test_finite_stochastic_training_step_freezes_rho_codec_and_moments",
+    "tests/test_phase_d_training.py::test_d3_initialization_freshens_noncodec_and_restores_exact_codec",
+    "tests/test_phase_d_training.py::test_accepted_phase_b_checkpoints_map_to_torx_means_exactly",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_021.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_d_training",
+      "test_clean_target_mean_teacher_uses_same_parameter_tree_without_noise_leakage"
+    ],
+    [
+      "tests.test_phase_d_training",
+      "test_stochastic_mask_retains_phase_b_mask_and_disables_all_rho"
+    ],
+    [
+      "tests.test_phase_d_training",
+      "test_finite_stochastic_training_step_freezes_rho_codec_and_moments"
+    ],
+    [
+      "tests.test_phase_d_training",
+      "test_d3_initialization_freshens_noncodec_and_restores_exact_codec"
+    ],
+    [
+      "tests.test_phase_d_training",
+      "test_accepted_phase_b_checkpoints_map_to_torx_means_exactly"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:13:35+0000",
+  "ended": "2026-10-28T19:14:34+0000",
+  "wall_seconds": 59.27264224993996,
+  "log_sha256": "4d2df7a96ce4a667da3ccf295f2d16c728a65ed0e861a3baa919f7bb469b02b5",
+  "junit_sha256": "0c68b4a578920f4aab2e3ed97becf651493021fd2868f98f749ba3b13bed464f"
+}

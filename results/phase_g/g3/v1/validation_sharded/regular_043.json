@@ -1,0 +1,57 @@
+{
+  "name": "regular_043",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g23_records.py::test_export_is_lossless_immutable_and_initial_record_not_counted",
+    "tests/test_phase_g23_records.py::test_bad_evidence_cannot_produce_an_export[checksum]",
+    "tests/test_phase_g23_records.py::test_bad_evidence_cannot_produce_an_export[frozen]",
+    "tests/test_phase_g23_records.py::test_bad_evidence_cannot_produce_an_export[snapshot]",
+    "tests/test_phase_g23_records.py::test_bad_evidence_cannot_produce_an_export[identity]"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g23_records.py::test_export_is_lossless_immutable_and_initial_record_not_counted",
+    "tests/test_phase_g23_records.py::test_bad_evidence_cannot_produce_an_export[checksum]",
+    "tests/test_phase_g23_records.py::test_bad_evidence_cannot_produce_an_export[frozen]",
+    "tests/test_phase_g23_records.py::test_bad_evidence_cannot_produce_an_export[snapshot]",
+    "tests/test_phase_g23_records.py::test_bad_evidence_cannot_produce_an_export[identity]",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_043.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g23_records",
+      "test_export_is_lossless_immutable_and_initial_record_not_counted"
+    ],
+    [
+      "tests.test_phase_g23_records",
+      "test_bad_evidence_cannot_produce_an_export[checksum]"
+    ],
+    [
+      "tests.test_phase_g23_records",
+      "test_bad_evidence_cannot_produce_an_export[frozen]"
+    ],
+    [
+      "tests.test_phase_g23_records",
+      "test_bad_evidence_cannot_produce_an_export[snapshot]"
+    ],
+    [
+      "tests.test_phase_g23_records",
+      "test_bad_evidence_cannot_produce_an_export[identity]"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:24:33+0000",
+  "ended": "2026-10-28T19:24:33+0000",
+  "wall_seconds": 0.30465220916084945,
+  "log_sha256": "4d2df7a96ce4a667da3ccf295f2d16c728a65ed0e861a3baa919f7bb469b02b5",
+  "junit_sha256": "c41ebaf036f498d4ea6c640ec3a8518756d0d5b7a495bf186f1759c3d23ab88c"
+}

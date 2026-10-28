@@ -1,0 +1,75 @@
+{
+  "name": "regular_009",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_b_reaudit.py::test_full_graph_really_routes_learned_operations_through_backend",
+    "tests/test_phase_b_reaudit.py::test_teacher_partition_is_generic_and_separate_from_boundaries",
+    "tests/test_phase_b_reaudit.py::test_selective_ssm_is_finite_causal_and_uses_configured_depth",
+    "tests/test_phase_b_reaudit.py::test_dit_tying_depth_modulation_and_q_independent_parameter_count",
+    "tests/test_phase_b_reaudit.py::test_dit_manual_unroll_matches_recurrent_driver",
+    "tests/test_phase_b_reaudit.py::test_persistent_coordinate_rope_and_attention_connectivity",
+    "tests/test_phase_b_reaudit.py::test_dit_jit_and_every_physical_block_has_first_step_gradients",
+    "tests/test_phase_b_reaudit.py::test_target_codec_site_distinction_proposal_prior_and_decoder_order"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_b_reaudit.py::test_full_graph_really_routes_learned_operations_through_backend",
+    "tests/test_phase_b_reaudit.py::test_teacher_partition_is_generic_and_separate_from_boundaries",
+    "tests/test_phase_b_reaudit.py::test_selective_ssm_is_finite_causal_and_uses_configured_depth",
+    "tests/test_phase_b_reaudit.py::test_dit_tying_depth_modulation_and_q_independent_parameter_count",
+    "tests/test_phase_b_reaudit.py::test_dit_manual_unroll_matches_recurrent_driver",
+    "tests/test_phase_b_reaudit.py::test_persistent_coordinate_rope_and_attention_connectivity",
+    "tests/test_phase_b_reaudit.py::test_dit_jit_and_every_physical_block_has_first_step_gradients",
+    "tests/test_phase_b_reaudit.py::test_target_codec_site_distinction_proposal_prior_and_decoder_order",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_009.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_b_reaudit",
+      "test_full_graph_really_routes_learned_operations_through_backend"
+    ],
+    [
+      "tests.test_phase_b_reaudit",
+      "test_teacher_partition_is_generic_and_separate_from_boundaries"
+    ],
+    [
+      "tests.test_phase_b_reaudit",
+      "test_selective_ssm_is_finite_causal_and_uses_configured_depth"
+    ],
+    [
+      "tests.test_phase_b_reaudit",
+      "test_dit_tying_depth_modulation_and_q_independent_parameter_count"
+    ],
+    [
+      "tests.test_phase_b_reaudit",
+      "test_dit_manual_unroll_matches_recurrent_driver"
+    ],
+    [
+      "tests.test_phase_b_reaudit",
+      "test_persistent_coordinate_rope_and_attention_connectivity"
+    ],
+    [
+      "tests.test_phase_b_reaudit",
+      "test_dit_jit_and_every_physical_block_has_first_step_gradients"
+    ],
+    [
+      "tests.test_phase_b_reaudit",
+      "test_target_codec_site_distinction_proposal_prior_and_decoder_order"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:03:38+0000",
+  "ended": "2026-10-28T19:03:53+0000",
+  "wall_seconds": 14.811076999874786,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "c139311764699120f8d17c5b86311af213f556d51ba78679712830df9430efc2"
+}

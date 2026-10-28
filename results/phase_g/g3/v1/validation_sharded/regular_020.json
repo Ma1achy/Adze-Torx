@@ -1,0 +1,33 @@
+{
+  "name": "regular_020",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_d_noise.py::test_full_model_shared_frontend_and_q_residuals_are_distinct_and_reproducible"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_d_noise.py::test_full_model_shared_frontend_and_q_residuals_are_distinct_and_reproducible",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_020.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_d_noise",
+      "test_full_model_shared_frontend_and_q_residuals_are_distinct_and_reproducible"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:12:59+0000",
+  "ended": "2026-10-28T19:13:35+0000",
+  "wall_seconds": 35.84615350002423,
+  "log_sha256": "423b1d0e014eb1eab96f4420f7b344c2615be505dd574b756ac884826ca74f2d",
+  "junit_sha256": "79fc05d4f762bd4abcdcec6d6660427752768be69c919047e4af06f4dfb85f2d"
+}

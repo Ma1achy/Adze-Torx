@@ -1,0 +1,13 @@
+{
+  "command": [
+    "make",
+    "test"
+  ],
+  "name": "test",
+  "returncode": -2,
+  "started": "2026-10-28T18:46:37+0000",
+  "ended": "2026-10-28T18:56:44+0000",
+  "wall_seconds": 606.9839124169666,
+  "log": "results/phase_g/g3/v1/validation_branch/05_test.log",
+  "log_sha256": "ddddc701119097c498fa74f8e1b37655d35a8725e0fb993c5f35d11e741015d3"
+}

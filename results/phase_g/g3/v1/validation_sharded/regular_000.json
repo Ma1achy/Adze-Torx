@@ -1,0 +1,45 @@
+{
+  "name": "regular_000",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_blocks.py::test_blocks_worked_example",
+    "tests/test_blocks.py::test_no_internal_cuts_is_one_block",
+    "tests/test_blocks.py::test_cut_after_every_site"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_blocks.py::test_blocks_worked_example",
+    "tests/test_blocks.py::test_no_internal_cuts_is_one_block",
+    "tests/test_blocks.py::test_cut_after_every_site",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_000.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_blocks",
+      "test_blocks_worked_example"
+    ],
+    [
+      "tests.test_blocks",
+      "test_no_internal_cuts_is_one_block"
+    ],
+    [
+      "tests.test_blocks",
+      "test_cut_after_every_site"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:02:48+0000",
+  "ended": "2026-10-28T19:02:49+0000",
+  "wall_seconds": 1.3862457498908043,
+  "log_sha256": "cf426ab35f3b06fccef8290fde5325d90af130a79da1d1752031518df77c4236",
+  "junit_sha256": "35042566bb758343f7236bfd3144275f8dbb895280076e2f81a06f8b72aa3edd"
+}

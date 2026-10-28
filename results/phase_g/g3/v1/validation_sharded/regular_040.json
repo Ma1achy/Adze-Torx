@@ -1,0 +1,63 @@
+{
+  "name": "regular_040",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g21.py::test_bernstein_radius_solves_exponent_and_handles_zero_variance",
+    "tests/test_phase_g21.py::test_independent_actions_loss_and_analytic_gradient[uniform]",
+    "tests/test_phase_g21.py::test_independent_actions_loss_and_analytic_gradient[asymmetric]",
+    "tests/test_phase_g21.py::test_independent_actions_loss_and_analytic_gradient[peaked]",
+    "tests/test_phase_g21.py::test_joint_family_bound_does_not_studentize_away_rare_events",
+    "tests/test_phase_g21.py::test_wilson_support_and_multinomial_count_conservation"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g21.py::test_bernstein_radius_solves_exponent_and_handles_zero_variance",
+    "tests/test_phase_g21.py::test_independent_actions_loss_and_analytic_gradient[uniform]",
+    "tests/test_phase_g21.py::test_independent_actions_loss_and_analytic_gradient[asymmetric]",
+    "tests/test_phase_g21.py::test_independent_actions_loss_and_analytic_gradient[peaked]",
+    "tests/test_phase_g21.py::test_joint_family_bound_does_not_studentize_away_rare_events",
+    "tests/test_phase_g21.py::test_wilson_support_and_multinomial_count_conservation",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_040.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g21",
+      "test_bernstein_radius_solves_exponent_and_handles_zero_variance"
+    ],
+    [
+      "tests.test_phase_g21",
+      "test_independent_actions_loss_and_analytic_gradient[uniform]"
+    ],
+    [
+      "tests.test_phase_g21",
+      "test_independent_actions_loss_and_analytic_gradient[asymmetric]"
+    ],
+    [
+      "tests.test_phase_g21",
+      "test_independent_actions_loss_and_analytic_gradient[peaked]"
+    ],
+    [
+      "tests.test_phase_g21",
+      "test_joint_family_bound_does_not_studentize_away_rare_events"
+    ],
+    [
+      "tests.test_phase_g21",
+      "test_wilson_support_and_multinomial_count_conservation"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:24:30+0000",
+  "ended": "2026-10-28T19:24:32+0000",
+  "wall_seconds": 2.6702636659611017,
+  "log_sha256": "700bc0322b00f8e8db3ce495047983b54ab27ab59ed1fedac05f3aeba47dae24",
+  "junit_sha256": "09a3a7d80ef2c738763ed0816497bc6e60f65f716f55bf121904a75a9d7d44ec"
+}

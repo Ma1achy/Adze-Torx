@@ -1,0 +1,75 @@
+{
+  "name": "slow_063",
+  "kind": "slow",
+  "nodes": [
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[inactive-uniform]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[inactive-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[inactive-peaked]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[reactivation-uniform]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[reactivation-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[reactivation-peaked]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[zero-uniform]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[zero-asymmetric]"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "slow",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[inactive-uniform]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[inactive-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[inactive-peaked]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[reactivation-uniform]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[reactivation-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[reactivation-peaked]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[zero-uniform]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[zero-asymmetric]",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/slow_063.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[inactive-uniform]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[inactive-asymmetric]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[inactive-peaked]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[reactivation-uniform]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[reactivation-asymmetric]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[reactivation-peaked]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[zero-uniform]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[zero-asymmetric]"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:30:08+0000",
+  "ended": "2026-10-28T19:30:26+0000",
+  "wall_seconds": 17.950820583850145,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "3a5e8bdb2667b8312908476a507f05d4d058c99325059429b03ccd487e83fd3d"
+}

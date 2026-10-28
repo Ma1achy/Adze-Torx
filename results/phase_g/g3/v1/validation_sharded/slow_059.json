@@ -1,0 +1,33 @@
+{
+  "name": "slow_059",
+  "kind": "slow",
+  "nodes": [
+    "tests/test_phase_c_1_occurrences.py::test_full_raw_gradient_parity_on_stochastic_capable_zero_noise_path"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "slow",
+    "tests/test_phase_c_1_occurrences.py::test_full_raw_gradient_parity_on_stochastic_capable_zero_noise_path",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/slow_059.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_c_1_occurrences",
+      "test_full_raw_gradient_parity_on_stochastic_capable_zero_noise_path"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:29:14+0000",
+  "ended": "2026-10-28T19:29:35+0000",
+  "wall_seconds": 20.426163541851565,
+  "log_sha256": "423b1d0e014eb1eab96f4420f7b344c2615be505dd574b756ac884826ca74f2d",
+  "junit_sha256": "82ec4de39b46801102d34ffd280433bcc667e5988c691466cd2bfc3031961eb0"
+}

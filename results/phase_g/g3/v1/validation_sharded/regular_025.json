@@ -1,0 +1,69 @@
+{
+  "name": "regular_025",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_e_recurrence.py::test_phase_e_q_execution_and_cycle_capture_shapes",
+    "tests/test_phase_e_recurrence.py::test_phase_e_q_zero_is_a_finite_zero_physical_block_baseline",
+    "tests/test_phase_e_recurrence.py::test_q_zero_ignores_physical_blocks_but_uses_dit_shell",
+    "tests/test_phase_e_recurrence.py::test_phase_e_depth_toggle_and_intervention_paths_are_finite",
+    "tests/test_phase_e_recurrence.py::test_depth_conditioning_overrides_preserve_actual_cycle_occurrence_keys",
+    "tests/test_phase_e_recurrence.py::test_stop_gradient_control_is_forward_identical_but_changes_gradient_path",
+    "tests/test_phase_e_recurrence.py::test_phase_e_reference_and_q1_parameter_counts_match"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_e_recurrence.py::test_phase_e_q_execution_and_cycle_capture_shapes",
+    "tests/test_phase_e_recurrence.py::test_phase_e_q_zero_is_a_finite_zero_physical_block_baseline",
+    "tests/test_phase_e_recurrence.py::test_q_zero_ignores_physical_blocks_but_uses_dit_shell",
+    "tests/test_phase_e_recurrence.py::test_phase_e_depth_toggle_and_intervention_paths_are_finite",
+    "tests/test_phase_e_recurrence.py::test_depth_conditioning_overrides_preserve_actual_cycle_occurrence_keys",
+    "tests/test_phase_e_recurrence.py::test_stop_gradient_control_is_forward_identical_but_changes_gradient_path",
+    "tests/test_phase_e_recurrence.py::test_phase_e_reference_and_q1_parameter_counts_match",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_025.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_e_recurrence",
+      "test_phase_e_q_execution_and_cycle_capture_shapes"
+    ],
+    [
+      "tests.test_phase_e_recurrence",
+      "test_phase_e_q_zero_is_a_finite_zero_physical_block_baseline"
+    ],
+    [
+      "tests.test_phase_e_recurrence",
+      "test_q_zero_ignores_physical_blocks_but_uses_dit_shell"
+    ],
+    [
+      "tests.test_phase_e_recurrence",
+      "test_phase_e_depth_toggle_and_intervention_paths_are_finite"
+    ],
+    [
+      "tests.test_phase_e_recurrence",
+      "test_depth_conditioning_overrides_preserve_actual_cycle_occurrence_keys"
+    ],
+    [
+      "tests.test_phase_e_recurrence",
+      "test_stop_gradient_control_is_forward_identical_but_changes_gradient_path"
+    ],
+    [
+      "tests.test_phase_e_recurrence",
+      "test_phase_e_reference_and_q1_parameter_counts_match"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:14:46+0000",
+  "ended": "2026-10-28T19:15:18+0000",
+  "wall_seconds": 32.44940008386038,
+  "log_sha256": "83a1593c5b5783693fe3006d1f6597bcb4f3a5968f23b59481ee09a0477f910a",
+  "junit_sha256": "bfb87f1602420d411aa34544e10e1857ef777580de3b82ad4638ad9098684e9a"
+}

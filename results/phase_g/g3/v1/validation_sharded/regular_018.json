@@ -1,0 +1,75 @@
+{
+  "name": "regular_018",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[0.25-conv]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-affine]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-logits]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-embedding]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-conv]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[1.0-affine]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[1.0-logits]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[1.0-embedding]"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[0.25-conv]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-affine]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-logits]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-embedding]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-conv]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[1.0-affine]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[1.0-logits]",
+    "tests/test_phase_d_noise.py::test_fixed_epsilon_residual_scales_exactly_with_lambda[1.0-embedding]",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_018.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_d_noise",
+      "test_fixed_epsilon_residual_scales_exactly_with_lambda[0.25-conv]"
+    ],
+    [
+      "tests.test_phase_d_noise",
+      "test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-affine]"
+    ],
+    [
+      "tests.test_phase_d_noise",
+      "test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-logits]"
+    ],
+    [
+      "tests.test_phase_d_noise",
+      "test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-embedding]"
+    ],
+    [
+      "tests.test_phase_d_noise",
+      "test_fixed_epsilon_residual_scales_exactly_with_lambda[0.5-conv]"
+    ],
+    [
+      "tests.test_phase_d_noise",
+      "test_fixed_epsilon_residual_scales_exactly_with_lambda[1.0-affine]"
+    ],
+    [
+      "tests.test_phase_d_noise",
+      "test_fixed_epsilon_residual_scales_exactly_with_lambda[1.0-logits]"
+    ],
+    [
+      "tests.test_phase_d_noise",
+      "test_fixed_epsilon_residual_scales_exactly_with_lambda[1.0-embedding]"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:12:50+0000",
+  "ended": "2026-10-28T19:12:54+0000",
+  "wall_seconds": 4.160826666979119,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "114f9c73514893ff4f24eaaeed4c8ec3f61a4461fb58c619e7212a20a900498e"
+}

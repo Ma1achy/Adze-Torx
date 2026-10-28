@@ -1,0 +1,9 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "overall": "PHASE_G_GENERATED_STRUCTURE_FUNCTIONAL",
+  "has_complete_G3_decision": true,
+  "failures_retained": 2,
+  "historical_preservation_passed": true,
+  "H_I_Thermo_untouched": true,
+  "S4_not_run": true
+}

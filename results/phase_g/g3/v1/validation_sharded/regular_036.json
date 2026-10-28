@@ -1,0 +1,57 @@
+{
+  "name": "regular_036",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g1.py::test_draft_cuts_remove_future_not_earlier_peer_information",
+    "tests/test_phase_g1.py::test_empty_stratum_is_not_a_zero_quality_score",
+    "tests/test_phase_g1.py::test_counterfactual_pairs_hold_background_positions_lengths_fixed",
+    "tests/test_phase_g1.py::test_decoder_reset_preserves_first_carrier_but_blocks_history",
+    "tests/test_phase_g1.py::test_geometry_ablation_preserves_carrier_position_embedding"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g1.py::test_draft_cuts_remove_future_not_earlier_peer_information",
+    "tests/test_phase_g1.py::test_empty_stratum_is_not_a_zero_quality_score",
+    "tests/test_phase_g1.py::test_counterfactual_pairs_hold_background_positions_lengths_fixed",
+    "tests/test_phase_g1.py::test_decoder_reset_preserves_first_carrier_but_blocks_history",
+    "tests/test_phase_g1.py::test_geometry_ablation_preserves_carrier_position_embedding",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_036.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g1",
+      "test_draft_cuts_remove_future_not_earlier_peer_information"
+    ],
+    [
+      "tests.test_phase_g1",
+      "test_empty_stratum_is_not_a_zero_quality_score"
+    ],
+    [
+      "tests.test_phase_g1",
+      "test_counterfactual_pairs_hold_background_positions_lengths_fixed"
+    ],
+    [
+      "tests.test_phase_g1",
+      "test_decoder_reset_preserves_first_carrier_but_blocks_history"
+    ],
+    [
+      "tests.test_phase_g1",
+      "test_geometry_ablation_preserves_carrier_position_embedding"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:22:36+0000",
+  "ended": "2026-10-28T19:22:44+0000",
+  "wall_seconds": 7.883421041769907,
+  "log_sha256": "4d2df7a96ce4a667da3ccf295f2d16c728a65ed0e861a3baa919f7bb469b02b5",
+  "junit_sha256": "96b07f9e968937acd2bfcb1627b65aba8afb68d9597256ee2638225add6ca210"
+}

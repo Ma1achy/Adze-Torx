@@ -1,0 +1,63 @@
+{
+  "name": "regular_039",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g2.py::test_global_query_alignment_missing_extra_zero_and_teacher_parity",
+    "tests/test_phase_g2.py::test_generated_api_rejects_teacher_and_is_metadata_independent[B]",
+    "tests/test_phase_g2.py::test_generated_api_rejects_teacher_and_is_metadata_independent[C]",
+    "tests/test_phase_g2.py::test_score_connection_changes_real_model_gradient_and_update_is_finite",
+    "tests/test_phase_g2.py::test_rolling_journal_recovery_snapshot_immutability_and_mismatch",
+    "tests/test_phase_g2.py::test_receipt_corruption_and_uncommitted_payload_are_not_successes"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g2.py::test_global_query_alignment_missing_extra_zero_and_teacher_parity",
+    "tests/test_phase_g2.py::test_generated_api_rejects_teacher_and_is_metadata_independent[B]",
+    "tests/test_phase_g2.py::test_generated_api_rejects_teacher_and_is_metadata_independent[C]",
+    "tests/test_phase_g2.py::test_score_connection_changes_real_model_gradient_and_update_is_finite",
+    "tests/test_phase_g2.py::test_rolling_journal_recovery_snapshot_immutability_and_mismatch",
+    "tests/test_phase_g2.py::test_receipt_corruption_and_uncommitted_payload_are_not_successes",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_039.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g2",
+      "test_global_query_alignment_missing_extra_zero_and_teacher_parity"
+    ],
+    [
+      "tests.test_phase_g2",
+      "test_generated_api_rejects_teacher_and_is_metadata_independent[B]"
+    ],
+    [
+      "tests.test_phase_g2",
+      "test_generated_api_rejects_teacher_and_is_metadata_independent[C]"
+    ],
+    [
+      "tests.test_phase_g2",
+      "test_score_connection_changes_real_model_gradient_and_update_is_finite"
+    ],
+    [
+      "tests.test_phase_g2",
+      "test_rolling_journal_recovery_snapshot_immutability_and_mismatch"
+    ],
+    [
+      "tests.test_phase_g2",
+      "test_receipt_corruption_and_uncommitted_payload_are_not_successes"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:23:49+0000",
+  "ended": "2026-10-28T19:24:30+0000",
+  "wall_seconds": 40.79107683408074,
+  "log_sha256": "700bc0322b00f8e8db3ce495047983b54ab27ab59ed1fedac05f3aeba47dae24",
+  "junit_sha256": "72ba88dd5778f49eb003a7da1f2488ad3cc658f103b386110a242afefc935381"
+}

@@ -1,0 +1,84 @@
+{
+  "source_head": "c03bdcb330360e5e8421dfde8f366d04210bc71d",
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "time": "2026-10-28T18:41:17+0000",
+  "commands": [
+    [
+      "focused_G",
+      [
+        "/opt/anaconda3/bin/python",
+        "-m",
+        "pytest",
+        "-m",
+        "not slow",
+        "tests/test_phase_g2.py",
+        "tests/test_phase_g21.py",
+        "tests/test_phase_g23_statistics.py",
+        "tests/test_phase_g23_records.py",
+        "tests/test_phase_g23_supervision.py",
+        "tests/test_phase_g23_churn.py",
+        "tests/test_phase_g23_v1.py",
+        "tests/test_phase_g23_pause.py",
+        "tests/test_phase_g23_validation_completion.py",
+        "tests/test_phase_g_integration.py",
+        "tests/test_phase_g_amended.py"
+      ]
+    ],
+    [
+      "format-check",
+      [
+        "make",
+        "format-check"
+      ]
+    ],
+    [
+      "lint",
+      [
+        "make",
+        "lint"
+      ]
+    ],
+    [
+      "typecheck",
+      [
+        "make",
+        "typecheck"
+      ]
+    ],
+    [
+      "boundaries",
+      [
+        "make",
+        "boundaries"
+      ]
+    ],
+    [
+      "test",
+      [
+        "make",
+        "test"
+      ]
+    ],
+    [
+      "test-slow",
+      [
+        "make",
+        "test-slow"
+      ]
+    ],
+    [
+      "private_torx_scan",
+      [
+        "/opt/anaconda3/bin/python",
+        "-c",
+        "import ast,json,subprocess\nfrom pathlib import Path\npaths=subprocess.check_output(['rg','--files','--glob','*.py'],text=True).splitlines(); violations=[]\nfor name in paths:\n tree=ast.parse(Path(name).read_text(),filename=name)\n for node in ast.walk(tree):\n  modules=[]\n  if isinstance(node,ast.Import): modules=[x.name for x in node.names]\n  if isinstance(node,ast.ImportFrom):\n   modules=[node.module or '']\n   if node.module=='torx': modules += ['torx.'+x.name for x in node.names if x.name.startswith('_')]\n  if isinstance(node,ast.Call) and node.args and isinstance(node.args[0],ast.Constant) and isinstance(node.args[0].value,str):\n   if (isinstance(node.func,ast.Name) and node.func.id=='__import__') or (isinstance(node.func,ast.Attribute) and node.func.attr=='import_module'): modules.append(node.args[0].value)\n  for module in modules:\n   if module.startswith('torx.') and any(x.startswith('_') for x in module.split('.')[1:]): violations.append({'file':name,'line':node.lineno,'module':module})\nprint(json.dumps({'python_files_scanned':len(paths),'private_torx_imports':violations},indent=2)); assert not violations\n"
+      ]
+    ]
+  ],
+  "worker_python_source": "from pathlib import Path\nimport json,os,subprocess,time\nfrom collect_phase_g23_records import sha,write_identical\nroot=Path.cwd(); base=root/'results/phase_g/g3/v1/validation_branch'\nlaunch=json.loads((base/'LAUNCH.json').read_text()); results=[]\nfor index,(name,argv) in enumerate(launch['commands']):\n start=time.monotonic(); started=time.strftime('%Y-%m-%dT%H:%M:%S%z')\n logfile=base/f'{index:02d}_{name}.log'\n with logfile.open('xb') as log:\n  outcome=subprocess.run(argv,cwd=root,stdout=log,stderr=subprocess.STDOUT,check=False)\n  log.flush(); os.fsync(log.fileno())\n record={'command':argv,'name':name,'returncode':outcome.returncode,'started':started,'ended':time.strftime('%Y-%m-%dT%H:%M:%S%z'),'wall_seconds':time.monotonic()-start,'log':str(logfile.relative_to(root)),'log_sha256':sha(logfile)}\n write_identical(base/f'{index:02d}_{name}.json',(json.dumps(record,indent=2)+'\\n').encode()); results.append(record)\n if outcome.returncode!=0: break\nsummary={'source_head':launch['source_head'],'worker_source_sha256':launch['worker_source_sha256'],'results':results,'all_commands_passed':len(results)==len(launch['commands']) and all(r['returncode']==0 for r in results),'time':time.strftime('%Y-%m-%dT%H:%M:%S%z')}\nwrite_identical(base/'EXIT.json',(json.dumps(summary,indent=2)+'\\n').encode())\nraise SystemExit(0 if summary['all_commands_passed'] else 1)\n",
+  "worker_source_sha256": "c2643bad79b78f25dac06c63696208fdb3991a09e428bdc4e74ac0bb3cb18dd6",
+  "python": "/opt/anaconda3/bin/python",
+  "PYTHONPATH": "src:scripts",
+  "nice": 10,
+  "no_model_training": true
+}

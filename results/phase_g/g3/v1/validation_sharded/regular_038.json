@@ -1,0 +1,75 @@
+{
+  "name": "regular_038",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g11_teacher.py::test_guard_is_conjunction_and_inclusive",
+    "tests/test_phase_g11_teacher.py::test_stratified_bootstrap_preserves_pairs_and_rejects_unbalanced",
+    "tests/test_phase_g11_teacher.py::test_journal_roundtrip_orphan_stale_pointer_and_protocol",
+    "tests/test_phase_g11_teacher.py::test_teacher_loss_weights_target_loss_only_and_jit",
+    "tests/test_phase_g11_teacher.py::test_invalid_and_overflow_leave_full_optimizer_bitwise_unchanged[False]",
+    "tests/test_phase_g11_teacher.py::test_invalid_and_overflow_leave_full_optimizer_bitwise_unchanged[True]",
+    "tests/test_phase_g11_teacher.py::test_valid_prospective_update_changes_decoder_not_frozen_leaves",
+    "tests/test_phase_g11_teacher.py::test_checkpoint_host_to_device_boundary_preserves_bits_and_real_eager_jit"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g11_teacher.py::test_guard_is_conjunction_and_inclusive",
+    "tests/test_phase_g11_teacher.py::test_stratified_bootstrap_preserves_pairs_and_rejects_unbalanced",
+    "tests/test_phase_g11_teacher.py::test_journal_roundtrip_orphan_stale_pointer_and_protocol",
+    "tests/test_phase_g11_teacher.py::test_teacher_loss_weights_target_loss_only_and_jit",
+    "tests/test_phase_g11_teacher.py::test_invalid_and_overflow_leave_full_optimizer_bitwise_unchanged[False]",
+    "tests/test_phase_g11_teacher.py::test_invalid_and_overflow_leave_full_optimizer_bitwise_unchanged[True]",
+    "tests/test_phase_g11_teacher.py::test_valid_prospective_update_changes_decoder_not_frozen_leaves",
+    "tests/test_phase_g11_teacher.py::test_checkpoint_host_to_device_boundary_preserves_bits_and_real_eager_jit",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_038.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g11_teacher",
+      "test_guard_is_conjunction_and_inclusive"
+    ],
+    [
+      "tests.test_phase_g11_teacher",
+      "test_stratified_bootstrap_preserves_pairs_and_rejects_unbalanced"
+    ],
+    [
+      "tests.test_phase_g11_teacher",
+      "test_journal_roundtrip_orphan_stale_pointer_and_protocol"
+    ],
+    [
+      "tests.test_phase_g11_teacher",
+      "test_teacher_loss_weights_target_loss_only_and_jit"
+    ],
+    [
+      "tests.test_phase_g11_teacher",
+      "test_invalid_and_overflow_leave_full_optimizer_bitwise_unchanged[False]"
+    ],
+    [
+      "tests.test_phase_g11_teacher",
+      "test_invalid_and_overflow_leave_full_optimizer_bitwise_unchanged[True]"
+    ],
+    [
+      "tests.test_phase_g11_teacher",
+      "test_valid_prospective_update_changes_decoder_not_frozen_leaves"
+    ],
+    [
+      "tests.test_phase_g11_teacher",
+      "test_checkpoint_host_to_device_boundary_preserves_bits_and_real_eager_jit"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:22:55+0000",
+  "ended": "2026-10-28T19:23:49+0000",
+  "wall_seconds": 53.80172083294019,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "b6fdf7a6e50562e4e84d3b440bbbcd589f0ebd241e53bead939d8ed390f33f94"
+}

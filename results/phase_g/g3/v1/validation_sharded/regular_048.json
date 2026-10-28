@@ -1,0 +1,75 @@
+{
+  "name": "regular_048",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g_amended.py::test_amended_update_forwards_full_site_dynamic_capacity_and_fails_closed[False]",
+    "tests/test_phase_g_amended.py::test_amended_update_forwards_full_site_dynamic_capacity_and_fails_closed[True]",
+    "tests/test_phase_g_amended.py::test_amended_loss_matches_unchanged_frozen_common_descendant_weights",
+    "tests/test_phase_g_amended.py::test_nonfinite_prospective_state_is_atomically_rejected",
+    "tests/test_phase_g_amended.py::test_controller_does_not_persist_invalid_completed_update",
+    "tests/test_phase_g_amended.py::test_immutable_receipts_and_matching_gate_required",
+    "tests/test_phase_g_amended.py::test_latest_state_rejects_stale_receipt_before_resuming",
+    "tests/test_phase_g_amended.py::test_nonemitting_output_reports_empty_overlap_support"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g_amended.py::test_amended_update_forwards_full_site_dynamic_capacity_and_fails_closed[False]",
+    "tests/test_phase_g_amended.py::test_amended_update_forwards_full_site_dynamic_capacity_and_fails_closed[True]",
+    "tests/test_phase_g_amended.py::test_amended_loss_matches_unchanged_frozen_common_descendant_weights",
+    "tests/test_phase_g_amended.py::test_nonfinite_prospective_state_is_atomically_rejected",
+    "tests/test_phase_g_amended.py::test_controller_does_not_persist_invalid_completed_update",
+    "tests/test_phase_g_amended.py::test_immutable_receipts_and_matching_gate_required",
+    "tests/test_phase_g_amended.py::test_latest_state_rejects_stale_receipt_before_resuming",
+    "tests/test_phase_g_amended.py::test_nonemitting_output_reports_empty_overlap_support",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_048.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g_amended",
+      "test_amended_update_forwards_full_site_dynamic_capacity_and_fails_closed[False]"
+    ],
+    [
+      "tests.test_phase_g_amended",
+      "test_amended_update_forwards_full_site_dynamic_capacity_and_fails_closed[True]"
+    ],
+    [
+      "tests.test_phase_g_amended",
+      "test_amended_loss_matches_unchanged_frozen_common_descendant_weights"
+    ],
+    [
+      "tests.test_phase_g_amended",
+      "test_nonfinite_prospective_state_is_atomically_rejected"
+    ],
+    [
+      "tests.test_phase_g_amended",
+      "test_controller_does_not_persist_invalid_completed_update"
+    ],
+    [
+      "tests.test_phase_g_amended",
+      "test_immutable_receipts_and_matching_gate_required"
+    ],
+    [
+      "tests.test_phase_g_amended",
+      "test_latest_state_rejects_stale_receipt_before_resuming"
+    ],
+    [
+      "tests.test_phase_g_amended",
+      "test_nonemitting_output_reports_empty_overlap_support"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:24:36+0000",
+  "ended": "2026-10-28T19:26:18+0000",
+  "wall_seconds": 102.07940995809622,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "13e78490d382461f73ef6d80188fbebdb9fea4ada0ccce1eb9cd40128f2c1ed5"
+}

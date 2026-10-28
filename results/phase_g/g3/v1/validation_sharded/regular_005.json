@@ -1,0 +1,39 @@
+{
+  "name": "regular_005",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_a_edges.py::test_consecutive_inactive_holes_keep_all_identity_slots",
+    "tests/test_phase_a_edges.py::test_predicted_structure_shape_is_validated_without_becoming_routing"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_a_edges.py::test_consecutive_inactive_holes_keep_all_identity_slots",
+    "tests/test_phase_a_edges.py::test_predicted_structure_shape_is_validated_without_becoming_routing",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_005.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_a_edges",
+      "test_consecutive_inactive_holes_keep_all_identity_slots"
+    ],
+    [
+      "tests.test_phase_a_edges",
+      "test_predicted_structure_shape_is_validated_without_becoming_routing"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:02:54+0000",
+  "ended": "2026-10-28T19:02:55+0000",
+  "wall_seconds": 1.385867582866922,
+  "log_sha256": "99db33d5c94c6f7da021687c7391181685cc33299c5435b1c861e2db3be3ec87",
+  "junit_sha256": "bd5b4394be47ab9ab4fa9a104d0a4aff401dc6198f74c15d0d2a803f1988c17a"
+}

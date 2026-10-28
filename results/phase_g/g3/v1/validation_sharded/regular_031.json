@@ -1,0 +1,75 @@
+{
+  "name": "regular_031",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_exact_law_and_unit_energy[0.0]",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_exact_law_and_unit_energy[0.25]",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_exact_law_and_unit_energy[0.5]",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_exact_law_and_unit_energy[0.75]",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_exact_law_and_unit_energy[1.0]",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_endpoints_arrays_jit_and_invalid_levels",
+    "tests/test_phase_f_corruption.py::test_forward_corruption_matches_independent_reference_and_broadcasts_batch_levels",
+    "tests/test_phase_f_corruption.py::test_corruption_has_no_hidden_dimension_or_compute_scaling"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_exact_law_and_unit_energy[0.0]",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_exact_law_and_unit_energy[0.25]",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_exact_law_and_unit_energy[0.5]",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_exact_law_and_unit_energy[0.75]",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_exact_law_and_unit_energy[1.0]",
+    "tests/test_phase_f_corruption.py::test_alpha_sigma_endpoints_arrays_jit_and_invalid_levels",
+    "tests/test_phase_f_corruption.py::test_forward_corruption_matches_independent_reference_and_broadcasts_batch_levels",
+    "tests/test_phase_f_corruption.py::test_corruption_has_no_hidden_dimension_or_compute_scaling",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_031.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_f_corruption",
+      "test_alpha_sigma_exact_law_and_unit_energy[0.0]"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_alpha_sigma_exact_law_and_unit_energy[0.25]"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_alpha_sigma_exact_law_and_unit_energy[0.5]"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_alpha_sigma_exact_law_and_unit_energy[0.75]"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_alpha_sigma_exact_law_and_unit_energy[1.0]"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_alpha_sigma_endpoints_arrays_jit_and_invalid_levels"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_forward_corruption_matches_independent_reference_and_broadcasts_batch_levels"
+    ],
+    [
+      "tests.test_phase_f_corruption",
+      "test_corruption_has_no_hidden_dimension_or_compute_scaling"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:22:01+0000",
+  "ended": "2026-10-28T19:22:02+0000",
+  "wall_seconds": 1.074986084131524,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "b86e3f101e7d6d49e049e541c43a73c18457baa51993d03293aa2af02f4c3747"
+}

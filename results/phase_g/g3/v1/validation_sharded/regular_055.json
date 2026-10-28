@@ -1,0 +1,75 @@
+{
+  "name": "regular_055",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g_structure.py::test_hysteresis_rejection_preserves_prior_switch_and_confidence",
+    "tests/test_phase_g_structure.py::test_sampled_structure_uses_public_factor_and_explicit_local_owner",
+    "tests/test_phase_g_structure.py::test_structure_keys_reproduce_and_separate_every_coordinate_and_namespace",
+    "tests/test_phase_g_structure.py::test_invalid_committed_state_is_rejected[<lambda>-error codes0]",
+    "tests/test_phase_g_structure.py::test_invalid_committed_state_is_rejected[<lambda>-error codes1]",
+    "tests/test_phase_g_structure.py::test_invalid_committed_state_is_rejected[<lambda>-error codes2]",
+    "tests/test_phase_g_structure.py::test_invalid_committed_state_is_rejected[<lambda>-error codes3]",
+    "tests/test_phase_g_structure.py::test_phase_g_rejects_implicit_lengths_nonfinite_logits_and_nonboolean_masks"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g_structure.py::test_hysteresis_rejection_preserves_prior_switch_and_confidence",
+    "tests/test_phase_g_structure.py::test_sampled_structure_uses_public_factor_and_explicit_local_owner",
+    "tests/test_phase_g_structure.py::test_structure_keys_reproduce_and_separate_every_coordinate_and_namespace",
+    "tests/test_phase_g_structure.py::test_invalid_committed_state_is_rejected[<lambda>-error codes0]",
+    "tests/test_phase_g_structure.py::test_invalid_committed_state_is_rejected[<lambda>-error codes1]",
+    "tests/test_phase_g_structure.py::test_invalid_committed_state_is_rejected[<lambda>-error codes2]",
+    "tests/test_phase_g_structure.py::test_invalid_committed_state_is_rejected[<lambda>-error codes3]",
+    "tests/test_phase_g_structure.py::test_phase_g_rejects_implicit_lengths_nonfinite_logits_and_nonboolean_masks",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_055.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g_structure",
+      "test_hysteresis_rejection_preserves_prior_switch_and_confidence"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_sampled_structure_uses_public_factor_and_explicit_local_owner"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_structure_keys_reproduce_and_separate_every_coordinate_and_namespace"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_invalid_committed_state_is_rejected[<lambda>-error codes0]"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_invalid_committed_state_is_rejected[<lambda>-error codes1]"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_invalid_committed_state_is_rejected[<lambda>-error codes2]"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_invalid_committed_state_is_rejected[<lambda>-error codes3]"
+    ],
+    [
+      "tests.test_phase_g_structure",
+      "test_phase_g_rejects_implicit_lengths_nonfinite_logits_and_nonboolean_masks"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:29:06+0000",
+  "ended": "2026-10-28T19:29:09+0000",
+  "wall_seconds": 2.6011896249838173,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "fa3aca1624644df402364679846d5b6c09b99e7449d91f694c45ddacb7ae3bf4"
+}

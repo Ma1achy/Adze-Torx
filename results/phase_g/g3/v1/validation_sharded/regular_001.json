@@ -1,0 +1,33 @@
+{
+  "name": "regular_001",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_inactive_sites.py::test_inactive_site_query_active_kv_pool_emit_inactive"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_inactive_sites.py::test_inactive_site_query_active_kv_pool_emit_inactive",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_001.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_inactive_sites",
+      "test_inactive_site_query_active_kv_pool_emit_inactive"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:02:49+0000",
+  "ended": "2026-10-28T19:02:50+0000",
+  "wall_seconds": 1.167019542073831,
+  "log_sha256": "423b1d0e014eb1eab96f4420f7b344c2615be505dd574b756ac884826ca74f2d",
+  "junit_sha256": "211fa77e5c83ac521d58eb246c228b293f08328544accf62713a0b3cb412b92c"
+}

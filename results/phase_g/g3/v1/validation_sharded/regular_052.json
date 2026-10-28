@@ -1,0 +1,75 @@
+{
+  "name": "regular_052",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[zero-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[zero-peaked]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[missing-uniform]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[missing-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[missing-peaked]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[extra-uniform]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[extra-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[extra-peaked]"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[zero-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[zero-peaked]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[missing-uniform]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[missing-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[missing-peaked]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[extra-uniform]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[extra-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_enumerated_local_bridge_matches_independent_exact_gradient[extra-peaked]",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_052.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[zero-asymmetric]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[zero-peaked]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[missing-uniform]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[missing-asymmetric]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[missing-peaked]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[extra-uniform]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[extra-asymmetric]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_enumerated_local_bridge_matches_independent_exact_gradient[extra-peaked]"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:28:55+0000",
+  "ended": "2026-10-28T19:28:58+0000",
+  "wall_seconds": 3.180177625035867,
+  "log_sha256": "06955fb47f16312e5d13266c774a2aa4648c46e423cbe6564a92e25b68e39131",
+  "junit_sha256": "7dff317c26759a6f4b6edcc3d6adffc6bc1b4e089f57c7d1324fcad4e3beee0e"
+}

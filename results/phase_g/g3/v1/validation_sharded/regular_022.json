@@ -1,0 +1,63 @@
+{
+  "name": "regular_022",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_e_1_fixed_transition.py::test_rule30_hand_cases_and_periodic_boundary",
+    "tests/test_phase_e_1_fixed_transition.py::test_bit_packing_round_trip_and_one_step_reference_parity",
+    "tests/test_phase_e_1_fixed_transition.py::test_repeated_iteration_and_prompt_oracle_match_independent_reference",
+    "tests/test_phase_e_1_fixed_transition.py::test_fixed_transition_dataset_is_balanced_reproducible_and_task_relevant",
+    "tests/test_phase_e_1_fixed_transition.py::test_fixed_transition_splits_have_no_complete_example_overlap",
+    "tests/test_phase_e_1_fixed_transition.py::test_predeclared_rule_passes_model_independent_quality_gate"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_e_1_fixed_transition.py::test_rule30_hand_cases_and_periodic_boundary",
+    "tests/test_phase_e_1_fixed_transition.py::test_bit_packing_round_trip_and_one_step_reference_parity",
+    "tests/test_phase_e_1_fixed_transition.py::test_repeated_iteration_and_prompt_oracle_match_independent_reference",
+    "tests/test_phase_e_1_fixed_transition.py::test_fixed_transition_dataset_is_balanced_reproducible_and_task_relevant",
+    "tests/test_phase_e_1_fixed_transition.py::test_fixed_transition_splits_have_no_complete_example_overlap",
+    "tests/test_phase_e_1_fixed_transition.py::test_predeclared_rule_passes_model_independent_quality_gate",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_022.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_e_1_fixed_transition",
+      "test_rule30_hand_cases_and_periodic_boundary"
+    ],
+    [
+      "tests.test_phase_e_1_fixed_transition",
+      "test_bit_packing_round_trip_and_one_step_reference_parity"
+    ],
+    [
+      "tests.test_phase_e_1_fixed_transition",
+      "test_repeated_iteration_and_prompt_oracle_match_independent_reference"
+    ],
+    [
+      "tests.test_phase_e_1_fixed_transition",
+      "test_fixed_transition_dataset_is_balanced_reproducible_and_task_relevant"
+    ],
+    [
+      "tests.test_phase_e_1_fixed_transition",
+      "test_fixed_transition_splits_have_no_complete_example_overlap"
+    ],
+    [
+      "tests.test_phase_e_1_fixed_transition",
+      "test_predeclared_rule_passes_model_independent_quality_gate"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:14:34+0000",
+  "ended": "2026-10-28T19:14:40+0000",
+  "wall_seconds": 5.676883791806176,
+  "log_sha256": "700bc0322b00f8e8db3ce495047983b54ab27ab59ed1fedac05f3aeba47dae24",
+  "junit_sha256": "3fd72729d56286a40a268b674ce83815774277942d526dba8bf5813c3b08839f"
+}

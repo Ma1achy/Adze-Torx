@@ -1,0 +1,63 @@
+{
+  "name": "regular_037",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_phase_g11_task.py::test_grammar_is_identifiable_without_teacher_fields",
+    "tests/test_phase_g11_task.py::test_counterlabels_do_not_change_prefix_or_metadata",
+    "tests/test_phase_g11_task.py::test_true_and_cut_routes_preserve_identity_and_remove_only_future_access",
+    "tests/test_phase_g11_task.py::test_real_model_transmits_future_signal_only_when_permitted",
+    "tests/test_phase_g11_task.py::test_invalid_capacity_skips_actual_model_eager_and_jit",
+    "tests/test_phase_g11_task.py::test_independent_host_oracle_rejects_corrupted_peer_identity"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_phase_g11_task.py::test_grammar_is_identifiable_without_teacher_fields",
+    "tests/test_phase_g11_task.py::test_counterlabels_do_not_change_prefix_or_metadata",
+    "tests/test_phase_g11_task.py::test_true_and_cut_routes_preserve_identity_and_remove_only_future_access",
+    "tests/test_phase_g11_task.py::test_real_model_transmits_future_signal_only_when_permitted",
+    "tests/test_phase_g11_task.py::test_invalid_capacity_skips_actual_model_eager_and_jit",
+    "tests/test_phase_g11_task.py::test_independent_host_oracle_rejects_corrupted_peer_identity",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_037.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g11_task",
+      "test_grammar_is_identifiable_without_teacher_fields"
+    ],
+    [
+      "tests.test_phase_g11_task",
+      "test_counterlabels_do_not_change_prefix_or_metadata"
+    ],
+    [
+      "tests.test_phase_g11_task",
+      "test_true_and_cut_routes_preserve_identity_and_remove_only_future_access"
+    ],
+    [
+      "tests.test_phase_g11_task",
+      "test_real_model_transmits_future_signal_only_when_permitted"
+    ],
+    [
+      "tests.test_phase_g11_task",
+      "test_invalid_capacity_skips_actual_model_eager_and_jit"
+    ],
+    [
+      "tests.test_phase_g11_task",
+      "test_independent_host_oracle_rejects_corrupted_peer_identity"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:22:44+0000",
+  "ended": "2026-10-28T19:22:55+0000",
+  "wall_seconds": 11.398490874795243,
+  "log_sha256": "700bc0322b00f8e8db3ce495047983b54ab27ab59ed1fedac05f3aeba47dae24",
+  "junit_sha256": "5533b12e2283105328b5fd6b453ceef0fe3b9f720fa4457d1017f325f48a4c47"
+}

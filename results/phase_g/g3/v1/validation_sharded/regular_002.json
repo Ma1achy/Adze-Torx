@@ -1,0 +1,57 @@
+{
+  "name": "regular_002",
+  "kind": "regular",
+  "nodes": [
+    "tests/test_jit_phase_a.py::test_boundary_to_blocks_jit",
+    "tests/test_jit_phase_a.py::test_carrier_invariant_flags_jit",
+    "tests/test_jit_phase_a.py::test_pack_values_and_unpool_jit_with_inactive_hole",
+    "tests/test_jit_phase_a.py::test_masks_jit",
+    "tests/test_jit_phase_a.py::test_overflow_flags_are_reported_under_jit_without_tracer_errors"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "not slow",
+    "tests/test_jit_phase_a.py::test_boundary_to_blocks_jit",
+    "tests/test_jit_phase_a.py::test_carrier_invariant_flags_jit",
+    "tests/test_jit_phase_a.py::test_pack_values_and_unpool_jit_with_inactive_hole",
+    "tests/test_jit_phase_a.py::test_masks_jit",
+    "tests/test_jit_phase_a.py::test_overflow_flags_are_reported_under_jit_without_tracer_errors",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/regular_002.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_jit_phase_a",
+      "test_boundary_to_blocks_jit"
+    ],
+    [
+      "tests.test_jit_phase_a",
+      "test_carrier_invariant_flags_jit"
+    ],
+    [
+      "tests.test_jit_phase_a",
+      "test_pack_values_and_unpool_jit_with_inactive_hole"
+    ],
+    [
+      "tests.test_jit_phase_a",
+      "test_masks_jit"
+    ],
+    [
+      "tests.test_jit_phase_a",
+      "test_overflow_flags_are_reported_under_jit_without_tracer_errors"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:02:50+0000",
+  "ended": "2026-10-28T19:02:51+0000",
+  "wall_seconds": 1.0139186249580234,
+  "log_sha256": "4d2df7a96ce4a667da3ccf295f2d16c728a65ed0e861a3baa919f7bb469b02b5",
+  "junit_sha256": "fcb9699d784b1a2f16cb090673786b7d77cc089ade57ec929b2d5caeaa576721"
+}

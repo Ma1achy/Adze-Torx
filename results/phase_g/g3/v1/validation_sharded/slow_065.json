@@ -1,0 +1,57 @@
+{
+  "name": "slow_065",
+  "kind": "slow",
+  "nodes": [
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[direct_dependencies-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[direct_dependencies-peaked]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[baseline-uniform]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[baseline-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[baseline-peaked]"
+  ],
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-m",
+    "slow",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[direct_dependencies-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[direct_dependencies-peaked]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[baseline-uniform]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[baseline-asymmetric]",
+    "tests/test_phase_g_oracle.py::test_monte_carlo_bridge_is_within_four_root_standard_errors[baseline-peaked]",
+    "--junitxml=/private/tmp/adze-phase-g/results/phase_g/g3/v1/validation_sharded/slow_065.xml"
+  ],
+  "returncode": 0,
+  "all_exact_nodecases_passed": true,
+  "junit_cases": [
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[direct_dependencies-asymmetric]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[direct_dependencies-peaked]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[baseline-uniform]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[baseline-asymmetric]"
+    ],
+    [
+      "tests.test_phase_g_oracle",
+      "test_monte_carlo_bridge_is_within_four_root_standard_errors[baseline-peaked]"
+    ]
+  ],
+  "nonpassing_cases": [],
+  "junit_parse_error": null,
+  "started": "2026-10-28T19:30:47+0000",
+  "ended": "2026-10-28T19:31:02+0000",
+  "wall_seconds": 14.8377048750408,
+  "log_sha256": "4d2df7a96ce4a667da3ccf295f2d16c728a65ed0e861a3baa919f7bb469b02b5",
+  "junit_sha256": "9b673bdd5f0afd05f2bab5677d5633f21777c1934246c431946010d0a64d98b9"
+}

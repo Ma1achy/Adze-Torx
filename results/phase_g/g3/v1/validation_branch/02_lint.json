@@ -1,0 +1,13 @@
+{
+  "command": [
+    "make",
+    "lint"
+  ],
+  "name": "lint",
+  "returncode": 0,
+  "started": "2026-10-28T18:46:31+0000",
+  "ended": "2026-10-28T18:46:31+0000",
+  "wall_seconds": 0.032398332841694355,
+  "log": "results/phase_g/g3/v1/validation_branch/02_lint.log",
+  "log_sha256": "d11bb9c6296ecb7ce817a3f51bc8b64b0c38fd0d638544629de786714d4c8b0f"
+}
