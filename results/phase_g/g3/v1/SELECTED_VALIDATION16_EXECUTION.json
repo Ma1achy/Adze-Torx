@@ -1,0 +1,43 @@
+{
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "launch": {
+    "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+    "stage": "validation16",
+    "attempt": "validation16_20261028",
+    "command": [
+      "nice",
+      "-n",
+      "10",
+      "/opt/anaconda3/bin/python",
+      "/private/tmp/adze-phase-g/scripts/complete_phase_g23_validation.py"
+    ],
+    "source_head": "47cb6b5eeff23f2ff3e9f64658ae03ae566c8d51",
+    "supervisor_source_sha256": "9a06c5befadc28771dfba40e310377c459c072cbb6407f38d242d748c8ea3466",
+    "worker_source_sha256": "72d22533819946f1ca2789406224632666fd86706f88b671b4e2cfe1ef577b16",
+    "supervisor_pid": 47449,
+    "time": "2026-10-28T05:44:00+0000",
+    "stdout_is_regular_project_file": true,
+    "child_new_session": true,
+    "PYTHONPATH": "src:scripts",
+    "optimizer_or_protocol_modifications": false,
+    "worker_pid": 47484
+  },
+  "exit": {
+    "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+    "stage": "validation16",
+    "worker_pid": 47484,
+    "returncode": 0,
+    "time": "2026-10-28T11:01:18+0000",
+    "worker_log_sha256": "9a155efe0642f628fb5f85ad0f678fe0dd73c1b450e277b0a418a2f42b246543",
+    "launch_sha256": "d5e591bb7b14d45c90ee35a560e69fbb6dd2342b1fb8134bacc435d3a5f4e484"
+  },
+  "selection_sha256": "ee0df89871b3afa74c5243225270086c29a80b17c229abc9ef73f6b7314dd57c",
+  "complete_summary_sha256": "25fe76d4932c394f0950562c97ed5d5a9804e7695e9983e5cbce94f21926013a",
+  "all_nine_models_verified": true,
+  "roots_per_model_per_control": 16,
+  "control_count": 3,
+  "root_control_instances": 432,
+  "valid_all_instances": true,
+  "optimizer_updates": 0,
+  "protected_test_not_opened": true
+}
