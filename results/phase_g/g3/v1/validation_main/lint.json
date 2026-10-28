@@ -1,0 +1,10 @@
+{
+  "name": "lint",
+  "command": [
+    "make",
+    "lint"
+  ],
+  "returncode": 0,
+  "wall_seconds": 0.035855500027537346,
+  "log_sha256": "d11bb9c6296ecb7ce817a3f51bc8b64b0c38fd0d638544629de786714d4c8b0f"
+}

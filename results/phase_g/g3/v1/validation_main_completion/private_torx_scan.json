@@ -1,0 +1,11 @@
+{
+  "name": "private_torx_scan",
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "-c",
+    "import ast,json,subprocess\nfrom pathlib import Path\npaths=subprocess.check_output(['rg','--files','--glob','*.py'],text=True).splitlines(); violations=[]\nfor name in paths:\n tree=ast.parse(Path(name).read_text(),filename=name)\n for node in ast.walk(tree):\n  modules=[]\n  if isinstance(node,ast.Import): modules=[x.name for x in node.names]\n  if isinstance(node,ast.ImportFrom):\n   modules=[node.module or '']\n   if node.module=='torx': modules += ['torx.'+x.name for x in node.names if x.name.startswith('_')]\n  if isinstance(node,ast.Call) and node.args and isinstance(node.args[0],ast.Constant) and isinstance(node.args[0].value,str):\n   if (isinstance(node.func,ast.Name) and node.func.id=='__import__') or (isinstance(node.func,ast.Attribute) and node.func.attr=='import_module'): modules.append(node.args[0].value)\n  for module in modules:\n   if module.startswith('torx.') and any(x.startswith('_') for x in module.split('.')[1:]): violations.append({'file':name,'line':node.lineno,'module':module})\nprint(json.dumps({'python_files_scanned':len(paths),'private_torx_imports':violations},indent=2)); assert not violations\n"
+  ],
+  "returncode": 0,
+  "wall_seconds": 0.38097900012508035,
+  "log_sha256": "9c1ee5d1356ea392f8ff121c96abd6e07c3b538c38be35a9db2c8d381468a5fd"
+}

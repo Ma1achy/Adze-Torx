@@ -1,0 +1,387 @@
+{
+  "main_source_head": "399f5902aaadfe3426c96b12548e70f399239ccc",
+  "identity": "5cb5e7363b14239b4c65a7dda1fb70b569e0b92a935e1f2c67311496a15f1d99",
+  "validation_examples": 32,
+  "protected_test_opened": false,
+  "checkpoint_sha256": "ff344d72489c0923cc014e40b2d5b647f04c8c6e4af928713019838da07a6446",
+  "reference_sha256": "08699244e1eefc077f86c9a2a9428e6599eaaa1b61fd4f37aecb777e1eca0236",
+  "all_outputs_bitwise_identical_to_G_branch": true,
+  "comparisons": {
+    "b": {
+      "bitwise_equal": true,
+      "shape": [
+        32,
+        32
+      ],
+      "dtype": "int32"
+    },
+    "b_accuracy": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "b_ce": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "b_fn": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "b_fp": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "b_support": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "b_tp": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "byte_accuracy": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "byte_exact": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "bool"
+    },
+    "byte_loss": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "byte_nll": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "byte_nll_support": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "capacity_cut": {
+      "bitwise_equal": true,
+      "shape": [
+        32,
+        32
+      ],
+      "dtype": "bool"
+    },
+    "commit_change": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "descendant": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "ell": {
+      "bitwise_equal": true,
+      "shape": [
+        32,
+        32
+      ],
+      "dtype": "int32"
+    },
+    "ell_ce": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "emitted_length": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "entropy": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "extent_accuracy": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "extent_class_correct": {
+      "bitwise_equal": true,
+      "shape": [
+        32,
+        5
+      ],
+      "dtype": "int32"
+    },
+    "extent_class_support": {
+      "bitwise_equal": true,
+      "shape": [
+        32,
+        5
+      ],
+      "dtype": "int32"
+    },
+    "extent_exact": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "bool"
+    },
+    "extra": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "h_mse": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "length_accuracy": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "bool"
+    },
+    "log_prob": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "loss_per_example": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "missing": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "missing_query": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "nonquery_accuracy": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "nonquery_loss": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "nonquery_nll": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "nonquery_nll_support": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "pack_k": {
+      "bitwise_equal": true,
+      "shape": [
+        32,
+        32
+      ],
+      "dtype": "int32"
+    },
+    "pack_m": {
+      "bitwise_equal": true,
+      "shape": [
+        32,
+        32
+      ],
+      "dtype": "int32"
+    },
+    "partial_correct": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "partial_support": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "peer_reach": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "bool"
+    },
+    "prediction_b": {
+      "bitwise_equal": true,
+      "shape": [
+        32,
+        32
+      ],
+      "dtype": "int32"
+    },
+    "prediction_b_accuracy": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "prediction_ell": {
+      "bitwise_equal": true,
+      "shape": [
+        32,
+        32
+      ],
+      "dtype": "int32"
+    },
+    "prediction_extent_accuracy": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "prediction_extent_exact": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "bool"
+    },
+    "query_accuracy": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "query_exact": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "bool"
+    },
+    "query_loss": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "query_nll": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "query_nll_support": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "structure_exact": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "bool"
+    },
+    "true_length": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "int32"
+    },
+    "valid": {
+      "bitwise_equal": true,
+      "shape": [
+        32
+      ],
+      "dtype": "bool"
+    }
+  },
+  "model_and_adam_unchanged": true,
+  "optimizer_updates": 0,
+  "no_new_scientific_criterion_or_selection": true
+}

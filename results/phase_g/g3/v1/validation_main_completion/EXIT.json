@@ -1,0 +1,50 @@
+{
+  "all_commands_passed": true,
+  "source_head": "399f5902aaadfe3426c96b12548e70f399239ccc",
+  "time": "2026-10-28T19:41:51+0000",
+  "results": [
+    {
+      "name": "typecheck",
+      "command": [
+        "env",
+        "PYTHONPATH=src:scripts:tests",
+        "make",
+        "typecheck"
+      ],
+      "returncode": 0,
+      "wall_seconds": 6.358499083900824,
+      "log_sha256": "8042e66b39573dac8e4a1ea086e9ea1333fe708e45869336e834b5cc534743a6"
+    },
+    {
+      "name": "boundaries",
+      "command": [
+        "make",
+        "boundaries"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.06814391701482236,
+      "log_sha256": "caac2da048b019cef54b04e77fab94a7988a10408ec49d9f5e6717d57eac3a18"
+    },
+    {
+      "name": "private_torx_scan",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "-c",
+        "import ast,json,subprocess\nfrom pathlib import Path\npaths=subprocess.check_output(['rg','--files','--glob','*.py'],text=True).splitlines(); violations=[]\nfor name in paths:\n tree=ast.parse(Path(name).read_text(),filename=name)\n for node in ast.walk(tree):\n  modules=[]\n  if isinstance(node,ast.Import): modules=[x.name for x in node.names]\n  if isinstance(node,ast.ImportFrom):\n   modules=[node.module or '']\n   if node.module=='torx': modules += ['torx.'+x.name for x in node.names if x.name.startswith('_')]\n  if isinstance(node,ast.Call) and node.args and isinstance(node.args[0],ast.Constant) and isinstance(node.args[0].value,str):\n   if (isinstance(node.func,ast.Name) and node.func.id=='__import__') or (isinstance(node.func,ast.Attribute) and node.func.attr=='import_module'): modules.append(node.args[0].value)\n  for module in modules:\n   if module.startswith('torx.') and any(x.startswith('_') for x in module.split('.')[1:]): violations.append({'file':name,'line':node.lineno,'module':module})\nprint(json.dumps({'python_files_scanned':len(paths),'private_torx_imports':violations},indent=2)); assert not violations\n"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.38097900012508035,
+      "log_sha256": "9c1ee5d1356ea392f8ff121c96abd6e07c3b538c38be35a9db2c8d381468a5fd"
+    },
+    {
+      "name": "reference_parity",
+      "command": [
+        "/opt/anaconda3/bin/python",
+        "/private/tmp/adze-g23-main-parity.py"
+      ],
+      "returncode": 0,
+      "wall_seconds": 7.960351875051856,
+      "log_sha256": "775ca0757d1c9bbe7488a74135046c4c832850697ddd34b1d1117dd03bc9207d"
+    }
+  ]
+}

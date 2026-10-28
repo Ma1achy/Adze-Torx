@@ -1,0 +1,52 @@
+{
+  "time": "2026-10-28T19:43:45+0000",
+  "overall": "PHASE_G_GENERATED_STRUCTURE_FUNCTIONAL",
+  "axis1": "BENEFIT",
+  "axis2": "BENEFIT",
+  "axis3": "UNRESOLVED",
+  "G_ENGINEERING_READY": true,
+  "G_INTEGRATION_READY": true,
+  "G_scientific_closure": "Reference-scale generated functionality and semantic-routing value demonstrated; sampling-training comparison remains unresolved. No general language or H/R claim.",
+  "branch_commit": "b06218c9b84923f413e89a663f60fcc0b0863901",
+  "validated_merge_commit": "399f5902aaadfe3426c96b12548e70f399239ccc",
+  "premerge_main": "2a0cab0c9c647832596013d56037c842ff3844ea",
+  "normal_merge_no_conflicts": true,
+  "identical_G_and_merged_tracked_tree": true,
+  "branch_validation": {
+    "regular": 323,
+    "slow": 30,
+    "skips": 0,
+    "focused_separately": 65,
+    "evidence": "VALIDATION.json"
+  },
+  "fresh_main_validation": {
+    "focused": 65,
+    "format": "pass",
+    "lint": "pass",
+    "typecheck": "pass: PYTHONPATH=src:scripts:tests",
+    "boundaries": "pass",
+    "private_Torx": "187 files; no violations",
+    "reference_parity": "52 output fields bitwise equal, 32 fixed validation examples; params/Adam unchanged",
+    "full_353_node_suite_repeated_after_merge": false,
+    "scope_reason": "All 353 nodes passed on the identical tracked G tree; focused full-model integration/static/replay gates rerun freshly on main."
+  },
+  "retained_main_static_nonpass": {
+    "path": "validation_main/EXIT.json",
+    "reason": "pyright also scanned pre-existing immutable ignored historical source archives; three unresolved test-helper imports under src:scripts only",
+    "resolution": "added live tests directory to static-only import path, no archive or source modifications",
+    "no_model_or_scientific_protocol_changes": true
+  },
+  "raw_collection_log_whitespace_exception": "git diff --cached --check excluded only preserved validation_sharded/collect_regular.log, whose original failed-collection output has a trailing blank line. All other staged files passed; raw evidence was not normalized.",
+  "full_scientific_manifest_sha256": "fdf3edc941f362400c5190a8d572db2080fae958ad9774e6628da27dd186f345",
+  "scientific_manifest_entries_reverified_after_main_validation": 11932,
+  "historical_baseline_entries_reverified": 731,
+  "accepted_F1_F3_G0_G01_and_G11_G21_evidence_unchanged": true,
+  "matched_initialization_and_complete_optimizer_resume_verified": true,
+  "H_ref": "a4de838b757e0ccd660898341e1feeb770d03dc4",
+  "I_ref": "de91289284bb185fc6f5a66ed606efd9d9873747",
+  "H_I_Thermo_untouched": true,
+  "Phase_H": "G prerequisite established; isolated H must still pass typed structural-only commit/repacking/UNKNOWN/shared-weight causal/global/R integration gates. No H scientific experiment authorized or run.",
+  "S4_H_I_training": "not executed",
+  "Git_publication": "Validated local integration. Push and remote-ref synchronization verified separately after final delivery-evidence commit; no self-referential commit/hash claim.",
+  "raw_binary_publication": "Scientific checkpoints and raw shards preserved locally and bound by tracked manifest; not uploaded to Git as if tracked."
+}

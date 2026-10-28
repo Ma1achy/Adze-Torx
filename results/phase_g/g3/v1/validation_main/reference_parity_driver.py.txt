@@ -1,0 +1,59 @@
+"""Postmerge read-only replay against an immutable validation reference."""
+
+import json
+from pathlib import Path
+import pickle
+import subprocess
+
+import jax
+import jax.numpy as jnp
+import numpy as np
+
+import run_phase_g23_v1 as g
+from collect_phase_g23_records import write_identical
+
+source = Path('/private/tmp/adze-phase-g')
+checkpoint = source / 'results/runs/phase_g/g23/v1/seed0/B/snapshots/update_01000.pkl'
+reference = source / 'results/runs/phase_g/g23/v1/seed0/B/evaluation/validation_01000_argmax_00_policy.npz'
+assert g.sha(checkpoint) == 'ff344d72489c0923cc014e40b2d5b647f04c8c6e4af928713019838da07a6446'
+metadata = json.loads(reference.with_suffix('.json').read_text())
+assert metadata['sha256'] == g.sha(reference)
+identity = g.audit()  # Read accepted evidence; never resample adjudication.
+with checkpoint.open('rb') as stream:
+    state = pickle.load(stream)
+before = g.tree_hash((state['params'], state['moments']))
+data = g.old.make_examples(1141, 16, id_offset=10000)
+assert g.old.v.dataset_hash(data) == json.loads(g.IDENTITY.read_text())['binding']['datasets']['ordered_sha256']['validation']
+data = g.old.v.take(data, jnp.arange(32))
+codec = g.old.load_pickle(g.old.v.CODEC)
+encode = jax.jit(g.old.v.encode_fn)
+data = {**data,
+        'source_h': encode(codec, data['source'], data['source_mask']),
+        'target_h': encode(codec, data['target'], data['target_mask']),
+        'slots': jnp.pad(data['target'], ((0, 0), (0, 64))).reshape(-1, 32, 4),
+        'slot_mask': jnp.arange(4)[None, None, :] < data['length'][:, :, None]}
+_, metrics = g.OBJECTIVES['B'](state['params'], data,
+                             g.named_key('evaluation_structure', 0, 0),
+                             g.named_key('operator', 0))
+assert bool(metrics['executed']) and g.finite(metrics)
+comparisons = {}
+with np.load(reference) as archive:
+    assert np.array_equal(archive['global_example_id'][:32], np.asarray(data['global_example_id']))
+    for name, value in metrics.items():
+        if name == 'executed':
+            continue
+        actual = np.asarray(value)
+        expected = archive[name][:32]
+        assert actual.dtype == expected.dtype and actual.shape == expected.shape, name
+        assert np.array_equal(actual, expected), name
+        comparisons[name] = {'bitwise_equal': True, 'shape': list(actual.shape), 'dtype': str(actual.dtype)}
+assert before == g.tree_hash((state['params'], state['moments']))
+record = {'main_source_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+          'identity': identity, 'validation_examples': 32, 'protected_test_opened': False,
+          'checkpoint_sha256': g.sha(checkpoint), 'reference_sha256': g.sha(reference),
+          'all_outputs_bitwise_identical_to_G_branch': True,
+          'comparisons': comparisons, 'model_and_adam_unchanged': True,
+          'optimizer_updates': 0, 'no_new_scientific_criterion_or_selection': True}
+destination = g.G3 / 'validation_main/REFERENCE_PARITY.json'
+write_identical(destination, (json.dumps(record, indent=2) + '\n').encode())
+print(json.dumps({'reference_parity': True, 'compared_fields': len(comparisons), 'examples': 32}), flush=True)

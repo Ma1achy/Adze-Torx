@@ -1,0 +1,81 @@
+{
+  "source_head": "399f5902aaadfe3426c96b12548e70f399239ccc",
+  "time": "2026-10-28T19:34:30+0000",
+  "commands": [
+    [
+      "focused_G",
+      [
+        "/opt/anaconda3/bin/python",
+        "-m",
+        "pytest",
+        "-m",
+        "not slow",
+        "tests/test_phase_g2.py",
+        "tests/test_phase_g21.py",
+        "tests/test_phase_g23_statistics.py",
+        "tests/test_phase_g23_records.py",
+        "tests/test_phase_g23_supervision.py",
+        "tests/test_phase_g23_churn.py",
+        "tests/test_phase_g23_v1.py",
+        "tests/test_phase_g23_pause.py",
+        "tests/test_phase_g23_validation_completion.py",
+        "tests/test_phase_g_integration.py",
+        "tests/test_phase_g_amended.py"
+      ]
+    ],
+    [
+      "format-check",
+      [
+        "make",
+        "format-check"
+      ]
+    ],
+    [
+      "lint",
+      [
+        "make",
+        "lint"
+      ]
+    ],
+    [
+      "typecheck",
+      [
+        "make",
+        "typecheck"
+      ]
+    ],
+    [
+      "boundaries",
+      [
+        "make",
+        "boundaries"
+      ]
+    ],
+    [
+      "private_torx_scan",
+      [
+        "/opt/anaconda3/bin/python",
+        "-c",
+        "import ast,json,subprocess\nfrom pathlib import Path\npaths=subprocess.check_output(['rg','--files','--glob','*.py'],text=True).splitlines(); violations=[]\nfor name in paths:\n tree=ast.parse(Path(name).read_text(),filename=name)\n for node in ast.walk(tree):\n  modules=[]\n  if isinstance(node,ast.Import): modules=[x.name for x in node.names]\n  if isinstance(node,ast.ImportFrom):\n   modules=[node.module or '']\n   if node.module=='torx': modules += ['torx.'+x.name for x in node.names if x.name.startswith('_')]\n  if isinstance(node,ast.Call) and node.args and isinstance(node.args[0],ast.Constant) and isinstance(node.args[0].value,str):\n   if (isinstance(node.func,ast.Name) and node.func.id=='__import__') or (isinstance(node.func,ast.Attribute) and node.func.attr=='import_module'): modules.append(node.args[0].value)\n  for module in modules:\n   if module.startswith('torx.') and any(x.startswith('_') for x in module.split('.')[1:]): violations.append({'file':name,'line':node.lineno,'module':module})\nprint(json.dumps({'python_files_scanned':len(paths),'private_torx_imports':violations},indent=2)); assert not violations\n"
+      ]
+    ],
+    [
+      "reference_parity",
+      [
+        "/opt/anaconda3/bin/python",
+        "/private/tmp/adze-g23-main-parity.py"
+      ]
+    ]
+  ],
+  "worker_sha256": "9f59036cef01474cdd78c358384671f9f059d366308c01056ff0cc32c929644d",
+  "reference_driver_sha256": "d107cb084217608c2c27a69f12d1dc26dbe332daeea001793938bc78ab7035de",
+  "PYTHONPATH": "src:scripts",
+  "sequential": true,
+  "nice": 10,
+  "complete_premerge_suite": {
+    "regular": 323,
+    "slow": 30,
+    "skipped": 0
+  },
+  "postmerge_scope": "Fresh focused G/full-model integration, all static gates, public Torx scan, exact real-model replay. Full 353-node suite is not repeated; merged tracked tree is identical to the fully validated G tree."
+}

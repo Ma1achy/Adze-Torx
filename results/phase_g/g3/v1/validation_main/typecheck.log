@@ -1,0 +1,9 @@
+pyright --pythonpath "$(python -c 'import sys; print(sys.executable)')"
+/Users/malachy/src/Adze-Torx/results/runs/phase_g/g1/diagnostic_v1_archive/source/test_phase_g1.py
+  /Users/malachy/src/Adze-Torx/results/runs/phase_g/g1/diagnostic_v1_archive/source/test_phase_g1.py:12:6 - error: Import "test_phase_g_integration" could not be resolved (reportMissingImports)
+/Users/malachy/src/Adze-Torx/results/runs/phase_g/g1_1/teacher_v0_archive/evaluation_source/tests/test_phase_g11_teacher.py
+  /Users/malachy/src/Adze-Torx/results/runs/phase_g/g1_1/teacher_v0_archive/evaluation_source/tests/test_phase_g11_teacher.py:14:6 - error: Import "test_phase_g_integration" could not be resolved (reportMissingImports)
+/Users/malachy/src/Adze-Torx/results/runs/phase_g/g1_1/validation_v0_archive/source/test_phase_g11_task.py
+  /Users/malachy/src/Adze-Torx/results/runs/phase_g/g1_1/validation_v0_archive/source/test_phase_g11_task.py:25:6 - error: Import "test_phase_g_integration" could not be resolved (reportMissingImports)
+3 errors, 0 warnings, 0 informations
+make: *** [typecheck] Error 1

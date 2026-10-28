@@ -1,0 +1,52 @@
+"""Sequential, file-logged main integration validation; no training."""
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+root = Path('/Users/malachy/src/Adze-Torx')
+base = root / 'results/phase_g/g3/v1/validation_main'
+base.mkdir(exist_ok=True)
+sha = lambda path: hashlib.sha256(Path(path).read_bytes()).hexdigest()
+original = json.loads((root / 'results/phase_g/g3/v1/validation_branch/EXIT.json').read_text())
+scan = json.loads((root / 'results/phase_g/g3/v1/validation_sharded/PRIVATE_TORX_SCAN.json').read_text())
+commands = [(r['name'], r['command']) for r in original['results'] if r['name'] in
+            ('format-check', 'lint', 'typecheck', 'boundaries', 'focused_G')]
+commands += [('private_torx_scan', scan['command']),
+             ('reference_parity', [sys.executable, '/private/tmp/adze-g23-main-parity.py'])]
+launch = {'source_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root, text=True).strip(),
+          'time': time.strftime('%Y-%m-%dT%H:%M:%S%z'), 'commands': commands,
+          'worker_sha256': sha(Path(__file__)), 'reference_driver_sha256': sha(Path('/private/tmp/adze-g23-main-parity.py')),
+          'PYTHONPATH': 'src:scripts', 'sequential': True, 'nice': 10,
+          'complete_premerge_suite': {'regular': 323, 'slow': 30, 'skipped': 0},
+          'postmerge_scope': 'Fresh focused G/full-model integration, all static gates, public Torx scan, exact real-model replay. Full 353-node suite is not repeated; merged tracked tree is identical to the fully validated G tree.'}
+def save(name, value):
+    with (base / name).open('x') as stream:
+        json.dump(value, stream, indent=2)
+        stream.write('\n')
+        stream.flush()
+        os.fsync(stream.fileno())
+save('LAUNCH.json', launch)
+records = []
+env = {**os.environ, 'PYTHONPATH': 'src:scripts'}
+for name, argv in commands:
+    start = time.monotonic()
+    with (base / (name + '.log')).open('xb') as stream:
+        result = subprocess.run(argv, cwd=root, env=env, stdout=stream,
+                                stderr=subprocess.STDOUT, start_new_session=True, check=False)
+        stream.flush()
+        os.fsync(stream.fileno())
+    rec = {'name': name, 'command': argv, 'returncode': result.returncode,
+           'wall_seconds': time.monotonic() - start, 'log_sha256': sha(base / (name + '.log'))}
+    save(name + '.json', rec)
+    records.append(rec)
+    if result.returncode:
+        break
+passed = len(records) == len(commands) and all(r['returncode'] == 0 for r in records)
+save('EXIT.json', {'all_commands_passed': passed, 'source_head': launch['source_head'],
+                   'time': time.strftime('%Y-%m-%dT%H:%M:%S%z'), 'results': records})
+raise SystemExit(0 if passed else 1)

@@ -1,0 +1,10 @@
+{
+  "name": "boundaries",
+  "command": [
+    "make",
+    "boundaries"
+  ],
+  "returncode": 0,
+  "wall_seconds": 0.06814391701482236,
+  "log_sha256": "caac2da048b019cef54b04e77fab94a7988a10408ec49d9f5e6717d57eac3a18"
+}

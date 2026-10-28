@@ -1,0 +1,12 @@
+{
+  "name": "typecheck",
+  "command": [
+    "env",
+    "PYTHONPATH=src:scripts:tests",
+    "make",
+    "typecheck"
+  ],
+  "returncode": 0,
+  "wall_seconds": 6.358499083900824,
+  "log_sha256": "8042e66b39573dac8e4a1ea086e9ea1333fe708e45869336e834b5cc534743a6"
+}

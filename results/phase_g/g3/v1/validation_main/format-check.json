@@ -1,0 +1,10 @@
+{
+  "name": "format-check",
+  "command": [
+    "make",
+    "format-check"
+  ],
+  "returncode": 0,
+  "wall_seconds": 0.07593141682446003,
+  "log_sha256": "58c59b700a725fec011d3b6c3658666d00f0ccb440b73847af5e01df9a75c365"
+}

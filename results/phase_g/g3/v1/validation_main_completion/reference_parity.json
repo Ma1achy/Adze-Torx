@@ -1,0 +1,10 @@
+{
+  "name": "reference_parity",
+  "command": [
+    "/opt/anaconda3/bin/python",
+    "/private/tmp/adze-g23-main-parity.py"
+  ],
+  "returncode": 0,
+  "wall_seconds": 7.960351875051856,
+  "log_sha256": "775ca0757d1c9bbe7488a74135046c4c832850697ddd34b1d1117dd03bc9207d"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "typecheck",
+  "command": [
+    "make",
+    "typecheck"
+  ],
+  "returncode": 2,
+  "wall_seconds": 7.568233083933592,
+  "log_sha256": "6e38afd8f289a8e9090541010bdca70c03e6954a6851ae0c2d661aafe79ec13a"
+}
